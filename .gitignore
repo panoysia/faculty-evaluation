@@ -17,3 +17,5 @@
 /tmp
 
 database.yml
+*.txt
+_my_files/

@@ -11,9 +11,12 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# gem 'activeadmin', '~> 0.6.6'
+gem 'activeadmin', github: 'activeadmin'
 gem 'awesome_print', '~> 1.6', '>= 1.6.1'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'devise', '~> 3.5', '>= 3.5.3'
+# gem 'paperclip', '~> 4.3', '>= 4.3.2'
 
 group :development do
   gem 'web-console', '~> 2.0'
