@@ -14,3 +14,11 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.uncountable %w[ dashboard ]
+  # inflect.irregular 'leave', 'leaves'
+  # inflect.acronym 'QCE'
+  # inflect.acronym 'QCEs'
+  # inflect.acronym 'CCE'
+  # inflect.acronym 'CCEs'
+end
