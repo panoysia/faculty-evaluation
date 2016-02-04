@@ -7,23 +7,22 @@ Rails.application.routes.draw do
 
 =end
 
-  devise_for :users, path_names: {
-    sign_in: 'login',
-    sign_out: 'logout'
-  }
+  # devise_for :users, path_names: {
+  #   sign_in: 'login',
+  #   sign_out: 'logout'
+  # }
 
   # devise_for :admin_users
 
   namespace :admin do
-    get 'dashboard' => 'admin/dashboard#show'
-    resource :employees
-    resource :leaves
+    # get 'dashboard' => 'admin/dashboard#show'
+    resources :employees
   end
 
-  root 'dashboard#show'
+  # root 'dashboard#show'
   
-  get 'dashboard' => 'dashboard#show'
-  get 'test' => 'dashboard#test'
+  # get 'dashboard' => 'dashboard#show'
+  # get 'test' => 'dashboard#test'
   # Customize devise logins
     # change /users/sign_in to /users/login
 
