@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   namespace :admin do
     # get 'dashboard' => 'admin/dashboard#show'
     resources :employees
+    resources :rating_periods
   end
 
   # root 'dashboard#show'
