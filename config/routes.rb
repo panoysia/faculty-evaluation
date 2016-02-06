@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
 =begin  
   Samples:
   
@@ -15,13 +16,15 @@ Rails.application.routes.draw do
   # devise_for :admin_users
 
   namespace :admin do
-    # get 'dashboard' => 'admin/dashboard#show'
+    root to: redirect('admin/dashboard')
+    resource :dashboard, only: [:show]
     resources :employees
     resources :rating_periods
   end
 
-  # root 'dashboard#show'
-  
+  root to: redirect('dashboard')
+  resource :dashboard, only: [:show]
+
   # get 'dashboard' => 'dashboard#show'
   # get 'test' => 'dashboard#test'
   # Customize devise logins
