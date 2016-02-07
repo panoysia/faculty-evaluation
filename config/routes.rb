@@ -1,6 +1,29 @@
 Rails.application.routes.draw do
-
+  
+  devise_for :admin_users
   devise_for :users
+
+  namespace :admin do
+    root to: redirect('admin/dashboard')
+    resource :dashboard, only: [:show]
+    resources :employees
+    resources :rating_periods
+    resources :admin_users
+  end
+
+  root to: redirect('dashboard')
+  resource :dashboard, only: [:show]
+  # get 'test' => 'dashboard#test'
+
+
+  # Customize devise logins
+    # change /users/sign_in to /users/login
+
+    # devise_for :users, path_names: {
+    #   sign_in: 'login',
+    #   sign_out: 'logout'
+    # }
+
 =begin  
   Samples:
   
@@ -8,35 +31,12 @@ Rails.application.routes.draw do
 
 =end
 
-  # devise_for :users, path_names: {
-  #   sign_in: 'login',
-  #   sign_out: 'logout'
-  # }
-
-  # devise_for :admin_users
-
-  namespace :admin do
-    root to: redirect('admin/dashboard')
-    resource :dashboard, only: [:show]
-    resources :employees
-    resources :rating_periods
-  end
-
-  root to: redirect('dashboard')
-  resource :dashboard, only: [:show]
-
-  # get 'dashboard' => 'dashboard#show'
-  # get 'test' => 'dashboard#test'
-  # Customize devise logins
-    # change /users/sign_in to /users/login
-
 =begin
   /elmersia/dashboard
   /elmersia/leaves
   /elmersia/evaluations
     /elmersia/evaluations/qce/new
     /elmersia/evaluations/cce/new
-
 
   /elmersia/dashboard
   /elmersia/leaves
