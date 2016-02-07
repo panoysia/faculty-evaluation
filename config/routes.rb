@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
   
+  # route admin_user login to admin_user dashboard
+  # route user login to user dashboard
+
   devise_for :admin_users
   devise_for :users
 
   namespace :admin do
     root to: redirect('admin/dashboard')
     resource :dashboard, only: [:show]
+    resources :admin_users
     resources :employees
     resources :rating_periods
-    resources :admin_users
+    # resources :academic_rankings
   end
 
   root to: redirect('dashboard')

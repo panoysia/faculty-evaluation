@@ -1,4 +1,4 @@
-class Admin::RatingPeriodsController < ApplicationController
+class Admin::RatingPeriodsController < Admin::ApplicationController
   before_action :set_rating_period, only: [:show, :edit, :update, :destroy]
 
   def index

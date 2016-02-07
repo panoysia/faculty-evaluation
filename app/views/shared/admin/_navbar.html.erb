@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -8,14 +8,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'CAPSU HR', '#', class: 'navbar-brand' %>
+      <%= link_to 'CAPSU HR Admin', admin_root_path, class: 'navbar-brand' %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%#= link_to 'Link 2', '#'  %></li>
+        <li><%= link_to 'Employees', admin_employees_path %></li>
+        <li><%= link_to 'Leaves', admin_leaves_path  %></li>
+        <li><%= link_to 'Rating Periods', admin_rating_periods_path  %></li>
+        <li><%= link_to 'Admin Users', admin_admin_users_path  %></li>
       </ul>
+
       <!-- <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
@@ -23,13 +27,13 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form> -->
       <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
-          <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
-          <li><%= link_to 'Log out', destroy_user_session_path, method: :delete  %></li>
+        <% if admin_user_signed_in? %>
+          <li><%= link_to 'Edit Profile', edit_admin_user_registration_path %></li>
+          <li><%= link_to 'Log out', destroy_admin_user_session_path, method: :delete  %></li>
         <% else %>
-          <li><%= link_to 'Sign up', new_user_registration_path %></li>
-          <li><%= link_to 'Log in', new_user_session_path %></li>
-        <% end %>      
+          <li><%= link_to 'Sign up', new_admin_user_registration_path %></li>
+          <li><%= link_to 'Log in', new_admin_user_session_path %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
