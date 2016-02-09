@@ -1,0 +1,16 @@
+<%#= render partial: partial_name, locals: { obj: obj_source } %>
+<%# if object && object.errors.size > 0 %>
+<% if object.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>      
+    <h4><%= pluralize(object.errors.count, "error") %> prohibited this record from being saved:</h4>
+    <ul>
+    <% object.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,18 +1,5 @@
 <%= form_for([:admin, @employee]) do |f| %>
-  <% if @employee.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger alert-dismissable">
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-        <span class="sr-only">Close</span>
-      </button>      
-      <h4><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h4>
-      <ul>
-      <% @employee.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= error_messages_for(@employee) %>
 
   <div class="form-group">
     <%= f.label :first_name %>

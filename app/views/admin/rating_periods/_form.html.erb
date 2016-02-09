@@ -1,16 +1,5 @@
 <%= form_for([:admin, @rating_period]) do |f| %>
-  <% if @rating_period.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@rating_period.errors.count, "error") %> prohibited this rating_period from being saved:</h2>
-
-      <ul>
-      <% @rating_period.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-    <%= debug(@rating_period) %>
-  <% end %>
+  <%= error_messages_for(@rating_period) %>
 
   <div class="form-group">
     <%= f.label :start_at %>
