@@ -10,9 +10,11 @@ Rails.application.routes.draw do
     root to: redirect('admin/dashboard')
     resource :dashboard, only: [:show]
     resources :admin_users
+
     resources :employees
+    resources :leaves
     resources :rating_periods
-    # resources :academic_rankings
+    resources :academic_rankings, only: [:index]
   end
 
   root to: redirect('dashboard')
@@ -27,6 +29,14 @@ Rails.application.routes.draw do
     #   sign_in: 'login',
     #   sign_out: 'logout'
     # }
+
+
+  # scope ':username' do
+  #   resources :ratings
+  # end
+  #
+  # => /panoy/leaves/3
+  # => params[:username] in controller, helper, views
 
 =begin  
   Samples:

@@ -16,7 +16,7 @@
 # end
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.uncountable %w[ dashboard ]
-  # inflect.irregular 'leave', 'leaves'
+  inflect.irregular 'leave', 'leaves'
   # inflect.acronym 'QCE'
   # inflect.acronym 'QCEs'
   # inflect.acronym 'CCE'

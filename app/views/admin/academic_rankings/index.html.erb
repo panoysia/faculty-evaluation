@@ -1,0 +1,20 @@
+<% display_number = 0 %>
+<h3>Academic Rankings</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>  
+      <th>Rank</th>
+      <th>Position</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @academic_rankings.each do |academic_rank| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= academic_rank.rank %></td>
+        <td><%= academic_rank.position %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

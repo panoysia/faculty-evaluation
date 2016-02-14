@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206014353) do
+ActiveRecord::Schema.define(version: 20160210001648) do
+
+  create_table "academic_rankings", force: :cascade do |t|
+    t.string   "rank",       limit: 50, null: false
+    t.integer  "position",   limit: 1,  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -37,6 +44,18 @@ ActiveRecord::Schema.define(version: 20160206014353) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
+
+  create_table "leaves", force: :cascade do |t|
+    t.date     "filed_at",    null: false
+    t.date     "start_at",    null: false
+    t.date     "end_at",      null: false
+    t.integer  "length",      null: false
+    t.integer  "employee_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "leaves", ["employee_id"], name: "index_leaves_on_employee_id"
 
   create_table "rating_periods", force: :cascade do |t|
     t.integer  "start_at",                         null: false

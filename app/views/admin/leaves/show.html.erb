@@ -1,0 +1,15 @@
+<p>
+  <strong>Filed at:</strong>
+  <%= @leave.filed_at %>   
+</p>
+<p>
+  <strong>Start Date:</strong>
+  <%= @employee.start_at %>
+</p>
+<p>
+  <strong>End Date:</strong>
+  <%= @employee.end_at %>
+</p>
+
+<%= link_to 'Edit', edit_admin_leave_path(@leave), class: 'btn btn-link' %> |
+<%= link_to 'Back', admin_leaves_path, class: 'btn btn-link' %>
