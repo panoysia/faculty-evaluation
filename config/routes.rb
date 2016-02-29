@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
   namespace :admin do    
-    # root to: redirect('admin/dashboard')
+    root to: redirect('admin/dashboard')
     resource :dashboard, only: [:show]
-    resources :admin_users
+    resources :admins
+    resources :users
 
     resources :employees
     resources :leaves
@@ -12,8 +13,19 @@ Rails.application.routes.draw do
     resources :students
   end
 
-  root 'dashboard#show'
-  resource :dashboard, only: [:show]
+  
+
+  scope module: :user do
+    root 'dashboard#show'
+    get 'login' => 'sessions#new'
+    delete 'logout' => 'sessions#destroy'
+    post 'authenticate_user' => 'sessions#create', as: :authenticate_user
+
+    resource :dashboard, only: [:show]
+  end
+
+
+  # resources :sessions, only: [:create]
 
   #scope ':username' do
     # root to: redirect('dashboard')
