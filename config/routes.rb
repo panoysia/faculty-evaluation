@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  post 'admin/login' => 'admin/sessions#create', as: 'authenticate_admin'
+  post 'admin/login' => 'admin/sessions#create', as: :authenticate_admin
 
   namespace :admin do    
     # root to: redirect('admin/dashboard')

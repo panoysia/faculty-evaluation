@@ -6,6 +6,7 @@ class User::SessionsController < User::ApplicationController
     redirect_to(dashboard_path, notice: 'You are already logged in.') if user_signed_in?
   end
 
+
   def new
   end
 
