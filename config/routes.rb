@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
 
+  post 'admin/login' => 'admin/sessions#create', as: 'authenticate_admin'
+
   namespace :admin do    
-    root to: redirect('admin/dashboard')
+    # root to: redirect('admin/dashboard')
+    root 'sessions#new'
+
+    get 'login' => 'sessions#new'
+    delete 'logout' => 'sessions#destroy'
+
     resource :dashboard, only: [:show]
     resources :admins
     resources :users
@@ -13,24 +20,18 @@ Rails.application.routes.draw do
     resources :students
   end
 
-  
 
   scope module: :user do
-    root 'dashboard#show'
+    root 'sessions#new'
+
     get 'login' => 'sessions#new'
     delete 'logout' => 'sessions#destroy'
-    post 'authenticate_user' => 'sessions#create', as: :authenticate_user
+    post 'login' => 'sessions#create', as: :authenticate_user
 
     resource :dashboard, only: [:show]
   end
 
-
-  # resources :sessions, only: [:create]
-
   #scope ':username' do
-    # root to: redirect('dashboard')
-    # root 'dashboard#show'
-    #resource :dashboard, only: [:show]
     # resources :ratings
     # => /panoy/leaves/3
     # => params[:username] in controller, helper, views

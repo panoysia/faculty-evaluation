@@ -1,0 +1,25 @@
+<% display_number = 0 %>
+<h2 class="page-header">Users</h2>
+<%= link_to 'New User', new_admin_user_path, class: 'btn btn-primary' %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <!-- <th>Employee</th> -->
+      <th>Username</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <!-- <td><%#= 'link employee name' %></td> -->
+        <td><%= user.username %></td>
+        <td><%= link_to 'Show', [:admin, user] %></td>
+        <td><%= link_to 'Edit', [:edit, :admin, user] %></td>
+        <td><%= link_to 'Delete', [:admin, user], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>  

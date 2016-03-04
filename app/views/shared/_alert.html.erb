@@ -1,6 +1,9 @@
 <% flash.each do |name, msg| %>
-  <div class="alert alert-<%= name == 'notice' ? 'success' : 'danger' %> alert-dismissable">
+  <div class="alert alert-<%= name == 'notice' ? 'success' : 'danger' %> alert-dismissable fade in">
     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
     <%= content_tag :div, msg, id: "flash_#{name}" %>
   </div>
 <% end %>
+<script>
+  $('.alert').fadeOut(5000);
+</script>

@@ -1,8 +1,9 @@
 # Run: rake db:seed / rake db:setup
 
 if Rails.env.development?
-  puts 'Adding AcademicRank records...'
+  puts 'Adding AcademicRank records..........'
 
+  AcademicRanking.delete_all
   AcademicRanking.create [
     { rank: 'Instructor 1', position: 1 },
     { rank: 'Instructor 2', position: 2 },
@@ -26,6 +27,22 @@ if Rails.env.development?
   ]
   
   puts 'Finished populating AcademicRank records!'
+  puts
+
+  puts 'Adding Student records..........'
+  Student.delete_all
+  1.upto(100) do |number|
+    Student.create first_name: 'Student', last_name: "#{number}"
+  end
+  puts 'Finished populating Student records!'
+
+  puts 'Adding sample User records..........'
+  User.delete_all
+  1.upto(10) do |number|
+    value = "user#{number}"
+    User.create username: value, password: value
+  end
+  puts 'Finished populating User records!'
 end
 
 =begin    CHEATSHEET

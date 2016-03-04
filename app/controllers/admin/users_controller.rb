@@ -1,6 +1,5 @@
 class Admin::UsersController < Admin::ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   
   def index
     @users = User.all
@@ -18,7 +17,7 @@ class Admin::UsersController < Admin::ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to [:admin, @leave], notice: 'User was successfully created.' }
+        format.html { redirect_to [:admin, @user], notice: 'User was successfully created.' }
       else
         format.html { render :new }
       end      
@@ -31,7 +30,7 @@ class Admin::UsersController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to [:admin, @leave], notice: 'User was successfully updated.' }
+        format.html { redirect_to [:admin, @user], notice: 'User was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -40,17 +39,17 @@ class Admin::UsersController < Admin::ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to admin_users_url, notice: 'User was successfully deleted.'
+    redirect_to admin_users_path, notice: 'User was successfully deleted.'
   end
 
 
   private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def user_params
-      params.require(:user).permit(:username, :password_digest)
-    end
+  def user_params
+    params.require(:user).permit(:username, :password)
+  end
 end

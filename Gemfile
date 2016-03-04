@@ -11,6 +11,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+#Use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.7'
+
 # gem 'activeadmin', '~> 0.6.6'
 # gem 'activeadmin', github: 'activeadmin'
 # gem 'devise', '~> 3.5', '>= 3.5.3'
@@ -37,8 +40,7 @@ end
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'
