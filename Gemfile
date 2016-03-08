@@ -11,7 +11,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-#Use ActiveModel has_secure_password
+# Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
 # gem 'activeadmin', '~> 0.6.6'
@@ -26,6 +26,7 @@ group :development do
   gem 'spring'
   gem 'better_errors', '~> 2.1', '>= 2.1.1'
   gem 'quiet_assets', '~> 1.1'    
+  gem 'rails-footnotes', '~> 4.1', '>= 4.1.8'
 end
 
 group :development, :test do
@@ -39,8 +40,6 @@ end
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
-
 
 # Use Unicorn as the app server
 # gem 'unicorn'

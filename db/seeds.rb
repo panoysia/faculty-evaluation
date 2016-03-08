@@ -1,5 +1,6 @@
 # Run: rake db:seed / rake db:setup
 
+# TODO: Make this data seeding transactional by batches.
 if Rails.env.development?
   puts 'Adding AcademicRank records..........'
 
@@ -35,6 +36,7 @@ if Rails.env.development?
     Student.create first_name: 'Student', last_name: "#{number}"
   end
   puts 'Finished populating Student records!'
+  puts
 
   puts 'Adding sample User records..........'
   User.delete_all
@@ -43,6 +45,33 @@ if Rails.env.development?
     User.create username: value, password: value
   end
   puts 'Finished populating User records!'
+  puts
+
+  puts 'Adding Area Instrument records..........'
+
+  AreaInstrument.create [
+    { area: :Instruction, instrument: 'Commitment' },
+    { area: :Instruction, instrument: 'Knowledge of Subject' },
+    { area: :Instruction, instrument: 'Teaching for Independent Learning' },
+    { area: :Instruction, instrument: 'Management of Learning' },
+
+    { area: :Research, instrument: :'Client Satisfaction' },
+    { area: :Research, instrument: :'Leadership' },
+    { area: :Research, instrument: :'Partnership Development' },
+    { area: :Research, instrument: :'Community Responsibility' },
+
+    { area: :Extension, instrument: :'Client Satisfaction' },
+    { area: :Extension, instrument: :'Leadership' },
+    { area: :Extension, instrument: :'Partnership Development' },
+    { area: :Extension, instrument: :'Community Responsibility' },    
+
+    { area: :Production, instrument: :'Client Satisfaction' },
+    { area: :Production, instrument: :'Leadership' },
+    { area: :Production, instrument: :'Partnership Development' },
+    { area: :Production, instrument: :'Community Responsibility' }
+  ]
+  puts 'Finished populating Area Instrument records!'
+  puts
 end
 
 =begin    CHEATSHEET
