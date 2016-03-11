@@ -61,7 +61,7 @@
       </form> -->
       <ul class="nav navbar-nav navbar-right">
         <% if admin_signed_in? %>
-          <li><%= link_to 'Edit Account', '#' %></li>
+          <li><%= link_to 'Edit Account', edit_admin_account_path %></li>
           <li><%= link_to 'Log out', admin_logout_path, method: :delete  %></li>
         <% else %>
           <li><%= link_to 'Log in', admin_login_path %></li>

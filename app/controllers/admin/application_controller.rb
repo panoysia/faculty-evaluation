@@ -23,4 +23,7 @@ class Admin::ApplicationController < ActionController::Base
     !!current_admin
   end    
 
+  def logout_current_admin
+    session[:admin_id] = nil
+  end
 end
