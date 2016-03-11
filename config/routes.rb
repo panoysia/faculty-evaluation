@@ -15,8 +15,8 @@ Rails.application.routes.draw do
 
     resources :employees
     resources :leaves
-    resources :rating_periods
-    resources :academic_rankings, only: [:index]
+    resources :rating_periods, path: 'rating-periods'
+    resources :academic_rankings, only: [:index], path: 'academic-rankings'
     resources :students
   end
 
@@ -29,7 +29,13 @@ Rails.application.routes.draw do
     post 'login' => 'sessions#create', as: :authenticate_user
 
     resource :dashboard, only: [:show]
+    resource :account, only: [:edit, :update], path: 'user-account', as: :user_account
   end
+
+=begin
+  Translated paths:
+    * 
+=end
 
   #scope ':username' do
     # resources :ratings

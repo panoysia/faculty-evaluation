@@ -12,25 +12,7 @@
     <%= render 'shared/alert' %>
     <%= yield %>
     <%= render 'shared/footer' %>
-
-    <% 
-      if true
-        objects = {}
-        objects[:params] = params
-        objects[:params_controller] = params[:controller]
-        objects[:controller_name] = controller_name
-        objects[:controller_path] = controller_path
-        objects[:action_name] = action_name
-      end
-    %>
-    <% objects.each do |key, value| %>
-      <%= debug([key.to_s, value]) %>
-    <% end %>
-    <pre>
-      <span>current_user is: <%= current_user.nil? ? 'nil' : current_user %></span>
-      <%#= controller_name %>
-      <%#= action_name %>
-    </pre>
   </div>
+  <pre><%= debug(current_user) %></pre>
 </body>
 </html>
