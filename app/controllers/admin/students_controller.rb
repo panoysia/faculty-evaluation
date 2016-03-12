@@ -43,13 +43,15 @@ class Admin::StudentsController < Admin::ApplicationController
     end
   end
 
+
   private
 
-    def set_student
-      @student = Student.find(params[:id])
-    end
+  def set_student
+    @student = Student.find(params[:id])
+  end
 
-    def student_params
-      params.require(:student).permit(:first_name, :last_name)      
-    end
+  def student_params
+    params.require(:student).permit(:first_name, :last_name)      
+  end
+
 end

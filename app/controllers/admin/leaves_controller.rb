@@ -48,11 +48,12 @@ class Admin::LeavesController < Admin::ApplicationController
 
   private
 
-    def set_leave
-      @leave = Leave.find(params[:id])
-    end  
+  def set_leave
+    @leave = Leave.find(params[:id])
+  end  
 
-    def leave_params
-      params.require(:leave).permit(:filed_at, :start_at, :end_at, :length, :employee_id)
-    end    
+  def leave_params
+    params.require(:leave).permit(:filed_at, :start_at, :end_at, :length, :employee_id)
+  end
+      
 end

@@ -44,13 +44,15 @@ class Admin::RatingPeriodsController < Admin::ApplicationController
     end
   end
 
+
   private
 
-    def set_rating_period
-      @rating_period = RatingPeriod.find(params[:id])
-    end
+  def set_rating_period
+    @rating_period = RatingPeriod.find(params[:id])
+  end
 
-    def rating_period_params
-      params.require(:rating_period).permit(:start_at, :end_at, :semester, :status)
-    end
+  def rating_period_params
+    params.require(:rating_period).permit(:start_at, :end_at, :semester, :status)
+  end
+  
 end

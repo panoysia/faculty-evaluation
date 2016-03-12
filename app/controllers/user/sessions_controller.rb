@@ -2,6 +2,7 @@ class User::SessionsController < User::ApplicationController
   # Exempt our controller from this specific method of its parent class.
   skip_before_action :authorize_user
 
+  # TODO: Add also if requests comes from '/login' route
   before_action only: :new do
     redirect_to(dashboard_path, notice: 'You are already logged in.') if user_signed_in?
   end

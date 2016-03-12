@@ -16,7 +16,7 @@
         <td><%= student.full_name %></td>
         <td><%= link_to 'Show', [:admin, student] %></td>
         <td><%= link_to 'Edit', [:edit, :admin, student] %></td>
-        <td><%= link_to 'Destroy', [:admin, student], method: :delete, data: { confirm: 'Are you sure?' } %></td>        
+        <td><%= link_to 'Delete', [:admin, student], method: :delete, data: { confirm: 'Are you sure?' } %></td>        
       </tr>
     <% end %>
   </tbody>

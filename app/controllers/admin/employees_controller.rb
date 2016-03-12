@@ -44,13 +44,15 @@ class Admin::EmployeesController < Admin::ApplicationController
     end
   end
 
+
   private
 
-    def set_employee
-      @employee = Employee.find(params[:id])
-    end
+  def set_employee
+    @employee = Employee.find(params[:id])
+  end
 
-    def employee_params
-      params.require(:employee).permit(:first_name, :last_name)    
-    end
+  def employee_params
+    params.require(:employee).permit(:first_name, :last_name)    
+  end
+  
 end
