@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160312055110) do
+ActiveRecord::Schema.define(version: 20160313090335) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "rank",       limit: 50, null: false
@@ -35,6 +35,88 @@ ActiveRecord::Schema.define(version: 20160312055110) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
+
+  create_table "employee_civil_service_eligibilities", force: :cascade do |t|
+    t.string   "career_service",          limit: 30, null: false
+    t.float    "rating",                  limit: 24, null: false
+    t.date     "date_of_exam",                       null: false
+    t.string   "place_of_exam",           limit: 50
+    t.string   "license_number",          limit: 15
+    t.date     "date_release_of_license"
+    t.integer  "employee_id",                        null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "employee_civil_service_eligibilities", ["employee_id"], name: "index_employee_civil_service_eligibilities_on_employee_id"
+
+  create_table "employee_educations", force: :cascade do |t|
+    t.integer  "level",           limit: 1,     null: false
+    t.string   "school_name",     limit: 69,    null: false
+    t.string   "degree_course",   limit: 50,    null: false
+    t.string   "grade_units",     limit: 7
+    t.date     "graduated_at"
+    t.date     "start_at"
+    t.date     "end_at"
+    t.text     "honors_received", limit: 65535
+    t.integer  "employee_id",                   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "employee_educations", ["employee_id"], name: "index_employee_educations_on_employee_id"
+
+  create_table "employee_other_infos", force: :cascade do |t|
+    t.integer  "context",     limit: 1,   null: false
+    t.string   "info",        limit: 100, null: false
+    t.integer  "employee_id",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "employee_other_infos", ["employee_id"], name: "index_employee_other_infos_on_employee_id"
+
+  create_table "employee_trainings", force: :cascade do |t|
+    t.string   "title",        limit: 100, null: false
+    t.date     "start_at"
+    t.date     "end_at"
+    t.integer  "no_of_hours",  limit: 2
+    t.string   "conducted_by", limit: 50
+    t.integer  "employee_id",              null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "employee_trainings", ["employee_id"], name: "index_employee_trainings_on_employee_id"
+
+  create_table "employee_voluntary_works", force: :cascade do |t|
+    t.string   "organization", limit: 70, null: false
+    t.date     "start_at",                null: false
+    t.date     "end_at",                  null: false
+    t.integer  "no_of_hours",  limit: 2
+    t.string   "position",     limit: 50
+    t.integer  "employee_id",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "employee_voluntary_works", ["employee_id"], name: "index_employee_voluntary_works_on_employee_id"
+
+  create_table "employee_work_experiences", force: :cascade do |t|
+    t.date     "start_at",                                        null: false
+    t.date     "end_at",                                          null: false
+    t.string   "position_title",        limit: 40,                null: false
+    t.string   "company",               limit: 50,                null: false
+    t.decimal  "monthly_salary",                   precision: 10
+    t.string   "salary_grade",          limit: 7
+    t.string   "status_of_appointment", limit: 20
+    t.boolean  "is_gov_service",        limit: 1
+    t.integer  "employee_id",                                     null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "employee_work_experiences", ["employee_id"], name: "index_employee_work_experiences_on_employee_id"
 
   create_table "employees", force: :cascade do |t|
     t.string   "first_name",         limit: 50, null: false

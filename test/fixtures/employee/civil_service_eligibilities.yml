@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  career_service: MyString
+  rating: 1.5
+  date_of_exam: 2016-03-13
+  place_of_exam: MyString
+
+two:
+  career_service: MyString
+  rating: 1.5
+  date_of_exam: 2016-03-13
+  place_of_exam: MyString

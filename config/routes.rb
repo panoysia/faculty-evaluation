@@ -13,7 +13,21 @@ Rails.application.routes.draw do
     resources :admins
     resources :users
 
-    resources :employees
+    # resources :forum_threads do
+    #   resources :forum_posts, module: :forum_threads
+    # end
+
+    resources :employees do
+      scope module: :employees do
+        resources :educations, only: [:index]
+        resources :trainings, only: [:index]
+        resources :civil_service_eligibilities, only: [:index]
+        resources :other_infos, only: [:index]
+        resources :voluntary_works, only: [:index]
+        resources :work_experiences, only: [:index]
+      end
+    end
+
     resources :leaves
     resources :rating_periods, path: 'rating-periods'
     resources :academic_rankings, only: [:index], path: 'academic-rankings'
@@ -47,3 +61,16 @@ Rails.application.routes.draw do
     # => params[:username] in controller, helper, views
   #end
 end
+
+=begin
+
+
+class ForumThreads::ForumPostsController < ApplicationController
+
+class ForumThreadsController < ApplicationController
+
+# /forum_threads
+    forum_posts_controller.rb
+
+  forum_threads_controller.rb 
+=end
