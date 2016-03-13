@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160306101228) do
+ActiveRecord::Schema.define(version: 20160312055110) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "rank",       limit: 50, null: false
@@ -37,10 +37,34 @@ ActiveRecord::Schema.define(version: 20160306101228) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "first_name", limit: 50, null: false
-    t.string   "last_name",  limit: 50, null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "first_name",         limit: 50, null: false
+    t.string   "last_name",          limit: 50, null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "middle_name",        limit: 50
+    t.string   "name_extension",     limit: 7
+    t.string   "designation"
+    t.string   "gender",             limit: 1
+    t.string   "civil_status",       limit: 3
+    t.date     "birth_date"
+    t.string   "citizenship",        limit: 15
+    t.string   "height",             limit: 5
+    t.string   "weight",             limit: 5
+    t.string   "blood_type",         limit: 3
+    t.string   "gsis_no",            limit: 20
+    t.string   "pagibig_no",         limit: 20
+    t.string   "philhealth_no",      limit: 20
+    t.string   "sss_no",             limit: 15
+    t.string   "r_address",          limit: 70
+    t.string   "r_zip_code",         limit: 5
+    t.string   "r_telephone_no",     limit: 15
+    t.string   "p_address",          limit: 70
+    t.string   "p_zip_code",         limit: 5
+    t.string   "p_telephone_no",     limit: 15
+    t.string   "email_address",      limit: 40
+    t.string   "cellphone_no",       limit: 15
+    t.string   "agency_employee_no", limit: 20
+    t.string   "tin",                limit: 15
   end
 
   create_table "leaves", force: :cascade do |t|
@@ -58,7 +82,7 @@ ActiveRecord::Schema.define(version: 20160306101228) do
   create_table "rating_periods", force: :cascade do |t|
     t.integer  "start_at",                         null: false
     t.integer  "end_at",                           null: false
-    t.string   "semester",   limit: 1,             null: false
+    t.integer  "semester",   limit: 1,             null: false
     t.integer  "status",               default: 1, null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
