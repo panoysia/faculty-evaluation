@@ -1,6 +1,23 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 
+// Bootstrap-related CSS
 .container-fluid {
-  padding: 10px 120px; 
+//  padding: 10px 120px;
+//  border: 1px solid blue;
+}
+
+.page-header {
+  margin: 20px 0px;    
+}
+
+.navbar {
+  margin-bottom: 10px;    
+}
+
+
+// Application-related CSS
+.app-container {
+  padding: 2px 120px;
+//  border: 1px solid red;
 }

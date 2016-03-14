@@ -1,0 +1,15 @@
+<h2 class="page-header"><%= @career_path.name.titlecase %> Career Path</h2>
+<div>
+  <p><strong>List of actions to pursue for this path</strong></p>
+  <ul>
+    <li>Training 1</li>
+    <li>Training 2</li>
+    <li>Training 3</li>
+    <li>Training 4</li>
+    <li>Training 5</li>
+  </ul>
+</div>
+<div>
+  <%= link_to 'Edit', [:edit, :admin, @career_path], class: 'btn btn-link' %> |
+  <%= link_to 'Back to List', admin_career_paths_path, class: 'btn btn-link' %>
+</div>

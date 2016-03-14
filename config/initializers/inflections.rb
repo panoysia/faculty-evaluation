@@ -19,7 +19,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   # Most inflections here are for resources under the User module. It uses the singular term for these resources.
 
   inflect.acronym 'HR'
-  inflect.uncountable %w[ dashboard hr_profile career_path account]
+  inflect.uncountable %w[ dashboard hr_profile account] # career_path
   inflect.irregular 'leave', 'leaves'
   # inflect.acronym 'QCE'
   # inflect.acronym 'QCEs'

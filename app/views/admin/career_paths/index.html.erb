@@ -1,0 +1,24 @@
+<% display_number = 0 %>
+<h2 class="page-header">Career Paths</h2>
+<%= link_to 'New Career Path', new_admin_career_path_path, class: 'btn btn-primary' %>
+<!-- puts some gap here -->
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @career_paths.each do |career_path| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= career_path.name %></td>
+        <td><%= link_to 'Show', [:admin, career_path] %></td>
+        <td><%= link_to 'Edit', [:edit, :admin, career_path] %></td>
+        <td><%= link_to 'Delete', [:admin, career_path], method: :delete, data: { confirm: 'Are you sure?' } %></td>  
+      </tr>
+    <% end %>
+  </tbody>
+</table>

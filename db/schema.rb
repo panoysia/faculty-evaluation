@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313090335) do
+ActiveRecord::Schema.define(version: 20160314084343) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "rank",       limit: 50, null: false
@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(version: 20160313090335) do
     t.string   "instrument", limit: 50, null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+  end
+
+  create_table "career_paths", force: :cascade do |t|
+    t.string   "name",       limit: 100, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "employee_civil_service_eligibilities", force: :cascade do |t|

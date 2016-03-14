@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     end
 
     resources :leaves
+    resources :career_paths
     resources :rating_periods, path: 'rating-periods'
     resources :academic_rankings, only: [:index], path: 'academic-rankings'
     resources :students

@@ -17,7 +17,8 @@ class Employee < ActiveRecord::Base
   has_many :work_experiences
 
   has_many :leaves 
-
+  has_many :career_paths
+  
   #, inverse_of: :employee
   
   validates :first_name, :last_name, presence: true

@@ -72,6 +72,19 @@ if Rails.env.development?
   ]
   puts 'Finished populating Area Instrument records!'
   puts
+
+  puts 'Career Path records..........'
+
+  CareerPath.create [
+    { name: 'Computer Science' },
+    { name: 'Agriculture' },
+    { name: 'Nursing' },
+    { name: 'Business Administration' },
+    { name: 'Fisheries' }
+  ]
+
+  puts 'Finished populating Career Path records!'
+  puts  
 end
 
 =begin    CHEATSHEET
