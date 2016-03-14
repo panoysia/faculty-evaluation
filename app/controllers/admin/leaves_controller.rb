@@ -41,7 +41,7 @@ class Admin::LeavesController < Admin::ApplicationController
   def destroy
     @leave.destroy
     respond_to do |format|
-      format.html { redirect_to admin_leaves_path, notice: 'Leave was successfully destroyed.' }
+      format.html { redirect_to admin_leaves_path, notice: 'Leave was successfully deleted.' }
     end
   end
 

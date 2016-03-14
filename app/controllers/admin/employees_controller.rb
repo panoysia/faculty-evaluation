@@ -40,7 +40,7 @@ class Admin::EmployeesController < Admin::ApplicationController
   def destroy
     @employee.destroy
     respond_to do |format|
-      format.html { redirect_to admin_employees_path, notice: 'Employee was successfully destroyed.' }
+      format.html { redirect_to admin_employees_path, notice: 'Employee was successfully deleted.' }
     end
   end
 

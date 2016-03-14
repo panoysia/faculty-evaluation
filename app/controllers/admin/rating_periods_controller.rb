@@ -40,7 +40,7 @@ class Admin::RatingPeriodsController < Admin::ApplicationController
   def destroy
     @rating_period.destroy
     respond_to do |format|
-      format.html { redirect_to admin_rating_periods_path, notice: 'Rating period was successfully destroyed.' }
+      format.html { redirect_to admin_rating_periods_path, notice: 'Rating period was successfully deleted.' }
     end
   end
 
