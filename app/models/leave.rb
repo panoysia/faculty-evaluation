@@ -1,7 +1,11 @@
 class Leave < ActiveRecord::Base
-  # TODO: Change 'category' column to 'type' column so that STI can be use for different types of leaves
+  # Prefer the use of 'category' column name over 'type' column name. 'Type' is used internally by Rails for models using Single Table Inheritance.
+  CATEGORIES = { 
+      Sick: 'S', 
+      Vacation: 'V', 
+      Maternity: 'M'
+    }
   
-  CATEGORIES = { Sick: 0, Vacation: 2, Others: 2 }
   MAXIMUM = 15
 
   belongs_to :employee
@@ -13,24 +17,26 @@ class Leave < ActiveRecord::Base
   before_save :compute_length_of_leave
 
 
-  # def self.remaining(id) 
-  #   15 - where(employee_id: id).sum(:length)
-  # end 
+  def self.remaining(id) 
+    MAXIMUM - where(employee_id: id).sum(:length)
+  end
+
 
   private
 
-    def date_values_are_nil?
-      start_at.nil? && end_at.nil?
-    end
+  def date_values_are_nil?
+    start_at.nil? && end_at.nil?
+  end
 
-    def correct_date_range
-      unless end_at > start_at
-        errors[:base] << "Invalid date range.\n'End at' date value must be greater than 'Start at' date value."
-      end
+  def correct_date_range
+    unless end_at > start_at
+      errors[:base] << "Invalid date range.\n'End at' date value must be greater than 'Start at' date value."
     end
+  end
 
-    def compute_length_of_leave
-      self[:length] = (end_at - start_at).to_i
-      puts "computing length of leave...."
-    end
+  def compute_length_of_leave
+    self[:length] = (end_at - start_at).to_i
+    puts "computing length of leave...."
+  end
+
 end
