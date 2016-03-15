@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rating_period_id: 
+  employee_id: 
+  project_title: MyString
+
+two:
+  rating_period_id: 
+  employee_id: 
+  project_title: MyString

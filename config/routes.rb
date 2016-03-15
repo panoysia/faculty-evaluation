@@ -28,6 +28,13 @@ Rails.application.routes.draw do
       end
     end
 
+    scope path: 'ratings' do
+      resources :instructions, only: [:new, :create, :show]
+      resources :researches, only: [:new, :create, :show]
+      resources :extensions, only: [:new, :create, :show]
+      resources :productions, only: [:new, :create, :show]
+    end
+
     resources :leaves
     resources :career_paths
     resources :rating_periods, path: 'rating-periods'

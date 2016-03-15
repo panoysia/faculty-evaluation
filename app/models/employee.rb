@@ -16,9 +16,26 @@ class Employee < ActiveRecord::Base
   has_many :voluntary_works
   has_many :work_experiences
 
+  has_many :timesheets
+  has_many :draft_timesheets, -> { where(submitted: false) }, class_name: 'Timesheet'
+
+  has_many :ratings
+  has_many :instruction_ratings, 
+    -> { where(type: 'Employee::Rating::Instruction') },
+    class_name: 'Employee::Rating'
+  has_many :research_ratings,
+    -> { where(type: 'Employee::Rating::Research') },
+    class_name: 'Employee::Rating'
+  has_many :extension_ratings, 
+    -> { where(type: 'Employee::Rating::Extension') },
+    class_name: 'Employee::Rating'
+  has_many :production_ratings, 
+    -> { where(type: 'Employee::Rating::Production') },
+    class_name: 'Employee::Rating'
+
   has_many :leaves 
   has_many :career_paths
-  
+
   #, inverse_of: :employee
   
   validates :first_name, :last_name, presence: true
