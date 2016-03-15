@@ -6,6 +6,9 @@ class RatingPeriod < ActiveRecord::Base
   # TODO: Check for gab between the two years -> there must be only a 1 year gap: Ex: 2006-2007; 2010-2011
 
   enum status: { open: 1, close: 2 }
+  # Declaring ENUM fields automatically adds these scopes: 
+    # scope :open, -> { where(status: 1) }
+    # scope :close, -> { where(status: 2) }
 
   validates_presence_of :start_at, :end_at, :semester, :status
   validates_length_of :start_at, :end_at, is: 4
@@ -14,13 +17,9 @@ class RatingPeriod < ActiveRecord::Base
   
   # 1 is for 1st Sem., 2 is for 2nd Sem.
   validates_inclusion_of :semester, in: [1, 2]
-  
-  scope :open, -> { where(status: 1) }
-  scope :close, -> { where(status: 2) }
 
-
-  def to_s
-    "#{start_at}-#{end_at}"
+  def coverage
+    "#{start_at}-#{end_at}"    
   end
 
 =begin
