@@ -1,19 +1,42 @@
-class RatingPeriod < ActiveRecord::Base
-  SEMESTERS = {
-    '1': '1st',
-    '2': '2nd',
-    's': 'Summer'
-  }
+class RatingPeriod < ActiveRecord::Base 
+  # TODO: Check leave.rb as guide
+  # 
+  # TODO: Validate numericality
+  # TODO: Validate uniqueness
+  # TODO: Check for gab between the two years -> there must be only a 1 year gap: Ex: 2006-2007; 2010-2011
 
   enum status: { open: 1, close: 2 }
 
-  validates :start_at, :end_at, :semester, :status, presence: true
-
-  # validate :start_at and :end_at?
+  validates_presence_of :start_at, :end_at, :semester, :status
+  validates_length_of :start_at, :end_at, is: 4
 
   validates_inclusion_of :status, in: RatingPeriod.statuses
-  validates_inclusion_of :semester, in: SEMESTERS.keys.map(&:to_s)
   
+  # 1 is for 1st Sem., 2 is for 2nd Sem.
+  validates_inclusion_of :semester, in: [1, 2]
+  
+  scope :open, -> { where(status: 1) }
+  scope :close, -> { where(status: 2) }
+
+
+  def to_s
+    "#{start_at}-#{end_at}"
+  end
+
+=begin
+  SEMESTER_TYPES = {
+    '1': '1st',
+    '2': '2nd'
+    's': 'Summer'
+  }
+
+  SEMESTER_TYPES.keys.map(&:to_s)
+=end
+
+  # def to_s
+  #   "#{SEMESTER_TYPES[semester]} for #{start_at}-#{end_at}"  
+  # end
+
   # def self.convert_semester(value)
   #   SEMESTERS[value.to_sym]
   # end

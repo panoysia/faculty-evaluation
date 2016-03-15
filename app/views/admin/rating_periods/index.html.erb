@@ -19,11 +19,11 @@
         <td><%= display_number += 1 %></td>
         <td><%= rating_period.start_at %></td>
         <td><%= rating_period.end_at %></td>
-        <td><%= convert_semester(rating_period.semester) %></td>
+        <td><%= rating_period.semester.ordinalize %></td>
         <td><%= rating_period.status.titleize %></td>
         <td><%= link_to 'Show', [:admin, rating_period] %></td>
         <td><%= link_to 'Edit', edit_admin_rating_period_path(rating_period) %></td>
-        <td><%= link_to 'Destroy', [:admin, rating_period], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', [:admin, rating_period], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
