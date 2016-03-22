@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315005616) do
+ActiveRecord::Schema.define(version: 20160315194614) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "rank",       limit: 50, null: false
@@ -200,8 +200,11 @@ ActiveRecord::Schema.define(version: 20160315005616) do
     t.string   "password_digest",            null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "account_id"
+    t.string   "account_type"
   end
 
+  add_index "users", ["account_type", "account_id"], name: "index_users_on_account_type_and_account_id"
   add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end
