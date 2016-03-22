@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317190452) do
+ActiveRecord::Schema.define(version: 20160322124936) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",       limit: 50, null: false
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20160317190452) do
     t.decimal  "monthly_salary",                   precision: 10
     t.string   "salary_grade",          limit: 7
     t.string   "status_of_appointment", limit: 20
-    t.boolean  "is_gov_service",        limit: 1
+    t.integer  "is_gov_service",        limit: 1
     t.integer  "employee_id",                                     null: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
