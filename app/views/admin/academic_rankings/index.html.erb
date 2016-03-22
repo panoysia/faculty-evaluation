@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>#</th>  
-      <th>Rank</th>
+      <th>Rank Name</th>
       <th>Position</th>
     </tr>
   </thead>
@@ -12,7 +12,7 @@
     <% @academic_rankings.each do |academic_rank| %>
       <tr>
         <td><%= display_number += 1 %></td>
-        <td><%= academic_rank.rank %></td>
+        <td><%= academic_rank.name %></td>
         <td><%= academic_rank.position %></td>
       </tr>
     <% end %>

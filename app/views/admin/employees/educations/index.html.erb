@@ -1,1 +1,33 @@
-<h2 class="page-header">Educations</h2>
+<div id="educations-content" class="row">
+  <h4 class="page-header">List of Educations</h4>
+</div>
+<% display_number = 0 %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>  
+      <th>School</th>
+      <th>Degree/Course</th>
+      <th>Level</th>
+      <th>Start</th>
+      <th>End</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @educations.each do |education| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= education.school_name %></td>
+        <td><%= education.degree_course %></td>
+        <td><%= education.level += 1 %></td>
+        <td><%= education.start_at %></td>
+        <td><%= education.end_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<!-- 
+t.string   "grade_units",     limit: 7
+t.date     "graduated_at"
+t.text     "honors_received", limit: 65535 
+-->

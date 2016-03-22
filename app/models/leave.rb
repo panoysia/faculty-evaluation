@@ -1,5 +1,5 @@
 class Leave < ActiveRecord::Base
-  # Prefer the use of 'category' column name over 'type' column name. 'Type' is used internally by Rails for models using Single Table Inheritance.
+  # Prefer the use of words 'category'/'context' over the word 'type' as column name. 'Type' is more of a reserved word and used internally by Rails for models using Single Table Inheritance.
   CATEGORIES = { 
       Sick: 'S', 
       Vacation: 'V', 

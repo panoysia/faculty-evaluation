@@ -4,6 +4,10 @@ module ApplicationHelper
     render partial: 'shared/error_messages', locals: { object: object }
   end
 
+  def set_active_tab(tab_name)
+    tab_name.to_s == controller_name ? 'active' : ''
+  end
+
   # def authenticate_user
   # end
 

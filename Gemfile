@@ -23,7 +23,7 @@ gem 'paperclip', '~> 4.3', '>= 4.3.4'
 
 group :development do
   gem 'web-console', '~> 2.0'
-  gem 'spring'
+  gem 'spring', '~> 1.6', '>= 1.6.4'
   gem 'better_errors', '~> 2.1', '>= 2.1.1'
   gem 'quiet_assets', '~> 1.1'    
   gem 'rails-footnotes', '~> 4.1', '>= 4.1.8'

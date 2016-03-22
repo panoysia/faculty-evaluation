@@ -19,13 +19,19 @@ Rails.application.routes.draw do
 
     resources :employees do
       scope module: :employees do
-        resources :educations, only: [:index]
-        resources :trainings, only: [:index]
-        resources :civil_service_eligibilities, only: [:index]
-        resources :other_infos, only: [:index]
-        resources :voluntary_works, only: [:index]
-        resources :work_experiences, only: [:index]
+        resources :educations
+        resources :trainings
+        resources :civil_service_eligibilities
+        resources :other_infos
+        resources :voluntary_works
+        resources :work_experiences
       end
+
+      # member do
+      # end
+
+      # collection do
+      # end
     end
 
     scope path: 'ratings' do

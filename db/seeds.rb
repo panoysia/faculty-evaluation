@@ -6,25 +6,25 @@ if Rails.env.development?
 
   AcademicRanking.delete_all
   AcademicRanking.create [
-    { rank: 'Instructor 1', position: 1 },
-    { rank: 'Instructor 2', position: 2 },
-    { rank: 'Instructor 3', position: 3 },
-    { rank: 'Assistant Professor 1', position: 4 },
-    { rank: 'Assistant Professor 2', position: 5 },
-    { rank: 'Assistant Professor 3', position: 6 },
-    { rank: 'Assistant Professor 4', position: 7 },
-    { rank: 'Associate Professor 1', position: 8 },
-    { rank: 'Associate Professor 2', position: 9 },
-    { rank: 'Associate Professor 3', position: 10 },
-    { rank: 'Associate Professor 4', position: 11 },
-    { rank: 'Associate Professor 5', position: 12 },
-    { rank: 'Professor 1', position: 13 },
-    { rank: 'Professor 2', position: 14 },
-    { rank: 'Professor 3', position: 15 },
-    { rank: 'Professor 4', position: 16 },
-    { rank: 'Professor 5', position: 17 },
-    { rank: 'Professor 6', position: 18 },
-    { rank: 'College/University Professor', position: 19 }
+    { name: 'Instructor 1', position: 1 },
+    { name: 'Instructor 2', position: 2 },
+    { name: 'Instructor 3', position: 3 },
+    { name: 'Assistant Professor 1', position: 4 },
+    { name: 'Assistant Professor 2', position: 5 },
+    { name: 'Assistant Professor 3', position: 6 },
+    { name: 'Assistant Professor 4', position: 7 },
+    { name: 'Associate Professor 1', position: 8 },
+    { name: 'Associate Professor 2', position: 9 },
+    { name: 'Associate Professor 3', position: 10 },
+    { name: 'Associate Professor 4', position: 11 },
+    { name: 'Associate Professor 5', position: 12 },
+    { name: 'Professor 1', position: 13 },
+    { name: 'Professor 2', position: 14 },
+    { name: 'Professor 3', position: 15 },
+    { name: 'Professor 4', position: 16 },
+    { name: 'Professor 5', position: 17 },
+    { name: 'Professor 6', position: 18 },
+    { name: 'College/University Professor', position: 19 }
   ]
   
   puts 'Finished populating AcademicRank records!'
@@ -96,7 +96,7 @@ if Rails.env.development?
   conn.execute 'start transaction;'
     # Standard data for academic rankings. Used SQL statements instead of using an ActiveRecord Academic Rank model since there's no need to use one at the moment.
     insert_all_academic_rankings = 
-      "INSERT INTO academic_rankings (rank, position) VALUES 
+      "INSERT INTO academic_rankings (name, position) VALUES 
         ('Instructor 1', 1),
         ('Instructor 2', 2),
         ('Instructor 3', 3),
