@@ -16,6 +16,6 @@
 !/log/.keep
 /tmp
 
-database.yml
+#database.yml
 *.txt
 _my_files/
