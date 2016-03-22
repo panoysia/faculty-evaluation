@@ -1,3 +1,28 @@
 <div id="civil-service-content" class="row">
   <h4 class="page-header">List of Civil Service Eligibilities</h4>
 </div>
+<% display_number = 0 %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>  
+      <th>Career Service</th>
+      <th>Rating</th>
+      <th>Exam Date</th>
+      <th>License #</th>
+      <th>License Release Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @civil_service_eligibilities.each do |cse| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= cse.career_service %></td>
+        <td><%= cse.rating %></td>
+        <td><%= cse.date_of_exam %></td>
+        <td><%= cse.license_number %></td>
+        <td><%= cse.date_release_of_licence %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

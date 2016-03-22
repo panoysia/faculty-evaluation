@@ -1,3 +1,28 @@
 <div id="educations-content" class="row">
   <h4 class="page-header">List of Voluntary Works</h4>
 </div>
+<% display_number = 0 %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>  
+      <th>Organization</th>
+      <th>Position</th>
+      <th>Start</th>
+      <th>End</th>
+      <th># of hours</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @voluntary_works.each do |work| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= work.organization %></td>
+        <td><%= work.position %></td>
+        <td><%= work.start_at %></td>
+        <td><%= work.end_at %></td>
+        <td><%= work.no_of_hours %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -19,15 +19,13 @@
         <td><%= display_number += 1 %></td>
         <td><%= education.school_name %></td>
         <td><%= education.degree_course %></td>
-        <td><%= education.level += 1 %></td>
+        <td><%= education.level %></td>
         <td><%= education.start_at %></td>
         <td><%= education.end_at %></td>
+        <td><%#= education.grade_units %></td>
+        <td><%#= education.graduated_at %></td>
+        <td><%#= education.honors_received %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<!-- 
-t.string   "grade_units",     limit: 7
-t.date     "graduated_at"
-t.text     "honors_received", limit: 65535 
--->

@@ -1,3 +1,31 @@
 <div id="work-experiences-content" class="row">
   <h4 class="page-header">List of Work Experiences</h4>
 </div>
+<% display_number = 0 %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>#</th>  
+      <th>Company</th>
+      <th>Position/Title</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Monthly Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @work_experiences.each do |work_experience| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= work_experience.company %></td>
+        <td><%= work_experience.position_title %></td>
+        <td><%= work_experience.start_at %></td>
+        <td><%= work_experience.end_at %></td>
+        <td><%= work_experience.monthly_salary %></td>
+        <td><%#= work_experience.salary_grade %></td>
+        <td><%#= work_experience.status_of_appointment %></td>
+        <td><%#= work_experience.is_gov_service %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
