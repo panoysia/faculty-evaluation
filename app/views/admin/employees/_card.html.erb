@@ -4,7 +4,7 @@
   </div>
   <div class="col-md-9">
     <h2 class="page-header"><%= @employee.full_name %></h2>
-    <p><%= @employee.rank.name %><p>
-    <p>30 years old<span>&nbsp;—&nbsp;</span>10 years tenure</p>
+    <p><%= @employee.rank.name unless @employee.rank.nil? %><p>
+    <p><%= @employee.age %> years old<span>&nbsp;—&nbsp;</span><%= @employee.hired_date %></p>
   </div>
 </div>

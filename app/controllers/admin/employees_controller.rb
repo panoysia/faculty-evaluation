@@ -20,7 +20,7 @@ class Admin::EmployeesController < Admin::ApplicationController
 
     respond_to do |format|
       if @employee.save
-        format.html { redirect_to [:admin, @employee], notice: 'Employee was successfully created.' }
+        format.html { redirect_to [:edit, :admin, @employee], notice: 'Employee was successfully created.' }
       else
         @employee.build_user_account
         format.html { render :new }
@@ -61,6 +61,6 @@ class Admin::EmployeesController < Admin::ApplicationController
   end
   
   def employee_params_for_update
-    params.require(:employee).permit(:first_name, :last_name)
+    params.require(:employee).permit(:first_name, :last_name, :middle_name, :name_extension, :designation, :gender, :civil_status, :birth_date, :citizenship, :height, :weight, :blood_type, :gsis_no, :pagibig_no, :philhealth_no, :sss_no, :r_address, :r_zip_code, :r_telephone_no, :p_address, :p_zip_code, :p_telephone_no, :email_address, :cellphone_no, :agency_employee_no, :tin, :academic_ranking_id, :hired_date)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322124936) do
+ActiveRecord::Schema.define(version: 20160323054840) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",       limit: 50, null: false
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 20160322124936) do
     t.date     "birth_date"
     t.string   "citizenship",         limit: 15
     t.string   "height",              limit: 5
-    t.string   "weight",              limit: 5
+    t.string   "weight",              limit: 15
     t.string   "blood_type",          limit: 3
     t.string   "gsis_no",             limit: 20
     t.string   "pagibig_no",          limit: 20
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 20160322124936) do
     t.string   "agency_employee_no",  limit: 20
     t.string   "tin",                 limit: 15
     t.integer  "academic_ranking_id"
+    t.date     "hired_date"
   end
 
   add_index "employees", ["academic_ranking_id"], name: "index_employees_on_academic_ranking_id"

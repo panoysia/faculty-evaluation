@@ -14,19 +14,22 @@ class Employee < ActiveRecord::Base
     M: 'Married'
   }
 
-
-  validates :middle_name, length: { maximum: 50 }
-  validates :name_extension, length: { maximum: 50 }
+  BLOOD_TYPES = {
+    A: 'Type A',
+    B: 'Type B',
+    AB: 'Type AB',
+    O: 'Type O'
+  }
 
   has_one :user_account, as: :account, class_name: 'User'
 
-  has_many :civil_service_eligibilities
   has_many :educations
-  has_many :other_infos
-  has_many :trainings
-  has_many :voluntary_works
   has_many :work_experiences
-
+  has_many :trainings
+  has_many :civil_service_eligibilities
+  has_many :voluntary_works
+  has_many :other_infos
+  
   has_many :ratings
   has_many :instruction_ratings, 
     -> { where(type: 'Employee::Rating::Instruction') },
@@ -49,67 +52,89 @@ class Employee < ActiveRecord::Base
 
   #, inverse_of: :employee
   accepts_nested_attributes_for :user_account, 
-    reject_if: lambda { |attributes| attributes['username'].blank? }
+    reject_if: lambda { |attributes| attributes['username'].blank? && attributes['password'].blank? }
+
 
   validates :first_name, :last_name, 
     presence: true,
     length: { maximum: 50 }
 
-  validates :gender, inclusion: { in: GENDER_TYPES.keys.to_s }
-  validates :civil_status, 
-    inclusion: { in: CIVIL_STATUS_TYPES.keys.to_s }
+  with_options on: :update do |record|
+    record.validates :gender, 
+      inclusion: { in: GENDER_TYPES.keys.map(&:to_s) }
+    
+    record.validates :civil_status, 
+      inclusion: { in: CIVIL_STATUS_TYPES.keys.map(&:to_s) }    
+    
+    record.validates :blood_type,
+      inclusion: { in: BLOOD_TYPES.keys.map(&:to_s) }
+
+    record.validates :middle_name, length: { maximum: 50 }
+    record.validates :name_extension, length: { maximum: 7 }
+    record.validates :height, length: { maximum: 5 }
+    record.validates :weight, length: { maximum: 15 }
+    record.validates :blood_type, length: { maximum: 3 }
+    record.validates :gsis_no, :pagibig_no, :philhealth_no, 
+                      :agency_employee_no, 
+                      length: { maximum: 20 }
+
+    record.validates :r_address, :p_address, length: { maximum: 70 }
+    record.validates :r_zip_code, :p_zip_code, length: { maximum: 5 }
+    record.validates :r_telephone_no, :p_telephone_no, length: { maximum: 15 }      
+
+    record.validates :email_address, length: { maximum: 40 }
+    # validate format of :email too
+
+    record.validates :citizenship, :sss_no, :cellphone_no, :tin, 
+                      length: { maximum: 15 } 
+    
+    # has_attached_file :picture # styles: {}
+    # validates_attachment_content_type :picture, :content_type => //    
+  end
 
 
-  def self.display_gender_types
+  def self.get_gender_types
     GENDER_TYPES.map { |key, value| [value, key] }
   end
 
-  def self.display_civil_status
+  def self.get_civil_status_types
     CIVIL_STATUS_TYPES.map { |key, value| [value, key] }
   end
 
-  def gender
-    GENDER_TYPES[self[:gender].to_sym] unless self[:gender].nil?
+  def self.get_blood_types
+    BLOOD_TYPES.map { |key, value| [value, key] }
   end
 
-  def civil_status
+  def self.get_field_limit_of(field_name)
+    column_for_attribute(field_name.to_s.to_sym).limit
   end
 
   def full_name
+=begin
+  Roosevelt, Theodore, Jr.
+  Stevenson, Adlai E., III
+  Sia, Elmer A., Jr
+  Moffett, Mrs. James, Sr.
+=end     
     name = "#{first_name.capitalize} "
     name << "#{middle_name.first.capitalize}. " if middle_name.present?
     name << last_name.capitalize
     # TODO: account for employee's name extension
   end
 
-  # def age
-  #   unless birth_date.nil?
-      
-  #   end  
-  # end
+  def age
+    return nil if birth_date.nil?
+    # 3/23/16         3/20/1985
+    if Date.current.month >= birth_date.month
+      if Date.current.day >= birth_date.day
+        Date.current.year - birth_date.year
+      else
 
-=begin
-  Roosevelt, Theodore, Jr.
-  Stevenson, Adlai E., III
-  Sia, Elmer A., Jr
-  Moffett, Mrs. James, Sr.
-=end
+      end
+    else
+      (Date.current.year - birth_date.year) - 1
+    end
+    
+  end
 
 end
-
-=begin
-
-  has_attached_file :picture # styles: {}
-  # validates_attachment_content_type :picture, :content_type => //
-  
-  validates :citizenship, length: { maximum: 15 }
-  validates :height, :weight, length: { maximum: 5 }
-  validates :blood_type, length: { maximum: 3 }
-  validates :gsis_no, :pagibig_no, :philhealth_no, 
-              length: { maximum: 20 }
-  validates :sss_no, length: { maximum: 15 }
-  validates :r_address, :p_address, length: { maximum: 70 }
-  validates :r_zip_code, :p_zip_code, length: { maximum: 5 }
-  validates :r_telephone_no, :p_telephone_no, length: { maximum: 15 }
-
-=end
