@@ -10,8 +10,10 @@
   <%= render 'admin/navbar' unless controller_name == 'sessions' %>
   <div class="app-container">
     <%= render 'shared/alert' %>
-    <%= yield %>  
+    <div class="container-fluid">    
+      <%= yield %>
+    </div>  <!-- .container-fluid -->
     <%= render 'shared/footer' %>
-  </div>
+  </div>  <!-- .app-container -->
 </body>
 </html>

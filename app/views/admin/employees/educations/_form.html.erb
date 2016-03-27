@@ -1,0 +1,38 @@
+<%= form_for [:admin, @employee, @education] do |f| %>
+  <%= error_messages_for(@education) %>
+  <div class="form-group">
+    <%= f.label :level %>
+    <%= f.select :level, level_types_for_select, {}, class: 'form-control' %>
+  </div>  
+  <div class="form-group">
+    <%= f.label :school_name %>
+    <%= f.text_field :school_name, class: 'form-control', maxlength: Employee::Education.get_field_limit_of(:school_name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :degree_course, 'Degree/Course' %>
+    <%= f.text_field :degree_course, class: 'form-control', maxlength: Employee::Education.get_field_limit_of(:degree_course) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :grade_units, 'Grade/Units' %>
+    <%= f.text_field :grade_units, class: 'form-control', maxlength: Employee::Education.get_field_limit_of(:grade_units) %>
+  </div>  
+  <div class="form-group">
+    <%= f.label :graduated_at, 'Year Graduated' %>
+    <%= f.date_field :graduated_at, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :start_at, 'Year Started' %>
+    <%= f.date_field :start_at, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :end_at, 'Year Ended' %>
+    <%= f.date_field :end_at, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :honors_received %>
+    <%= f.text_area :honors_received, class: 'form-control', maxlength: Employee::Education.get_field_limit_of(:honors_received), rows: 7 %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

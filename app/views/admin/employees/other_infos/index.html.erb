@@ -1,13 +1,17 @@
-<div id="educations-content" class="row">
-  <h4 class="page-header">List of Other Infos</h4>
-</div>
+<% provide(:content_id, 'id=other-infos-content') %>
 <% display_number = 0 %>
-<table class="table">
+<div>
+  <%= link_to new_admin_employee_other_info_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span> New
+  <% end %>
+</div>
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
       <th>#</th>  
       <th>Context</th>
-      <th>Info</th>
+      <th>Information</th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
   <tbody>

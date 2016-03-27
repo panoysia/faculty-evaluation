@@ -10,40 +10,15 @@ class RatingPeriod < ActiveRecord::Base
     # scope :open, -> { where(status: 1) }
     # scope :close, -> { where(status: 2) }
 
-  validates_presence_of :start_at, :end_at, :semester, :status
-  validates_length_of :start_at, :end_at, is: 4
-
-  validates_inclusion_of :status, in: RatingPeriod.statuses
-  
+  validates :start_at, :end_at, :semester, :status, presence: true
+  validates :start_at, :end_at, length: { is: 4 }
+  validates :status, inclusion: { in: RatingPeriod.statuses }
   # 1 is for 1st Sem., 2 is for 2nd Sem.
-  validates_inclusion_of :semester, in: [1, 2]
+  validates :semeseter, inclusion: { in: [1, 2] }
 
+  
   def coverage
     "#{start_at}-#{end_at}"    
   end
 
-=begin
-  SEMESTER_TYPES = {
-    '1': '1st',
-    '2': '2nd'
-    's': 'Summer'
-  }
-
-  SEMESTER_TYPES.keys.map(&:to_s)
-=end
-
-  # def to_s
-  #   "#{SEMESTER_TYPES[semester]} for #{start_at}-#{end_at}"  
-  # end
-
-  # def self.convert_semester(value)
-  #   SEMESTERS[value.to_sym]
-  # end
-
-  # def semester
-  #   unless self[:semester].nil?
-  #     value = self[:semester].to_sym
-  #     SEMESTERS[value]
-  #   end
-  # end
 end

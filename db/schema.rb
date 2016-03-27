@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323054840) do
+ActiveRecord::Schema.define(version: 20160326173802) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",       limit: 50, null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20160323054840) do
 
   create_table "employee_educations", force: :cascade do |t|
     t.integer  "level",           limit: 1,     null: false
-    t.string   "school_name",     limit: 69,    null: false
+    t.string   "school_name",     limit: 50,    null: false
     t.string   "degree_course",   limit: 50,    null: false
     t.string   "grade_units",     limit: 7
     t.date     "graduated_at"
@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 20160323054840) do
   create_table "employee_work_experiences", force: :cascade do |t|
     t.date     "start_at",                                        null: false
     t.date     "end_at",                                          null: false
-    t.string   "position_title",        limit: 40,                null: false
+    t.string   "position_title",        limit: 50,                null: false
     t.string   "company",               limit: 50,                null: false
     t.decimal  "monthly_salary",                   precision: 10
     t.string   "salary_grade",          limit: 7
@@ -137,36 +137,40 @@ ActiveRecord::Schema.define(version: 20160323054840) do
   add_index "employee_work_experiences", ["employee_id"], name: "index_employee_work_experiences_on_employee_id"
 
   create_table "employees", force: :cascade do |t|
-    t.string   "first_name",          limit: 50, null: false
-    t.string   "last_name",           limit: 50, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "middle_name",         limit: 50
-    t.string   "name_extension",      limit: 7
+    t.string   "first_name",           limit: 50, null: false
+    t.string   "last_name",            limit: 50, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "middle_name",          limit: 50
+    t.string   "name_extension",       limit: 7
     t.string   "designation"
-    t.string   "gender",              limit: 1
-    t.string   "civil_status",        limit: 3
+    t.string   "gender",               limit: 1
+    t.string   "civil_status",         limit: 3
     t.date     "birth_date"
-    t.string   "citizenship",         limit: 15
-    t.string   "height",              limit: 5
-    t.string   "weight",              limit: 15
-    t.string   "blood_type",          limit: 3
-    t.string   "gsis_no",             limit: 20
-    t.string   "pagibig_no",          limit: 20
-    t.string   "philhealth_no",       limit: 20
-    t.string   "sss_no",              limit: 15
-    t.string   "r_address",           limit: 70
-    t.string   "r_zip_code",          limit: 5
-    t.string   "r_telephone_no",      limit: 15
-    t.string   "p_address",           limit: 70
-    t.string   "p_zip_code",          limit: 5
-    t.string   "p_telephone_no",      limit: 15
-    t.string   "email_address",       limit: 40
-    t.string   "cellphone_no",        limit: 15
-    t.string   "agency_employee_no",  limit: 20
-    t.string   "tin",                 limit: 15
+    t.string   "citizenship",          limit: 15
+    t.string   "height",               limit: 5
+    t.string   "weight",               limit: 15
+    t.string   "blood_type",           limit: 3
+    t.string   "gsis_no",              limit: 20
+    t.string   "pagibig_no",           limit: 20
+    t.string   "philhealth_no",        limit: 20
+    t.string   "sss_no",               limit: 15
+    t.string   "r_address",            limit: 70
+    t.string   "r_zip_code",           limit: 5
+    t.string   "r_telephone_no",       limit: 15
+    t.string   "p_address",            limit: 70
+    t.string   "p_zip_code",           limit: 5
+    t.string   "p_telephone_no",       limit: 15
+    t.string   "email_address",        limit: 40
+    t.string   "cellphone_no",         limit: 15
+    t.string   "agency_employee_no",   limit: 20
+    t.string   "tin",                  limit: 15
     t.integer  "academic_ranking_id"
     t.date     "hired_date"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   add_index "employees", ["academic_ranking_id"], name: "index_employees_on_academic_ranking_id"

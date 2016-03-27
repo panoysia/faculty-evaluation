@@ -1,12 +1,22 @@
 # This code is commented and act only for reference on using namespaced models.
 
-# module Employee
-#   def self.table_name_prefix
-#     'employee_'
-#   end
-# end
+=begin
+module Employee
+  def self.table_name_prefix
+    'employee_'
+  end
+
+  def self.use_relative_model_naming?
+    true
+  end
+end
+=end
 
 class Employee < ActiveRecord::Base
+  def self.use_relative_model_naming?
+    true
+  end
+
   GENDER_TYPES = { M: 'Male', F: 'Female'}
   CIVIL_STATUS_TYPES = {
     S: 'Single', 
@@ -21,14 +31,20 @@ class Employee < ActiveRecord::Base
     O: 'Type O'
   }
 
-  has_one :user_account, as: :account, class_name: 'User'
+  has_attached_file :picture, 
+    styles: { medium: "200x200", thumb: "100x100" },
+    default_url: 'no_profile_image.jpg'
+    
+  validates_attachment_content_type :picture, content_type: ['image/jpg', 'image/jpeg', 'image/png']
 
-  has_many :educations
-  has_many :work_experiences
-  has_many :trainings
-  has_many :civil_service_eligibilities
-  has_many :voluntary_works
-  has_many :other_infos
+  has_one :user_account, as: :account, class_name: 'User', dependent: :destroy
+
+  has_many :educations, dependent: :destroy
+  has_many :work_experiences, dependent: :destroy
+  has_many :trainings, dependent: :destroy
+  has_many :civil_service_eligibilities, dependent: :destroy
+  has_many :voluntary_works, dependent: :destroy
+  has_many :other_infos, dependent: :destroy
   
   has_many :ratings
   has_many :instruction_ratings, 
@@ -44,8 +60,8 @@ class Employee < ActiveRecord::Base
     -> { where(type: 'Employee::Rating::Production') },
     class_name: 'Employee::Rating'
 
-  has_many :leaves 
-  has_many :career_paths
+  has_many :leaves, dependent: :destroy 
+  has_many :career_paths, dependent: :destroy
 
   belongs_to :rank, class_name: 'AcademicRanking', foreign_key: 'academic_ranking_id'
   # belongs_to :department
@@ -54,6 +70,7 @@ class Employee < ActiveRecord::Base
   accepts_nested_attributes_for :user_account, 
     reject_if: lambda { |attributes| attributes['username'].blank? && attributes['password'].blank? }
 
+  # accepts_nested_attributes_for :picture
 
   validates :first_name, :last_name, 
     presence: true,
@@ -90,19 +107,6 @@ class Employee < ActiveRecord::Base
     
     # has_attached_file :picture # styles: {}
     # validates_attachment_content_type :picture, :content_type => //    
-  end
-
-
-  def self.get_gender_types
-    GENDER_TYPES.map { |key, value| [value, key] }
-  end
-
-  def self.get_civil_status_types
-    CIVIL_STATUS_TYPES.map { |key, value| [value, key] }
-  end
-
-  def self.get_blood_types
-    BLOOD_TYPES.map { |key, value| [value, key] }
   end
 
   def self.get_field_limit_of(field_name)

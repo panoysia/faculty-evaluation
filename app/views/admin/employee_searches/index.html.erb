@@ -1,0 +1,3 @@
+<% results = "#{pluralize(@searched_employees.count, 'record')} found" %>
+<h2 class="page-header">Employee Search Results: <span style="font-style: italic"><%= results %><span></h2>
+<%= render partial: 'searched_employee', collection: @searched_employees %>

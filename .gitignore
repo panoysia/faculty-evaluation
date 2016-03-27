@@ -19,3 +19,5 @@
 #database.yml
 *.txt
 _my_files/
+
+public/system

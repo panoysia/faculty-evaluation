@@ -1,0 +1,38 @@
+<%= form_for [:admin, @employee, @work_experience] do |f| %>
+  <%= error_messages_for(@work_experience) %>    
+  <div class="form-group">
+    <%= f.label :position_title %>
+    <%= f.text_field :position_title, class: 'form-control', maxlength: Employee::WorkExperience.get_field_limit_of(:position_title) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :company %>
+    <%= f.text_field :company, class: 'form-control', maxlength: Employee::WorkExperience.get_field_limit_of(:company) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :start_at, 'Start Date' %>
+    <%= f.date_field :start_at, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :end_at, 'End Date' %>
+    <%= f.date_field :end_at, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :monthly_salary, 'Monthly Salary' %>
+    <%= f.text_field :monthly_salary, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :salary_grade, 'Salary Grade' %>
+    <%= f.text_field :salary_grade, class: 'form-control', maxlength: Employee::WorkExperience.get_field_limit_of(:salary_grade) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :status_of_appointment, 'Status of Appointment' %>
+    <%= f.text_field :status_of_appointment, class: 'form-control', maxlength: Employee::WorkExperience.get_field_limit_of(:status_of_appointment) %>
+  </div>
+  <div class="form-group">
+    <%= f.check_box :is_gov_service, class: 'form-controlasdfasd', maxlength: Employee::WorkExperience.get_field_limit_of(:is_gov_service) %>
+    <%= f.label :is_gov_service, 'Government Service?', class: 'form-label' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>  
+<% end %>

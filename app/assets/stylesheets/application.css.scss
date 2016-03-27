@@ -2,13 +2,13 @@
 @import 'bootstrap';
 
 // Bootstrap-related CSS
-.container-fluid {
-//  padding: 10px 120px;
-//  border: 1px solid blue;
-}
 
 .page-header {
-  margin: 20px 0px;    
+  //margin: 20px 0px;
+  margin-top: 15px;
+  margin-bottom: 10px;    
+  margin-left: 0px;
+  margin-right: 0px
 }
 
 .navbar {
@@ -17,23 +17,102 @@
 
 
 // Application-related CSS
+
 .app-container {
   padding: 2px 120px;
 //  border: 1px solid red;
 }
 
 footer {
-  margin-top: 50px;
+  margin-top: 35px;
 }
 
-[class*="col-md"] {
+div#login-panel {
+  margin-top: 70px;
+  margin-bottom: 0px;
   //border: 1px red solid;
 }
 
-#employee-related-data {
-  margin-top: 30px;
+div#employee-card {
+  //border: 1px red dashed;
+  margin-top: 15px;
 }
 
-div#profile-content {
-  margin-top: 30px;
+div.employee-card-info > p {
+  font-size: 16px;
+  margin-bottom: 5px;
+  //color: red; 
 }
+
+
+div#employee-tabs {
+  margin-top: 30px;
+  //border: 1px green dashed;
+}
+
+div#profile-content, 
+div#educations-content,
+div#work-experiences-content,
+div#trainings-content, 
+div#civil-services-content, 
+div#voluntary-works-content,
+div#other-infos-content {
+  //margin-top: 30px;
+  //margin: 30px 20px;
+  //border: 1px blue dashed;
+  table {
+    margin-top: 10px;
+  }
+}
+
+.content {
+  margin: 15px 3px;
+  //border: 1px orange solid;
+  //margin-top: 30px;
+}
+
+.caption > h4 {
+  //font-size: 17px;
+  margin: 2px;
+}
+
+.caption > p {
+  font-size: 15px;
+  margin: 0px;
+}
+
+.col-md-3:nth-child(4n+1) {
+  clear: left;
+}
+
+.center {
+  text-align: center;
+}  
+
+
+
+// Guides
+
+/*
+  .container-fluid {
+    padding: 10px 120px;
+    border: 1px solid blue;
+  }
+*/
+
+/*
+  [class*="col-md"] {
+    border: 1px red solid;
+  }
+*/
+
+/*
+  div.row {
+    border: 1px red solid;
+  }
+*/
+
+/*
+  div#employee-card
+  div#employee-tabs
+*/

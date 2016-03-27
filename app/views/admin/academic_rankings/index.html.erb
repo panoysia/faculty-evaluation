@@ -1,11 +1,22 @@
+<!-- <span class="pull-right"> -->
+  <%#= link_to new_admin_leave_path, class: 'btn btn-primary' do %>
+    <!-- <span class="glyphicon glyphicon-plus"></span> New -->
+  <%# end %>
+<!-- </span> -->
 <% display_number = 0 %>
-<h2 class="page-header">Academic Rankings</h2>
-<table class="table">
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span>Academic Rankings</span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<table class="table table-striped table-bordered content">
   <thead>
     <tr>
       <th>#</th>  
       <th>Rank Name</th>
-      <th>Position</th>
+      <!-- <th>Position</th> -->
     </tr>
   </thead>
   <tbody>
@@ -13,7 +24,7 @@
       <tr>
         <td><%= display_number += 1 %></td>
         <td><%= academic_rank.name %></td>
-        <td><%= academic_rank.position %></td>
+        <!-- <td><%#= academic_rank.position %></td> -->
       </tr>
     <% end %>
   </tbody>

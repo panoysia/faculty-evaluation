@@ -1,13 +1,14 @@
-<h3 class="page-header">Welcome back, <%= current_user.username %></h3>
+<!-- <h3 class="page-header">Welcome back, <%#= current_user.username %></h3> -->
+<h3 class="page-header">Dashboard</h3>
 <div id="panel-tasks" class="panel">
   <h4 class="page-header">Tasks</h4>
-  <p>1# You are required to rate Elmer A. Sia</p>
-  <p>2# You are required to rate Anrem Balontong</p>  
+  <p><strong><%= link_to "1# You are required to rate Virginia Figueroa" %></strong></p>
+  <p><strong><%= link_to "2# You are required to rate Anrem Balontong" %></strong></p>  
 </div>
 <div id="panel-ratings" class="panel">
   <h4 class="page-header">Available Ratings</h4>
   <% @opened_rating_periods.each do |period| %>
-    <p><strong><%= period.coverage %></strong></p>
+    <p><strong><%= link_to period.coverage %></strong></p>
   <% end %>
 </div>
 <!-- 

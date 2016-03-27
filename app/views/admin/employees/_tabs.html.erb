@@ -1,14 +1,14 @@
-<div id="employee-related-data" class="row">
+<div id="employee-tabs" class="row">
   <ul class="nav nav-tabs">
     <li role="presentation" class="<%= set_active_tab(:employees) %>">
       <%= link_to 'Profile', admin_employee_path(@employee) %>
-    </li>    
+    </li>
     <li role="presentation" class="<%= set_active_tab(:educations) %>">
       <%= link_to 'Educations', admin_employee_educations_path(@employee) %>
     </li>
     <li role="presentation" class="<%= set_active_tab(:work_experiences) %>">
-      <%= link_to 'Work Experiences', admin_employee_work_experiences_path(@employee)%>  
-    </li>    
+      <%= link_to 'Work Experiences', admin_employee_work_experiences_path(@employee)%>
+    </li>
     <li role="presentation" class="<%= set_active_tab(:trainings) %>">
       <%= link_to 'Trainings', admin_employee_trainings_path(@employee)%>  
     </li>
@@ -17,9 +17,15 @@
     </li>
     <li role="presentation" class="<%= set_active_tab(:voluntary_works) %>">
       <%= link_to 'Voluntary Works', admin_employee_voluntary_works_path(@employee)%>
-    </li>        
+    </li>
     <li role="presentation" class="<%= set_active_tab(:other_infos) %>">
       <%= link_to 'Other Info', admin_employee_other_infos_path(@employee) %>
-    </li>    
-  </ul>    
+    </li>
+    <li role="presentation" class="<%= set_active_tab(:career_paths) %>">
+      <%= link_to 'Career Path', '#' %>
+    </li>
+    <li role="presentation" class="<%= set_active_tab(:leaves) %>">
+      <%= link_to 'Leaves', '#' %>
+    </li>
+  </ul>
 </div>  <!-- <div#employee-related-data.row> -->

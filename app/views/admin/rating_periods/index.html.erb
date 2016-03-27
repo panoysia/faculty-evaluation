@@ -1,8 +1,17 @@
 <% display_number = 0 %>
-<h2 class="page-header">Rating Periods</h2>
-<%= link_to 'New Rating Period', new_admin_rating_period_path, class: 'btn btn-primary' %>
-<!-- puts some gap here -->
-<table class="table">
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span>Rating Periods</span>
+      <span class="pull-right">
+        <%= link_to new_admin_rating_period_path, class: 'btn btn-primary' do %>
+          <span class="glyphicon glyphicon-plus"></span> New
+        <% end %>
+      </span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div> <!-- .row -->
+<table class="table table-striped table-bordered content">
   <thead>
     <tr>
       <th>#</th>
@@ -10,7 +19,7 @@
       <th>End</th>
       <th>Semester</th>
       <th>Status</th>
-      <th colspan="3"></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -21,9 +30,15 @@
         <td><%= rating_period.end_at %></td>
         <td><%= rating_period.semester.ordinalize %></td>
         <td><%= rating_period.status.titleize %></td>
-        <td><%= link_to 'Show', [:admin, rating_period] %></td>
-        <td><%= link_to 'Edit', edit_admin_rating_period_path(rating_period) %></td>
-        <td><%= link_to 'Delete', [:admin, rating_period], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- <td><%#= link_to 'Show', [:admin, rating_period] %></td> -->
+        <td>
+          <%= link_to edit_admin_rating_period_path(rating_period)   do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_rating_period_path(rating_period), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

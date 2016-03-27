@@ -1,22 +1,38 @@
 <% display_number = 0 %>
-<h2 class="page-header">Students</h2>
-<%= link_to 'New Student', new_admin_student_path, class: 'btn btn-primary' %>
-<table class="table">
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span>Students</span>
+      <span class="pull-right">
+        <%= link_to new_admin_student_path, class: 'btn btn-primary' do %>
+          <span class="glyphicon glyphicon-plus"></span> New
+        <% end %>
+      </span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div> <!-- .row -->
+<table class="table table-striped table-bordered content">
   <thead>
     <tr>
       <th>#</th>
       <th>Student Name</th>
-      <th colspan="3"></th>      
+      <th colspan="2">Actions</th>      
     </tr>
   </thead>
   <tbody>
     <% @students.each do |student| %>
       <tr>
         <td><%= display_number += 1 %></td>
-        <td><%= student.full_name %></td>
-        <td><%= link_to 'Show', [:admin, student] %></td>
-        <td><%= link_to 'Edit', [:edit, :admin, student] %></td>
-        <td><%= link_to 'Delete', [:admin, student], method: :delete, data: { confirm: 'Are you sure?' } %></td>        
+        <td><%= link_to student.full_name, admin_student_path(student) %></td>
+        <td>
+          <%= link_to edit_admin_student_path(student)   do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_student_path(student), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+
       </tr>
     <% end %>
   </tbody>

@@ -10,9 +10,10 @@
   <%= render 'user/navbar' unless controller_name == 'sessions' %>
   <div class="app-container">
     <%= render 'shared/alert' %>
-    <%= yield %>
+    <div class="container-fluid">    
+      <%= yield %>
+    </div>
     <%= render 'shared/footer' %>
   </div>
-  <pre><%= debug(current_user) %></pre>
 </body>
 </html>

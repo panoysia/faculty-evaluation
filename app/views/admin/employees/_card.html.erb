@@ -1,10 +1,28 @@
 <div id="employee-card" class="row">
   <div class="col-md-3">
-    <img class="img-responsive img-thumbnail center-block" src="http://lorempixel.com/200/200/people/" alt="">
+    <!-- <img class="img-responsive img-thumbnail center-block" src="http://lorempixel.com/200/200/people/" alt=""> -->
+    <%= image_tag @employee.picture.url, size: "210", class: 'img-responsive img-thumbnail center-block' %>
   </div>
   <div class="col-md-9">
-    <h2 class="page-header"><%= @employee.full_name %></h2>
-    <p><%= @employee.rank.name unless @employee.rank.nil? %><p>
-    <p><%= @employee.age %> years old<span>&nbsp;—&nbsp;</span><%= @employee.hired_date %></p>
+    <h2 class="page-header">
+      <span><%= @employee.full_name %></span>
+      <!-- bullet character <span>&#9679;</span> -->
+      <div class="pull-right">
+        <span class="pull-right">
+          <%= button_to admin_employees_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Delete Employee record? This is undoable!' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>        
+        </span>
+        <span class="pull-right">
+          <%#= link_to 'Available Actions', '#', class: 'btn btn-default', visible: false %>
+        </span>         
+      </div>
+    </h2>
+    <div class="employee-card-info">
+      <p><%= @employee.rank.name if @employee.rank %></p>
+      <p><%= @employee.designation if @employee.designation.present? %></p>
+      <p><%= "#{@employee.age} years old" if @employee.age.present? %></p>
+      <p><%= @employee.hired_date if @employee.hired_date.present? %></p>
+    </div>
   </div>
 </div>

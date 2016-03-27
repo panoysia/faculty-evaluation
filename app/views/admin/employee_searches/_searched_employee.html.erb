@@ -1,0 +1,29 @@
+<div id="employee-card" class="row">
+  <div class="col-md-3">
+    <%= link_to admin_employee_path(searched_employee) do %>
+      <%= image_tag searched_employee.picture.url(:medium), size: "210", class: 'img-responsive img-thumbnail center-block' %>
+    <% end %>
+  </div>
+  <div class="col-md-9">
+    <h2 class="page-header">
+      <span><%= link_to searched_employee.full_name, admin_employee_path(searched_employee) %></span>
+      <!-- bullet character <span>&#9679;</span> -->
+      <div class="pull-right">
+        <span class="pull-right">
+          <%= button_to admin_employees_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Delete Employee record? This is undoable!' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>        
+        </span>
+        <span class="pull-right">
+          <%#= link_to 'Available Actions', '#', class: 'btn btn-default', visible: false %>
+        </span>         
+      </div>
+    </h2>
+    <div class="employee-card-info">
+      <p><%= searched_employee.rank.name if searched_employee.rank %></p>
+      <p><%= searched_employee.designation if searched_employee.designation.present? %></p>
+      <p><%= "#{searched_employee.age} years old" if searched_employee.age.present? %></p>
+      <p><%= searched_employee.hired_date if searched_employee.hired_date.present? %></p>
+    </div>
+  </div>
+</div>

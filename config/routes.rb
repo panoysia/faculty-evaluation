@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     get 'login' => 'sessions#new'
     delete 'logout' => 'sessions#destroy'
 
+    get 'employees/search' => "employee_searches#index"
+
     resource :dashboard, only: [:show]
     resources :admins
     resources :users
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
     # resources :forum_threads do
     #   resources :forum_posts, module: :forum_threads
     # end
+
+  
 
     resources :employees do
       scope module: :employees do

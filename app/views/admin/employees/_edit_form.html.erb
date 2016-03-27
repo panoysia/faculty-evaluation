@@ -1,182 +1,218 @@
-<div id="profile-content" class="row">
-  <%= form_for [:admin, @employee], html: { multipart: true } do |f| %>
-    <%= error_messages_for(@employee) %>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :first_name, 'First Name', class: 'control-label' %>
-        <%= f.text_field :first_name, class: 'form-control', autofocus: true, maxlength: Employee.get_field_limit_of(:first_name) %>
+<%= form_for [:admin, @employee], html: { multipart: true } do |f| %>
+  <%= error_messages_for(@employee) %>
+  <div id="personal-info" class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Personal Information</h3>
+    </div>  <!-- .panel-heading -->
+    <div class="panel-body">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :first_name, 'First Name', class: 'control-label' %>
+          <%= f.text_field :first_name, class: 'form-control', autofocus: true, maxlength: Employee.get_field_limit_of(:first_name) %>
+        </div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :middle_name, 'Middle Name', class: 'control-label' %>
-        <%= f.text_field :middle_name, class: 'form-control', maxlength: Employee.get_field_limit_of(:middle_name) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :last_name, class: 'control-label' %>
-        <%= f.text_field :last_name, class: 'form-control', maxlength: Employee.get_field_limit_of(:last_name) %>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :middle_name, 'Middle Name', class: 'control-label' %>
+          <%= f.text_field :middle_name, class: 'form-control', maxlength: Employee.get_field_limit_of(:middle_name) %>
+        </div>      
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :name_extension, 'Name Extension', class: 'control-label' %>
-        <%= f.text_field :name_extension, class: 'form-control', maxlength: Employee.get_field_limit_of(:name_extension)  %>
-        <!-- <span class="help-block"><em>(7 chars max)</em></span> -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :last_name, class: 'control-label' %>
+          <%= f.text_field :last_name, class: 'form-control', maxlength: Employee.get_field_limit_of(:last_name) %>
+        </div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :academic_ranking_id, 'Rank', class: 'control-label' %>
-        <%= f.collection_select :academic_ranking_id, AcademicRanking.all, :id, :name, {}, class: 'form-control' %>
-        <%#= f.date_field :birth_date, class: 'form-control' %>
-      </div>      
-    </div>  
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :designation, class: 'control-label' %>
-        <%= f.text_field :designation, class: 'form-control' %>
-      </div>      
-    </div>  
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :birth_date, 'Date of Birth', class: 'control-label' %>
-        <%= f.date_field :birth_date, class: 'form-control' %>
-      </div>      
-    </div>  
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :gender, 'Gender', class: 'control-label' %>
-        <%= f.select :gender, Employee.get_gender_types, {}, class: 'form-control' %>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :name_extension, 'Name Extension', class: 'control-label' %>
+          <%= f.text_field :name_extension, class: 'form-control', maxlength: Employee.get_field_limit_of(:name_extension)  %>
+          <!-- <span class="help-block"><em>(7 chars max)</em></span> -->
+        </div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :civil_status, 'Civil Status', class: 'control-label' %>
-        <%= f.select :civil_status, Employee.get_civil_status_types, {}, class: 'form-control' %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :citizenship, class: 'control-label' %>
-        <%= f.text_field :citizenship, class: 'form-control', maxlength: Employee.get_field_limit_of(:citizenship) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :height, class: 'control-label' %>
-        <%= f.text_field :height, class: 'form-control', maxlength: Employee.get_field_limit_of(:height) %>
-      </div>      
-    </div>
-   <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :weight, class: 'control-label' %>
-        <%= f.text_field :weight, class: 'form-control', maxlength: Employee.get_field_limit_of(:weight) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <!-- must be a 'select' field -->
-        <%= f.label :blood_type, 'Blood Type', class: 'control-label' %>
-        <%= f.select :blood_type, Employee.get_blood_types, {}, class: 'form-control' %>
-      </div>      
-    </div>  
-    <div class="col-md-6">
-      <div class="form-group">
-        <!-- must be an 'email' field -->
-        <%= f.label :email_address, 'Email Address', class: 'control-label' %>
-        <%= f.text_field :email_address, class: 'form-control', maxlength: Employee.get_field_limit_of(:email_address) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :cellphone_no, 'Cellphone #', class: 'control-label' %>
-        <%= f.text_field :cellphone_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:cellphone_no) %>
-      </div>      
-    </div>  
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :gsis_no, 'GSIS #', class: 'control-label' %>
-        <%= f.text_field :gsis_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:gsis_no) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :pagibig_no, 'PAG-IBIG #', class: 'control-label' %>
-        <%= f.text_field :pagibig_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:pagibig_no) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :philhealth_no, 'PhilHealth #',class: 'control-label' %>
-        <%= f.text_field :philhealth_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:philhealth_no) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :sss_no, 'SSS #', class: 'control-label' %>
-        <%= f.text_field :sss_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:sss_no) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :agency_employee_no, 'Agency Employee #', class: 'control-label' %>
-        <%= f.text_field :agency_employee_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:agency_employee_no) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :tin, 'TIN', class: 'control-label' %>
-        <%= f.text_field :tin, class: 'form-control', maxlength: Employee.get_field_limit_of(:tin) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :r_address, 'Residential Address', class: 'control-label' %>
-        <%= f.text_field :r_address, class: 'form-control', maxlength: Employee.get_field_limit_of(:r_address) %>
-      </div>      
-    </div>                
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :r_zip_code, 'Residential Zip Code', class: 'control-label' %>
-        <%= f.text_field :r_zip_code, class: 'form-control', maxlength: Employee.get_field_limit_of(:r_zip_code) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :r_telephone_no, 'Residential Tel. #', class: 'control-label' %>
-        <%= f.text_field :r_telephone_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:r_telephone_no) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :p_address, 'Permanent Address', class: 'control-label' %>
-        <%= f.text_field :p_address, class: 'form-control', maxlength: Employee.get_field_limit_of(:p_address) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :p_zip_code, 'Permanent Zip Code', class: 'control-label' %>
-        <%= f.text_field :p_zip_code, class: 'form-control', maxlength: Employee.get_field_limit_of(:p_zip_code) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :p_telephone_no, 'Permanent Tel. #', class: 'control-label' %>
-        <%= f.text_field :p_telephone_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:p_telephone_no) %>
-      </div>      
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <%= f.label :hired_date, class: 'control-label' %>
-        <%= f.date_field :hired_date, class: 'form-control' %>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :birth_date, 'Date of Birth', class: 'control-label' %>
+          <%= f.date_field :birth_date, class: 'form-control' %>
+        </div>      
+      </div>  
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :gender, 'Gender', class: 'control-label' %>
+          <%= f.select :gender, gender_types_for_select, {}, class: 'form-control' %>
+        </div>
       </div>
-    </div>
-    <div class="col-md-12">
-      <div class="form-group">
-        <%= f.submit class: 'btn btn-primary' %>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :civil_status, 'Civil Status', class: 'control-label' %>
+          <%= f.select :civil_status, civil_status_types_for_select, {}, class: 'form-control' %>
+        </div>      
       </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :citizenship, class: 'control-label' %>
+          <%= f.text_field :citizenship, class: 'form-control', maxlength: Employee.get_field_limit_of(:citizenship) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :height, class: 'control-label' %>
+          <%= f.text_field :height, class: 'form-control', maxlength: Employee.get_field_limit_of(:height) %>
+        </div>      
+      </div>
+     <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :weight, class: 'control-label' %>
+          <%= f.text_field :weight, class: 'form-control', maxlength: Employee.get_field_limit_of(:weight) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <!-- must be a 'select' field -->
+          <%= f.label :blood_type, 'Blood Type', class: 'control-label' %>
+          <%= f.select :blood_type, blood_types_for_select, {}, class: 'form-control' %>
+        </div>      
+      </div>  
+      <div class="col-md-6">
+        <div class="form-group">
+          <!-- must be an 'email' field -->
+          <%= f.label :email_address, 'Email Address', class: 'control-label' %>
+          <%= f.text_field :email_address, class: 'form-control', maxlength: Employee.get_field_limit_of(:email_address) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :cellphone_no, 'Cellphone #', class: 'control-label' %>
+          <%= f.text_field :cellphone_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:cellphone_no) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :picture, 'Employee Picture ', class: 'control-label' %>
+          <%= f.file_field :picture, class: 'form-control' %>
+        </div>
+      </div>      
+    </div>  <!-- .panel-body -->
+  </div>  <!-- #personal-info .panel -->
+
+  <div id="employment-information" class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Employment Information</h3>
     </div>
-  <% end # end of form_for %>
-</div>  <!-- id="profile-content" -->
+    <div class="panel-body">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :academic_ranking_id, 'Rank', class: 'control-label' %>
+          <%= f.collection_select :academic_ranking_id, AcademicRanking.all, :id, :name, {}, class: 'form-control' %>
+          <%#= f.date_field :birth_date, class: 'form-control' %>
+        </div>      
+      </div>  
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :designation, class: 'control-label' %>
+          <%= f.text_field :designation, class: 'form-control' %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :hired_date, class: 'control-label' %>
+          <%= f.date_field :hired_date, class: 'form-control' %>
+        </div>
+      </div>
+    </div> <!-- .panel-body -->
+  </div>  <!--  #employment-information .panel -->
+
+  <div id="government-membership" class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Gov. Membership</h3>
+    </div>  <!-- .panel-heading -->
+    <div class="panel-body">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :gsis_no, 'GSIS #', class: 'control-label' %>
+          <%= f.text_field :gsis_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:gsis_no) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :pagibig_no, 'PAG-IBIG #', class: 'control-label' %>
+          <%= f.text_field :pagibig_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:pagibig_no) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :philhealth_no, 'PhilHealth #',class: 'control-label' %>
+          <%= f.text_field :philhealth_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:philhealth_no) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :sss_no, 'SSS #', class: 'control-label' %>
+          <%= f.text_field :sss_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:sss_no) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :agency_employee_no, 'Agency Employee #', class: 'control-label' %>
+          <%= f.text_field :agency_employee_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:agency_employee_no) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :tin, 'TIN', class: 'control-label' %>
+          <%= f.text_field :tin, class: 'form-control', maxlength: Employee.get_field_limit_of(:tin) %>
+        </div>      
+      </div>
+    </div>  <!-- .panel-body -->
+  </div>  <!-- #government-membership .panel -->
+
+  <div id="addresses-panel" class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Addresses</h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :r_address, 'Residential Address', class: 'control-label' %>
+          <%= f.text_field :r_address, class: 'form-control', maxlength: Employee.get_field_limit_of(:r_address) %>
+        </div>      
+      </div>                
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :r_zip_code, 'Residential Zip Code', class: 'control-label' %>
+          <%= f.text_field :r_zip_code, class: 'form-control', maxlength: Employee.get_field_limit_of(:r_zip_code) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :r_telephone_no, 'Residential Tel. #', class: 'control-label' %>
+          <%= f.text_field :r_telephone_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:r_telephone_no) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :p_address, 'Permanent Address', class: 'control-label' %>
+          <%= f.text_field :p_address, class: 'form-control', maxlength: Employee.get_field_limit_of(:p_address) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :p_zip_code, 'Permanent Zip Code', class: 'control-label' %>
+          <%= f.text_field :p_zip_code, class: 'form-control', maxlength: Employee.get_field_limit_of(:p_zip_code) %>
+        </div>      
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :p_telephone_no, 'Permanent Tel. #', class: 'control-label' %>
+          <%= f.text_field :p_telephone_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:p_telephone_no) %>
+        </div>      
+      </div>    
+    </div>  <!-- .panel-body -->
+  </div>  <!-- #addresses-panel .panel -->
+
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end # end of form_for %>

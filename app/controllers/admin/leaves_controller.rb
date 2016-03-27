@@ -3,6 +3,7 @@ class Admin::LeavesController < Admin::ApplicationController
 
   def index
     @leaves = Leave.all
+    # @leaves = Leave.include(:employee).latest(15)
   end
 
   def show    

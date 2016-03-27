@@ -5,12 +5,13 @@ class Leave < ActiveRecord::Base
       Vacation: 'V', 
       Maternity: 'M'
     }
-  
+
   MAXIMUM = 15
+  #enum status: %i(pending approved disapproved)
 
   belongs_to :employee
 
-  validates_presence_of :filed_at, :start_at, :end_at, :employee
+  validates :filed_at, :start_at, :end_at, :employee, presence: true
   validate :correct_date_range, unless: :date_values_are_nil?
   #  unless: Proc.new { (start_at.nil? && end_at.nil?) }
   

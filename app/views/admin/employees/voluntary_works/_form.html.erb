@@ -1,0 +1,26 @@
+<%= form_for [:admin, @employee, @voluntary_work] do |f| %>
+  <%= error_messages_for(@voluntary_work) %>    
+  <div class="form-group">
+    <%= f.label :organization %>
+    <%= f.text_field :organization, class: 'form-control', autofocus: true, maxlength: Employee::VoluntaryWork.get_field_limit_of(:organization) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :start_at, 'Start Date' %>
+    <%= f.date_field :start_at, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :end_at, 'End Date' %>
+    <%= f.date_field :end_at, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :no_of_hours, 'No. of hours' %>
+    <%= f.number_field :no_of_hours, class: 'form-control' %>
+  </div>  
+  <div class="form-group">
+    <%= f.label :position %>
+    <%= f.text_field :position, class: 'form-control', maxlength: Employee::VoluntaryWork.get_field_limit_of(:position) %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>  
+<% end %>

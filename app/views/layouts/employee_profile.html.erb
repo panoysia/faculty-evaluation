@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CAPSU HR Admin - Emp</title>
+  <title>CAPSU HR Admin</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -11,15 +11,13 @@
   <div class="app-container">
     <%= render 'shared/alert' %>
     <div class="container-fluid">
-      <%= render 'admin/employees/card' %>
-      <%= render 'admin/employees/tabs_of_related_data' %>
-      <%= yield %>
-      <div class="row links">
-        <%#= link_to 'Edit', edit_admin_employee_path(@employee), class: 'btn btn-link' %>
-        <%= link_to 'Back to Employees', admin_employees_path, class: 'btn btn-link' %>
-      </div>      
-    </div>
+      <%= render 'admin/employees/card' %> <!-- row -->
+      <%= render 'admin/employees/tabs' %><!-- row -->
+      <div <%= yield :content_id %> class="row content">
+        <%= yield %>
+      </div>
+    </div>  <!-- <div.container-fluid> --> 
     <%= render 'shared/footer' %>
-  </div>
+  </div>  <!-- <div.app-container> -->
 </body>
 </html>

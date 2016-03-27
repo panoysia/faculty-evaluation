@@ -1,6 +1,10 @@
+<% if false %>
+  <%= button_to admin_employees_path, method: :delete, class: 'btn btn-link', data: { confirm: 'Delete Employee record? This is undoable!' } do %>
+    Check
+  <% end %>
+<% end %>
 <%= form_for([:admin, @leave]) do |f| %>
   <%= error_messages_for(@leave) %>
-
   <div class="form-group">
     <%= f.label 'Employee' %>
     <%= f.collection_select :employee_id, Employee.all, :id, :full_name, class: 'form-control' %>
