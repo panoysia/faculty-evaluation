@@ -1,0 +1,29 @@
+<%= form_for [:admin, @employee, @ranking] do |f| %>
+  <%= error_messages_for(@ranking) %>  
+  <%#= f.label :nbc, 'Current NBC' %>
+  <%#= f.text_field :nbc, class: 'form-control', disabled: true %>
+  <%#= text_field_tag :nbc, @nbc_name, class: 'form-control', disabled: true %>
+  <div class="bg-info alert alert-warning">
+    <h4><strong>Current NBC is <%= @nbc_name %></strong></h4>
+    <h4><strong>Current rank is <%= @rank_full_name %></strong></h4>
+  </div>
+  <div class="form-group">
+    <%= f.label :cce_total_points, 'CCE Total Points' %>
+    <%= f.number_field :cce_total_points, class: 'form-control', autofocus: true %>
+  </div>  
+  <div class="form-group">
+    <%= f.label :qce_total_points, 'QCE Total Points' %>
+    <%= f.number_field :qce_total_points, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :achieved_rank, 'Achieved Rank' %>
+    <%= f.text_field :achieved_rank, class: 'form-control', disabled: true, maxlength: Employee::Ranking.get_field_limit_of(:achieved_rank) %>
+  </div>
+  <div class="form-group">
+    <% if @ranking.new_record? %>
+      <%= f.submit 'Perform Ranking', class: 'btn btn-primary' %>
+    <% else %>
+      <%= f.submit 'Update Ranking', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+<% end %>

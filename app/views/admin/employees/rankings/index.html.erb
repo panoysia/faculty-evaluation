@@ -1,0 +1,40 @@
+<% provide(:content_id, 'id=rankings-content') %>
+<% display_number = 0 %>
+<div>
+  <%= link_to new_admin_employee_ranking_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span> New
+  <% end %>
+</div>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>  
+      <th>NBC</th>
+      <th>CCE Total</th>
+      <th>QCE Total</th>
+      <th>Current Rank</th>
+      <th>Achieved Rank</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rankings.each do |ranking| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= ranking.nbc.name %></td>
+        <td><%= ranking.cce_total_points %></td>
+        <td><%= ranking.qce_total_points %></td>
+        <td><%= ranking.current_rank %></td>
+        <td><%= ranking.achieved_rank %></td>
+        <td>
+          <%= link_to edit_admin_employee_ranking_path(@employee, ranking)   do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_employee_ranking_path(@employee, ranking), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

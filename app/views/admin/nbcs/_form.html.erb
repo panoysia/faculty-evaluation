@@ -1,0 +1,18 @@
+<%= form_for [:admin, @nbc] do |f| %>
+  <%= error_messages_for(@nbc) %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control', autofocus: true, maxlength: NBC.get_field_limit_of(:name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.check_box :is_current %>
+    <%= f.label :is_current, 'Current NBC?', class: 'form-label' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

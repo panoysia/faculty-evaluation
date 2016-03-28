@@ -1,0 +1,4 @@
+<% provide(:content_id, 'id=rankings-content') %>
+<h4 class="page-header">Perform Ranking for <%= @employee.full_name %></h4>
+<%= render 'form' %>
+<%= link_to 'Back to Rankings', admin_employee_rankings_path, class: 'btn btn-link' %>
