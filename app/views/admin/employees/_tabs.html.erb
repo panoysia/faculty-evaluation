@@ -27,5 +27,8 @@
     <li role="presentation" class="<%= set_active_tab(:leaves) %>">
       <%= link_to 'Leaves', '#' %>
     </li>
+    <li role="presentation" class="<%= set_active_tab(:rankings) %>">
+      <%= link_to 'Rankings', admin_employee_rankings_path(@employee) %>
+    </li>    
   </ul>
 </div>  <!-- <div#employee-related-data.row> -->

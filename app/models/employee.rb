@@ -39,6 +39,7 @@ class Employee < ActiveRecord::Base
 
   has_one :user_account, as: :account, class_name: 'User', dependent: :destroy
 
+  has_many :rankings, dependent: :destroy
   has_many :educations, dependent: :destroy
   has_many :work_experiences, dependent: :destroy
   has_many :trainings, dependent: :destroy
@@ -61,7 +62,7 @@ class Employee < ActiveRecord::Base
     class_name: 'Employee::Rating'
 
   has_many :leaves, dependent: :destroy 
-  has_many :career_paths, dependent: :destroy
+  has_many :career_paths #, dependent: :destroy
 
   belongs_to :rank, class_name: 'AcademicRanking', foreign_key: 'academic_ranking_id'
   # belongs_to :department

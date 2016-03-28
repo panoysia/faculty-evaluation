@@ -21,8 +21,10 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'HR'
   inflect.uncountable %w[ dashboard hr_profile account] # career_path
   inflect.irregular 'leave', 'leaves'
-  # inflect.acronym 'QCE'
-  # inflect.acronym 'QCEs'
-  # inflect.acronym 'CCE'
-  # inflect.acronym 'CCEs'
+  inflect.acronym 'QCE'
+  inflect.acronym 'QCEs'
+  inflect.acronym 'CCE'
+  inflect.acronym 'CCEs'
+  inflect.acronym 'NBC'
+  inflect.acronym 'NBCs'
 end

@@ -6,4 +6,10 @@ class AcademicRanking < ActiveRecord::Base
   
   validates :position, presence: true,
                       numericality: { greater_than: 0, less_than: 50 }
+
+  def full_name
+    result = "#{name}"
+    result << " #{subrank}" if subrank.present?
+    result
+  end                      
 end

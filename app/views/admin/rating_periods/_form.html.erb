@@ -1,6 +1,5 @@
 <%= form_for([:admin, @rating_period]) do |f| %>
   <%= error_messages_for(@rating_period) %>
-
   <div class="form-group">
     <%= f.label :start_at %>
     <%= f.number_field :start_at, class: 'form-control', autofocus: true %>

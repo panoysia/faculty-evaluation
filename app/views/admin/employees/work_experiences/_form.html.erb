@@ -29,7 +29,7 @@
     <%= f.text_field :status_of_appointment, class: 'form-control', maxlength: Employee::WorkExperience.get_field_limit_of(:status_of_appointment) %>
   </div>
   <div class="form-group">
-    <%= f.check_box :is_gov_service, class: 'form-controlasdfasd', maxlength: Employee::WorkExperience.get_field_limit_of(:is_gov_service) %>
+    <%= f.check_box :is_gov_service %>
     <%= f.label :is_gov_service, 'Government Service?', class: 'form-label' %>
   </div>
   <div class="form-group">

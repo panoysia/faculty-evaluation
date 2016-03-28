@@ -5,7 +5,7 @@
     <% end %>
     <div id="info" class="caption">
       <h4><%= link_to employee.full_name, [:admin, employee] %></h4>
-      <p><%= employee.rank.name unless employee.rank.nil? %></p>
+      <p><%= employee.rank.full_name unless employee.rank.nil? %></p>
       <p><%= employee.designation %></p>  
     </div>
   </div>

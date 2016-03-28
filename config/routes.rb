@@ -10,15 +10,16 @@ Rails.application.routes.draw do
     delete 'logout' => 'sessions#destroy'
 
     get 'employees/search' => "employee_searches#index"
+    # get 'employees/query'
 
     resource :dashboard, only: [:show]
     resources :admins
     resources :users
+    resources :nbcs
 
     # resources :forum_threads do
     #   resources :forum_posts, module: :forum_threads
     # end
-
   
 
     resources :employees do
@@ -29,9 +30,16 @@ Rails.application.routes.draw do
         resources :other_infos
         resources :voluntary_works
         resources :work_experiences
+
+        resources :rankings
       end
 
       # member do
+        # perform_ranking_admin_employee_path
+        # admin/perform_rankings#index
+        # /admin/employees/:id/perform-ranking(.:format) 
+
+        # get 'perform-ranking'
       # end
 
       # collection do

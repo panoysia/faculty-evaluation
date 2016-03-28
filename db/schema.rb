@@ -11,13 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326173802) do
+ActiveRecord::Schema.define(version: 20160327220144) do
 
   create_table "academic_rankings", force: :cascade do |t|
-    t.string   "name",       limit: 50, null: false
-    t.integer  "position",   limit: 1,  null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "name",           limit: 50, null: false
+    t.integer  "position",       limit: 1,  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "cce_min_points"
+    t.integer  "cce_max_points"
+    t.integer  "qce_min_points"
+    t.integer  "qce_max_points"
+    t.integer  "subrank"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -81,6 +86,20 @@ ActiveRecord::Schema.define(version: 20160326173802) do
   end
 
   add_index "employee_other_infos", ["employee_id"], name: "index_employee_other_infos_on_employee_id"
+
+  create_table "employee_rankings", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.integer  "nbc_id"
+    t.integer  "cce_total_points", null: false
+    t.integer  "qce_total_points", null: false
+    t.string   "current_rank",     null: false
+    t.string   "achieved_rank"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "employee_rankings", ["employee_id"], name: "index_employee_rankings_on_employee_id"
+  add_index "employee_rankings", ["nbc_id"], name: "index_employee_rankings_on_nbc_id"
 
   create_table "employee_ratings", force: :cascade do |t|
     t.integer  "rating_period_id", null: false
@@ -186,6 +205,14 @@ ActiveRecord::Schema.define(version: 20160326173802) do
   end
 
   add_index "leaves", ["employee_id"], name: "index_leaves_on_employee_id"
+
+  create_table "nbcs", force: :cascade do |t|
+    t.string   "name",                    null: false
+    t.string   "description"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "is_current",  default: 0, null: false
+  end
 
   create_table "rating_periods", force: :cascade do |t|
     t.integer  "start_at",                         null: false
