@@ -119,6 +119,12 @@
           <%= f.date_field :hired_date, class: 'form-control' %>
         </div>
       </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :specialization_id, 'Specialization', class: 'control-label' %>
+          <%= f.collection_select :specialization_id, Specialization.order(name: :asc), :id, :name, { include_blank: true }, class: 'form-control' %>
+        </div>
+      </div>      
     </div> <!-- .panel-body -->
   </div>  <!--  #employment-information .panel -->
 

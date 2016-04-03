@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     resources :leaves
     resources :leave_service_credits
     
+    resources :specializations
     resources :career_paths
     resources :academic_years, path: 'academic-years'
     # resources :rating_periods, path: 'rating-periods'

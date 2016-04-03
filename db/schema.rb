@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403000400) do
+ActiveRecord::Schema.define(version: 20160403042242) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -197,9 +197,11 @@ ActiveRecord::Schema.define(version: 20160403000400) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.integer  "specialization_id"
   end
 
   add_index "employees", ["academic_ranking_id"], name: "index_employees_on_academic_ranking_id"
+  add_index "employees", ["specialization_id"], name: "index_employees_on_specialization_id"
 
   create_table "leave_service_credits", force: :cascade do |t|
     t.integer  "employee_id",      null: false
@@ -245,6 +247,14 @@ ActiveRecord::Schema.define(version: 20160403000400) do
 
   add_index "rating_periods", ["academic_year_id"], name: "index_rating_periods_on_academic_year_id"
   add_index "rating_periods", ["nbc_id"], name: "index_rating_periods_on_nbc_id"
+
+  create_table "specializations", force: :cascade do |t|
+    t.string   "name",       limit: 50, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "specializations", ["name"], name: "index_specializations_on_name", unique: true
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name", limit: 50, null: false

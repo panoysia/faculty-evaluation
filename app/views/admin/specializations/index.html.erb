@@ -1,0 +1,38 @@
+<% display_number = 0 %>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span>Specializations</span>
+      <span class="pull-right">
+        <%= link_to new_admin_specialization_path, class: 'btn btn-primary' do %>
+          <span class="glyphicon glyphicon-plus"></span> New
+        <% end %>
+      </span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div> <!-- .row -->
+<table id="table-master" class="table table-bordered table-striped content">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @specializations.each do |specialization| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= link_to specialization.name, admin_specialization_path(specialization) %></td>
+        <td>
+          <%= link_to edit_admin_specialization_path(specialization)   do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_specialization_path(specialization), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

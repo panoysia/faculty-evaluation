@@ -1,11 +1,11 @@
 <div id="employee-card" class="row">
   <div class="col-md-3">
     <!-- <img class="img-responsive img-thumbnail center-block" src="http://lorempixel.com/200/200/people/" alt=""> -->
-    <%= image_tag @employee.picture.url, size: "210", class: 'img-responsive img-thumbnail center-block' %>
+    <%= image_tag model.picture.url, size: "210", class: 'img-responsive img-thumbnail center-block' %>
   </div>
   <div class="col-md-9">
     <h2 class="page-header">
-      <span><%= @employee.full_name %></span>
+      <span><%= model.full_name %></span>
       <div class="pull-right">
         <span class="pull-right">
           <div class="btn-group">
@@ -13,19 +13,19 @@
               Actions <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><%= link_to 'Perform Ranking', new_admin_employee_ranking_path(@employee) %></li>
+              <li><%= link_to 'Perform Ranking', new_admin_employee_ranking_path(model) %></li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to 'Delete Record', admin_employee_path(@employee), method: :delete, data: { confirm: 'Delete Employee record? This is undoable!' }%></li>
+              <li><%= link_to 'Delete Record', admin_employee_path(model), method: :delete, data: { confirm: 'Delete Employee record? This is undoable!' }%></li>
             </ul>
           </div>
         </span>
       </div>
     </h2>
     <div class="employee-card-info">
-      <p><%= @employee.rank.full_name if @employee.rank %></p>
-      <p><%= @employee.designation if @employee.designation.present? %></p>
-      <p><%= "#{@employee.age} years old" if @employee.age.present? %></p>
-      <p><%= "Employed since #{@employee.hired_date}" if @employee.hired_date.present? %></p>
+      <p><%= model.rank.full_name if model.rank %></p>
+      <p><%= model.designation if model.designation.present? %></p>
+      <p><%= "#{model.age} years old" if model.age.present? %></p>
+      <p><%= "Employed since #{model.hired_date}" if model.hired_date.present? %></p>
     </div>
   </div>
 </div>

@@ -38,7 +38,8 @@ class Employee < ActiveRecord::Base
   validates_attachment_content_type :picture, content_type: ['image/jpg', 'image/jpeg', 'image/png']
 
   has_one :user_account, as: :account, class_name: 'User', dependent: :destroy
-
+  has_one :specialization
+  
   has_many :rankings, dependent: :destroy
   has_many :educations, dependent: :destroy
   has_many :work_experiences, dependent: :destroy
