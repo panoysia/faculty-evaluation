@@ -40,9 +40,9 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # AWS S3 with Paperclip
-  config.paperclip_defaults = {
-    storage: :s3,
-    s3_host_name: "",
-    :bucket: 'S3_bucket_name'
-  }
+  # config.paperclip_defaults = {
+  #   storage: :s3,
+  #   s3_host_name: "",
+  #   :bucket: 'S3_bucket_name'
+  # }
 end
