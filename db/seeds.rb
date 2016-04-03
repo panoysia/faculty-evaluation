@@ -1,8 +1,18 @@
 # Run: rake db:seed / rake db:setup
 if Rails.env.production?
+  Admin.delete_all
   Admin.create username: 'admin1', password: 'admin1'
   Admin.create username: 'admin2', password: 'admin2'
   Admin.create username: 'admin3', password: 'admin3'
+
+  Specialization.delete_all
+  Specialization.create name: 'Computer Programming'
+  Specialization.create name: 'Computer Networking'
+  Specialization.create name: 'Accounting'
+  Specialization.create name: 'Community Extension'
+  Specialization.create name: 'Guidance Counseling'
+  Specialization.create name: 'Mathematics'
+  Specialization.create name: 'Fisheries'
 end
 
 # TODO: Make this data seeding transactional by batches.
