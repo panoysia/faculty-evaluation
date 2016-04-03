@@ -13,6 +13,36 @@ if Rails.env.production?
   Specialization.create name: 'Guidance Counseling'
   Specialization.create name: 'Mathematics'
   Specialization.create name: 'Fisheries'
+
+  puts 'Adding Student records..........'
+  Student.delete_all
+  1.upto(100) do |number|
+    Student.create first_name: 'Student', last_name: "#{number}"
+  end
+  puts 'Finished populating Student records!'
+  puts
+
+  ActiveRecord::Base.connection.execute
+"INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (58,'Instructor',1,1,'2016-03-01 06:34:19.362138','2016-03-27 15:09:07.534618',65,65,79,79);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (59,'Instructor',2,2,'2016-03-01 06:34:19.716830','2016-03-27 15:10:35.027326',66,76,80,89);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (60,'Instructor',3,3,'2016-03-01 06:34:19.719984','2016-03-01 06:34:19.719984',77,87,90,100);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (61,'Assistant Professor',1,4,'2016-03-01 06:34:19.722848','2016-03-01 06:34:19.722848',88,96,80,84);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (62,'Assistant Professor',2,5,'2016-03-01 06:34:19.725680','2016-03-01 06:34:19.725680',97,105,85,89);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (63,'Assistant Professor',3,6,'2016-03-01 06:34:19.728620','2016-03-01 06:34:19.728620',106,114,90,94);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (64,'Assistant Professor',4,7,'2016-03-01 06:34:19.731523','2016-03-01 06:34:19.731523',115,123,95,100);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (65,'Associate Professor',1,8,'2016-03-01 06:34:19.734123','2016-03-01 06:34:19.734123',124,130,76,79);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (66,'Associate Professor',2,9,'2016-03-01 06:34:19.736576','2016-03-01 06:34:19.736576',131,137,80,85);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (67,'Associate Professor',3,10,'2016-03-01 06:34:19.738982','2016-03-01 06:34:19.738982',138,144,86,90);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (68,'Associate Professor',4,11,'2016-03-01 06:34:19.741218','2016-03-01 06:34:19.741218',145,151,91,95);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (69,'Associate Professor',5,12,'2016-03-01 06:34:19.743408','2016-03-01 06:34:19.743408',152,158,96,100);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (70,'Professor',1,13,'2016-03-01 06:34:19.745863','2016-03-01 06:34:19.745863',159,164,61,65);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (71,'Professor',2,14,'2016-03-01 06:34:19.748328','2016-03-01 06:34:19.748328',165,170,66,70);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (72,'Professor',3,15,'2016-03-01 06:34:19.750696','2016-03-01 06:34:19.750696',171,176,71,75);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (73,'Professor',4,16,'2016-03-01 06:34:19.752991','2016-03-01 06:34:19.752991',177,182,76,80);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (74,'Professor',5,17,'2016-03-01 06:34:19.755971','2016-03-01 06:34:19.755971',183,188,81,85);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (75,'Professor',6,18,'2016-03-01 06:34:19.758307','2016-03-01 06:34:19.758307',189,194,86,90);
+INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (76,'College/University Professor',NULL,19,'2016-03-01 06:34:19.760612','2016-03-01 06:34:19.760612',195,200,91,100);"
+
 end
 
 # TODO: Make this data seeding transactional by batches.
@@ -43,14 +73,6 @@ if Rails.env.development?
   ]
   
   puts 'Finished populating AcademicRank records!'
-  puts
-
-  puts 'Adding Student records..........'
-  Student.delete_all
-  1.upto(100) do |number|
-    Student.create first_name: 'Student', last_name: "#{number}"
-  end
-  puts 'Finished populating Student records!'
   puts
 
   puts 'Adding sample User records..........'
