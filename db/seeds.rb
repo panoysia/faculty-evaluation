@@ -26,7 +26,7 @@ if Rails.env.production?
   AcademicRanking.delete_all
 
   
-  sql = "INSERT INTO `academic_rankings` (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (58,'Instructor',1,1,'2016-03-01 06:34:19.362138','2016-03-27 15:09:07.534618',65,65,79,79);"
+  sql = "INSERT INTO academic_rankings (id,name,subrank,position,created_at,updated_at,cce_min_points,cce_max_points,qce_min_points,qce_max_points) VALUES (58,'Instructor',1,1,'2016-03-01 06:34:19.362138','2016-03-27 15:09:07.534618',65,65,79,79);"
   ActiveRecord::Base.connection.execute sql
 
 end
