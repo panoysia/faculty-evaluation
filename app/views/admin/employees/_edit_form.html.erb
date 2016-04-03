@@ -39,13 +39,13 @@
       <div class="col-md-6">
         <div class="form-group">
           <%= f.label :gender, 'Gender', class: 'control-label' %>
-          <%= f.select :gender, gender_types_for_select, {}, class: 'form-control' %>
+          <%= f.select :gender, gender_types_for_select, { include_blank: '-- Select Gender --' }, class: 'form-control' %>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <%= f.label :civil_status, 'Civil Status', class: 'control-label' %>
-          <%= f.select :civil_status, civil_status_types_for_select, {}, class: 'form-control' %>
+          <%= f.select :civil_status, civil_status_types_for_select, { include_blank: '-- Select Civil Status --' }, class: 'form-control' %>
         </div>      
       </div>
       <div class="col-md-6">
@@ -70,7 +70,7 @@
         <div class="form-group">
           <!-- must be a 'select' field -->
           <%= f.label :blood_type, 'Blood Type', class: 'control-label' %>
-          <%= f.select :blood_type, blood_types_for_select, {}, class: 'form-control' %>
+          <%= f.select :blood_type, blood_types_for_select, { include_blank: '-- Select Blood Type --' }, class: 'form-control' %>
         </div>      
       </div>  
       <div class="col-md-6">
@@ -103,7 +103,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <%= f.label :academic_ranking_id, 'Rank', class: 'control-label' %>
-          <%= f.collection_select :academic_ranking_id, AcademicRanking.all, :id, :full_name, {}, class: 'form-control' %>
+          <%= f.collection_select :academic_ranking_id, AcademicRanking.all, :id, :full_name, { include_blank: ' -- Select Rank --' }, class: 'form-control' %>
           <%#= f.date_field :birth_date, class: 'form-control' %>
         </div>      
       </div>  

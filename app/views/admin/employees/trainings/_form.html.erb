@@ -1,24 +1,52 @@
 <%= form_for [:admin, @employee, @training] do |f| %>
   <%= error_messages_for(@training) %>
-  <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control', maxlength: Employee::Training.get_field_limit_of(:title) %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control', maxlength: Employee::Training.get_field_limit_of(:title) %>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :conducted_by %>
-    <%= f.text_field :conducted_by, class: 'form-control', maxlength: Employee::Training.get_field_limit_of(:conducted_by) %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :level, 'Level' %>
+        <%= f.select :level, training_level_types_for_select, {}, class: 'form-control' %>        
+      </div>      
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :start_at, 'Start Date' %>
+        <%= f.date_field :start_at, class: 'form-control' %>
+      </div>      
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :start_at, 'Start Date' %>
-    <%= f.date_field :start_at, class: 'form-control' %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :end_at, 'End Date' %>
+        <%= f.date_field :end_at, class: 'form-control' %>
+      </div>      
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :end_at, 'End Date' %>
-    <%= f.date_field :end_at, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :no_of_hours, 'No. of hours' %>
-    <%= f.number_field :no_of_hours, class: 'form-control' %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :conducted_by %>
+        <%= f.text_field :conducted_by, class: 'form-control', maxlength: Employee::Training.get_field_limit_of(:conducted_by) %>
+      </div>      
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :no_of_hours, 'No. of hours' %>
+        <%= f.number_field :no_of_hours, class: 'form-control' %>
+      </div>      
+    </div>
   </div>
   <div class="form-group">
     <%= f.submit class: 'btn btn-primary' %>

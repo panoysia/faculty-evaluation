@@ -35,6 +35,7 @@ Rails.application.routes.draw do
         resources :voluntary_works
         resources :work_experiences
 
+        resources :career_paths
         resources :rankings
         resources :leaves
       end

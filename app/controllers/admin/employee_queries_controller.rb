@@ -6,14 +6,15 @@ class Admin::EmployeeQueriesController < Admin::ApplicationController
       if params[:query][:degree_value].present?
         value = params[:query][:degree_value]
         if value == 'masters'
-          criteria = "degree_type = 'M'"
+          criteria = "employee_educations.level = 1"
         elsif value == 'doctorate'
-          criteria = "degree_type = 'D'"
+          criteria = "employee_educations.level = 2"
         elsif value == 'both'
-          criteria = "degree_type = 'M' OR degree_type = 'D'"
+          criteria = "(employee_educations.level = 1 OR employee_educations.level = 2)"
         end
 
-        #@results = Employee.includes(:education).where()
+        @employees = Employee.includes(:educations).where(criteria).order('employee_educations.level DESC').references(:employee_educations)
+        return @employees
       end
 
       if params[:query][:gender_value].present?

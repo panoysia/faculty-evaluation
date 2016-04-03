@@ -38,7 +38,7 @@ class Admin::Employees::TrainingsController < Admin::ApplicationController
     respond_to do |format|    
       if @training.update(training_params)
         format.html {
-          redirect_to edit_admin_employee_trainings_path(@employee, @training),
+          redirect_to edit_admin_employee_training_path(@employee, @training),
           notice: 'Training was successfully updated.'
         }
       else
@@ -71,7 +71,7 @@ class Admin::Employees::TrainingsController < Admin::ApplicationController
   end
 
   def training_params
-    params.require(:training).permit(:title, :start_at, :end_at, :no_of_hours, :conducted_by)
+    params.require(:training).permit(:title, :start_at, :end_at, :no_of_hours, :conducted_by, :level)
   end
 
 end

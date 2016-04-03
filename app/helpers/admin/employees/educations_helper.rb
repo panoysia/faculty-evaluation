@@ -7,4 +7,5 @@ module Admin::Employees::EducationsHelper
   def education_level_to_string(level)
     Employee::Education::LEVEL_TYPES[level]
   end
+
 end

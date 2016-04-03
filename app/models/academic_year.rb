@@ -5,7 +5,9 @@ class AcademicYear < ActiveRecord::Base
 
   validates :start_at, :end_at, presence: true   
   validate :correct_date_range #, unless: :date_values_are_nil?
-  validate :start_date_overlap
+
+  # TODO: solve this!
+  # validate :start_date_overlap
 
   after_create :create_two_rating_periods
 

@@ -69,7 +69,7 @@ class Admin::Employees::EducationsController < Admin::ApplicationController
   end
 
   def education_params
-    params.require(:education).permit(:level, :school_name, :degree_course, :grade_units, :graduated_at, :start_at, :end_at, :honors_received)
+    params.require(:education).permit(:level, :school_name, :degree_course, :grade_units, :graduated_at, :start_at, :end_at, :honors_received, :is_recent)
   end
 
 end
