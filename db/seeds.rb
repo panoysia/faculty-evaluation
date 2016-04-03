@@ -1,4 +1,9 @@
 # Run: rake db:seed / rake db:setup
+if Rails.env.production?
+  Admin.create username: 'admin1', password: 'admin1'
+  Admin.create username: 'admin2', password: 'admin2'
+  Admin.create username: 'admin3', password: 'admin3'
+end
 
 # TODO: Make this data seeding transactional by batches.
 if Rails.env.development?
