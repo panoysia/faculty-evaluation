@@ -2,64 +2,53 @@ class Admin::EmployeeQueriesController < Admin::ApplicationController
 
   def index
     if params[:query] then
-      render(html: params.inspect) and return true
-    else
 
-    end
-  end
-
-  def indexs
-    if params[:query] then
-      if params[:query][:degree].present?
+      if params[:query][:degree_value].present?
         value = params[:query][:degree_value]
+        if value == 'masters'
+          criteria = "degree_type = 'M'"
+        elsif value == 'doctorate'
+          criteria = "degree_type = 'D'"
+        elsif value == 'both'
+          criteria = "degree_type = 'M' OR degree_type = 'D'"
+        end
+
+        #@results = Employee.includes(:education).where()
       end
 
-      if params[:query][:gender]
+      if params[:query][:gender_value].present?
         value = params[:query][:gender_value]
+        if value == 'male'
+          criteria = "gender = 'M'"
+        elsif value == 'female'
+          criteria = "gender = 'F'"
+        elsif value == 'both'
+          criteria = "gender = 'M' OR gender = 'F' "
+        end
       end
 
-      if params[:query][:rank]
+      if params[:query][:rank_value].present?
         value = params[:query][:rank_value]
+        criteria = "academic_ranking_id = #{value}"
       end
 
-      if params[:query][:specialization]
+      if params[:query][:specialization_value].present?
         value = params[:query][:specialization_value]
-      end
-    else
-      # render normal index page
-    end
-
-    if params[:query] then
-      # button && select box value
-      value = params[:query][:value]
-
-      if params[:query][:qualifications] && value
-        criteria = ""
-      end
-
-      if params[:query][:gender] && value
-        value = (value == 'male') ? 'male' : 'female'
-        criteria = "where gender = #{value}"
-      end
-
-      if params[:rank] && params[:value]
-        criteria = "where academic_rank_id = #{params[:value]}"
-      end
-
-      if params[:specialization] && params[:value]
-        criteria = "where specialization_id = #{params[:value]}"
+        criteria = "specialization_id = #{value}"
       end
 
       if criteria.present?
-        render html: params.inspect and return true
-        # @query_results = Employee.where(criteria).to_sql
-        # render html: @query
-      else
-        flash.now.alert = "No criteria found in your query. Please choose from any of the options below."
-        render :index
-      end    
-    end   # if param[:query]
+        @employees = Employee.includes(:rank, :specialization).where(criteria)
+        # render html: @employees.to_sql and return true
+        # render html: params and return true
 
-  end
+        # @leaves = Leave.includes(:employee).where(criteria, values).order(filed_at: :desc)        
+      else
+        flash.now.alert = "No criteria found in your search. Please provide necessary data in the fields below."
+        render :index
+      end
+
+    end   # if params[:query]
+  end   # def index
 
 end   # class Admin::EmployeeQueriesController

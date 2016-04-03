@@ -16,8 +16,8 @@
       <%= form_tag admin_employees_query_path, method: :get do %>
         <div class="form-group">
           <%= label_tag 'query[degree_value]', 'Degree' %>
-          <%= select_tag 'query[degree_value]', options_for_select(qualifications), class: 'form-control' %>
-          <%= button_tag(name: 'query[degree]', type: 'submit', class: 'btn btn-default', id: 'view-button') do %>
+          <%= select_tag 'query[degree_value]', options_for_select(qualifications), include_blank: '-- Select Degree --', class: 'form-control' %>
+          <%= button_tag(name: 'query[degree]', type: 'submit', class: 'btn btn-default', id: 'view-button', value: 'degree') do %>
             <%= content_tag(:strong, 'View') %>
           <% end %>        
         </div>
@@ -27,8 +27,8 @@
       <%= form_tag admin_employees_query_path, method: :get do %>
         <div class="form-group">
           <%= label_tag 'query[gender_value]', 'Gender' %>
-          <%= select_tag 'query[gender_value]', options_for_select(genders), class: 'form-control' %>
-          <%= button_tag(name: 'query[gender]', type: 'submit', class: 'btn btn-default', id: 'view-button') do %>
+          <%= select_tag 'query[gender_value]', options_for_select(genders), include_blank: '-- Select Gender --', class: 'form-control' %>
+          <%= button_tag(name: 'query[gender]', type: 'submit', class: 'btn btn-default', id: 'view-button', value: 'gender') do %>
             <%= content_tag(:strong, 'View') %>
           <% end %>        
         </div>      
@@ -38,8 +38,8 @@
       <%= form_tag admin_employees_query_path, method: :get do %>
         <div class="form-group">
           <%= label_tag 'query[rank_value]', 'Rank' %>
-          <%= select_tag 'query[rank_value]', nil, class: 'form-control' %>
-          <%= button_tag(name: 'query[rank]', type: 'submit', class: 'btn btn-default', id: 'view-button') do %>
+          <%= collection_select nil, 'query[rank_value]', AcademicRanking.all, :id, :full_name, { include_blank: '-- Select Rank --', selected: "e" }, { class: 'form-control' } %>
+          <%= button_tag(name: 'query[rank]', type: 'submit', class: 'btn btn-default', id: 'view-button', value: 'rank') do %>
             <%= content_tag(:strong, 'View') %>
           <% end %>        
         </div>
@@ -48,14 +48,50 @@
     <div class="col-md-3">
       <%= form_tag admin_employees_query_path, method: :get do %>
         <div class="form-group">
-          <%= label_tag 'query[:specialization_value]', 'Specialization' %>
-          <%= select_tag 'query[:specialization_value]', nil, class: 'form-control' %>
-          <%= button_tag(name: 'query[specialization]', type: 'submit', class: 'btn btn-default', id: 'view-button') do %>
+          <%= label_tag 'query[specialization_value]', 'Specialization' %>
+          <%= collection_select nil, 'query[specialization_value]', Specialization.order(name: :asc), :id, :name, { include_blank: '-- Select Specialization --', selected: "e" }, { class: 'form-control' } %>
+          <%= button_tag(name: 'query[specialization]', type: 'submit', class: 'btn btn-default', id: 'view-button', value: 'specialization') do %>
             <%= content_tag(:strong, 'View') %>
           <% end %>        
         </div>      
       <% end %>
     </div>      
-  </div>  <!-- .col-md-12 -->
-  
+  </div>  <!-- .col-md-12 -->  
 </div>  <!-- .row -->
+<!-- render the results here -->
+<% unless @employees.nil? %>
+  <% display_counter = 0 %>
+  <% results = "#{pluralize(@employees.count, 'record')} found" %>
+  <h3 class="page-header">Search Results: <span style="font-style: italic"><%= results %><span></h3>  
+  <table id="table-master" class="table table-bordered table-striped content">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Faculty</th>
+        <th>Rank</th>
+        <th>Specialization</th>
+        <th>Gender</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>  
+    <tbody>
+      <% @employees.each do |employee| %>
+        <tr>
+          <td><%= display_counter += 1 %></td>
+          <td><%= link_to employee.full_name, admin_employee_path(employee) %></td>
+          <td><%= employee.rank.full_name %></td>
+          <td><%= employee.specialization.name if employee.specialization.present? %></td>
+          <td><%= convert_gender_value(employee.gender) %></td>
+          <td>
+            <%= link_to edit_admin_employee_path(employee) do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to admin_employee_path(employee), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %>
+          </td>          
+        </tr>
+      <% end %>      
+    </tbody>
+  </table>
+<% end %>

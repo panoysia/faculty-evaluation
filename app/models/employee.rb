@@ -38,7 +38,6 @@ class Employee < ActiveRecord::Base
   validates_attachment_content_type :picture, content_type: ['image/jpg', 'image/jpeg', 'image/png']
 
   has_one :user_account, as: :account, class_name: 'User', dependent: :destroy
-  has_one :specialization
   
   has_many :rankings, dependent: :destroy
   has_many :educations, dependent: :destroy
@@ -66,7 +65,7 @@ class Employee < ActiveRecord::Base
   has_many :career_paths #, dependent: :destroy
 
   belongs_to :rank, class_name: 'AcademicRanking', foreign_key: 'academic_ranking_id'
-  # belongs_to :department
+  belongs_to :specialization
 
   #, inverse_of: :employee
   accepts_nested_attributes_for :user_account, 

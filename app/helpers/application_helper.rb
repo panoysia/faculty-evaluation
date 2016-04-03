@@ -16,6 +16,9 @@ module ApplicationHelper
     date.strftime '%Y-%b-%d'
   end
 
+  def convert_gender_value(value)
+    value == 'M' ? 'Male' : 'Female'
+  end
   # def authenticate_user
   # end
 
