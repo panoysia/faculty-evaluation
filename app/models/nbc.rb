@@ -1,9 +1,10 @@
 class NBC < ActiveRecord::Base
   
   has_many :rankings, class_name: 'Employee::Ranking'
-
-  scope :current, -> { where(is_current: 1).limit(1) }
-
+  has_many :rating_periods
+  
+#  scope :current, -> { where(is_current: 1).limit(1) }
+  
   validates :name, presence: true
   # Add unique index to the :is_current field
       # -> validate it also  

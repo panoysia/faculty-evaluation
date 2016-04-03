@@ -1,12 +1,15 @@
 class Admin::LeavesController < Admin::ApplicationController
   before_action :set_leave, only: [:show, :edit, :update, :destroy]
 
+
   def index
-    @leaves = Leave.all
-    # @leaves = Leave.include(:employee).latest(15)
+    # @leaves = Leave.includes(:employee).order(filed_at: :desc)
+    # @leaves = Leave.includes(:employee).latest(15)
+    # @employees = Employee.order(last_name: :asc)
+    # @employees = Employee.select(:id, :first_name, :last_name, :middle_name).order(last_name: :asc)
   end
 
-  def show    
+  def show
   end
 
   def new
@@ -54,7 +57,7 @@ class Admin::LeavesController < Admin::ApplicationController
   end  
 
   def leave_params
-    params.require(:leave).permit(:filed_at, :start_at, :end_at, :length, :employee_id)
+    params.require(:leave).permit(:filed_at, :start_at, :end_at, :length, :employee_id, :academic_year_id)
   end
       
 end

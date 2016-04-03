@@ -19,7 +19,7 @@
 // Application-related CSS
 
 .app-container {
-  padding: 2px 110px;
+  padding: 2px 80px;
 //  border: 1px solid red;
 }
 
@@ -57,7 +57,9 @@ div#trainings-content,
 div#civil-services-content, 
 div#voluntary-works-content,
 div#other-infos-content,
-div#rankings-content {
+div#rankings-content,
+div#leaves-content {
+
   //margin-top: 30px;
   //margin: 30px 20px;
   //border: 1px blue dashed;
@@ -91,7 +93,26 @@ div#rankings-content {
 }  
 
 
+#question.active {
+  //background-color: green;
+}
 
+#table-master {
+  width: auto;
+}
+
+#panel-nbcs {
+  margin-bottom: 500px;
+}
+
+.view-button {
+  margin-top: 22px;
+}
+
+#leave-search-box {
+  margin-top: 15px;
+}
+  
 // Guides
 
 /*

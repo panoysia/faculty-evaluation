@@ -127,6 +127,16 @@ class Employee < ActiveRecord::Base
     # TODO: account for employee's name extension
   end
 
+  def full_name_in_reverse
+    name = "#{last_name.capitalize}, "
+    name << "#{first_name.capitalize} "
+    if middle_name.present?
+      name << "#{middle_name.first.capitalize}."
+    else
+      name
+    end
+  end
+
   def age
     return nil if birth_date.nil?
     # 3/23/16         3/20/1985

@@ -1,4 +1,4 @@
-class Leave < ActiveRecord::Base
+class Leave < ActiveRecord::Base  
   # Prefer the use of words 'category'/'context' over the word 'type' as column name. 'Type' is more of a reserved word and used internally by Rails for models using Single Table Inheritance.
   CATEGORIES = { 
       Sick: 'S', 
@@ -7,11 +7,18 @@ class Leave < ActiveRecord::Base
     }
 
   MAXIMUM = 15
-  #enum status: %i(pending approved disapproved)
 
   belongs_to :employee
+  belongs_to :academic_year
 
-  validates :filed_at, :start_at, :end_at, :employee, presence: true
+  scope :latest, -> (size = 8) { order(filed_at: :desc).limit(size) }
+
+
+  validates :filed_at, :start_at, :end_at, :employee, :academic_year, presence: true
+  
+  # 1- ensure employee has remaining credits to file for leave
+  # 2 - ensure date of leave is between the academic_year period
+
   validate :correct_date_range, unless: :date_values_are_nil?
   #  unless: Proc.new { (start_at.nil? && end_at.nil?) }
   

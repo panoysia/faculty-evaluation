@@ -1,25 +1,43 @@
 <%= form_for([:admin, @rating_period]) do |f| %>
   <%= error_messages_for(@rating_period) %>
-  <div class="form-group">
-    <%= f.label :start_at %>
-    <%= f.number_field :start_at, class: 'form-control', autofocus: true %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :start_at %>
+        <%= f.date_field :start_at, class: 'form-control', autofocus: true %>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :end_at %>
-    <%= f.number_field :end_at, class: 'form-control' %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :end_at %>
+        <%= f.date_field :end_at, class: 'form-control' %>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :semester %>
-    <%= f.select :semester, [['1st', 1], ['2nd', 2]], 
-      class: 'form-control' %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :semester %>
+        <%= f.select :semester, [['1st', 1], ['2nd', 2]], {},
+          class: 'form-control' %>
+      </div>      
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :status %>
-    <%= f.select :status, 
-      RatingPeriod.statuses.keys.map { |key| [key.titleize, key] }, 
-      class: 'form-control' %>
-  </div>  
-  <div class="form-group">
-    <%= f.submit class: 'btn btn-primary' %>
+  <!-- <div class="row"> -->
+<!--     <div class="col-md-4">
+      <div class="form-group bg bg-info">
+        <%#= f.check_box :is_current %>
+        <%#= f.label :is_current, 'Make this the current rating period?', class: 'form-label ' %>
+      </div>
+    </div> -->
+  <!-- </div> -->
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    </div>
   </div>
 <% end %>

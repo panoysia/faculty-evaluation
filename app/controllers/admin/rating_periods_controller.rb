@@ -2,7 +2,7 @@ class Admin::RatingPeriodsController < Admin::ApplicationController
   before_action :set_rating_period, only: [:show, :edit, :update, :destroy]
 
   def index
-    @rating_periods = RatingPeriod.all
+    @rating_periods = RatingPeriod.order(start_at: :desc, end_at: :desc, semester: :asc)
   end
 
   def show
@@ -52,7 +52,7 @@ class Admin::RatingPeriodsController < Admin::ApplicationController
   end
 
   def rating_period_params
-    params.require(:rating_period).permit(:start_at, :end_at, :semester, :status)
+    params.require(:rating_period).permit(:start_at, :end_at, :semester)
   end
   
 end

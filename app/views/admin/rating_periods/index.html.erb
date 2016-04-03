@@ -11,14 +11,13 @@
     </h2>
   </div>  <!-- .col-md-12 -->
 </div> <!-- .row -->
-<table class="table table-striped table-bordered content">
+<table id="table-master" class="table table-bordered table-striped content">
   <thead>
     <tr>
       <th>#</th>
       <th>Start</th>
       <th>End</th>
       <th>Semester</th>
-      <th>Status</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
@@ -26,11 +25,9 @@
     <% @rating_periods.each do |rating_period| %>
       <tr>
         <td><%= display_number += 1 %></td>
-        <td><%= rating_period.start_at %></td>
-        <td><%= rating_period.end_at %></td>
+        <td><%= date_format_readable(rating_period.start_at) %></td>
+        <td><%= date_format_readable(rating_period.end_at) %></td>
         <td><%= rating_period.semester.ordinalize %></td>
-        <td><%= rating_period.status.titleize %></td>
-        <!-- <td><%#= link_to 'Show', [:admin, rating_period] %></td> -->
         <td>
           <%= link_to edit_admin_rating_period_path(rating_period)   do %>
             <span class="glyphicon glyphicon-pencil"></span>

@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     delete 'logout' => 'sessions#destroy'
 
     get 'employees/search' => "employee_searches#index"
+    get 'employees/query' => "employee_queries#index"
+    get 'leaves/search' => "leave_searches#index"
+    get 'leaves/view' => "leave_viewings#index"
+
     # get 'employees/query'
 
     resource :dashboard, only: [:show]
@@ -32,6 +36,7 @@ Rails.application.routes.draw do
         resources :work_experiences
 
         resources :rankings
+        resources :leaves
       end
 
       # member do
@@ -54,11 +59,13 @@ Rails.application.routes.draw do
     end
 
     resources :leaves
+    resources :leave_service_credits
+    
     resources :career_paths
-    resources :rating_periods, path: 'rating-periods'
+    resources :academic_years, path: 'academic-years'
+    # resources :rating_periods, path: 'rating-periods'
     resources :academic_rankings, only: [:index], path: 'academic-rankings'
     resources :students
-
     resource :account, only: [:edit, :update]
   end
 

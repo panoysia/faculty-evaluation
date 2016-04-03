@@ -1,0 +1,84 @@
+<style>
+  div.panel-body {
+    padding: 15px 7px 7px 7px;
+  }
+
+  form div.col-md-3 {
+    // border: 1px green solid;
+    padding: 0px 7px;
+  }
+
+  form > div.col-md-12 {
+    // border: 1px red solid;
+    padding: 0px 7px;
+  }
+    
+  div.panel-heading {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span>Leave Service Credits<span>
+      <span class="pull-right">
+        <%= link_to new_admin_leave_service_credit_path, class: 'btn btn-primary' do %>
+          <span class="glyphicon glyphicon-plus"></span> New
+        <% end %>
+      </span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<div id="leave-search-box" class="row">
+  <div class="col-md-9">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Search</h4>
+    </div>
+    <div class="panel-body">
+      <%= form_tag admin_leaves_search_path, method: :get do %>
+        <div class="col-md-12">
+          <div class="col-md-5">
+            <div class="form-group">
+              <%= label_tag :academic_year, 'Academic Year' %>
+              <%= collection_select nil, :id, AcademicYear.display_all, :id, :coverage_with_details, { include_blank: '-- Select Academic Year --', selected: "e" }, { class: 'form-control' } %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <%= label_tag :employees, 'Employee' %>        
+              <%# if params[:employee].nil? %>
+                <%# value = nil %>
+              <%# else %>
+                <%# value = params[:employee][:id] %>
+              <%# end %>
+              <%#= collection_select nil, :employee_id, Employee.order(:last_name), :id, :full_name_in_reverse, { include_blank: '-- Select Employee --', selected: employee_id }, { class: 'form-control' } %>
+            </div>
+          </div>
+          <div class="col-md-2 view-button">
+            <div class="form-group">
+              <%= button_tag(name: 'search', type: 'submit', class: 'btn btn-default') do %>
+                <%= content_tag(:strong, 'Search') %>
+              <% end %>
+            </div>
+          </div>          
+        </div>  <!-- div.col-md-12 -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class>
+                  <%#= label_tag :group do %>
+                    <!-- <%#= check_box_tag 'group' %> Group the results? -->
+                  <%# end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>  <!-- div.panel-body -->
+  </div>  <!-- div.panel.panel-default -->
+</div>
+</div>  <!-- div#leave-search-box -->

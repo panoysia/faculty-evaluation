@@ -1,0 +1,6 @@
+<%= render template: 'admin/leaves/index' %>
+<% if params[:by] == 'r' %>
+  <%= render 'leave_records' %>
+<% else %>
+  <%= render 'leave_credits' %>
+<% end %>

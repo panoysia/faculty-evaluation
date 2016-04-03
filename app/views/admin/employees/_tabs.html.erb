@@ -22,10 +22,10 @@
       <%= link_to 'Other Info', admin_employee_other_infos_path(@employee) %>
     </li>
     <li role="presentation" class="<%= set_active_tab(:career_paths) %>">
-      <%= link_to 'Career Path', '#' %>
+      <%= link_to 'Career Path', admin_career_paths_path(@employee) %>
     </li>
     <li role="presentation" class="<%= set_active_tab(:leaves) %>">
-      <%= link_to 'Leaves', '#' %>
+      <%= link_to 'Leaves', admin_employee_leaves_path(@employee) %>
     </li>
     <li role="presentation" class="<%= set_active_tab(:rankings) %>">
       <%= link_to 'Rankings', admin_employee_rankings_path(@employee) %>

@@ -1,0 +1,26 @@
+<%= form_for [:admin, @academic_year] do |f| %>
+  <%= error_messages_for(@academic_year) %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :start_at %>
+        <%= f.date_field :start_at, class: 'form-control', autofocus: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :end_at %>
+        <%= f.date_field :end_at, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>      
+    </div>
+  </div>
+<% end %>

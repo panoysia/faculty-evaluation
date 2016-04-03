@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327220144) do
+ActiveRecord::Schema.define(version: 20160403000400) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
+    t.integer  "subrank"
     t.integer  "position",       limit: 1,  null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
@@ -22,7 +23,13 @@ ActiveRecord::Schema.define(version: 20160327220144) do
     t.integer  "cce_max_points"
     t.integer  "qce_min_points"
     t.integer  "qce_max_points"
-    t.integer  "subrank"
+  end
+
+  create_table "academic_years", force: :cascade do |t|
+    t.date     "start_at",   null: false
+    t.date     "end_at",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "admins", force: :cascade do |t|
@@ -194,34 +201,50 @@ ActiveRecord::Schema.define(version: 20160327220144) do
 
   add_index "employees", ["academic_ranking_id"], name: "index_employees_on_academic_ranking_id"
 
+  create_table "leave_service_credits", force: :cascade do |t|
+    t.integer  "employee_id",      null: false
+    t.string   "description"
+    t.date     "valid_at",         null: false
+    t.date     "expire_at",        null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "academic_year_id"
+  end
+
+  add_index "leave_service_credits", ["academic_year_id"], name: "index_leave_service_credits_on_academic_year_id"
+  add_index "leave_service_credits", ["employee_id"], name: "index_leave_service_credits_on_employee_id"
+
   create_table "leaves", force: :cascade do |t|
-    t.date     "filed_at",    null: false
-    t.date     "start_at",    null: false
-    t.date     "end_at",      null: false
-    t.integer  "length",      null: false
-    t.integer  "employee_id", null: false
+    t.date     "filed_at",         null: false
+    t.date     "start_at",         null: false
+    t.date     "end_at",           null: false
+    t.integer  "length",           null: false
+    t.integer  "employee_id",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "academic_year_id"
+  end
+
+  add_index "leaves", ["academic_year_id"], name: "index_leaves_on_academic_year_id"
+  add_index "leaves", ["employee_id"], name: "index_leaves_on_employee_id"
+
+  create_table "nbcs", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "leaves", ["employee_id"], name: "index_leaves_on_employee_id"
-
-  create_table "nbcs", force: :cascade do |t|
-    t.string   "name",                    null: false
-    t.string   "description"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "is_current",  default: 0, null: false
-  end
-
   create_table "rating_periods", force: :cascade do |t|
-    t.integer  "start_at",                         null: false
-    t.integer  "end_at",                           null: false
-    t.integer  "semester",   limit: 1,             null: false
-    t.integer  "status",               default: 1, null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.integer  "semester",         limit: 1, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "nbc_id"
+    t.integer  "academic_year_id"
   end
+
+  add_index "rating_periods", ["academic_year_id"], name: "index_rating_periods_on_academic_year_id"
+  add_index "rating_periods", ["nbc_id"], name: "index_rating_periods_on_nbc_id"
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name", limit: 50, null: false

@@ -1,0 +1,61 @@
+<style>
+  #view-button {
+    margin-top: 10px;
+  }
+</style>
+<%
+  qualifications = %w[Masters Doctorate Both].map { |value| [value, value.downcase] }
+  genders = %w[Male Female Both].map { |value| [value, value.downcase] }
+  # specializations = []
+  # ranks = []
+%>
+<h2 class="page-header">Faculty Querying</h2>
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-3">
+      <%= form_tag admin_employees_query_path, method: :get do %>
+        <div class="form-group">
+          <%= label_tag 'query[degree_value]', 'Degree' %>
+          <%= select_tag 'query[degree_value]', options_for_select(qualifications), class: 'form-control' %>
+          <%= button_tag(name: 'query[degree]', type: 'submit', class: 'btn btn-default', id: 'view-button') do %>
+            <%= content_tag(:strong, 'View') %>
+          <% end %>        
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <%= form_tag admin_employees_query_path, method: :get do %>
+        <div class="form-group">
+          <%= label_tag 'query[gender_value]', 'Gender' %>
+          <%= select_tag 'query[gender_value]', options_for_select(genders), class: 'form-control' %>
+          <%= button_tag(name: 'query[gender]', type: 'submit', class: 'btn btn-default', id: 'view-button') do %>
+            <%= content_tag(:strong, 'View') %>
+          <% end %>        
+        </div>      
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <%= form_tag admin_employees_query_path, method: :get do %>
+        <div class="form-group">
+          <%= label_tag 'query[rank_value]', 'Rank' %>
+          <%= select_tag 'query[rank_value]', nil, class: 'form-control' %>
+          <%= button_tag(name: 'query[rank]', type: 'submit', class: 'btn btn-default', id: 'view-button') do %>
+            <%= content_tag(:strong, 'View') %>
+          <% end %>        
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <%= form_tag admin_employees_query_path, method: :get do %>
+        <div class="form-group">
+          <%= label_tag 'query[:specialization_value]', 'Specialization' %>
+          <%= select_tag 'query[:specialization_value]', nil, class: 'form-control' %>
+          <%= button_tag(name: 'query[specialization]', type: 'submit', class: 'btn btn-default', id: 'view-button') do %>
+            <%= content_tag(:strong, 'View') %>
+          <% end %>        
+        </div>      
+      <% end %>
+    </div>      
+  </div>  <!-- .col-md-12 -->
+  
+</div>  <!-- .row -->

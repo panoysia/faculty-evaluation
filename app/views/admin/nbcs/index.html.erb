@@ -11,13 +11,12 @@
     </h2>
   </div>  <!-- .col-md-12 -->
 </div> <!-- .row -->
-<table class="table table-striped table-bordered content">
+<table id="table-master" class="table table-bordered table-striped content">
   <thead>
     <tr>
       <th>#</th>
       <th>Name</th>
       <th>Description</th>
-      <th>Status</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
@@ -27,7 +26,6 @@
         <td><%= display_number += 1 %></td>
         <td><%= link_to nbc.name, admin_nbc_path(nbc) %></td>
         <td><%= nbc.description %></td>
-        <td><span class="<%= nbc.is_current? ? 'label label-success' : 'label label-default' %>"><%= nbc.is_current? ? 'Current' : 'Close' %></span></td>
         <td>
           <%= link_to edit_admin_nbc_path(nbc)   do %>
             <span class="glyphicon glyphicon-pencil"></span>

@@ -8,6 +8,14 @@ module ApplicationHelper
     tab_name.to_s == controller_name ? 'active' : ''
   end
 
+  # For formatting dates for display. 
+  #
+  # Gives me a good reason for monkey-patching Ruby's Date class.
+  
+  def date_format_readable(date)
+    date.strftime '%Y-%b-%d'
+  end
+
   # def authenticate_user
   # end
 

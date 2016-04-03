@@ -1,28 +1,43 @@
-<h3 class="page-header">Dashboard</h3>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4 class="panel-title">Records Management</h4>
-  </div>
-  <div class="panel-body">    
-    <li><%= link_to 'New Employee', new_admin_employee_path %></li>
-    <li><%= link_to 'New Career Path', new_admin_career_path_path %></li>
-    <li><%= link_to 'New Rating Period', new_admin_rating_period_path %></li>
-    <li><%= link_to 'New Leave', new_admin_leave_path %></li>
+<div class="row">
+  <h3 class="page-header">Dashboard</h3>
+    
+  <div class="col-sm-12">
+   <!--  <div id="panel-nbcs" class="col-sm-6">
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h4 class="panel-title">NBC & Rating Periods</h4>
+        </div>
+        <div class="panel-body">
+        </div>
+      </div>
+    </div>   -->
+    <!-- .col-sm-6 for NBC -->
 
-    <span>&nbsp;</span>
-    <li><%= link_to 'New User', new_admin_user_path %></li>
-    <li><%= link_to 'New Admin', new_admin_admin_path %></li>
-    <li><%= link_to 'New Student', new_admin_student_path %></li>
-  </div>
-</div>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4 class="panel-title">Encode Ratings for an Employee</h4>
-  </div>
-  <div class="panel-body">
-    <li><%= link_to 'New Instruction Rating', '#' %></li>
-    <li><%= link_to 'New Research Rating', '#' %></li>
-    <li><%= link_to 'New Extension Rating', '#' %></li>
-    <li><%= link_to 'New Production Rating', '#' %></li>
-  </div>
-</div>
+    <div class="col-sm-6 col-sm-offset-0">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">Records Management</h4>
+        </div>
+        <div class="panel-body">    
+          <li><%= link_to 'New Faculty', new_admin_employee_path %></li>
+          <li><%= link_to 'New Leave', new_admin_leave_path %></li>
+          <li><%= link_to 'New Academic Year', new_admin_academic_year_path %></li>
+          <span>&nbsp;</span>
+          <li><%= link_to 'New Career Path', new_admin_career_path_path %></li>
+          <li><%= link_to 'New Admin', new_admin_admin_path %></li>
+          <li><%= link_to 'New Student', new_admin_student_path %></li>
+        </div>
+      </div>
+    </div>   <!-- .col-sm-6 for Records Management -->
+
+    <!-- Latest QCE ratings -->
+    <%#= render 'latest_QCE_ratings' %>
+
+    <!-- Latest Leaves -->
+    <%= render 'latest_leaves' %>
+
+    <!-- Upcoming Seminars/Trainings -->
+    <%#= render 'upcoming_seminars' %>
+
+  </div> <!-- .col-sm-12 -->
+</div>  <!-- .row -->

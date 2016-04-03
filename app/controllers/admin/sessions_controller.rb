@@ -6,7 +6,7 @@ class Admin::SessionsController < Admin::ApplicationController
     redirect_to(admin_dashboard_path, notice: 'You are already logged in.') if admin_signed_in?
   end
 
-  after_action :set_nbc_id, only: [:create]
+  # after_action :set_nbc_id, only: [:create]
 
   def new
   end
@@ -25,16 +25,21 @@ class Admin::SessionsController < Admin::ApplicationController
 
   def destroy
     session[:admin_id] = nil
-    session[:nbc_id] = nil
+    # session[:nbc_id] = nil
     redirect_to admin_root_path, notice: 'You have been logged out.'
   end
 
   
   private
 
-  def set_nbc_id
-    nbc = NBC.current.first
-    session[:nbc_id] = nbc.id if nbc
-  end
+  # def set_nbc_id
+  #   nbc = NBC.current.first
+  #   session[:nbc_id] = nbc.id if nbc
+  # end
+
+  # def initialize_session_values
+  #   # 'nbc name'
+  #   # 'admin id'
+  # end
 
 end

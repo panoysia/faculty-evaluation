@@ -1,0 +1,43 @@
+<% display_number = 0 %>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span>Academic Years</span>
+      <span class="pull-right">
+        <%= link_to new_admin_academic_year_path, class: 'btn btn-primary' do %>
+          <span class="glyphicon glyphicon-plus"></span> New
+        <% end %>
+      </span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div> <!-- .row -->
+<table id="table-master" class="table table-bordered table-striped content">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Start</th>
+      <th>End</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @academic_years.each do |academic_year| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= date_format_readable(academic_year.start_at) %></td>
+        <td><%= date_format_readable(academic_year.end_at) %></td>
+        <td>
+          <%= link_to admin_academic_year_path(academic_year) do %>
+            <span class="glyphicon glyphicon-zoom-in"></span>
+          <% end %>          
+          <%= link_to edit_admin_academic_year_path(academic_year) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_academic_year_path(academic_year), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
