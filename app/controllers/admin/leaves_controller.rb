@@ -24,13 +24,11 @@ class Admin::LeavesController < Admin::ApplicationController
       if criteria.present?
          @leaves = Leave.includes(:employee).where(criteria).order(filed_at: :desc)
       else
-        # from clicking Search button with no parameters
+        # from clicking Search button with no parameters        
         @leaves = Leave.includes(:employee).order(filed_at: :desc)
       end
     else
       # from request /admin/leaves
-            flash.now.alert = "No criteria found in your search. Please provide necessary data in the fields below."
-
       @leaves = Leave.includes(:employee).order(filed_at: :desc)
     end   # params[:search]
 
