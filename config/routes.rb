@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     get 'employees/query' => "employee_queries#index"
     get 'leaves/search' => "leave_searches#index"
     get 'leaves/view' => "leave_viewings#index"
-
+    get 'leave_service_credits/search' => "leave_service_credits#index"
+    
     # get 'employees/query'
 
     resource :dashboard, only: [:show]

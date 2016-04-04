@@ -11,30 +11,32 @@
       <h4 class="panel-title">Search</h4>
     </div>
     <div class="panel-body">
-      <%= form_tag admin_leaves_search_path, method: :get do %>
+      <%= form_tag admin_leave_service_credits_path, method: :get do %>
         <div class="col-md-12">
-          <div class="col-md-5">
+          <div class="col-md-4">
             <div class="form-group">
               <%= label_tag :academic_year_id, 'Academic Year' %>
-              <%= collection_select :academic_year, :id, AcademicYear.display_all, :id, :coverage_with_details, { include_blank: '-- Select Academic Year --', selected: "e" }, { class: 'form-control', name: :academic_year_id } %>
+              <%= collection_select :academic_year, :id, AcademicYear.display_all, :id, :coverage_with_details, { include_blank: '-- Select Academic Year --', selected: "e" }, { class: 'form-control', name: 'search[academic_year_id]' } %>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <%= label_tag :employee_id, 'Employee' %>
-              <%= collection_select :employee, :id, Employee.all, :id, :full_name, { include_blank: '-- Select Employee --', selected: "e" }, { class: 'form-control', name: :employee_id } %>
+              <%= collection_select :employee, :id, Employee.all, :id, :full_name, { include_blank: '-- Select Employee --', selected: "e" }, { class: 'form-control', name: 'search[employee_id]' } %>
             </div>
           </div>
-          <div class="col-md-2 view-button">
+          <div class="col-md-3 view-button">
             <div class="form-group">
-              <%= button_tag(name: 'search', type: 'submit', class: 'btn btn-default') do %>
+              <%= button_tag(name: 'search[button]', type: 'submit', class: 'btn btn-default') do %>
                 <%= content_tag(:strong, 'Search') %>
               <% end %>
+              <%= link_to 'Clear results', admin_leave_service_credits_path, class: 'btn btn-default' %>
             </div>
-          </div>          
+          </div>
         </div>  <!-- div.col-md-12 -->
+
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-13.2">
             <div class="col-md-3">
               <div class="form-group">
                 <div class>

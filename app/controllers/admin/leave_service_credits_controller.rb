@@ -4,9 +4,34 @@ class Admin::LeaveServiceCreditsController < Admin::ApplicationController
 
 
   def index
-    @leave_service_credits = LeaveServiceCredit.includes(:employee, :academic_year).order(valid_at: :desc)
-    # @leave_service_credits = leaveServiceCredit.includes(:employee)
-  end
+
+    if params[:search]
+      criteria = ""  
+      
+      if params[:search][:academic_year_id].present?
+        criteria << "(academic_year_id = #{params[:search][:academic_year_id]})"
+      end
+
+      if params[:search][:employee_id].present?
+        if criteria.present?
+          criteria << " AND (employee_id = #{params[:search][:employee_id]})"
+        else
+          criteria = "(employee_id = #{params[:search][:employee_id]})"
+        end
+      end
+      
+      # render html: params and return true
+
+      if criteria.present?
+         @leave_service_credits = LeaveServiceCredit.includes(:employee, :academic_year).where(criteria).order(valid_at: :desc)
+      else
+        @leave_service_credits = LeaveServiceCredit.includes(:employee, :academic_year).order(valid_at: :desc)
+      end
+    else
+      @leave_service_credits = LeaveServiceCredit.includes(:employee, :academic_year).order(valid_at: :desc)
+    end   # params[:search]
+
+  end   # index
 
   def show
   end
