@@ -17,7 +17,7 @@ class Admin::LeavesController < Admin::ApplicationController
         end
       end
       
-      # render html: criteria and return true
+      # render html: params and return true
       if criteria.present?
          @leaves = Leave.includes(:employee).where(criteria).order(filed_at: :desc)
       else

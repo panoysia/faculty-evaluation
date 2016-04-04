@@ -42,20 +42,15 @@
             </div>
           </div>
         </div>  <!-- div.col-md-12 -->
-
-        <div class="row">
-          <div class="col-md-13.2">
-            <div class="col-md-3">
-              <div class="form-group">
-                <div class>
-                  <%#= label_tag :group do %>
-                    <!-- <%#= check_box_tag 'group' %> Group the results? -->
-                  <%# end %>
-                </div>
-              </div>
+        <div class="col-md-12">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= label_tag :group_by_employees do %>
+                <%= check_box_tag :group_by_employees %> Group search results
+              <% end %>
             </div>
-          </div>
-        </div>
+          </div>  
+        </div>        
       <% end %>
     </div>  <!-- div.panel-body -->
   </div>  <!-- div.panel.panel-default -->

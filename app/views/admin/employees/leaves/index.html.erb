@@ -21,8 +21,6 @@
       <tr>
         <td><%= display_number += 1 %></td>
         <td><%= leave.filed_at %></td>
-        <td><%= link_to leave.degree_course, admin_employee_leave_path(@employee, leave) %></td>
-        <td><%= leave_level_to_string(leave.level) %></td>
         <td><%= leave.start_at %></td>
         <td><%= leave.end_at %></td>
         <td>

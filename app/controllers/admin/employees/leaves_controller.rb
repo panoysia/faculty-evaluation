@@ -7,7 +7,8 @@ class Admin::Employees::LeavesController < Admin::ApplicationController
 
 
   def index
-    @leaves = @employee.leaves
+    @leaves = @employee.leaves.order(filed_at: :desc)
+    # @leaves = Leave.includes(:employee).order(filed_at: :desc)
   end
 
   def show
