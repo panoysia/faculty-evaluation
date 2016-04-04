@@ -82,10 +82,12 @@ class Employee < ActiveRecord::Base
       inclusion: { in: GENDER_TYPES.keys.map(&:to_s) }
     
     record.validates :civil_status, 
-      inclusion: { in: CIVIL_STATUS_TYPES.keys.map(&:to_s) }    
+      inclusion: { in: CIVIL_STATUS_TYPES.keys.map(&:to_s) },
+      allow_blank: true
     
     record.validates :blood_type,
-      inclusion: { in: BLOOD_TYPES.keys.map(&:to_s) }
+      inclusion: { in: BLOOD_TYPES.keys.map(&:to_s) },
+      allow_blank: true
 
     record.validates :middle_name, length: { maximum: 50 }
     record.validates :name_extension, length: { maximum: 7 }

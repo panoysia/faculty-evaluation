@@ -4,7 +4,7 @@
       <%= link_to 'Profile', admin_employee_path(@employee) %>
     </li>
     <li role="presentation" class="<%= set_active_tab(:educations) %>">
-      <%= link_to 'Educations', admin_employee_educations_path(@employee) %>
+      <%= link_to 'Education', admin_employee_educations_path(@employee) %>
     </li>
     <li role="presentation" class="<%= set_active_tab(:work_experiences) %>">
       <%= link_to 'Work Experiences', admin_employee_work_experiences_path(@employee)%>
@@ -21,14 +21,18 @@
     <li role="presentation" class="<%= set_active_tab(:other_infos) %>">
       <%= link_to 'Other Info', admin_employee_other_infos_path(@employee) %>
     </li>
+
+    <% if false %>
     <li role="presentation" class="<%= set_active_tab(:career_paths) %>">
       <%= link_to 'Career Path', admin_employee_career_paths_path(@employee) %>
     </li>
+    <li role="presentation" class="<%= set_active_tab(:rankings) %>">
+      <%= link_to 'Rankings', admin_employee_rankings_path(@employee) %>
+    </li>        
+    <% end %>
+
     <li role="presentation" class="<%= set_active_tab(:leaves) %>">
       <%= link_to 'Leaves', admin_employee_leaves_path(@employee) %>
     </li>
-    <li role="presentation" class="<%= set_active_tab(:rankings) %>">
-      <%= link_to 'Rankings', admin_employee_rankings_path(@employee) %>
-    </li>    
   </ul>
 </div>  <!-- <div#employee-related-data.row> -->
