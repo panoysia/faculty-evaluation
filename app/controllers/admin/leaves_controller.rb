@@ -1,13 +1,56 @@
 class Admin::LeavesController < Admin::ApplicationController
   before_action :set_leave, only: [:show, :edit, :update, :destroy]
 
-
   def index
-    # @leaves = Leave.includes(:employee).order(filed_at: :desc)
-    # @leaves = Leave.includes(:employee).latest(15)
-    # @employees = Employee.order(last_name: :asc)
-    # @employees = Employee.select(:id, :first_name, :last_name, :middle_name).order(last_name: :asc)
-  end
+    if params[:search]
+      criteria = ""  
+      
+      if params[:search][:academic_year_id].present?
+        criteria << "(academic_year_id = #{params[:search][:academic_year_id]})"
+      end
+
+      if params[:search][:employee_id].present?
+        if criteria.present?
+          criteria << " AND (employee_id = #{params[:search][:employee_id]})"
+        else
+          criteria = "(employee_id = #{params[:search][:employee_id]})"
+        end
+      end
+      
+      # render html: criteria and return true
+      if criteria.present?
+         @leaves = Leave.includes(:employee).where(criteria).order(filed_at: :desc)
+      else
+        @leaves = Leave.includes(:employee).order(filed_at: :desc)
+      end
+    else
+      @leaves = Leave.includes(:employee).order(filed_at: :desc)
+    end   # params[:search]
+
+  end   # index
+
+  # def indexes
+    
+  #   values = {}
+
+  #   if params[:search]
+  #     if params[:academic_year_id].present?
+  #       criteria = "academic_year_id = :academic_year_id"
+  #       values[:academic_year_id] = params[:academic_year_id]
+  #     end
+
+  #     if params[:employee_id].present?
+  #       if criteria.present?
+  #         criteria << " AND employee_id = :employee_id"
+  #       else
+  #         criteria = "employee_id = :employee_id"
+  #       end
+
+  #       values[:employee_id] = params[:employee_id]
+  #     end
+  #   end
+
+  # end
 
   def show
   end

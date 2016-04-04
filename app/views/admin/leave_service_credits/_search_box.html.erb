@@ -4,6 +4,14 @@
   <%# value = params[:employee][:id] %>
 <%# end %>
 <%#= collection_select nil, :employee_id, Employee.order(:last_name), :id, :full_name_in_reverse, { include_blank: '-- Select Employee --', selected: employee_id }, { class: 'form-control' } %>
+<%
+  if controller_name == 'leaves'
+    form_submit_path = admin_leaves_path
+    #clear_results_path = admin_leaves_path
+  elsif controller_name == 'leave_service_credits'
+    form_submit_path = admin_leave_service_credits_path
+  end
+%>
 <div id="leave-search-box" class="row">
   <div class="col-md-9">
   <div class="panel panel-default">
@@ -11,7 +19,7 @@
       <h4 class="panel-title">Search</h4>
     </div>
     <div class="panel-body">
-      <%= form_tag admin_leave_service_credits_path, method: :get do %>
+      <%= form_tag form_submit_path, method: :get do %>
         <div class="col-md-12">
           <div class="col-md-4">
             <div class="form-group">
@@ -30,7 +38,7 @@
               <%= button_tag(name: 'search[button]', type: 'submit', class: 'btn btn-default') do %>
                 <%= content_tag(:strong, 'Search') %>
               <% end %>
-              <%= link_to 'Clear results', admin_leave_service_credits_path, class: 'btn btn-default' %>
+              <%= link_to 'Clear results', form_submit_path, class: 'btn btn-default' %>
             </div>
           </div>
         </div>  <!-- div.col-md-12 -->

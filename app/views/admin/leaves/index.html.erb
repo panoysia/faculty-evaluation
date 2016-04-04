@@ -1,3 +1,7 @@
+<%#
+  employee_id = params[:employee_id] if params[:employee_id] 
+  academic_year_id = params[:academic_year_id] if params[:academic_year_id] 
+%>
 <style>
   div.panel-body {
     padding: 15px 7px 7px 7px;
@@ -18,10 +22,6 @@
     padding-bottom: 7px;
   }
 </style>
-<%
-  employee_id = params[:employee_id] if params[:employee_id] 
-  academic_year_id = params[:academic_year_id] if params[:academic_year_id] 
-%>
 <div class="row">
   <div class="col-md-12">
     <h2 class="page-header">
@@ -34,55 +34,48 @@
     </h2>
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
-<div id="leave-search-box" class="row">
-  <div class="col-md-9">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">Search</h4>
-    </div>
-    <div class="panel-body">
-      <%= form_tag admin_leaves_search_path, method: :get do %>
-        <div class="col-md-12">
-          <div class="col-md-5">
-            <div class="form-group">
-              <%= label_tag :academic_year, 'Academic Year' %>
-              <%= collection_select nil, :academic_year_id, AcademicYear.display_all, :id, :coverage_with_details, { include_blank: '-- Select Academic Year --', selected: academic_year_id }, { class: 'form-control' } %>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag :employees, 'Employee' %>        
-              <%# if params[:employee].nil? %>
-                <%# value = nil %>
-              <%# else %>
-                <%# value = params[:employee][:id] %>
-              <%# end %>
-              <%= collection_select nil, :employee_id, Employee.order(:last_name), :id, :full_name_in_reverse, { include_blank: '-- Select Employee --', selected: employee_id }, { class: 'form-control' } %>
-            </div>
-          </div>
-          <div class="col-md-2 view-button">
-            <div class="form-group">
-              <%= button_tag(name: 'search', type: 'submit', class: 'btn btn-default') do %>
-                <%= content_tag(:strong, 'Search') %>
-              <% end %>
-            </div>
-          </div>          
-        </div>  <!-- div.col-md-12 -->
-        <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-3">
-              <div class="form-group">
-                <div class>
-                  <%#= label_tag :group do %>
-                    <!-- <%#= check_box_tag 'group' %> Group the results? -->
-                  <%# end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<%= render 'admin/leave_service_credits/search_box' %>
+<% display_number = 0 %>
+
+<% unless @leaves.nil? %>
+  <%# results = "#{pluralize(@leaves.count, 'record')} found" %>
+  <!-- <h3 class="page-header">Search Results: <span style="font-style: italic"><%#= results %><span></h3>   -->
+  <table id="table-master" class="table table-bordered table-striped content">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Faculty</th>
+        <th>Date Filed</th>
+        <th>Start At</th>
+        <th>End At</th>
+        <th style="width: 138px;">Duration<em> (in days)</em></th>
+        <!-- <th>Type</th> -->
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @leaves.each do |leave| %>
+        <tr>
+          <td><%= display_number += 1 %></td>
+          <td><%= link_to leave.employee.full_name, admin_employee_leaves_path(leave.employee) %></td>
+          <td><%= date_format_readable(leave.filed_at) %></td>
+          <td><%= date_format_readable(leave.start_at) %></td>
+          <td><%= date_format_readable(leave.end_at) %></td>
+          <td><%= leave.length %></td>
+          <!-- <td><%#= leave.type %></td> -->
+          <td>
+            <%= link_to edit_admin_leave_path(leave), { title: 'View', data: { toggle: 'tooltip' } } do %>
+              <span class="glyphicon glyphicon-zoom-in"></span>
+            <% end %>
+            <%= link_to edit_admin_leave_path(leave), { title: 'Edit', data: { toggle: 'tooltip' } }  do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to admin_leave_path(leave), method: :delete, title: 'Delete', data: { toggle: 'tooltip', confirm: 'Do you really want to delete this record?' } do %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %>
+          </td>        
+        </tr>
       <% end %>
-    </div>  <!-- div.panel-body -->
-  </div>  <!-- div.panel.panel-default -->
-</div>
-</div>  <!-- div#leave-search-box -->
+    </tbody>
+  </table>
+<% end %>
