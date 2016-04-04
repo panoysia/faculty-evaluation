@@ -30,55 +30,38 @@
     </h2>
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
-<div id="leave-search-box" class="row">
-  <div class="col-md-9">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">Search</h4>
-    </div>
-    <div class="panel-body">
-      <%= form_tag admin_leaves_search_path, method: :get do %>
-        <div class="col-md-12">
-          <div class="col-md-5">
-            <div class="form-group">
-              <%= label_tag :academic_year, 'Academic Year' %>
-              <%= collection_select nil, :id, AcademicYear.display_all, :id, :coverage_with_details, { include_blank: '-- Select Academic Year --', selected: "e" }, { class: 'form-control' } %>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <%= label_tag :employees, 'Employee' %>        
-              <%# if params[:employee].nil? %>
-                <%# value = nil %>
-              <%# else %>
-                <%# value = params[:employee][:id] %>
-              <%# end %>
-              <%#= collection_select nil, :employee_id, Employee.order(:last_name), :id, :full_name_in_reverse, { include_blank: '-- Select Employee --', selected: employee_id }, { class: 'form-control' } %>
-            </div>
-          </div>
-          <div class="col-md-2 view-button">
-            <div class="form-group">
-              <%= button_tag(name: 'search', type: 'submit', class: 'btn btn-default') do %>
-                <%= content_tag(:strong, 'Search') %>
-              <% end %>
-            </div>
-          </div>          
-        </div>  <!-- div.col-md-12 -->
-        <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-3">
-              <div class="form-group">
-                <div class>
-                  <%#= label_tag :group do %>
-                    <!-- <%#= check_box_tag 'group' %> Group the results? -->
-                  <%# end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>  <!-- div.panel-body -->
-  </div>  <!-- div.panel.panel-default -->
-</div>
-</div>  <!-- div#leave-search-box -->
+<%= render 'search_box' %>
+<% display_number = 0 %>
+<table id="table-master" class="table table-bordered table-striped content">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Employee</th>
+      <th>Academic Year</th>
+      <th>Valid At</th>
+      <th>Expires At</th>
+      <th>Description</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @leave_service_credits.each do |credit| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= link_to credit.employee.full_name, '#' %></td>
+        <td><%= credit.academic_year.coverage_with_details %></td>
+        <td><%= date_format_readable(credit.valid_at) %></td>
+        <td><%= date_format_readable(credit.expire_at) %></td>
+        <td><%= credit.description %></td>
+        <td>
+          <%= link_to edit_admin_leave_service_credit_path(credit)   do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_leave_service_credit_path(credit), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

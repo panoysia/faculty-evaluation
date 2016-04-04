@@ -4,7 +4,7 @@ class Admin::LeaveServiceCreditsController < Admin::ApplicationController
 
 
   def index
-    @leave_service_credits = LeaveServiceCredit.all
+    @leave_service_credits = LeaveServiceCredit.includes(:employee, :academic_year).order(valid_at: :desc)
     # @leave_service_credits = leaveServiceCredit.includes(:employee)
   end
 
@@ -54,11 +54,11 @@ class Admin::LeaveServiceCreditsController < Admin::ApplicationController
   private
 
   def set_leave_service_credit
-    @leave_service_credit = leaveServiceCredit.find(params[:id])
+    @leave_service_credit = LeaveServiceCredit.find(params[:id])
   end  
 
   def leave_service_credit_params
-    params.require(:leave_service_credit).permit(:employee_id, :description, :valid_at, :expire_at)
+    params.require(:leave_service_credit).permit(:employee_id, :academic_year_id, :description, :valid_at)
   end
   
 end

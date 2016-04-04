@@ -5,12 +5,14 @@
   <p><strong><%= link_to "1# You are required to rate Virginia Figueroa" %></strong></p>
   <p><strong><%= link_to "2# You are required to rate Anrem Balontong" %></strong></p>  
 </div>
-<div id="panel-ratings" class="panel">
-  <h4 class="page-header">Available Ratings</h4>
-  <% @opened_rating_periods.each do |period| %>
-    <p><strong><%= link_to period.coverage %></strong></p>
-  <% end %>
-</div>
+<% if false %>
+  <div id="panel-ratings" class="panel">
+    <h4 class="page-header">Available Ratings</h4>
+    <% @opened_rating_periods.each do |period| %>
+      <p><strong><%= link_to period.coverage %></strong></p>
+    <% end %>
+  </div>
+<% end %>
 <!-- 
   qce_ratings/2016-2017/dashboard/
 -->

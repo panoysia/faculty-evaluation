@@ -1,0 +1,51 @@
+<%= form_for [:admin, @leave_service_credit] do |f| %>
+  <%= error_messages_for(@leave_service_credit) %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :employee_id, 'Employee' %>
+        <%= f.collection_select :employee_id, Employee.all, :id, :full_name, { include_blank: '-- Select Employee --' }, class: 'form-control', autofocus: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :academic_year_id, 'Academic Year', class: 'control-label' %>
+        <%= f.collection_select :academic_year_id, AcademicYear.display_all, :id, :coverage_with_details, { include_blank: ' -- Select Academic Year --' }, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :valid_at %>
+        <%= f.date_field :valid_at, class: 'form-control' %>
+        <span><em>Service credit expires after 1 year its validity</em></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :expire_at %>
+        <%= f.date_field :expire_at, class: 'form-control', disabled: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: 'form-control' %>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>      
+    </div>
+  </div>
+<% end %>
