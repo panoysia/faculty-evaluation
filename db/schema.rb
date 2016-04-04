@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403183716) do
+ActiveRecord::Schema.define(version: 20160404224020) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 20160403183716) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "academic_year_id"
+    t.integer  "no_of_days"
   end
 
   add_index "leave_service_credits", ["academic_year_id"], name: "index_leave_service_credits_on_academic_year_id"

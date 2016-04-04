@@ -38,6 +38,7 @@
       <th>#</th>
       <th>Employee</th>
       <th>Academic Year</th>
+      <th># of days</th>
       <th>Valid At</th>
       <th>Expires At</th>
       <th>Description</th>
@@ -50,6 +51,7 @@
         <td><%= display_number += 1 %></td>
         <td><%= link_to credit.employee.full_name, '#' %></td>
         <td><%= credit.academic_year.coverage_with_details %></td>
+        <td><%= credit.no_of_days %></td>
         <td><%= date_format_readable(credit.valid_at) %></td>
         <td><%= date_format_readable(credit.expire_at) %></td>
         <td><%= credit.description %></td>

@@ -42,15 +42,18 @@
             </div>
           </div>
         </div>  <!-- div.col-md-12 -->
-        <div class="col-md-12">
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= label_tag :group_by_employees do %>
-                <%= check_box_tag :group_by_employees %> Group search results
-              <% end %>
-            </div>
-          </div>  
-        </div>        
+
+        <% if controller_name == 'leaves' %>
+          <div class="col-md-12">
+            <div class="col-md-4">
+              <div class="form-group">
+                <%= label_tag :group_by_employees do %>
+                  <%= check_box_tag :group_by_employees %> Group search results
+                <% end %>
+              </div>
+            </div>  
+          </div>
+        <% end %>
       <% end %>
     </div>  <!-- div.panel-body -->
   </div>  <!-- div.panel.panel-default -->

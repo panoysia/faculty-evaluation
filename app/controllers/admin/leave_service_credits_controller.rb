@@ -83,7 +83,7 @@ class Admin::LeaveServiceCreditsController < Admin::ApplicationController
   end  
 
   def leave_service_credit_params
-    params.require(:leave_service_credit).permit(:employee_id, :academic_year_id, :description, :valid_at)
+    params.require(:leave_service_credit).permit(:employee_id, :academic_year_id, :no_of_days, :description, :valid_at)
   end
   
 end
