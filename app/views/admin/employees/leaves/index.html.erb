@@ -12,7 +12,7 @@
       <th>Date Filed</th>
       <th>Start At</th>
       <th>End At</th>
-      <th style="width: 138px;">Duration<em> (in days)</em></th>
+      <th>Duration<em> (in days)</em></th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
@@ -20,9 +20,10 @@
     <% @leaves.each do |leave| %>
       <tr>
         <td><%= display_number += 1 %></td>
-        <td><%= leave.filed_at %></td>
-        <td><%= leave.start_at %></td>
-        <td><%= leave.end_at %></td>
+        <td><%= date_format_readable(leave.filed_at) %></td>
+        <td><%= date_format_readable(leave.start_at) %></td>
+        <td><%= date_format_readable(leave.end_at) %></td>
+        <td><%= leave.length %></td>
         <td>
           <%= link_to edit_admin_employee_leave_path(@employee, leave)   do %>
             <span class="glyphicon glyphicon-pencil"></span>
