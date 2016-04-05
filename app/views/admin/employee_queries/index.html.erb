@@ -79,9 +79,9 @@
         <tr>
           <td><%= display_counter += 1 %></td>
           <td><%= link_to employee.full_name, admin_employee_path(employee) %></td>
-          <td><%= employee.rank.full_name %></td>
+          <td><%= employee.rank.full_name if employee.rank.present? %></td>
           <td><%= employee.specialization.name if employee.specialization.present? %></td>
-          <td><%= convert_gender_value(employee.gender) %></td>
+          <td><%= convert_gender_value(employee.gender) if employee.gender.present? %></td>
           <td>
             <%= link_to edit_admin_employee_path(employee) do %>
               <span class="glyphicon glyphicon-pencil"></span>
