@@ -1,3 +1,8 @@
+<style>
+  p.lead-text {
+
+  }
+</style>
 <h3 class="page-header">My HR Profile</h3>
 <div class="row">
   <div class="col-md-12">
@@ -78,21 +83,86 @@
 <div class="row">
   <div class="col-md-12">
     <div class="col-md-9 col-md-offset-3">
-      <div id="training-info">
+      <div id="work-experience-info">
         <div id="id-of-panel" class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Work Experiences</h3>
           </div>  <!-- .panel-heading -->
           <div class="panel-body">
-            <% @profile.trainings.each do |training| %>
-              <p><%= training.title %></p>
-              <p><%= training.conducted_by %></p>
+            <% @profile.work_experiences.each do |work_experience| %>
+              <p><%= work_experience.position_title %></p>
+              <p><%= work_experience.company %></p>
               <!-- dates are to be right-aligned -->
-              <p><%= "#{training.start_at.year} - #{training.end_at.year}"  %></p>
+              <p><%= "#{work_experience.start_at.year} - #{work_experience.end_at.year}"  %></p>
             <% end %>
           </div>  <!-- .panel-body -->
         </div>  <!-- #id-of-panel -->        
-      </div>  <!-- #training-info -->
+      </div>  <!-- #work-experience-info -->
+    </div>  <!-- .col-md-9 -->
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<!-- civil service -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-9 col-md-offset-3">
+      <div id="civil-service-info">
+        <div id="id-of-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Civil Service</h3>
+          </div>  <!-- .panel-heading -->
+          <div class="panel-body">
+            <% @profile.civil_service_eligibilities.each do |civil_service| %>
+              <p><%= civil_service.career_service %></p>
+              <p><%= civil_service.rating %></p>
+              <p><%= civil_service.place_of_exam %></p>
+              <!-- dates are to be right-aligned -->
+              <p><%= civil_service.date_of_exam %></p>
+            <% end %>
+          </div>  <!-- .panel-body -->
+        </div>  <!-- #id-of-panel -->        
+      </div>  <!-- #civil-service-info -->
+    </div>  <!-- .col-md-9 -->
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<!-- voluntary works -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-9 col-md-offset-3">
+      <div id="voluntary-work-info">
+        <div id="id-of-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Voluntary Works</h3>
+          </div>  <!-- .panel-heading -->
+          <div class="panel-body">
+            <% @profile.voluntary_works.each do |voluntary_work| %>
+              <p><%= voluntary_work.position %></p>
+              <p><%= voluntary_work.organization %></p>
+              <!-- dates are to be right-aligned -->
+              <p><%= "#{voluntary_work.start_at.year} - #{voluntary_work.end_at.year}"  %></p>
+            <% end %>
+          </div>  <!-- .panel-body -->
+        </div>  <!-- #id-of-panel -->        
+      </div>  <!-- #voluntary-work-info -->
+    </div>  <!-- .col-md-9 -->
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<!-- other info -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-9 col-md-offset-3">
+      <div id="other-info-info">
+        <div id="id-of-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Other Info</h3>
+          </div>  <!-- .panel-heading -->
+          <div class="panel-body">
+            <% @profile.other_infos.each do |other_info| %>
+              <p><%= other_info.context %></p>
+              <p><%= other_info.info %></p>
+            <% end %>
+          </div>  <!-- .panel-body -->
+        </div>  <!-- #id-of-panel -->        
+      </div>  <!-- #other-info-info -->
     </div>  <!-- .col-md-9 -->
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
