@@ -1,6 +1,6 @@
 <%#
   employee_id = params[:employee_id] if params[:employee_id] 
-  academic_year_id = params[:academic_year_id] if params[:academic_year_id] 
+  academic_year_id = params[:academic_year_id] if params[:academic_year_id]
 %>
 <style>
   div.panel-body {
@@ -36,7 +36,17 @@
 </div>  <!-- .row -->
 <%= render 'admin/leave_service_credits/search_box' %>
 <% display_number = 0 %>
-
+<% unless @remaining_leaves.nil? %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="alert alert-info">
+        <p>Summarize leave info for <%= @employee.full_name %> in Academic Year <%= @academic_year.coverage_in_years %></p>  
+        <p>Remaining leaves: <%= @remaining_leaves %></p>
+        <p>Service Credits: <%= @service_credits %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
 <% unless @leaves.nil? %>
   <%# results = "#{pluralize(@leaves.count, 'record')} found" %>
   <!-- <h3 class="page-header">Search Results: <span style="font-style: italic"><%#= results %><span></h3>   -->

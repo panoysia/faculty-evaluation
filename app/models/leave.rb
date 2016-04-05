@@ -25,8 +25,11 @@ class Leave < ActiveRecord::Base
   before_save :compute_length_of_leave
 
 
-  def self.remaining(id) 
-    MAXIMUM - where(employee_id: id).sum(:length)
+  def self.remaining(employee_id, academic_year_id)
+    service_credits = LeaveServiceCredit.where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:no_of_days)
+
+    total_leave_credits = MAXIMUM + service_credits
+    total_leave_credits - where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:length)
   end
 
 

@@ -17,12 +17,31 @@ class Admin::LeavesController < Admin::ApplicationController
         end
       end
       
-      if params[:group_by_employees].present? then
-      end
+      # if params[:group_by_employees].present? then
+      # end
 
       # render html: params and return true
       if criteria.present?
          @leaves = Leave.includes(:employee).where(criteria).order(filed_at: :desc)
+
+        # if params[:group_by_employees].present? then
+        #   Leave.
+        # end
+        if params[:search][:employee_id].present? &&
+          params[:search][:academic_year_id].present?
+            
+            employee_id = params[:search][:employee_id]
+            academic_year_id = params[:search][:academic_year_id]
+
+            # @leave_info = {}
+            @employee = Employee.find(employee_id)
+            @academic_year = AcademicYear.find(academic_year_id)
+
+            # @remaining_leaves = Leave.remaining(employee_id, academic_year_id)
+            @remaining_leaves = 15 - Leave.where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:length)
+            @service_credits = LeaveServiceCredit.where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:no_of_days)
+        end
+        
       else
         # from clicking Search button with no parameters        
         @leaves = Leave.includes(:employee).order(filed_at: :desc)
