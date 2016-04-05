@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span>My Filed Leaves<span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<% display_number = 0 %>
+<table id="table-master" class="table table-bordered table-striped content">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Faculty</th>
+      <th>Date Filed</th>
+      <th>Start At</th>
+      <th>End At</th>
+      <th>Duration<em> (in days)</em></th>
+      <!-- <th>Type</th> -->
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @leaves.each do |leave| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= leave.employee.full_name %></td>
+        <td><%= date_format_readable(leave.filed_at) %></td>
+        <td><%= date_format_readable(leave.start_at) %></td>
+        <td><%= date_format_readable(leave.end_at) %></td>
+        <td><%= leave.length %></td>
+        <!-- <td><%#= leave.type %></td> -->
+        <td>
+          <%= link_to leave_path(leave), { title: 'View', data: { toggle: 'tooltip' } } do %>
+            <span class="glyphicon glyphicon-zoom-in"></span>
+          <% end %>
+        </td>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>

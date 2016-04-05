@@ -81,6 +81,7 @@ Rails.application.routes.draw do
     delete 'logout' => 'sessions#destroy'
     post 'login' => 'sessions#create', as: :authenticate_user
 
+    resources :leaves, only: [:index, :show]
     resource :dashboard, only: [:show]
     resource :hr_profile, only: [:show], path: 'my-hr-profile'
     resource :career_path, only: [:show], path: 'my-career-path'     
