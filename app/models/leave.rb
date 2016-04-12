@@ -45,9 +45,33 @@ class Leave < ActiveRecord::Base
     end
   end
 
-  def compute_length_of_leave
-    self[:length] = (end_at - start_at).to_i
-    puts "computing length of leave...."
+  def compute_length_of_leave_xxx
+    length = ((end_at - start_at).to_i) + 1
+    self[:length] = length
+    # self[:length] = (end_at - start_at).to_i
   end
+
+  def compute_length_of_leave
+    length = ((end_at - start_at).to_i) + 1
+    weekend_count = 0
+
+    # Discount the days that fall on a Saturday and Sunday (non-working day)
+    (start_at..end_at).each do |date|
+      if date.saturday? || date.sunday?
+        puts "#{date} is a #{date.strftime '%A, %b %d'}"
+        weekend_count += 1
+      end
+    end
+
+    # Consider if it falls on a holiday to
+    holiday_count = Holiday.where('(occurs_at >= :start_at) AND (occurs_at <= :end_at)', start_at: start_at, end_at: end_at).count
+
+    puts Holiday.where('(occurs_at >= :start_at) AND (occurs_at <= :end_at)', start_at: start_at, end_at: end_at).to_sql
+
+    # Check again if the holiday falls on a Saturday or Sunday
+
+    length -= (weekend_count + holiday_count)
+    self[:length] = length
+  end   # compute_length_of_leave
 
 end

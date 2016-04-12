@@ -62,7 +62,9 @@ class Employee < ActiveRecord::Base
     class_name: 'Employee::Rating'
 
   has_many :leaves, dependent: :destroy 
-  has_many :career_paths #, dependent: :destroy
+  #has_one :career_path, dependent: :destroy
+  belongs_to :career_path
+  has_many :career_path_actions, through: :career_path
 
   belongs_to :rank, class_name: 'AcademicRanking', foreign_key: 'academic_ranking_id'
   belongs_to :specialization
@@ -139,6 +141,7 @@ class Employee < ActiveRecord::Base
     end
   end
 
+  # TODO: Age computation is unfinished
   def age
     return nil if birth_date.nil?
     # 3/23/16         3/20/1985

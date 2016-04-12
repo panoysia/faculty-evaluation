@@ -1,0 +1,26 @@
+<%= form_for [:admin, @holiday] do |f| %>
+  <%= error_messages_for(@holiday) %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', autofocus: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :occurs_at %>
+        <%= f.date_field :occurs_at, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>      
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,48 @@
+<% display_number = 0 %>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span>Career Path Actions</span>
+      <span class="pull-right">
+        <%= link_to new_admin_career_path_action_path, class: 'btn btn-primary' do %>
+          <span class="glyphicon glyphicon-plus"></span> New
+        <% end %>
+      </span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div> <!-- .row -->
+<table id="table-master" class="table table-bordered table-striped content">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Career Path</th>
+      <th>Category</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Description</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @actions.each do |action| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= link_to action.name, admin_career_path_action_path(action) %></td>
+        <td><%= action.career_path.name %></td>
+        <td><%= category_type_to_string(action.category) %></td>        
+        <td><%= date_format_readable(action.start_at) if action.start_at.present? %></td>
+        <td><%= date_format_readable(action.end_at) if action.end_at.present? %></td>
+        <td><%= action.description %></td>
+        <td>
+          <%= link_to edit_admin_career_path_action_path(action) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_career_path_action_path(action), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
     get 'employees/search' => "employee_searches#index"
     get 'employees/query' => "employee_queries#index"
-    
+    get 'employee-career-pathing' => "employee_career_pathings#index"
+
     #get 'leaves/view' => "leave_viewings#index"
     #get 'leaves/search' => "leave_searches#index"
     #get 'leave_service_credits/search' => "leave_service_credits#index"
@@ -22,12 +23,12 @@ Rails.application.routes.draw do
     resources :admins
     resources :users
     resources :nbcs
-
+    resources :holidays
+    
     # resources :forum_threads do
     #   resources :forum_posts, module: :forum_threads
     # end
   
-
     resources :employees do
       scope module: :employees do
         resources :educations
@@ -66,6 +67,8 @@ Rails.application.routes.draw do
     
     resources :specializations
     resources :career_paths
+    resources :career_path_actions
+    
     resources :academic_years, path: 'academic-years'
     # resources :rating_periods, path: 'rating-periods'
     resources :academic_rankings, only: [:index], path: 'academic-rankings'

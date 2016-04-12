@@ -74,7 +74,7 @@
           <td><%= leave.length %></td>
           <!-- <td><%#= leave.type %></td> -->
           <td>
-            <%= link_to edit_admin_leave_path(leave), { title: 'View', data: { toggle: 'tooltip' } } do %>
+            <%= link_to admin_leave_path(leave), { title: 'View', data: { toggle: 'tooltip' } } do %>
               <span class="glyphicon glyphicon-zoom-in"></span>
             <% end %>
             <%= link_to edit_admin_leave_path(leave), { title: 'Edit', data: { toggle: 'tooltip' } }  do %>

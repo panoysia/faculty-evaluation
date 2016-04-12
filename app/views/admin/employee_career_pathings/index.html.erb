@@ -1,0 +1,58 @@
+<style>
+  div.panel-body {
+    padding: 15px 7px 7px 7px;
+  }
+
+  form div.col-md-3 {
+    // border: 1px green solid;
+    padding: 0px 7px;
+  }
+
+  form > div.col-md-12 {
+    // border: 1px red solid;
+    padding: 0px 7px;
+  }
+    
+  div.panel-heading {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span>Employee Career Pathing<span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<%= render 'search_box' %>
+<% display_number = 0 %>
+
+<% unless @actions.nil? %>
+  <table id="table-master" class="table table-bordered table-striped content">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @actions.each do |action| %>
+        <tr>
+          <td><%= display_number += 1 %></td>
+          <td><%= action.name %></td>
+          <td><%= action.category %></td>
+          <td><%= action.start_at %></td>
+          <td><%= action.end_at %></td>
+          <td><%= action.description %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<%# results = "#{pluralize(@leaves.count, 'record')} found" %>
+<!-- <h3 class="page-header">Search Results: <span style="font-style: italic"><%#= results %><span></h3>   -->

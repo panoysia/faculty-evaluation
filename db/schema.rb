@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404224020) do
+ActiveRecord::Schema.define(version: 20160412010849) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -47,6 +47,20 @@ ActiveRecord::Schema.define(version: 20160404224020) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
+
+  create_table "career_path_actions", force: :cascade do |t|
+    t.string   "name",           null: false
+    t.date     "start_at"
+    t.date     "end_at"
+    t.string   "description"
+    t.integer  "category",       null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "career_path_id", null: false
+    t.string   "company"
+  end
+
+  add_index "career_path_actions", ["career_path_id"], name: "index_career_path_actions_on_career_path_id"
 
   create_table "career_paths", force: :cascade do |t|
     t.string   "name",       limit: 100, null: false
@@ -200,10 +214,20 @@ ActiveRecord::Schema.define(version: 20160404224020) do
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.integer  "specialization_id"
+    t.integer  "career_path_id"
   end
 
   add_index "employees", ["academic_ranking_id"], name: "index_employees_on_academic_ranking_id"
+  add_index "employees", ["career_path_id"], name: "index_employees_on_career_path_id"
   add_index "employees", ["specialization_id"], name: "index_employees_on_specialization_id"
+
+  create_table "holidays", force: :cascade do |t|
+    t.string   "name",                   null: false
+    t.date     "occurs_at",              null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "is_weekend", default: 0, null: false
+  end
 
   create_table "leave_service_credits", force: :cascade do |t|
     t.integer  "employee_id",      null: false

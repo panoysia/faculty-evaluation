@@ -1,0 +1,27 @@
+<%# if params[:employee].nil? %>
+  <%# value = nil %>
+<%# else %>
+  <%# value = params[:employee][:id] %>
+<%# end %>
+<%#= collection_select nil, :employee_id, Employee.order(:last_name), :id, :full_name_in_reverse, { include_blank: '-- Select Employee --', selected: employee_id }, { class: 'form-control' } %>
+<div id="leave-search-box" class="row">
+  <div class="col-md-10">
+    <%= form_tag admin_employee_career_pathing_path, method: :get do %>
+      <div class="col-md-12">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :employee_id, 'Employee' %>
+            <%= collection_select :employee, :id, Employee.all, :id, :full_name, { include_blank: '-- Select Employee --', selected: "e" }, { class: 'form-control', name: 'view[employee_id]' } %>
+          </div>
+        </div>
+        <div class="col-md-3 view-button">
+          <div class="form-group">
+            <%= button_tag(name: 'view[button]', value: 'view', type: 'submit', class: 'btn btn-default') do %>
+              <%= content_tag(:strong, 'View') %>
+            <% end %>
+          </div>
+        </div>
+      </div>  <!-- div.col-md-12 -->
+    <% end %>
+  </div>
+</div>

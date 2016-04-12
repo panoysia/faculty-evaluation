@@ -1,9 +1,16 @@
 class CareerPath < ActiveRecord::Base
-  belongs_to :employee
+  def self.use_relative_model_naming?
+    true
+  end
+
+  has_many :employees
+  has_many :career_path_actions, dependent: :destroy
+  # has_many :keywords, dependent: :destroy
 
   validates :name, presence: true, 
                     uniqueness: true, 
                     length: { maximum: 100 }
+
 end
 =begin
   class Employee

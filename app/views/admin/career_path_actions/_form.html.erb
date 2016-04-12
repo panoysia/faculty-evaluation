@@ -1,0 +1,66 @@
+<%= form_for [:admin, @action] do |f| %>
+  <%= error_messages_for(@action) %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :career_path, 'Career Path' %>
+        <%= f.collection_select :career_path_id, CareerPath.all, :id, :name, { include_blank: '--- Select Career Path ---' }, class: 'form-control', autofocus: true %>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :company %>
+        <%= f.text_field :company, class: 'form-control' %>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :start_at %>
+        <%= f.date_field :start_at, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :end_at %>
+        <%= f.date_field :end_at, class: 'form-control' %>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: 'form-control', rows: 4 %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :category %>
+        <%= f.select :category, category_types_for_select, {}, class: 'form-control' %>
+      </div>
+    </div>
+  </div>    
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>      
+    </div>
+  </div>
+<% end %>
