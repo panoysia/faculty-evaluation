@@ -80,8 +80,12 @@ Rails.application.routes.draw do
     post 'login' => 'sessions#create', as: :authenticate_user
 
     resources :leaves, only: [:index, :show]
-    resources :qce_ratings
-    
+    resources :qces, except: [:new, :destroy] do
+      scope module: :qces do
+        resources :assign_to_self, only: [:new, :create]
+      end 
+    end
+
     resource :dashboard, only: [:show]
     resource :hr_profile, only: [:show], path: 'my-hr-profile'
     resource :career_path, only: [:show], path: 'my-career-path'     

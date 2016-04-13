@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413035513) do
+ActiveRecord::Schema.define(version: 20160413183043) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -265,16 +265,30 @@ ActiveRecord::Schema.define(version: 20160413035513) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "qce_ratings", force: :cascade do |t|
-    t.integer  "employee_id",                  null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "rating_period_id",             null: false
-    t.integer  "completed",        default: 0, null: false
+  create_table "qce_instruction_ratings", force: :cascade do |t|
+    t.integer  "qce_id",             null: false
+    t.string   "evaluator_type",     null: false
+    t.string   "evaluator_name"
+    t.string   "evaluator_position"
+    t.date     "rated_on",           null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
-  add_index "qce_ratings", ["employee_id"], name: "index_qce_ratings_on_employee_id"
-  add_index "qce_ratings", ["rating_period_id"], name: "index_qce_ratings_on_rating_period_id"
+  add_index "qce_instruction_ratings", ["qce_id"], name: "index_qce_instruction_ratings_on_qce_id"
+
+  create_table "qces", force: :cascade do |t|
+    t.integer  "employee_id",                     null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "rating_period_id",                null: false
+    t.integer  "completed",           default: 0, null: false
+    t.integer  "support_rating_id"
+    t.string   "support_rating_type"
+  end
+
+  add_index "qces", ["employee_id"], name: "index_qces_on_employee_id"
+  add_index "qces", ["rating_period_id"], name: "index_qces_on_rating_period_id"
 
   create_table "rating_periods", force: :cascade do |t|
     t.integer  "semester",         limit: 1, null: false

@@ -38,7 +38,8 @@ class Employee < ActiveRecord::Base
   validates_attachment_content_type :picture, content_type: ['image/jpg', 'image/jpeg', 'image/png']
 
   has_one :user_account, as: :account, class_name: 'User', dependent: :destroy
-  
+  # has_one :supervisor, class_name: 'Employee'
+
   has_many :rankings, dependent: :destroy
   has_many :educations, dependent: :destroy
   has_many :work_experiences, dependent: :destroy
@@ -48,7 +49,7 @@ class Employee < ActiveRecord::Base
   has_many :other_infos, dependent: :destroy
   
   has_many :ratings
-  has_many :qce_ratings, dependent: :destroy
+  has_many :qces, dependent: :destroy
 
   has_many :instruction_ratings, 
     -> { where(type: 'Employee::Rating::Instruction') },

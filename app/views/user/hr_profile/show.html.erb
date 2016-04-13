@@ -49,7 +49,7 @@
             <% @profile.educations.each do |education| %>
               <p><%= education.degree_course %></p>
               <p><%= education.school_name %></p>
-              <p><%= "#{education.start_at.year} - #{education.end_at.year}"  %></p>
+              <p><%= "#{education.start_at.year} - #{education.end_at.year}" if education.start_at.present?  %></p>
             <% end %>
           </div>  <!-- .panel-body -->
         </div>  <!-- #id-of-panel -->        

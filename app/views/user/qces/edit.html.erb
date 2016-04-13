@@ -1,0 +1,52 @@
+<style>
+  div.qce-options {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span><%= "QCE for #{@qce.rating_period.coverage}" %></span>
+      <span class="pull-right label <%= @qce.completed? ? 'label-success' : 'label-danger' %>"><%= @qce.completed? ? 'Completed' : 'Incomplete' %></span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+
+<div class="qce-options">  
+  <h3 class="page-header">Ratings for Instruction</h3>
+  <ol>
+    <h4><li><%= link_to 'Assign to Self', qce_assign_to_self_index_path(@qce), remote: true, method: :post %> <span id="assign_self" style="color: green;" class="<%= 'glyphicon glyphicon-ok' if @qce.rated_self? %>"></span></li></h4>
+
+    <div>
+      <h4><li>Assign to Immediate Supervisor</li></h4>
+      <div class="row">
+        <div class="col-md-12">
+          <%= form_for %>
+        </div>
+      </div>
+    </div>
+    <h4><li><%= link_to 'Assign to Immediate Supervisor', '#' %></li></h4>
+    <h4><li><%= link_to 'Assign to 5 Peers' %></li></h4>
+    <h4><li><%= link_to 'Assign to 30 Students' %></li></h4>
+  </ol>
+</div>
+
+<div class="qce-options">  
+  <h3 class="page-header">Specify a support area to rate:</h3>
+  <% if false %>
+  <%= form_for @qce do |f| %>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :support_area_type, 'Support Area' %>
+          <%= f.select :support_area_type, %w[Research Production Extension], { include_blank: '-- Please choose --'}, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>    
+  <% end %>
+  <% end %>
+</div>
