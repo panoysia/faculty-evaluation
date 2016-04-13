@@ -25,6 +25,9 @@ class Leave < ActiveRecord::Base
   before_save :compute_length_of_leave
 
 
+  def self.total(employee_id, academic_year_id)
+  end
+
   def self.remaining(employee_id, academic_year_id)
     service_credits = LeaveServiceCredit.where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:no_of_days)
 
@@ -45,17 +48,17 @@ class Leave < ActiveRecord::Base
     end
   end
 
-  def compute_length_of_leave_xxx
-    length = ((end_at - start_at).to_i) + 1
-    self[:length] = length
-    # self[:length] = (end_at - start_at).to_i
-  end
+  # def compute_length_of_leave_xxx
+  #   length = ((end_at - start_at).to_i) + 1
+  #   self[:length] = length
+  #   self[:length] = (end_at - start_at).to_i
+  # end
 
   def compute_length_of_leave
     length = ((end_at - start_at).to_i) + 1
     weekend_count = 0
 
-    # Discount the days that fall on a Saturday and Sunday (non-working day)
+    # Saturday and Sunday are non-working days
     (start_at..end_at).each do |date|
       if date.saturday? || date.sunday?
         puts "#{date} is a #{date.strftime '%A, %b %d'}"
@@ -63,12 +66,11 @@ class Leave < ActiveRecord::Base
       end
     end
 
-    # Consider if it falls on a holiday to
-    holiday_count = Holiday.where('(occurs_at >= :start_at) AND (occurs_at <= :end_at)', start_at: start_at, end_at: end_at).count
+    # Consider only holidays that doesn't fall on a weekend (Saturday and Sunday) or non-working day
+    criteria = "((occurs_at >= :start_at) AND (occurs_at <= :end_at)) AND (is_weekend <> 1)"
+    holiday_count = Holiday.where(criteria, start_at: start_at, end_at: end_at).count
 
     puts Holiday.where('(occurs_at >= :start_at) AND (occurs_at <= :end_at)', start_at: start_at, end_at: end_at).to_sql
-
-    # Check again if the holiday falls on a Saturday or Sunday
 
     length -= (weekend_count + holiday_count)
     self[:length] = length

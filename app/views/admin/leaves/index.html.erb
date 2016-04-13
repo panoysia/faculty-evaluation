@@ -41,8 +41,13 @@
     <div class="col-md-6">
       <div class="alert alert-info">
         <p><strong>Summarize leave info for <%= @employee.full_name %> in Academic Year <%= @academic_year.coverage_in_years %></strong></p>
-        <p>Remaining leaves: <%= @remaining_leaves %></p>
+        <p>Maximum leaves for faculty is 15</p>
+        <p>Total leaves filed: <%= @total_leaves %></p>
         <p>Service Credits: <%= @service_credits %></p>
+        <p>
+          <strong>Balance: <%= @remaining_leaves %></strong><br>
+          <span><em>(Maximum leaves - total leaves filed) + service credits accumulated</em></span>
+        </p>
       </div>
     </div>
   </div>
@@ -60,7 +65,7 @@
         <th>End At</th>
         <th style="width: 138px;">Duration<em> (in days)</em></th>
         <!-- <th>Type</th> -->
-        <th colspan="3">Actions</th>
+        <th colspan="2">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -74,9 +79,9 @@
           <td><%= leave.length %></td>
           <!-- <td><%#= leave.type %></td> -->
           <td>
-            <%= link_to admin_leave_path(leave), { title: 'View', data: { toggle: 'tooltip' } } do %>
-              <span class="glyphicon glyphicon-zoom-in"></span>
-            <% end %>
+            <%#= link_to admin_leave_path(leave), { title: 'View', data: { toggle: 'tooltip' } } do %>
+              <!-- <span class="glyphicon glyphicon-zoom-in"></span> -->
+            <%# end %>
             <%= link_to edit_admin_leave_path(leave), { title: 'Edit', data: { toggle: 'tooltip' } }  do %>
               <span class="glyphicon glyphicon-pencil"></span>
             <% end %>

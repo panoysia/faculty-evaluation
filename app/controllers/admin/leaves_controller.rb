@@ -33,13 +33,18 @@ class Admin::LeavesController < Admin::ApplicationController
             employee_id = params[:search][:employee_id]
             academic_year_id = params[:search][:academic_year_id]
 
-            # @leave_info = {}
             @employee = Employee.find(employee_id)
             @academic_year = AcademicYear.find(academic_year_id)
-
-            # @remaining_leaves = Leave.remaining(employee_id, academic_year_id)
-            @remaining_leaves = 15 - Leave.where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:length)
+            
+            @total_leaves = Leave.where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:length)
+            
             @service_credits = LeaveServiceCredit.where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:no_of_days)
+
+            @remaining_leaves = Leave.remaining(employee_id, academic_year_id)
+
+            #@remaining_leaves = 15 - Leave.where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:length)
+
+            # @remaining_leaves = 15 - @total_leaves
         end
         
       else

@@ -3,10 +3,12 @@ class Holiday < ActiveRecord::Base
   validates :name, :occurs_at, presence: true
   before_save :set_weekend_column_value
 
+  scope :weekender, -> { where(is_weekend: 1) }
+
 
   def set_weekend_column_value
     if occurs_at.saturday? || occurs_at.sunday?
-      is_weekend = 1
+      self[:is_weekend] = 1
     end
   end
 
