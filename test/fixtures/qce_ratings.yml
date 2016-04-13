@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_id: 
+  academic_year_id: 
+  semeseter: 1
+  nbc_id: 
+
+two:
+  employee_id: 
+  academic_year_id: 
+  semeseter: 1
+  nbc_id: 

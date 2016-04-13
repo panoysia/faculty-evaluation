@@ -21,7 +21,7 @@ class Admin::EmployeesController < Admin::ApplicationController
 
     respond_to do |format|
       if @employee.save
-        format.html { redirect_to [:edit, :admin, @employee], notice: 'Employee was successfully created. Please provide additional data in the fields below.' }
+        format.html { redirect_to [:edit, :admin, @employee], notice: 'Faculty was successfully created. Please provide additional data in the fields below.' }
       else
         @employee.build_user_account
         format.html { render :new }
@@ -35,7 +35,7 @@ class Admin::EmployeesController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @employee.update(employee_params_for_update)
-        format.html { redirect_to [:admin, @employee], notice: 'Employee was successfully updated.' }
+        format.html { redirect_to [:admin, @employee], notice: 'Faculty was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -45,7 +45,7 @@ class Admin::EmployeesController < Admin::ApplicationController
   def destroy
     @employee.destroy
     respond_to do |format|
-      format.html { redirect_to admin_employees_path, notice: 'Employee was successfully deleted.' }
+      format.html { redirect_to admin_employees_path, notice: 'Faculty was successfully deleted.' }
     end
   end
 

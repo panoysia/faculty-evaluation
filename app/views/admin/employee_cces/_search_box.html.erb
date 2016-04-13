@@ -11,7 +11,7 @@ end
 <%#= collection_select nil, :employee_id, Employee.order(:last_name), :id, :full_name_in_reverse, { include_blank: '-- Select Faculty --', selected: employee_id }, { class: 'form-control' } %>
 <div id="leave-search-box" class="row">
   <div class="col-md-10">
-    <%= form_tag admin_faculty_career_pathing_path, method: :get do %>
+    <%= form_tag admin_check_employee_cce_path, method: :get do %>
       <div class="col-md-12">
         <div class="col-md-4">
           <div class="form-group">

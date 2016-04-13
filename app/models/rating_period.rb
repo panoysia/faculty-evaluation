@@ -1,28 +1,30 @@
 class RatingPeriod < ActiveRecord::Base 
   
+  has_many :qce_ratings, dependent: :destroy
   has_many :leaves
 
   belongs_to :academic_year
   belongs_to :nbcs
   
   validates :academic_year, :semester,  presence: true
-  # 1 is for 1st Sem., 2 is for 2nd Sem.
   validates :semester, inclusion: { in: [1, 2] }
 
   alias_attribute :name, :coverage
 
 
-  # def coverage
-  #   "#{start_at.year}-#{end_at.year} #{semester.ordinalize} Sem."    
-  # end
-
   def coverage
-    start_at_year = start_at.strftime '%b %e %Y'
-    end_at_year = end_at.strftime '%b %e %Y'
-    "#{start_at.year} - #{end_at.year} (#{start_at_year} - #{end_at_year})"
+    "#{semester.ordinalize} Semester of #{academic_year.coverage}"
   end
 
 end
+
+# start_at_year = start_at.strftime '%b %e %Y'
+    # end_at_year = end_at.strftime '%b %e %Y'
+    # "#{start_at.year} - #{end_at.year} (#{start_at_year} - #{end_at_year})"
+
+# def coverage
+#   "#{start_at.year}-#{end_at.year} #{semester.ordinalize} Sem."    
+# end
 
 # enum status: { open: 1, close: 2 }
 # Declaring ENUM fields automatically adds these scopes: 

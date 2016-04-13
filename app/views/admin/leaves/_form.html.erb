@@ -2,7 +2,7 @@
   <%= error_messages_for(@leave) %>
   <div class="row">
     <div class="col-md-4 form-group">
-      <%= f.label 'Employee' %>
+      <%= f.label 'Faculty' %>
       <%= f.collection_select :employee_id, Employee.order(last_name: :asc), :id, :full_name, 
       {}, { class: 'form-control', autofocus: true } %>
     </div>

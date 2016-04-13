@@ -9,25 +9,20 @@ Rails.application.routes.draw do
     get 'login' => 'sessions#new'
     delete 'logout' => 'sessions#destroy'
 
-    get 'employees/search' => "employee_searches#index"
-    get 'employees/query' => "employee_queries#index"
-    get 'employee-career-pathing' => "employee_career_pathings#index"
+    get 'faculty/search' => "employee_searches#index"
+    get 'faculty/query' => "employee_queries#index"
+    get 'faculty-career-pathing' => "employee_career_pathings#index"
 
     #get 'leaves/view' => "leave_viewings#index"
     #get 'leaves/search' => "leave_searches#index"
     #get 'leave_service_credits/search' => "leave_service_credits#index"
     
-    # get 'employees/query'
-
     resource :dashboard, only: [:show]
     resources :admins
     resources :users
     resources :nbcs
     resources :holidays
-    
-    # resources :forum_threads do
-    #   resources :forum_posts, module: :forum_threads
-    # end
+    resources :qces, :cces
   
     resources :employees do
       scope module: :employees do
@@ -85,11 +80,14 @@ Rails.application.routes.draw do
     post 'login' => 'sessions#create', as: :authenticate_user
 
     resources :leaves, only: [:index, :show]
+    resources :qce_ratings
+    
     resource :dashboard, only: [:show]
     resource :hr_profile, only: [:show], path: 'my-hr-profile'
     resource :career_path, only: [:show], path: 'my-career-path'     
     resource :account, only: [:edit, :update], path: 'user-account', as: :user_account    
   end
+
 
 =begin
   Translated paths:
@@ -105,6 +103,9 @@ end
 
 =begin
 
+resources :forum_threads do
+  resources :forum_posts, module: :forum_threads
+end
 
 class ForumThreads::ForumPostsController < ApplicationController
 

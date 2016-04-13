@@ -1,5 +1,5 @@
 module ApplicationHelper
-
+  
   def error_messages_for(object)
     render partial: 'shared/error_messages', locals: { object: object }
   end
@@ -13,7 +13,8 @@ module ApplicationHelper
   # Gives me a good reason for monkey-patching Ruby's Date class.
   
   def date_format_readable(date)
-    date.strftime '%Y-%b-%d'
+    #date.strftime '%Y-%b-%d'
+    date.strftime '%b %d %Y'
   end
 
   def convert_gender_value(value)

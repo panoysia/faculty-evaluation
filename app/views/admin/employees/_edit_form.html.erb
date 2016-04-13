@@ -45,19 +45,19 @@
       <!-- Start new row -->
       <div class="row">
         <div class="col-md-12">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
               <%= f.label :birth_date, 'Date of Birth', class: 'control-label' %>
               <%= f.date_field :birth_date, class: 'form-control' %>
             </div>      
           </div>
-          <div class="col-md-2 col-md-offset-0">
+          <div class="col-md-2">
             <div class="form-group">
               <%= f.label :gender, 'Gender', class: 'control-label' %>
               <%= f.select :gender, gender_types_for_select, { include_blank: '-- Select Gender --' }, class: 'form-control' %>
             </div>
           </div>          
-          <div class="col-md-2">
+          <div class="col-md-3">
             <div class="form-group">
               <%= f.label :civil_status, 'Civil Status', class: 'control-label' %>
               <%= f.select :civil_status, civil_status_types_for_select, { include_blank: '-- Select Civil Status --' }, class: 'form-control' %>
@@ -87,11 +87,11 @@
               <%= f.text_field :citizenship, class: 'form-control', maxlength: Employee.get_field_limit_of(:citizenship) %>
             </div>      
           </div>
-          <div class="col-md-2">
+          <div class="col-md-3">
             <div class="form-group">
               <!-- must be a 'select' field -->
               <%= f.label :blood_type, 'Blood Type', class: 'control-label' %>
-              <%= f.select :blood_type, blood_types_for_select, { include_blank: '-- Select Blood Type --' }, class: 'form-control' %>
+              <%= f.select :blood_type, blood_types_for_select, { include_blank: '-Select Blood Type-' }, class: 'form-control' %>
             </div>      
           </div>
           <div class="col-md-3">
@@ -115,7 +115,7 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <%= f.label :picture, 'Employee Picture ', class: 'control-label' %>
+              <%= f.label :picture, 'Faculty Picture ', class: 'control-label' %>
               <%= f.file_field :picture, class: 'form-control' %>
             </div>
           </div>          
@@ -275,7 +275,7 @@
 
   <div class="col-md-12">
     <div class="form-group">
-      <%= f.submit class: 'btn btn-primary' %>
+      <%= f.submit 'Save', class: 'btn btn-primary' %>
     </div>
   </div>
 <% end # end of form_for %>

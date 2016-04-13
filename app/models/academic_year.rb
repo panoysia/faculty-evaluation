@@ -17,6 +17,7 @@ class AcademicYear < ActiveRecord::Base
   end
 
   def coverage
+    "#{start_at.strftime('%b %d %Y')} - #{end_at.strftime('%b %d %Y')}"
   end
   
   def coverage_in_years

@@ -21,13 +21,16 @@
 <div class="row">
   <div class="col-md-12">
     <h2 class="page-header">
-      <span>Faculty Career Pathing<span>
+      <span>Check Faculty CCE<span>
     </h2>
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
 <%= render 'search_box' %>
 <% display_number = 0 %>
 
+
+
+<% if false %>
 <% unless @actions.nil? %>
   <% if @employee.career_path.present? %>
     <h3>Career path for <%= @employee.career_path.name %></h3>
@@ -59,3 +62,5 @@
 <% end %>
 <%# results = "#{pluralize(@leaves.count, 'record')} found" %>
 <!-- <h3 class="page-header">Search Results: <span style="font-style: italic"><%#= results %><span></h3>   -->
+
+<% end %>

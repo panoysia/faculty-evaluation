@@ -1,4 +1,4 @@
-class Admin::EmployeeCareerPathingsController < Admin::ApplicationController
+class Admin::EmployeeCCEsController < Admin::ApplicationController
   
   def index
     #@employees = Employee.all
@@ -8,7 +8,10 @@ class Admin::EmployeeCareerPathingsController < Admin::ApplicationController
         
         id = params[:view][:employee_id]
         @employee = Employee.find(id)
-        @actions = @employee.career_path_actions
+        
+        # Compute educational attainment
+        # professional experience
+        # 
       end
     end
   end

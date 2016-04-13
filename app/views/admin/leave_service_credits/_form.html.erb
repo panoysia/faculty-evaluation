@@ -3,8 +3,8 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :employee_id, 'Employee' %>
-        <%= f.collection_select :employee_id, Employee.all, :id, :full_name, { include_blank: '-- Select Employee --' }, class: 'form-control', autofocus: true %>
+        <%= f.label :employee_id, 'Faculty' %>
+        <%= f.collection_select :employee_id, Employee.all, :id, :full_name, { include_blank: '-- Select Faculty --' }, class: 'form-control', autofocus: true %>
       </div>
     </div>
   </div>

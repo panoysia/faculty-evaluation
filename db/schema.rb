@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412010849) do
+ActiveRecord::Schema.define(version: 20160413035513) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -83,18 +83,19 @@ ActiveRecord::Schema.define(version: 20160412010849) do
   add_index "employee_civil_service_eligibilities", ["employee_id"], name: "index_employee_civil_service_eligibilities_on_employee_id"
 
   create_table "employee_educations", force: :cascade do |t|
-    t.integer  "level",           limit: 1,     null: false
-    t.string   "school_name",     limit: 50,    null: false
-    t.string   "degree_course",   limit: 50,    null: false
+    t.integer  "level",           limit: 1,                             null: false
+    t.string   "school_name",     limit: 50,                            null: false
+    t.string   "degree_course",   limit: 50,                            null: false
     t.string   "grade_units",     limit: 7
     t.date     "graduated_at"
     t.date     "start_at"
     t.date     "end_at"
     t.text     "honors_received", limit: 65535
-    t.integer  "employee_id",                   null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "employee_id",                                           null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.integer  "is_recent"
+    t.decimal  "points",                        precision: 4, scale: 2
   end
 
   add_index "employee_educations", ["employee_id"], name: "index_employee_educations_on_employee_id"
@@ -263,6 +264,17 @@ ActiveRecord::Schema.define(version: 20160412010849) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "qce_ratings", force: :cascade do |t|
+    t.integer  "employee_id",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "rating_period_id",             null: false
+    t.integer  "completed",        default: 0, null: false
+  end
+
+  add_index "qce_ratings", ["employee_id"], name: "index_qce_ratings_on_employee_id"
+  add_index "qce_ratings", ["rating_period_id"], name: "index_qce_ratings_on_rating_period_id"
 
   create_table "rating_periods", force: :cascade do |t|
     t.integer  "semester",         limit: 1, null: false

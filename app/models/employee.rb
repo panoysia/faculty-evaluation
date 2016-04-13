@@ -48,6 +48,8 @@ class Employee < ActiveRecord::Base
   has_many :other_infos, dependent: :destroy
   
   has_many :ratings
+  has_many :qce_ratings, dependent: :destroy
+
   has_many :instruction_ratings, 
     -> { where(type: 'Employee::Rating::Instruction') },
     class_name: 'Employee::Rating'

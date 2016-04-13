@@ -3,7 +3,7 @@
 <%# else %>
   <%# value = params[:employee][:id] %>
 <%# end %>
-<%#= collection_select nil, :employee_id, Employee.order(:last_name), :id, :full_name_in_reverse, { include_blank: '-- Select Employee --', selected: employee_id }, { class: 'form-control' } %>
+<%#= collection_select nil, :employee_id, Employee.order(:last_name), :id, :full_name_in_reverse, { include_blank: '-- Select Faculty --', selected: employee_id }, { class: 'form-control' } %>
 <%
   if controller_name == 'leaves'
     form_submit_path = admin_leaves_path
@@ -29,8 +29,8 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <%= label_tag :employee_id, 'Employee' %>
-              <%= collection_select :employee, :id, Employee.all, :id, :full_name, { include_blank: '-- Select Employee --', selected: "e" }, { class: 'form-control', name: 'search[employee_id]' } %>
+              <%= label_tag :employee_id, 'Faculty' %>
+              <%= collection_select :employee, :id, Employee.all, :id, :full_name, { include_blank: '-- Select Faculty --', selected: "e" }, { class: 'form-control', name: 'search[employee_id]' } %>
             </div>
           </div>
           <div class="col-md-3 view-button">
