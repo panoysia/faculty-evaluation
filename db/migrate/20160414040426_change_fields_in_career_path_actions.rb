@@ -1,7 +1,5 @@
 class ChangeFieldsInCareerPathActions < ActiveRecord::Migration
   def change
-    # uncomment:
-    remove_column :events, :type, :integer, null: false
-    # rename_column :events, :type, :category     
+    change_column :career_path_actions, :category, :integer
   end
 end
