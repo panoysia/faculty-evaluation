@@ -1,17 +1,25 @@
 class QCE < ActiveRecord::Base
+  has_many :instruction_ratings, dependent: :destroy
+
   belongs_to :employee
   belongs_to :rating_period
-
 
   scope :completed, -> { where(completed: 1) }
   scope :incomplete, -> { where(completed: 0) }
 
-  def rated_self?
+
+  def has_self_rating?
     result = QCE::InstructionRating.where(qce_id: id, evaluator_type: 'Self').limit(1)
     result.present? ? true : false
   end
 
-  def rated_peers?
+  def has_supervisor_rating?
+  end
+
+  def has_peer_ratings?
+  end
+
+  def has_student_ratings?
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413183043) do
+ActiveRecord::Schema.define(version: 20160414014338) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -278,13 +278,17 @@ ActiveRecord::Schema.define(version: 20160413183043) do
   add_index "qce_instruction_ratings", ["qce_id"], name: "index_qce_instruction_ratings_on_qce_id"
 
   create_table "qces", force: :cascade do |t|
-    t.integer  "employee_id",                     null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.integer  "rating_period_id",                null: false
-    t.integer  "completed",           default: 0, null: false
+    t.integer  "employee_id",                                null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "rating_period_id",                           null: false
+    t.integer  "completed",                      default: 0, null: false
     t.integer  "support_rating_id"
     t.string   "support_rating_type"
+    t.integer  "has_assigned_self_rating"
+    t.integer  "has_assigned_supervisor_rating"
+    t.integer  "has_assigned_peer_rating"
+    t.integer  "has_assigned_student_rating"
   end
 
   add_index "qces", ["employee_id"], name: "index_qces_on_employee_id"
@@ -314,6 +318,7 @@ ActiveRecord::Schema.define(version: 20160413183043) do
     t.string   "last_name",  limit: 50, null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.integer  "group_no"
   end
 
   create_table "users", force: :cascade do |t|

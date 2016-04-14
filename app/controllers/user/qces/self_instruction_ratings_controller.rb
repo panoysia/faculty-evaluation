@@ -1,9 +1,6 @@
-class User::QCEs::AssignToSelfController < User::ApplicationController
+class User::QCEs::SelfInstructionRatingsController < User::ApplicationController
   
   before_action :set_qce
-
-  def new
-  end
 
   def create
     rating = QCE::InstructionRating.new
@@ -17,8 +14,9 @@ class User::QCEs::AssignToSelfController < User::ApplicationController
     
     respond_to do |format|
       if rating.save
-        # format.html {}
-        format.js {}
+        @qce.update(has_assigned_self_rating: 1)
+        format.html { redirect_to edit_qce_path(@qce), notice: 'Instruction Rating for Self has been created.'}
+        # format.js {}
       end    
     end
 

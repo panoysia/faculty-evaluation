@@ -31,7 +31,7 @@ class User::QCEsController < User::ApplicationController
   end
 
   def edit
-    
+    @employees = Employee.all
   end
 
 

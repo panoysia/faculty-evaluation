@@ -82,7 +82,10 @@ Rails.application.routes.draw do
     resources :leaves, only: [:index, :show]
     resources :qces, except: [:new, :destroy] do
       scope module: :qces do
-        resources :assign_to_self, only: [:new, :create]
+        resource :self_instruction_rating, only: [:create]
+        resource :supervisor_instruction_rating, only: [:create]
+        resource :peer_instruction_rating, only: [:create]
+        resource :student_instruction_rating, only: [:create]
       end 
     end
 
