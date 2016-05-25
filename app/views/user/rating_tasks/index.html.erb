@@ -1,0 +1,26 @@
+<% display_number = 0 %>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span>Rating Tasks</span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div> <!-- .row -->
+<table id="table-master" class="table table-bordered table-striped content">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Description</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= link_to task.description, '#' %></td>
+        <td><%= task.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

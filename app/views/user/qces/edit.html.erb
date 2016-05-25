@@ -12,8 +12,8 @@
     color: green;
     margin-left: 30px;
   }
-
 </style>
+
 <div class="row">
   <div class="col-md-12">
     <h2 class="page-header">
@@ -24,7 +24,7 @@
 </div>  <!-- .row -->
 
 <div class="qce-options">  
-  <h3 class="page-header">Ratings for Instruction</h3>
+  <h3 class="page-header">Ratings for Instruction/Teaching Effectiveness</h3>
   <ol>
     <!-- Assign to Self -->
     <div id="assign-self">
@@ -35,7 +35,8 @@
         <div class="col-md-12">
           <div class="col-md-3">
             <div class="form-group">
-              <%= button_to 'Assign', qce_self_instruction_rating_path(@qce), class: 'btn btn-success' %>            
+              <%= button_to 'Assign', qce_self_instruction_rating_path(@qce), disabled: @qce.has_assigned_self_rating?, class: 'btn btn-success' %>
+              <!-- Display the link for the newly created Rating -->
             </div>
           </div>
         </div>
@@ -44,81 +45,31 @@
 
     <!-- Assign to Immediate Supervisor -->
     <div id="assign-supervisor">
-      <h4><li>Assign to Immediate Supervisor</li></h4>
-      <%= form_for qce_supervisor_instruction_rating_path(@qce) do |f| %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-3">
-              <div class="form-group">
-                <%= f.collection_select :employee_id, @employees, :id, :full_name, { include_blank: '--- Select Supervisor ---' }, class: 'form-control' %>
-              </div>              
-            </div>
-          </div>  <!-- .col-md-12 -->
-        </div>  <!-- .row -->
-        <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-3">
-              <div class="form-group">
-                <%= f.submit 'Assign', class: 'btn btn-success' %>
-              </div>          
-            </div>
-          </div> <!-- .col-md-12 -->
-        </div>  <!-- .row -->
+      <h4>
+        <li>Assign to Immediate Supervisor <span class="assignment <%= 'glyphicon glyphicon-ok' if @qce.has_assigned_supervisor_rating? %>"></span></li>
+      </h4>
+      <% if @qce.has_assigned_supervisor_rating? %>
+        <%= render 'user/qces/selected_supervisor' %>
+        <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_supervisor_instruction_rating_path(@qce) } %>
+        <!-- display link to supervisor -->
+      <% else %>
+        <%= render 'user/qces/supervisor_selection_form' %>
       <% end %>
     </div>  <!-- #assign-supervisor -->
 
     <!-- Assign to 5 Peers  -->
     <div id="assign-peers">
-      <h4><li>Assign to 5 Peers</li></h4>
-      <%= form_for qce_peer_instruction_rating_path(@qce) do |f| %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-3">          
-              <div class="form-group">
-                <%= f.collection_select 'employee_ids[]', @employees, :id, :full_name, { include_blank: '--- Select Peer 1 ---' }, class: 'form-control' %>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <%= f.collection_select 'employee_ids[]', @employees, :id, :full_name, { include_blank: '--- Select Peer 2 ---' }, class: 'form-control' %>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <%= f.collection_select 'employee_ids[]', @employees, :id, :full_name, { include_blank: '--- Select Peer 3 ---' }, class: 'form-control' %>
-              </div>
-            </div>
-          </div>  <!-- .col-md-12 -->
-        </div>  <!-- .row -->
-
-        <!-- Another row -->
-        <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-3">
-              <div class="form-group">
-                <%= f.collection_select 'employee_ids[]', @employees, :id, :full_name, { include_blank: '--- Select Peer 4 ---' }, class: 'form-control' %>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <%= f.collection_select 'employee_ids[]', @employees, :id, :full_name, { include_blank: '--- Select Peer 5 ---' }, class: 'form-control' %>
-              </div>
-            </div>            
-          </div>  <!-- .col-md-12 -->
-        </div>  <!-- .row -->
-
-        <!-- Another row -->
-        <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-3">
-              <div class="form-group">
-                <%= submit_tag 'Assign', class: 'btn btn-success' %>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>  
-    </div>  <!-- #assign-peers -->
+      <h4>
+        <li>Assign to 5 Peers <span class="assignment <%= 'glyphicon glyphicon-ok' if @qce.has_assigned_peer_rating? %>"></span></li>
+      </h4>
+      <% if @qce.has_assigned_peer_rating? %>
+        <%= render 'user/qces/selected_peers' %>
+        <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_peer_instruction_rating_path(@qce) } %>
+        <!-- display link to Peer -->
+      <% else %>
+        <%= render 'user/qces/peer_selection_form' %>
+      <% end %>
+    </div>  <!-- #assign-peers -->    
 
     <!-- Assign to 30 students -->
     <div id="assign-supervisor">

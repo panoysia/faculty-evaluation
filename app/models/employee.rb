@@ -37,7 +37,8 @@ class Employee < ActiveRecord::Base
     
   validates_attachment_content_type :picture, content_type: ['image/jpg', 'image/jpeg', 'image/png']
 
-  has_one :user_account, as: :account, class_name: 'User', dependent: :destroy
+  has_one :user_account, as: :account, 
+                        class_name: 'User', dependent: :destroy
   # has_one :supervisor, class_name: 'Employee'
 
   has_many :rankings, dependent: :destroy
@@ -48,21 +49,22 @@ class Employee < ActiveRecord::Base
   has_many :voluntary_works, dependent: :destroy
   has_many :other_infos, dependent: :destroy
   
-  has_many :ratings
   has_many :qces, dependent: :destroy
+  # belongs_to :qce
+  
+  # has_many :evaluations, as: :evaluator
 
-  has_many :instruction_ratings, 
-    -> { where(type: 'Employee::Rating::Instruction') },
-    class_name: 'Employee::Rating'
-  has_many :research_ratings,
-    -> { where(type: 'Employee::Rating::Research') },
-    class_name: 'Employee::Rating'
-  has_many :extension_ratings, 
-    -> { where(type: 'Employee::Rating::Extension') },
-    class_name: 'Employee::Rating'
-  has_many :production_ratings, 
-    -> { where(type: 'Employee::Rating::Production') },
-    class_name: 'Employee::Rating'
+  # has_many :instruction_ratings, as: :evaluator, 
+  #                               class_name: 'QCE::InstructionRating'
+  # belongs_to :evaluator, polymorphic: true
+
+  has_many :owned_tasks, class_name: 'Rating::Task',
+                                foreign_key: 'owner_id'
+  # association: belongs_to :owner, class_name: 'Employee'
+
+  has_many :rating_tasks, as: :evaluator,
+                          class_name: 'Rating::Task'
+  # association: belongs_to :evaluator, polymorphic: true
 
   has_many :leaves, dependent: :destroy 
   #has_one :career_path, dependent: :destroy
@@ -161,3 +163,21 @@ class Employee < ActiveRecord::Base
   end
 
 end
+=begin
+
+  #has_many :ratings
+
+  # has_many :instruction_ratings, 
+  #   -> { where(type: 'Employee::Rating::Instruction') },
+  #   class_name: 'Employee::Rating'
+  # has_many :research_ratings,
+  #   -> { where(type: 'Employee::Rating::Research') },
+  #   class_name: 'Employee::Rating'
+  # has_many :extension_ratings, 
+  #   -> { where(type: 'Employee::Rating::Extension') },
+  #   class_name: 'Employee::Rating'
+  # has_many :production_ratings, 
+  #   -> { where(type: 'Employee::Rating::Production') },
+  #   class_name: 'Employee::Rating'
+
+=end

@@ -1,0 +1,13 @@
+<% evaluators = [] %>
+<% @qce.peer_instruction_ratings.each do |rating| %>
+  <% evaluators << rating.evaluator.full_name %>
+<% end %>  
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= text_area_tag :peers_evaluators, evaluators.join("\n"), class: 'form-control', disabled: true, rows: 5 %>        
+      </div>
+    </div>
+  </div>
+</div>

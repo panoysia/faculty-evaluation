@@ -1,0 +1,48 @@
+<%= form_tag qce_peer_instruction_rating_path(@qce) do %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3">          
+        <div class="form-group">
+          <%= collection_select nil, nil, @employees, :id, :full_name, { include_blank: '--- Select Peer 1 ---' }, class: 'form-control', name: 'employee_ids[]', id: 'supervisor1' %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= collection_select nil, nil, @employees, :id, :full_name, { include_blank: '--- Select Peer 2 ---' }, class: 'form-control', name: 'employee_ids[]', id: 'supervisor2' %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= collection_select nil, nil, @employees, :id, :full_name, { include_blank: '--- Select Peer 3 ---' }, class: 'form-control', name: 'employee_ids[]', id: 'supervisor3' %>
+        </div>
+      </div>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+
+  <!-- Another row -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= collection_select nil, nil, @employees, :id, :full_name, { include_blank: '--- Select Peer 4 ---' }, class: 'form-control', name: 'employee_ids[]', id: 'supervisor4' %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= collection_select nil, nil, @employees, :id, :full_name, { include_blank: '--- Select Peer 5 ---' }, class: 'form-control', name: 'employee_ids[]', id: 'supervisor5' %>
+        </div>
+      </div>            
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+
+  <!-- Another row -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= submit_tag 'Assign', class: 'btn btn-success' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -9,20 +9,24 @@
         <div class="col-md-12">
           <div class="col-md-4">
             <div class="form-group">
-              <%= f.label :first_name, 'First Name', class: 'control-label' %>
+              <%= f.label :first_name, class: 'control-label' do %>
+                First Name <span class="required">*</span>
+              <% end %>
               <%= f.text_field :first_name, class: 'form-control', autofocus: true, maxlength: Employee.get_field_limit_of(:first_name) %>
             </div>
           </div>          
           <!--  -->
           <div class="col-md-4">
             <div class="form-group">
-              <%= f.label :middle_name, 'Middle Name', class: 'control-label' %>
+              <%= f.label :middle_name, 'Middle Name', class: 'control-label'%>
               <%= f.text_field :middle_name, class: 'form-control', maxlength: Employee.get_field_limit_of(:middle_name) %>
             </div>      
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <%= f.label :last_name, class: 'control-label' %>
+              <%= f.label :last_name, class: 'control-label' do %>
+                Last Name <span class="required">*</span>
+              <% end %>
               <%= f.text_field :last_name, class: 'form-control', maxlength: Employee.get_field_limit_of(:last_name) %>
             </div>
           </div>          
@@ -53,7 +57,9 @@
           </div>
           <div class="col-md-2">
             <div class="form-group">
-              <%= f.label :gender, 'Gender', class: 'control-label' %>
+              <%= f.label :gender, class: 'control-label' do %>
+                Gender <span class="required">*</span>
+              <% end %>
               <%= f.select :gender, gender_types_for_select, { include_blank: '-- Select Gender --' }, class: 'form-control' %>
             </div>
           </div>          

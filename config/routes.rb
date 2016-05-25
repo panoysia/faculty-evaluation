@@ -50,11 +50,13 @@ Rails.application.routes.draw do
       # end
     end
 
-    scope path: 'ratings' do
+    namespace :ratings do
       resources :instructions, only: [:new, :create, :show]
       resources :researches, only: [:new, :create, :show]
       resources :extensions, only: [:new, :create, :show]
       resources :productions, only: [:new, :create, :show]
+
+      resources :questions
     end
 
     resources :leaves
@@ -69,7 +71,7 @@ Rails.application.routes.draw do
     resources :academic_rankings, only: [:index], path: 'academic-rankings'
     resources :students
     resource :account, only: [:edit, :update]
-  end
+  end   # namespace :admin
 
 
   scope module: :user do
@@ -82,24 +84,21 @@ Rails.application.routes.draw do
     resources :leaves, only: [:index, :show]
     resources :qces, except: [:new, :destroy] do
       scope module: :qces do
-        resource :self_instruction_rating, only: [:create]
-        resource :supervisor_instruction_rating, only: [:create]
-        resource :peer_instruction_rating, only: [:create]
-        resource :student_instruction_rating, only: [:create]
+        resource :self_instruction_rating, only: [:create, :destroy]
+        resource :supervisor_instruction_rating, only: [:create, :destroy]
+        resource :peer_instruction_rating, only: [:create, :destroy]
+        resource :student_instruction_rating, only: [:create, :destroy]
       end 
     end
 
     resource :dashboard, only: [:show]
     resource :hr_profile, only: [:show], path: 'my-hr-profile'
     resource :career_path, only: [:show], path: 'my-career-path'     
-    resource :account, only: [:edit, :update], path: 'user-account', as: :user_account    
-  end
+    resource :account, only: [:edit, :update], path: 'user-account', as: :user_account
 
+    resources :rating_tasks, only: [:index]
+  end   # scope module: :user
 
-=begin
-  Translated paths:
-    * 
-=end
 
   #scope ':username' do
     # resources :ratings
@@ -107,19 +106,3 @@ Rails.application.routes.draw do
     # => params[:username] in controller, helper, views
   #end
 end
-
-=begin
-
-resources :forum_threads do
-  resources :forum_posts, module: :forum_threads
-end
-
-class ForumThreads::ForumPostsController < ApplicationController
-
-class ForumThreadsController < ApplicationController
-
-# /forum_threads
-    forum_posts_controller.rb
-
-  forum_threads_controller.rb 
-=end
