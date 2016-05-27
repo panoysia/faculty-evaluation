@@ -1,0 +1,86 @@
+<!-- <h2>user/qce/ratings#edit (evaluate)</h2> -->
+<!-- Rating Guide -->
+<style>
+ #row-action {
+    border-collapse: collapse;
+  }
+</style>
+<p>Instruction: Please evaluate the faculty using the scale below. Encircle your rating.</p>
+<table id="table-master" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Scale</th>
+      <th>Descriptive Rating</th>
+      <th>Qualitative Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5</td>
+      <td>Outstanding</td>
+      <td>The performance almost always exceeds the job requirements.<br>The Faculty is an exceptional role model.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Very Satisfactory</td>
+      <td>The performance meets and often exceeds the job requirements.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Satisfactory</td>
+      <td>The performance meets job requirements</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Fair</td>
+      <td>The performance needs some development to meet job requirements.</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Poor</td>
+      <td>The faculty fails to meet job requirements</td>
+    </tr>
+  </tbody>
+</table>
+<%= form_tag qce_rating_path, method: :patch do %>
+  <table class="table table-bordered">
+    <tbody>
+    <%#= f.fields_for :user_account do |user_account_fb| %>
+    <% @rating.evaluations.each do |evaluation| %>
+      <tr>
+        <td class="question"><%= evaluation.question.question %></td>
+        <td>
+          <%= label_tag 5 %>
+          <%= radio_button_tag 'scores[]', 5, checked: true %>
+        </td>
+        <td>
+          <%= label_tag 4 %>
+          <%= radio_button_tag "scores[]", 4 %>
+        </td>
+        <td>
+          <%= label_tag 3 %>
+          <%= radio_button_tag 'scores[]', 3 %>
+        </td>
+        <td>
+          <%= label_tag 2 %>
+          <%= radio_button_tag 'scores[]', 2 %>
+        </td>
+        <td>
+          <%= label_tag 1 %>
+          <%= radio_button_tag 'scores[]', 1 %>
+        </td>
+        <!-- <td><%#= evaluation.score %></td> -->
+      </tr>
+    <% end %>
+    <tr id="row-action">
+      <td colspan="6">
+        <p class="text-right">
+          <%= link_to 'Back to Rating Tasks', rating_tasks_path, class: 'btn btn-link' %>
+          <%= submit_tag 'Save', class: 'btn btn-success' %>
+        </p>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+<% end %>
+<!-- <table id="table-master" class="table table-bordered table-striped content"> -->

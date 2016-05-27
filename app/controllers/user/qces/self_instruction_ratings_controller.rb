@@ -1,6 +1,6 @@
 class User::QCEs::SelfInstructionRatingsController < User::ApplicationController
   
-  EVALUATION_CATEGORY = 'Self'
+  EVALUATION_CONTEXT = 'Self'
   before_action :set_qce
 
 
@@ -9,7 +9,7 @@ class User::QCEs::SelfInstructionRatingsController < User::ApplicationController
   # end
 
   def create
-    rating = QCE::InstructionRating.new
+    rating = QCE::Instruction.new
     rating.qce_id = @qce.id
     
     # 'Self' in this context is the current user and evaluator. (Employee object)
@@ -17,7 +17,7 @@ class User::QCEs::SelfInstructionRatingsController < User::ApplicationController
     rating.evaluator = evaluator
     rating.evaluator_name = evaluator.full_name
     rating.evaluator_position = evaluator.rank.full_name
-    rating.evaluation_category = EVALUATION_CATEGORY
+    rating.evaluation_context = EVALUATION_CONTEXT
 
     # render html: rating.inspect
     
@@ -36,7 +36,7 @@ class User::QCEs::SelfInstructionRatingsController < User::ApplicationController
       @qce.self_instruction_rating.destroy
       @qce.update(has_assigned_self_rating: 0)
 
-      redirect_to edit_qce_path(@qce), notice: 'Instruction rating for Self has been deleted.'      
+      redirect_to edit_qce_path(@qce), notice: 'Instruction rating for Self has been deleted.'
     end
   end
 

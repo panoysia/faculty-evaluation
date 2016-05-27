@@ -1,7 +1,7 @@
-class Rating::Score < ActiveRecord::Base
-  self.table_name_prefix = 'rating_'
+class QCE::RatingEvaluation < ActiveRecord::Base
+  self.table_name_prefix = 'qce_'
 
-  #belongs_to :question#, class_name: 'Rating::Question'
+  belongs_to :question, class_name: 'QCE::Question'
   belongs_to :rating, polymorphic: true
 
   # Use this for resolving namespaced models in polymorphic route generation and when prefer to build routes using arrays instead of named route helpers.

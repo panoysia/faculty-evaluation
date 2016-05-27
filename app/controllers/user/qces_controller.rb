@@ -19,7 +19,9 @@ class User::QCEsController < User::ApplicationController
   end
 
   def create
-    # render html: params.inspect
+    # render html: params.inspect and return true
+    # render html: qce_params.inspect and return true
+
     @rating = current_user.account.qces.new(qce_params)
     respond_to do |format|
       if @rating.save
@@ -38,11 +40,16 @@ class User::QCEsController < User::ApplicationController
   private
 
   def set_qce
-    @qce = QCE.find(params[:id])
+    # @qce = QCE.find(params[:id])
+
+    # Scope searching of QCE to current_user (Employee/Faculty)
+    @qce = current_user.account.qces.find(params[:id])
   end
 
   def qce_params
     # params.require(:qce).permit(:rating_period_id)
+
+    # No need to access the :qce key here, :rating_period_id is a stand-alone parameter and isn't associated to a QCE object
     params.permit(:rating_period_id)
   end
 

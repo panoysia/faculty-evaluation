@@ -1,6 +1,6 @@
 class User::QCEs::PeerInstructionRatingsController < User::ApplicationController
   
-  EVALUATION_CATEGORY = 'Peer'  
+  EVALUATION_CONTEXT = 'Peer'  
   before_action :set_qce
 
   # def created
@@ -31,13 +31,13 @@ class User::QCEs::PeerInstructionRatingsController < User::ApplicationController
       employees = Employee.includes(:rank).find employee_ids
 
       employees.each do |employee|
-        rating = QCE::InstructionRating.new
+        rating = QCE::Instruction.new
         rating.qce_id = @qce.id
 
         rating.evaluator = employee
         rating.evaluator_name = employee.full_name
         rating.evaluator_position = employee.rank.full_name    
-        rating.evaluation_category = EVALUATION_CATEGORY
+        rating.evaluation_context = EVALUATION_CONTEXT
 
         rating.save
         # peer_ratings << rating

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160523074117) do
+ActiveRecord::Schema.define(version: 20160527145207) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -40,13 +40,6 @@ ActiveRecord::Schema.define(version: 20160523074117) do
   end
 
   add_index "admins", ["username"], name: "index_admins_on_username", unique: true
-
-  create_table "area_instruments", force: :cascade do |t|
-    t.string   "area",       limit: 50, null: false
-    t.string   "instrument", limit: 50, null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
 
   create_table "career_path_actions", force: :cascade do |t|
     t.string   "name",           null: false
@@ -123,18 +116,6 @@ ActiveRecord::Schema.define(version: 20160523074117) do
 
   add_index "employee_rankings", ["employee_id"], name: "index_employee_rankings_on_employee_id"
   add_index "employee_rankings", ["nbc_id"], name: "index_employee_rankings_on_nbc_id"
-
-  create_table "employee_ratings", force: :cascade do |t|
-    t.integer  "rating_period_id", null: false
-    t.integer  "employee_id",      null: false
-    t.string   "project_title",    null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "type"
-  end
-
-  add_index "employee_ratings", ["employee_id"], name: "index_employee_ratings_on_employee_id"
-  add_index "employee_ratings", ["rating_period_id"], name: "index_employee_ratings_on_rating_period_id"
 
   create_table "employee_trainings", force: :cascade do |t|
     t.string   "title",        limit: 100, null: false
@@ -265,19 +246,57 @@ ActiveRecord::Schema.define(version: 20160523074117) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "qce_instruction_ratings", force: :cascade do |t|
-    t.integer  "qce_id",              null: false
-    t.string   "evaluator_type",      null: false
-    t.string   "evaluator_name"
-    t.string   "evaluator_position"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.date     "finished_at"
-    t.integer  "evaluator_id",        null: false
-    t.string   "evaluation_category"
+  create_table "qce_questions", force: :cascade do |t|
+    t.string   "question",    null: false
+    t.integer  "sequence",    null: false
+    t.string   "rating_type", null: false
+    t.string   "instrument",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "qce_instruction_ratings", ["qce_id"], name: "index_qce_instruction_ratings_on_qce_id"
+  create_table "qce_rating_evaluations", force: :cascade do |t|
+    t.integer  "question_id", null: false
+    t.integer  "score"
+    t.integer  "rating_id",   null: false
+    t.string   "rating_type", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "qce_rating_evaluations", ["question_id"], name: "index_qce_rating_evaluations_on_question_id"
+  add_index "qce_rating_evaluations", ["rating_type", "rating_id"], name: "index_qce_rating_evaluations_on_rating_type_and_rating_id"
+
+  create_table "qce_rating_tasks", force: :cascade do |t|
+    t.integer  "owner_id",       null: false
+    t.integer  "evaluator_id",   null: false
+    t.string   "evaluator_type", null: false
+    t.integer  "rating_id",      null: false
+    t.string   "rating_type",    null: false
+    t.integer  "status",         null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "qce_rating_tasks", ["evaluator_type", "evaluator_id"], name: "index_qce_rating_tasks_on_evaluator_type_and_evaluator_id"
+  add_index "qce_rating_tasks", ["owner_id"], name: "index_qce_rating_tasks_on_owner_id"
+  add_index "qce_rating_tasks", ["rating_type", "rating_id"], name: "index_qce_rating_tasks_on_rating_type_and_rating_id"
+
+  create_table "qce_ratings", force: :cascade do |t|
+    t.integer  "qce_id",             null: false
+    t.string   "type",               null: false
+    t.integer  "evaluator_id",       null: false
+    t.string   "evaluator_type",     null: false
+    t.string   "evaluator_name"
+    t.string   "evaluator_position"
+    t.string   "evaluation_context"
+    t.date     "finished_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "qce_ratings", ["evaluator_type", "evaluator_id"], name: "index_qce_ratings_on_evaluator_type_and_evaluator_id"
+  add_index "qce_ratings", ["qce_id"], name: "index_qce_ratings_on_qce_id"
 
   create_table "qces", force: :cascade do |t|
     t.integer  "employee_id",                                null: false
@@ -306,42 +325,6 @@ ActiveRecord::Schema.define(version: 20160523074117) do
 
   add_index "rating_periods", ["academic_year_id"], name: "index_rating_periods_on_academic_year_id"
   add_index "rating_periods", ["nbc_id"], name: "index_rating_periods_on_nbc_id"
-
-  create_table "rating_questions", force: :cascade do |t|
-    t.string   "question",    null: false
-    t.integer  "sequence",    null: false
-    t.string   "rating_type", null: false
-    t.string   "instrument",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "rating_scores", force: :cascade do |t|
-    t.integer  "question_id", null: false
-    t.integer  "score"
-    t.integer  "rating_id",   null: false
-    t.string   "rating_type", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "rating_scores", ["question_id"], name: "index_rating_scores_on_question_id"
-  add_index "rating_scores", ["rating_type", "rating_id"], name: "index_rating_scores_on_rating_type_and_rating_id"
-
-  create_table "rating_tasks", force: :cascade do |t|
-    t.integer  "owner_id",       null: false
-    t.integer  "evaluator_id",   null: false
-    t.string   "evaluator_type", null: false
-    t.integer  "rating_id",      null: false
-    t.string   "rating_type",    null: false
-    t.integer  "status",         null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "rating_tasks", ["evaluator_type", "evaluator_id"], name: "index_rating_tasks_on_evaluator_type_and_evaluator_id"
-  add_index "rating_tasks", ["owner_id"], name: "index_rating_tasks_on_owner_id"
-  add_index "rating_tasks", ["rating_type", "rating_id"], name: "index_rating_tasks_on_rating_type_and_rating_id"
 
   create_table "specializations", force: :cascade do |t|
     t.string   "name",       limit: 50, null: false

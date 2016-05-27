@@ -1,8 +1,10 @@
-class Rating::Task < ActiveRecord::Base
-  self.table_name_prefix = 'rating_'
+class QCE::RatingTask < ActiveRecord::Base
+  self.table_name_prefix = 'qce_'
 
-  INSTRUCTION = 'QCE::InstructionRating'
-  RESEARCH = 'QCE::ResearchRating'
+  # INSTRUCTION = 'Instruction'
+  # RESEARCH = 'Research'
+  # PRODUCTION = 'Production'
+  # EXTENSION = 'Extension'
 
   belongs_to :owner, class_name: 'Employee'
   belongs_to :evaluator, polymorphic: true
@@ -20,16 +22,16 @@ class Rating::Task < ActiveRecord::Base
 
   def description
     owner_name = owner.full_name
-    category = rating.evaluation_category
-    category << " (yourself)" if category == 'Self'
+    context = rating.evaluation_context
+    context << " (yourself)" if context == 'Self'
     
-    if rating_type == INSTRUCTION
-      type_of_rating = 'Instruction'
-    elsif rating_type == RESEARCH
-      type_of_rating = 'Research'
-    end
+    # if rating_type == INSTRUCTION
+    #   type_of_rating = 'Instruction'
+    # elsif rating_type == RESEARCH
+    #   type_of_rating = 'Research'
+    # end
 
-    "Rate #{owner_name} as #{category} for #{type_of_rating}"
+    "Rate #{owner_name} as #{context} for #{rating.type}"
   end
 
 end

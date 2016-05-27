@@ -1,6 +1,6 @@
 class User::QCEs::SupervisorInstructionRatingsController < User::ApplicationController
   
-  EVALUATION_CATEGORY = 'Supervisor'
+  EVALUATION_CONTEXT = 'Supervisor'
   before_action :set_qce
 
 
@@ -13,13 +13,13 @@ class User::QCEs::SupervisorInstructionRatingsController < User::ApplicationCont
     if params[:supervisor_id].present?
       evaluator = Employee.find params[:supervisor_id]
 
-      rating = QCE::InstructionRating.new
+      rating = QCE::Instruction.new
       rating.qce_id = @qce.id
 
       rating.evaluator = evaluator
       rating.evaluator_name = evaluator.full_name
       rating.evaluator_position = evaluator.rank.full_name    
-      rating.evaluation_category = EVALUATION_CATEGORY
+      rating.evaluation_context = EVALUATION_CONTEXT
 
       respond_to do |format|
         if rating.save

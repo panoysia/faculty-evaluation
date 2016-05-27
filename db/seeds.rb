@@ -14,586 +14,48 @@
     * Partnership Development
     * Community Responsibility
 =end 
+# Instruction - Commitment
 
-=begin
-=end
-
-# Production: Community Responsibility
-Rating::Question.create [
+QCE::Question.create [
     {
-      question: 'Creates safe working environment where activities conducted consider the ethical and moral predicament of the community and/or the sector involved.',
-      sequence: 1,
-      rating_type: 'Production',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'Conducts production activity(s) where the responsibilities of the concerned sectors to the community are addressed.',
-      sequence: 2,
-      rating_type: 'Production',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'The production program extends technical assistance which supports community activities.',
-      sequence: 3,
-      rating_type: 'Production',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'Utilizes appropriate production procedures that conserve and prevent damage to the environment.',
-      sequence: 4,
-      rating_type: 'Production',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'Assumes impartial responsibility and accountability on the production activity(s) and its effect or impact to the community and/or other sectors involved.',
-      sequence: 5,
-      rating_type: 'Production',
-      instrument: 'Community Responsibility'
-    }
-
-]
-
-exit
-
-# Production: Partnership Development
-Rating::Question.create [
-    {
-      question: 'Coordinates with local residents, business and other government functionaries for possible production activity(s) collaboration.',
-      sequence: 1,
-      rating_type: 'Production',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Conducts consultative meetings and/or dialogues with stakeholders on priority production plan supporting their needs.',
-      sequence: 2,
-      rating_type: 'Production',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Regularly meet concerned sector to discuss ways in which the production undertaking can create better working environment, and full cooperation and participation.',
-      sequence: 3,
-      rating_type: 'Production',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Establishes linkages with local/national agencies for possible funding of production undertakings (sourcing of funds).',
-      sequence: 4,
-      rating_type: 'Production',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Communicates directly, openly, honestly and shares information with the concerned sectors, and considering comments, and suggestions for improvement if necessary.',
-      sequence: 5,
-      rating_type: 'Production',
-      instrument: 'Partnership Development'
-    }
-
-]
-
-exit
-
-# Production: Leadership
-Rating::Question.create [
-    {
-      question: 'Regularly communicates quality output of the production proceeding to colleagues/staff/clientele subordinates.',
-      sequence: 1,
-      rating_type: 'Production',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Manages priorities to get the job done and able to looks for better ways to confronts conflict situations in an honest and direct manner.',
-      sequence: 2,
-      rating_type: 'Production',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Encourage/motivates participation/cooperation of the people evolved in the production activity(s).',
-      sequence: 3,
-      rating_type: 'Production',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Suggest/introduces strategies that enhanced colleagues/staff/clientele/subordinates\' skills and abilities to perform the production activity in a more efficient manner.',
-      sequence: 4,
-      rating_type: 'Production',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Communicates directly, openly, honestly and shares information with the concerned individual or people involved in their production activity(s).',
-      sequence: 5,
-      rating_type: 'Production',
-      instrument: 'Leadership'
-    }
-
-]
-
-exit
-
-# Production: Clientele Satisfaction
-Rating::Question.create [
-    {
-      question: 'Involves clientele in the planning process of the intended production activity (there is a consultation with the client during the conceptualization of the said activity).',
-      sequence: 1,
-      rating_type: 'Production',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'Meet and discusses with the clientele the know how of the production activity(s) for its usability and/or clients benefits, and/or to assess the quality of production services provided.',
-      sequence: 2,
-      rating_type: 'Production',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'There is an information campaign for proper information of the clientele about the production activity(s).',
-      sequence: 3,
-      rating_type: 'Production',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'Monitors and evaluates the quantity and quality of services provided to clientele.',
-      sequence: 4,
-      rating_type: 'Production',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'Adopts and implements a system that is supportive of realizing clientele\'s needs/problems.',
-      sequence: 5,
-      rating_type: 'Production',
-      instrument: 'Clientele Satisfaction'
-    }
-
-]
-
-exit
-
-# Extension: Community Responsibility
-Rating::Question.create [
-    {
-      question: 'Creates safe working environment where activities conducted consider the ethical and moral predicament of the community and/or the sector involved.',
-      sequence: 1,
-      rating_type: 'Extension',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'Conducts extension activity(s) where the responsibilities of the concerned sectors to the community are addressed.',
-      sequence: 2,
-      rating_type: 'Extension',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'The extension activity(s) conducted with significant contribution to the community and increase awareness on community issues and concerns.',
-      sequence: 3,
-      rating_type: 'Extension',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'The extension activity(s) is instrumental and/or in of consideration of public safety, environmental safety, and sharing of quality-related information with the sector involved.',
-      sequence: 4,
-      rating_type: 'Extension',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'Assumes impartial responsibility and accountability on the extension proceeding and its effect or impact to the community and/or other sectors involved.',
-      sequence: 5,
-      rating_type: 'Extension',
-      instrument: 'Community Responsibility'
-    }
-
-]
-
-exit
-
-# Extension: Partnership Development
-Rating::Question.create [
-    {
-      question: 'Coordinates with local residents, businesses and other government functionaries for possible extension collaboration.',
-      sequence: 1,
-      rating_type: 'Extension',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Conducts consultative meetings and/or dialogues with stakeholders on priority extension plan supporting their needs.',
-      sequence: 2,
-      rating_type: 'Extension',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Regularly meet concerned sector to discuss ways in which the extension undertaking can create better working environment, and full cooperation and participation.',
-      sequence: 3,
-      rating_type: 'Extension',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Establishes linkages with local/national agencies for possible funding of extension undertakings (sourcing of funds).',
-      sequence: 4,
-      rating_type: 'Extension',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Communicates directly, openly, honestly and shares information with the concerned sectors, and considering comments, and suggestions for improvement if necessary.',
-      sequence: 5,
-      rating_type: 'Extension',
-      instrument: 'Partnership Development'
-    }
-
-]
-
-exit
-
-# Extension: Leadership
-Rating::Question.create [
-    {
-      question: 'Regularly communicates quality output of the extension proceeding to colleagues/staff/clientele subordinates.',
-      sequence: 1,
-      rating_type: 'Extension',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Manages priorities to get the job done and able to looks for better ways to confronts conflict situations in an honest and direct manner.',
-      sequence: 2,
-      rating_type: 'Extension',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Encourage/motivates participation/cooperation of the people evolved in the extension activity(s).',
-      sequence: 3,
-      rating_type: 'Extension',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Suggest/introduces strategies that enhanced colleagues/staff/clientele/subordinates\' skills and abilities to perform the extension activity(s) in a more efficient manner.',
-      sequence: 4,
-      rating_type: 'Extension',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Communicates directly, openly, honestly and shares information with the concerned individual or people involved in their extension activity(s).',
-      sequence: 5,
-      rating_type: 'Extension',
-      instrument: 'Leadership'
-    }
-
-]
-
-exit
-
-# Extension: Clientele Satisfaction
-Rating::Question.create [
-    {
-      question: 'The extension proposal/plan is base on the needs/problems of the clients (there is a consultation with the client during the conceptualization of the extension plan).',
-      sequence: 1,
-      rating_type: 'Extension',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'Meet and discusses with the clientele the know how of the extension activity(s) for its usability and/or clients benefits.',
-      sequence: 2,
-      rating_type: 'Extension',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'There is an information campaign for proper information of the clientele about the extension activity(s).',
-      sequence: 3,
-      rating_type: 'Extension',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'Monitors and evaluates the quantity and quality of services provided to clientele.',
-      sequence: 4,
-      rating_type: 'Extension',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'Extension activity(s) really helps and/or address the clients needs or problems.',
-      sequence: 5,
-      rating_type: 'Extension',
-      instrument: 'Clientele Satisfaction'
-    }
-
-]
-
-exit
-
-# Research: Community Responsibility
-Rating::Question.create [
-    {
-      question: 'Creates safe research environment where activities conducted consider the ethical and moral predicament of the community and/or the sector involved.',
-      sequence: 1,
-      rating_type: 'Research',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'Conducts researches/feasibility studies where implications on the responsibility of the concerned sectors to the community are addressed.',
-      sequence: 2,
-      rating_type: 'Research',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'Initiates and develops interventions that increase awareness of the responsibility of policy-makers, etc. based on the research findings.',
-      sequence: 3,
-      rating_type: 'Research',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'The researches/feasibility studies conducted with significant contribution to the community and increase awareness on community issues and concerns.',
-      sequence: 4,
-      rating_type: 'Research',
-      instrument: 'Community Responsibility'
-    },
-
-    {
-      question: 'The research assumes impartial responsibility and accountability on the research proceeding and its effect or impact to the community and/or other sectors involved.',
-      sequence: 5,
-      rating_type: 'Research',
-      instrument: 'Community Responsibility'
-    }
-
-]
-
-exit
-
-# Research: Partnership Development
-Rating::Question.create [
-    {
-      question: 'Coordinates with local residents, businesses and other government functionaries for possible research collaboration.',
-      sequence: 1,
-      rating_type: 'Research',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Promotes networking activities with local communities and various research agencies to gain support/cooperation on research activities.',
-      sequence: 2,
-      rating_type: 'Research',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Conducts consultative meetings and/or dialogues with stakeholders on priority research agenda supporting their needs.',
-      sequence: 3,
-      rating_type: 'Research',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Regularly meet concerned sector to discuss ways in which the research undertaking can create better learning and working environment.',
-      sequence: 4,
-      rating_type: 'Research',
-      instrument: 'Partnership Development'
-    },
-
-    {
-      question: 'Communicates directly, openly, honestly and shares information with the concerned sectors, and considering comments, and suggestions for improvement if necessary.',
-      sequence: 5,
-      rating_type: 'Research',
-      instrument: 'Partnership Development'
-    }
-
-]
-
-exit
-
-# Research: Leadership
-Rating::Question.create [
-    {
-      question: 'Regularly communicates quality output of the research proceeding to colleagues/staff/clientele/ subordinates.',
-      sequence: 1,
-      rating_type: 'Research',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Manages priorities to get the job done and able to looks for better ways to confronts conflict situations in an honest and direct manner.',
-      sequence: 2,
-      rating_type: 'Research',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Encourage/motivates participation/cooperation of the people evolved in the research proceedings.',
-      sequence: 3,
-      rating_type: 'Research',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Suggest/introduces strategies that enhanced colleague/staff/clientele/subordinates\' skills and abilities to perform the research activity in a more efficient manner.',
-      sequence: 4,
-      rating_type: 'Research',
-      instrument: 'Leadership'
-    },
-
-    {
-      question: 'Communicates directly, openly, honestly and shares information with the concerned individual or people involved in their research proceeding.',
-      sequence: 5,
-      rating_type: 'Research',
-      instrument: 'Leadership'
-    }
-
-]
-
-exit
-
-# Research: Clientele Satisfaction
-Rating::Question.create [
-    {
-      question: 'The research proposal/feasibility study submitted is base on the needs/problems of the clients (there is a consultation with the client during the conceptualization of the research proposal).',
-      sequence: 1,
-      rating_type: 'Research',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'Meet and discusses with the clientele the know how of the research results for its usability and/or clients benefits.',
-      sequence: 2,
-      rating_type: 'Research',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'Disseminates and/or present research results in a forum or symposium for proper information of the clientele.',
-      sequence: 3,
-      rating_type: 'Research',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'Utilizes appropriate research procedures, and/or methodologies in meeting clients\' needs and problems.',
-      sequence: 4,
-      rating_type: 'Research',
-      instrument: 'Clientele Satisfaction'
-    },
-
-    {
-      question: 'Research results would really helps and/or address the clients needs or problems.',
-      sequence: 5,
-      rating_type: 'Research',
-      instrument: 'Clientele Satisfaction'
-    }
-
-]
-
-exit
-
-# Instruction - Management of Learning
-Rating::Question.create [
-    {
-      question: 'Creates opportunities for intensive and/or extensive contribution of students in the class activities (e.g. breaks class into dyads, triads or buzz/task groups).',
+      question: 'Demonstrates sensitivity to students\' ability to attend and absorb content information.',
       sequence: 1,
       rating_type: 'Instruction',
-      instrument: 'Management of Learning'
+      instrument: 'Commitment'
     },
 
     {
-      question: 'Assumes roles as facilitator, resource person, coach, inquisitor, integrator, referee in drawing students to contribute to knowledge and understanding of the concepts at hands.',
+      question: 'Integrates sensitively his/her learning objectives with those of the students in a collaborative process.',
       sequence: 2,
       rating_type: 'Instruction',
-      instrument: 'Management of Learning'
+      instrument: 'Commitment'
     },
 
     {
-      question: 'Designs and implements learning conditions and experience that promotes healthy exchange and/or confrontations.',
+      question: 'Makes self available to students beyond official time.',
       sequence: 3,
       rating_type: 'Instruction',
-      instrument: 'Management of Learning'
+      instrument: 'Commitment'
     },
 
     {
-      question: 'Structures/re-structures learning and teaching-learning context to enhance attainment of collective learning objectives.',
+      question: 'Regularly comes to class on time, well-groomed and well-prepared to complete assigned responsibilities.',
       sequence: 4,
       rating_type: 'Instruction',
-      instrument: 'Management of Learning'
+      instrument: 'Commitment'
     },
 
     {
-      question: 'Use of Instructional Materials (audio/video materials: fieldtrips, film showing, computer aided instruction and etc.) to reinforce learning processes.',
+      question: 'Keeps accurate records of students\' performance and prompt submission of the same.',
       sequence: 5,
       rating_type: 'Instruction',
-      instrument: 'Management of Learning'
+      instrument: 'Commitment'
     }            
 
 ]
-
-exit
-
-# Instruction - Teaching for Independent Learning
-Rating::Question.create [
-    {
-      question: 'Creates teaching strategies that allow students to practice using concepts they need to understand (interactive discussion)',
-      sequence: 1,
-      rating_type: 'Instruction',
-      instrument: 'Teaching for Independent Learning'
-    },
-
-    {
-      question: 'Enhances student self-esteem and/or gives due recognition to students performance/potentials.',
-      sequence: 2,
-      rating_type: 'Instruction',
-      instrument: 'Teaching for Independent Learning'
-    },
-
-    {
-      question: 'Allows students to create their own course with objectives and realistically defined student-professor rules and make them accountable for their performance.',
-      sequence: 3,
-      rating_type: 'Instruction',
-      instrument: 'Teaching for Independent Learning'
-    },
-
-    {
-      question: 'Allows students to think independently and make their own decisions and holding them accountable for their performance based largely on their success in executing decisions.',
-      sequence: 4,
-      rating_type: 'Instruction',
-      instrument: 'Teaching for Independent Learning'
-    },
-
-    {
-      question: 'Encourages students to learn beyond what is required and help/guide the students how to apply the concepts learned.',
-      sequence: 5,
-      rating_type: 'Instruction',
-      instrument: 'Teaching for Independent Learning'
-    }            
-
-]
-
-exit
 
 # Instruction - Knowledge of Subject
-Rating::Question.create [
+QCE::Question.create [
     {
       question: 'Demonstrates mastery of the subject matter (explain the subject matter without relying solely on the prescribed textbook).',
       sequence: 1,
@@ -631,44 +93,549 @@ Rating::Question.create [
 
 ]
 
-exit
-
-# Instruction - Commitment
-Rating::Question.create [
+# Instruction - Teaching for Independent Learning
+QCE::Question.create [
     {
-      question: 'Demonstrates sensitivity to students\' ability to attend and absorb content information.',
+      question: 'Creates teaching strategies that allow students to practice using concepts they need to understand (interactive discussion)',
       sequence: 1,
       rating_type: 'Instruction',
-      instrument: 'Commitment'
+      instrument: 'Teaching for Independent Learning'
     },
 
     {
-      question: 'Integrates sensitively his/her learning objectives with those of the students in a collaborative process.',
+      question: 'Enhances student self-esteem and/or gives due recognition to students performance/potentials.',
       sequence: 2,
       rating_type: 'Instruction',
-      instrument: 'Commitment'
+      instrument: 'Teaching for Independent Learning'
     },
 
     {
-      question: 'Makes self available to students beyond official time.',
+      question: 'Allows students to create their own course with objectives and realistically defined student-professor rules and make them accountable for their performance.',
       sequence: 3,
       rating_type: 'Instruction',
-      instrument: 'Commitment'
+      instrument: 'Teaching for Independent Learning'
     },
 
     {
-      question: 'Regularly comes to class on time, well-groomed and well-prepared to complete assigned responsibilities.',
+      question: 'Allows students to think independently and make their own decisions and holding them accountable for their performance based largely on their success in executing decisions.',
       sequence: 4,
       rating_type: 'Instruction',
-      instrument: 'Commitment'
+      instrument: 'Teaching for Independent Learning'
     },
 
     {
-      question: 'Keeps accurate records of students\' performance and prompt submission of the same.',
+      question: 'Encourages students to learn beyond what is required and help/guide the students how to apply the concepts learned.',
       sequence: 5,
       rating_type: 'Instruction',
-      instrument: 'Commitment'
+      instrument: 'Teaching for Independent Learning'
     }            
+
+]
+
+# Instruction - Management of Learning
+QCE::Question.create [
+    {
+      question: 'Creates opportunities for intensive and/or extensive contribution of students in the class activities (e.g. breaks class into dyads, triads or buzz/task groups).',
+      sequence: 1,
+      rating_type: 'Instruction',
+      instrument: 'Management of Learning'
+    },
+
+    {
+      question: 'Assumes roles as facilitator, resource person, coach, inquisitor, integrator, referee in drawing students to contribute to knowledge and understanding of the concepts at hands.',
+      sequence: 2,
+      rating_type: 'Instruction',
+      instrument: 'Management of Learning'
+    },
+
+    {
+      question: 'Designs and implements learning conditions and experience that promotes healthy exchange and/or confrontations.',
+      sequence: 3,
+      rating_type: 'Instruction',
+      instrument: 'Management of Learning'
+    },
+
+    {
+      question: 'Structures/re-structures learning and teaching-learning context to enhance attainment of collective learning objectives.',
+      sequence: 4,
+      rating_type: 'Instruction',
+      instrument: 'Management of Learning'
+    },
+
+    {
+      question: 'Use of Instructional Materials (audio/video materials: fieldtrips, film showing, computer aided instruction and etc.) to reinforce learning processes.',
+      sequence: 5,
+      rating_type: 'Instruction',
+      instrument: 'Management of Learning'
+    }            
+
+]
+
+# Research: Clientele Satisfaction
+QCE::Question.create [
+    {
+      question: 'The research proposal/feasibility study submitted is base on the needs/problems of the clients (there is a consultation with the client during the conceptualization of the research proposal).',
+      sequence: 1,
+      rating_type: 'Research',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'Meet and discusses with the clientele the know how of the research results for its usability and/or clients benefits.',
+      sequence: 2,
+      rating_type: 'Research',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'Disseminates and/or present research results in a forum or symposium for proper information of the clientele.',
+      sequence: 3,
+      rating_type: 'Research',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'Utilizes appropriate research procedures, and/or methodologies in meeting clients\' needs and problems.',
+      sequence: 4,
+      rating_type: 'Research',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'Research results would really helps and/or address the clients needs or problems.',
+      sequence: 5,
+      rating_type: 'Research',
+      instrument: 'Clientele Satisfaction'
+    }
+
+]
+
+# Research: Leadership
+QCE::Question.create [
+    {
+      question: 'Regularly communicates quality output of the research proceeding to colleagues/staff/clientele/ subordinates.',
+      sequence: 1,
+      rating_type: 'Research',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Manages priorities to get the job done and able to looks for better ways to confronts conflict situations in an honest and direct manner.',
+      sequence: 2,
+      rating_type: 'Research',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Encourage/motivates participation/cooperation of the people evolved in the research proceedings.',
+      sequence: 3,
+      rating_type: 'Research',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Suggest/introduces strategies that enhanced colleague/staff/clientele/subordinates\' skills and abilities to perform the research activity in a more efficient manner.',
+      sequence: 4,
+      rating_type: 'Research',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Communicates directly, openly, honestly and shares information with the concerned individual or people involved in their research proceeding.',
+      sequence: 5,
+      rating_type: 'Research',
+      instrument: 'Leadership'
+    }
+
+]
+
+# Research: Partnership Development
+QCE::Question.create [
+    {
+      question: 'Coordinates with local residents, businesses and other government functionaries for possible research collaboration.',
+      sequence: 1,
+      rating_type: 'Research',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Promotes networking activities with local communities and various research agencies to gain support/cooperation on research activities.',
+      sequence: 2,
+      rating_type: 'Research',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Conducts consultative meetings and/or dialogues with stakeholders on priority research agenda supporting their needs.',
+      sequence: 3,
+      rating_type: 'Research',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Regularly meet concerned sector to discuss ways in which the research undertaking can create better learning and working environment.',
+      sequence: 4,
+      rating_type: 'Research',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Communicates directly, openly, honestly and shares information with the concerned sectors, and considering comments, and suggestions for improvement if necessary.',
+      sequence: 5,
+      rating_type: 'Research',
+      instrument: 'Partnership Development'
+    }
+
+]
+
+# Research: Community Responsibility
+QCE::Question.create [
+    {
+      question: 'Creates safe research environment where activities conducted consider the ethical and moral predicament of the community and/or the sector involved.',
+      sequence: 1,
+      rating_type: 'Research',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'Conducts researches/feasibility studies where implications on the responsibility of the concerned sectors to the community are addressed.',
+      sequence: 2,
+      rating_type: 'Research',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'Initiates and develops interventions that increase awareness of the responsibility of policy-makers, etc. based on the research findings.',
+      sequence: 3,
+      rating_type: 'Research',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'The researches/feasibility studies conducted with significant contribution to the community and increase awareness on community issues and concerns.',
+      sequence: 4,
+      rating_type: 'Research',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'The research assumes impartial responsibility and accountability on the research proceeding and its effect or impact to the community and/or other sectors involved.',
+      sequence: 5,
+      rating_type: 'Research',
+      instrument: 'Community Responsibility'
+    }
+
+]
+
+# Extension: Clientele Satisfaction
+QCE::Question.create [
+    {
+      question: 'The extension proposal/plan is base on the needs/problems of the clients (there is a consultation with the client during the conceptualization of the extension plan).',
+      sequence: 1,
+      rating_type: 'Extension',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'Meet and discusses with the clientele the know how of the extension activity(s) for its usability and/or clients benefits.',
+      sequence: 2,
+      rating_type: 'Extension',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'There is an information campaign for proper information of the clientele about the extension activity(s).',
+      sequence: 3,
+      rating_type: 'Extension',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'Monitors and evaluates the quantity and quality of services provided to clientele.',
+      sequence: 4,
+      rating_type: 'Extension',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'Extension activity(s) really helps and/or address the clients needs or problems.',
+      sequence: 5,
+      rating_type: 'Extension',
+      instrument: 'Clientele Satisfaction'
+    }
+
+]
+
+# Extension: Leadership
+QCE::Question.create [
+    {
+      question: 'Regularly communicates quality output of the extension proceeding to colleagues/staff/clientele subordinates.',
+      sequence: 1,
+      rating_type: 'Extension',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Manages priorities to get the job done and able to looks for better ways to confronts conflict situations in an honest and direct manner.',
+      sequence: 2,
+      rating_type: 'Extension',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Encourage/motivates participation/cooperation of the people evolved in the extension activity(s).',
+      sequence: 3,
+      rating_type: 'Extension',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Suggest/introduces strategies that enhanced colleagues/staff/clientele/subordinates\' skills and abilities to perform the extension activity(s) in a more efficient manner.',
+      sequence: 4,
+      rating_type: 'Extension',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Communicates directly, openly, honestly and shares information with the concerned individual or people involved in their extension activity(s).',
+      sequence: 5,
+      rating_type: 'Extension',
+      instrument: 'Leadership'
+    }
+
+]
+
+# Extension: Partnership Development
+QCE::Question.create [
+    {
+      question: 'Coordinates with local residents, businesses and other government functionaries for possible extension collaboration.',
+      sequence: 1,
+      rating_type: 'Extension',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Conducts consultative meetings and/or dialogues with stakeholders on priority extension plan supporting their needs.',
+      sequence: 2,
+      rating_type: 'Extension',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Regularly meet concerned sector to discuss ways in which the extension undertaking can create better working environment, and full cooperation and participation.',
+      sequence: 3,
+      rating_type: 'Extension',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Establishes linkages with local/national agencies for possible funding of extension undertakings (sourcing of funds).',
+      sequence: 4,
+      rating_type: 'Extension',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Communicates directly, openly, honestly and shares information with the concerned sectors, and considering comments, and suggestions for improvement if necessary.',
+      sequence: 5,
+      rating_type: 'Extension',
+      instrument: 'Partnership Development'
+    }
+
+]
+
+# Extension: Community Responsibility
+QCE::Question.create [
+    {
+      question: 'Creates safe working environment where activities conducted consider the ethical and moral predicament of the community and/or the sector involved.',
+      sequence: 1,
+      rating_type: 'Extension',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'Conducts extension activity(s) where the responsibilities of the concerned sectors to the community are addressed.',
+      sequence: 2,
+      rating_type: 'Extension',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'The extension activity(s) conducted with significant contribution to the community and increase awareness on community issues and concerns.',
+      sequence: 3,
+      rating_type: 'Extension',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'The extension activity(s) is instrumental and/or in of consideration of public safety, environmental safety, and sharing of quality-related information with the sector involved.',
+      sequence: 4,
+      rating_type: 'Extension',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'Assumes impartial responsibility and accountability on the extension proceeding and its effect or impact to the community and/or other sectors involved.',
+      sequence: 5,
+      rating_type: 'Extension',
+      instrument: 'Community Responsibility'
+    }
+
+]
+
+# Production: Clientele Satisfaction
+QCE::Question.create [
+    {
+      question: 'Involves clientele in the planning process of the intended production activity (there is a consultation with the client during the conceptualization of the said activity).',
+      sequence: 1,
+      rating_type: 'Production',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'Meet and discusses with the clientele the know how of the production activity(s) for its usability and/or clients benefits, and/or to assess the quality of production services provided.',
+      sequence: 2,
+      rating_type: 'Production',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'There is an information campaign for proper information of the clientele about the production activity(s).',
+      sequence: 3,
+      rating_type: 'Production',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'Monitors and evaluates the quantity and quality of services provided to clientele.',
+      sequence: 4,
+      rating_type: 'Production',
+      instrument: 'Clientele Satisfaction'
+    },
+
+    {
+      question: 'Adopts and implements a system that is supportive of realizing clientele\'s needs/problems.',
+      sequence: 5,
+      rating_type: 'Production',
+      instrument: 'Clientele Satisfaction'
+    }
+
+]
+
+# Production: Leadership
+QCE::Question.create [
+    {
+      question: 'Regularly communicates quality output of the production proceeding to colleagues/staff/clientele subordinates.',
+      sequence: 1,
+      rating_type: 'Production',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Manages priorities to get the job done and able to looks for better ways to confronts conflict situations in an honest and direct manner.',
+      sequence: 2,
+      rating_type: 'Production',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Encourage/motivates participation/cooperation of the people evolved in the production activity(s).',
+      sequence: 3,
+      rating_type: 'Production',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Suggest/introduces strategies that enhanced colleagues/staff/clientele/subordinates\' skills and abilities to perform the production activity in a more efficient manner.',
+      sequence: 4,
+      rating_type: 'Production',
+      instrument: 'Leadership'
+    },
+
+    {
+      question: 'Communicates directly, openly, honestly and shares information with the concerned individual or people involved in their production activity(s).',
+      sequence: 5,
+      rating_type: 'Production',
+      instrument: 'Leadership'
+    }
+
+]
+
+# Production: Partnership Development
+QCE::Question.create [
+    {
+      question: 'Coordinates with local residents, business and other government functionaries for possible production activity(s) collaboration.',
+      sequence: 1,
+      rating_type: 'Production',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Conducts consultative meetings and/or dialogues with stakeholders on priority production plan supporting their needs.',
+      sequence: 2,
+      rating_type: 'Production',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Regularly meet concerned sector to discuss ways in which the production undertaking can create better working environment, and full cooperation and participation.',
+      sequence: 3,
+      rating_type: 'Production',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Establishes linkages with local/national agencies for possible funding of production undertakings (sourcing of funds).',
+      sequence: 4,
+      rating_type: 'Production',
+      instrument: 'Partnership Development'
+    },
+
+    {
+      question: 'Communicates directly, openly, honestly and shares information with the concerned sectors, and considering comments, and suggestions for improvement if necessary.',
+      sequence: 5,
+      rating_type: 'Production',
+      instrument: 'Partnership Development'
+    }
+
+]
+
+# Production: Community Responsibility
+QCE::Question.create [
+    {
+      question: 'Creates safe working environment where activities conducted consider the ethical and moral predicament of the community and/or the sector involved.',
+      sequence: 1,
+      rating_type: 'Production',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'Conducts production activity(s) where the responsibilities of the concerned sectors to the community are addressed.',
+      sequence: 2,
+      rating_type: 'Production',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'The production program extends technical assistance which supports community activities.',
+      sequence: 3,
+      rating_type: 'Production',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'Utilizes appropriate production procedures that conserve and prevent damage to the environment.',
+      sequence: 4,
+      rating_type: 'Production',
+      instrument: 'Community Responsibility'
+    },
+
+    {
+      question: 'Assumes impartial responsibility and accountability on the production activity(s) and its effect or impact to the community and/or other sectors involved.',
+      sequence: 5,
+      rating_type: 'Production',
+      instrument: 'Community Responsibility'
+    }
 
 ]
 

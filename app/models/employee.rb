@@ -49,22 +49,30 @@ class Employee < ActiveRecord::Base
   has_many :voluntary_works, dependent: :destroy
   has_many :other_infos, dependent: :destroy
   
+  # Employee's own QCEs as (owner)
   has_many :qces, dependent: :destroy
-  # belongs_to :qce
+  # QCE association: belongs_to :qce
+
+  # Ratings to evaluate/grade by Employee
+  has_many :ratings, as: :evaluator,
+                      class_name: 'QCE::Rating',
+                      dependent: :destroy
+  # QCE::Rating association:
+  #   belongs_to :evaluator, polymorphic: true
   
-  # has_many :evaluations, as: :evaluator
 
-  # has_many :instruction_ratings, as: :evaluator, 
-  #                               class_name: 'QCE::InstructionRating'
-  # belongs_to :evaluator, polymorphic: true
-
-  has_many :owned_tasks, class_name: 'Rating::Task',
-                                foreign_key: 'owner_id'
-  # association: belongs_to :owner, class_name: 'Employee'
+  has_many :owned_tasks, class_name: 'QCE::RatingTask',
+                          foreign_key: 'owner_id',
+                          dependent: :destroy
+  # QCE::RatingTask association: 
+  #   belongs_to :owner, class_name: 'Employee'
 
   has_many :rating_tasks, as: :evaluator,
-                          class_name: 'Rating::Task'
-  # association: belongs_to :evaluator, polymorphic: true
+                          class_name: 'QCE::RatingTask',
+                          dependent: :destroy
+
+  # QCE::RatingTask association:
+  #   belongs_to :evaluator, polymorphic: true
 
   has_many :leaves, dependent: :destroy 
   #has_one :career_path, dependent: :destroy
@@ -163,21 +171,3 @@ class Employee < ActiveRecord::Base
   end
 
 end
-=begin
-
-  #has_many :ratings
-
-  # has_many :instruction_ratings, 
-  #   -> { where(type: 'Employee::Rating::Instruction') },
-  #   class_name: 'Employee::Rating'
-  # has_many :research_ratings,
-  #   -> { where(type: 'Employee::Rating::Research') },
-  #   class_name: 'Employee::Rating'
-  # has_many :extension_ratings, 
-  #   -> { where(type: 'Employee::Rating::Extension') },
-  #   class_name: 'Employee::Rating'
-  # has_many :production_ratings, 
-  #   -> { where(type: 'Employee::Rating::Production') },
-  #   class_name: 'Employee::Rating'
-
-=end

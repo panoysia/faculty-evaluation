@@ -1,6 +1,8 @@
-class Rating::Question < ActiveRecord::Base
-  self.table_name_prefix = 'rating_'
+class QCE::Question < ActiveRecord::Base
+  self.table_name_prefix = 'qce_'
 
+  #has_many :scores, class_name: 'QCE::Question'
+  
   scope :instruction, -> { where(rating_type: 'Instruction') }  
   scope :research, -> { where(rating_type: 'Research') }
   scope :production, -> { where(rating_type: 'Production') }
