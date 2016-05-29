@@ -62,10 +62,10 @@ class Employee < ActiveRecord::Base
   
 
   has_many :owned_tasks, class_name: 'QCE::RatingTask',
-                          foreign_key: 'owner_id',
+                          foreign_key: 'employee_id',
                           dependent: :destroy
   # QCE::RatingTask association: 
-  #   belongs_to :owner, class_name: 'Employee'
+  #   belongs_to :employee, class_name: 'Employee'
 
   has_many :rating_tasks, as: :evaluator,
                           class_name: 'QCE::RatingTask',

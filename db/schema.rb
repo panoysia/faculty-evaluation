@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529031317) do
+ActiveRecord::Schema.define(version: 20160529161558) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -268,7 +268,7 @@ ActiveRecord::Schema.define(version: 20160529031317) do
   add_index "qce_rating_evaluations", ["rating_type", "rating_id"], name: "index_qce_rating_evaluations_on_rating_type_and_rating_id"
 
   create_table "qce_rating_tasks", force: :cascade do |t|
-    t.integer  "owner_id",       null: false
+    t.integer  "employee_id",    null: false
     t.integer  "evaluator_id",   null: false
     t.string   "evaluator_type", null: false
     t.integer  "rating_id",      null: false
@@ -278,8 +278,8 @@ ActiveRecord::Schema.define(version: 20160529031317) do
     t.datetime "updated_at",     null: false
   end
 
+  add_index "qce_rating_tasks", ["employee_id"], name: "index_qce_rating_tasks_on_employee_id"
   add_index "qce_rating_tasks", ["evaluator_type", "evaluator_id"], name: "index_qce_rating_tasks_on_evaluator_type_and_evaluator_id"
-  add_index "qce_rating_tasks", ["owner_id"], name: "index_qce_rating_tasks_on_owner_id"
   add_index "qce_rating_tasks", ["rating_type", "rating_id"], name: "index_qce_rating_tasks_on_rating_type_and_rating_id"
 
   create_table "qce_ratings", force: :cascade do |t|

@@ -53,7 +53,7 @@ class QCE::Rating < ActiveRecord::Base
   def assign_task_to_evaluator
     pending = QCE::RatingTask.statuses[:pending]
     QCE::RatingTask.create evaluator: evaluator, rating: self, 
-                          owner_id: qce.employee_id, status: pending
+                          employee_id: qce.employee_id, status: pending
   end
 
 end   # class QCE::Rating
