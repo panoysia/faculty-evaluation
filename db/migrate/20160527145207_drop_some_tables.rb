@@ -5,8 +5,8 @@ class DropSomeTables < ActiveRecord::Migration
     
     drop_table :qce_instruction_ratings
     
-    drop_table :rating_questions
-    drop_table :rating_scores
-    drop_table :rating_tasks 
+    drop_table :rating_questions, force: :cascade
+    drop_table :rating_scores, force: :cascade
+    drop_table :rating_tasks , force: :cascade
   end
 end
