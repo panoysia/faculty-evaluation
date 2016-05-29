@@ -6,7 +6,7 @@ class QCE::RatingTask < ActiveRecord::Base
   # PRODUCTION = 'Production'
   # EXTENSION = 'Extension'
 
-  belongs_to :owner, class_name: 'Employee'
+  belongs_to :employee, class_name: 'Employee'
   belongs_to :evaluator, polymorphic: true
   belongs_to :rating, polymorphic: true
   
@@ -21,7 +21,7 @@ class QCE::RatingTask < ActiveRecord::Base
   end
 
   def description
-    owner_name = owner.full_name
+    owner_name = employee.full_name
     context = rating.evaluation_context
     context << " (yourself)" if context == 'Self'
     
@@ -46,16 +46,4 @@ Grace Poe:
   Rate Grace Poe (yourself) as Self for Instruction
   Rate Kevin Durant as Peer for Instruction
   Rate Kevin Garnett as Peer for Instruction
-
-  user.tasks
-
-    :owner_id => :integer, # employee_id only
-      :evaluator_id => :integer, # either employee or student
-    :evaluator_type => :string,
-         :rating_id => :integer, # any type of rating
-       :rating_type => :string,
-
-  employee has_many tasks
-  employee has_many tasks as: :evaluator
-
 =end
