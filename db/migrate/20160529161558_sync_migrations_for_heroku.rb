@@ -1,7 +1,5 @@
 class SyncMigrationsForHeroku < ActiveRecord::Migration
   def change
-    rename_column :qce_rating_tasks, :owner_id, :employee_id
-
     change_column_null :career_path_actions, :category, false
     change_column_null :specializations, :career_path_id, false
   end
