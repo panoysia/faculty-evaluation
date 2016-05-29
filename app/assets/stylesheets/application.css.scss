@@ -27,6 +27,23 @@ footer {
   margin-top: 35px;
 }
 
+.links {
+  margin-top: 20px;
+}  
+
+.required {
+  color: red;
+  font-weight: bolder;
+} 
+
+.center {
+  text-align: center;
+}  
+
+.career-paths-subheader {
+  margin-top: 30px;
+}
+
 div#login-panel {
   margin-top: 70px;
   margin-bottom: 0px;
@@ -43,7 +60,6 @@ div.employee-card-info > p {
   margin-bottom: 5px;
   //color: red; 
 }
-
 
 div#employee-tabs {
   margin-top: 30px;
@@ -88,11 +104,6 @@ div#leaves-content {
   clear: left;
 }
 
-.center {
-  text-align: center;
-}  
-
-
 #question.active {
   //background-color: green;
 }
@@ -113,10 +124,6 @@ div#leaves-content {
   margin-top: 15px;
 }
 
-.required {
-  color: red;
-  font-weight: bolder;
-} 
 
 // Guides
 

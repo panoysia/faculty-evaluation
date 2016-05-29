@@ -1,0 +1,28 @@
+<%= form_tag qce_clientele_instrument_path(@qce), method: :post do %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3">          
+        <div class="form-group">
+          <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true }, class: 'form-control', name: 'clients[]', id: 'client1' %>
+        </div>
+      </div>
+      <div class="col-md-3">          
+        <div class="form-group">
+          <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true }, class: 'form-control', name: 'clients[]', id: 'client1' %>
+        </div>
+      </div>
+      <div class="col-md-3">          
+        <div class="form-group">
+          <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true }, class: 'form-control', name: 'clients[]', id: 'client1' %>
+        </div>
+      </div>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <%= submit_tag 'Assign', name: 'client', class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -2,6 +2,7 @@ class QCE < ActiveRecord::Base
   has_many :ratings, class_name: 'QCE::Rating',
                     dependent: :destroy
 
+
   has_many :instruction_ratings, -> { instruction },
                                 class_name: 'QCE::Rating',
                                 dependent: :destroy
@@ -33,6 +34,15 @@ class QCE < ActiveRecord::Base
   has_many :student_instruction_ratings,
     -> { where(evaluation_context: 'Student', type: 'Instruction') },
     class_name: 'QCE::Rating', dependent: :destroy
+
+
+  has_many :clientele_instruments, -> { where instrument: 'Client Satisfaction' }, class_name: 'QCE::Rating'
+
+  has_one :leadership_instrument, -> { where instrument: 'Leadership' }, class_name: 'QCE::Rating'
+
+  has_many :partnership_instruments, -> { where instrument: 'Partnership Development' }, class_name: 'QCE::Rating'
+
+  has_many :community_instruments, -> { where instrument: 'Community Responsibility' }, class_name: 'QCE::Rating'
 
 
   belongs_to :employee

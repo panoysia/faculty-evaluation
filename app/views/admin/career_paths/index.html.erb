@@ -25,10 +25,10 @@
         <td><%= display_number += 1 %></td>
         <td><%= link_to career_path.name, admin_career_path_path(career_path) %></td>
         <td>
-          <%= link_to edit_admin_career_path_path(career_path)   do %>
+          <%= link_to edit_admin_career_path_path(career_path), title: 'Edit', data: { toggle: 'tooltip' } do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %>
-          <%= link_to admin_career_path_path(career_path), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+          <%= link_to admin_career_path_path(career_path), method: :delete, title: 'Delete', data: { confirm: 'Do you really want to delete this record?', toggle: 'tooltip' } do %>
             <span class="glyphicon glyphicon-remove"></span>
           <% end %>
         </td>

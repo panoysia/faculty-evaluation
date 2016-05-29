@@ -1,1 +1,23 @@
-<h1>admin/specializations#show</h1>
+<h2 class="page-header"><%= @specialization.name %></h2>
+<h4 class="page-header career-paths-subheader">Faculty members who specialize under this:</h4>
+<table id="table-master" class="table table-bordered table-striped content">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Faculty</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% display_number = 0 %>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= display_number += 1 %></td>
+        <td><%= link_to employee.full_name, admin_employee_path(employee) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="links">
+  <%= link_to 'Edit', [:edit, :admin, @specialization], class: 'btn btn-link' %> |
+  <%= link_to 'Back to List', admin_specializations_path, class: 'btn btn-link' %>
+</div>

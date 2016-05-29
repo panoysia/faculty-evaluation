@@ -20,7 +20,7 @@
         <tr>
           <td><%= display_number += 1 %></td>
           <td><%= period.coverage %></td>
-          <td><%= button_to 'Begin', { action: :create }, class: 'btn btn-success', params: { rating_period_id: period.id } %></td>
+          <td><%= button_to 'Begin', { action: :create }, class: 'btn btn-success', params: { 'qce[rating_period_id]': period.id } %></td>
         </tr>
       <% end %>
       <%# end %>
@@ -53,10 +53,10 @@
           </td>
           <td>
             <%= link_to qce_path(qce), { title: 'View', data: { toggle: 'tooltip' } } do %>
-              <span class="glyphicon glyphicon-zoom-in"></span>
+              <span class="glyphicon glyphicon-zoom-in"></span> Monitor
             <% end %>
             <%= link_to edit_qce_path(qce), { title: 'Edit', data: { toggle: 'tooltip' } } do %>
-              <span class="glyphicon glyphicon-pencil"></span>
+              <span class="glyphicon glyphicon-pencil"></span> Edit
             <% end %>            
             <%#= link_to qce_path(qce), method: :delete, title: 'Delete', data: { confirm: 'Do you really want to delete this record?',
             toggle: 'tooltip' } do %>

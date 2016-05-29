@@ -7,6 +7,7 @@ class Admin::SpecializationsController < Admin::ApplicationController
   end
 
   def show
+    @employees = @specialization.employees
   end
 
   def new
@@ -14,6 +15,8 @@ class Admin::SpecializationsController < Admin::ApplicationController
   end
 
   def create
+    # render html: params.inspect and return true
+
     @specialization = Specialization.new(specialization_params)
   
     respond_to do |format|
@@ -55,7 +58,7 @@ class Admin::SpecializationsController < Admin::ApplicationController
   end  
 
   def specialization_params
-    params.require(:specialization).permit(:name)
+    params.require(:specialization).permit(:name, :career_path_id)
   end
   
 end

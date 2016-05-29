@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-3">          
+      <div class="form-group">
+        <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true }, class: 'form-control', name: 'leader', id: 'leader' %>
+      </div>
+    </div>
+  </div> <!-- .col-md-12 -->
+</div> <!-- .row -->

@@ -22,10 +22,10 @@ class User::QCEsController < User::ApplicationController
     # render html: params.inspect and return true
     # render html: qce_params.inspect and return true
 
-    @rating = current_user.account.qces.new(qce_params)
+    @qce = current_user.account.qces.new(qce_params)
     respond_to do |format|
-      if @rating.save
-        format.html { redirect_to edit_qce_path(@rating), notice: "QCE was successfully created.<br>In order to complete/finish this QCE, you'll have to provide additional data and do some tasks listed below." }
+      if @qce.save
+        format.html { redirect_to edit_qce_path(@qce), notice: "QCE was successfully created.<br>In order to complete/finish this QCE, you'll have to provide additional data and do some tasks listed below." }
       else
         format.html { render :new }
       end
@@ -34,6 +34,39 @@ class User::QCEsController < User::ApplicationController
 
   def edit
     @employees = Employee.all
+  end
+
+  def update
+    # render html: params.inspect and return true
+    # render html: qce_params.inspect and return true
+
+    # support_area = params[:support_area]
+    # attributes = { support_area: support_area }
+    # render html: attributes and return true
+    support_area = qce_params[:support_area]
+
+    respond_to do |format|
+      if @qce.update(qce_params)
+        format.html { 
+          redirect_to edit_qce_path(@qce, anchor: 'assign-support-area'),
+          notice: "Support area for #{support_area} has been created." 
+        }
+        
+        # format.js
+      else
+        format.html { render :edit }
+      end
+    end
+
+  end   # def update
+
+  def destroy_support_area
+    render html: params.inspect and return true
+
+    support_area = qce_params[:support_area]
+    @qce.update support_area: nil
+    @qce.ratings.where(type: support_area).destroy_all
+    redirect_to edit_qce_path(@qce), notice: "Support area for #{support_area} has been deleted."
   end
 
 
@@ -50,7 +83,7 @@ class User::QCEsController < User::ApplicationController
     # params.require(:qce).permit(:rating_period_id)
 
     # No need to access the :qce key here, :rating_period_id is a stand-alone parameter and isn't associated to a QCE object
-    params.permit(:rating_period_id)
+    params.require(:qce).permit(:rating_period_id, :support_area)
   end
 
 end

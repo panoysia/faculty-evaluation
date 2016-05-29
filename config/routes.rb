@@ -58,9 +58,9 @@ Rails.application.routes.draw do
     resources :leaves
     resources :leave_service_credits
     
-    resources :specializations
     resources :career_paths
     resources :career_path_actions
+    resources :specializations
     
     resources :academic_years, path: 'academic-years'
     # resources :rating_periods, path: 'rating-periods'
@@ -86,12 +86,21 @@ Rails.application.routes.draw do
     resources :rating_tasks, only: [:index]
 
     resources :qces, except: [:new, :destroy] do
+      member do
+        delete 'support_area' => 'qces#destroy_support_area'
+      end
+
       scope module: :qces do
         # Should have been an object that manages adding these different type of QCE::InstructionRating
         resource :self_instruction_rating, only: [:create, :destroy]
         resource :supervisor_instruction_rating, only: [:create, :destroy]
         resource :peer_instruction_rating, only: [:create, :destroy]
         resource :student_instruction_rating, only: [:create, :destroy]
+
+        resource :clientele_instrument, only: [:create, :destroy]
+        resource :leadership_instrument, only: [:create, :destroy]
+        resource :partnership_instrument, only: [:create, :destroy]
+        resource :community_instrument, only: [:create, :destroy]
       end 
     end
 

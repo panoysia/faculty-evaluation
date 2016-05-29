@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527145207) do
+ActiveRecord::Schema.define(version: 20160529031317) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -293,6 +293,7 @@ ActiveRecord::Schema.define(version: 20160527145207) do
     t.date     "finished_at"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "instrument"
   end
 
   add_index "qce_ratings", ["evaluator_type", "evaluator_id"], name: "index_qce_ratings_on_evaluator_type_and_evaluator_id"
@@ -304,12 +305,11 @@ ActiveRecord::Schema.define(version: 20160527145207) do
     t.datetime "updated_at",                                 null: false
     t.integer  "rating_period_id",                           null: false
     t.integer  "completed",                      default: 0, null: false
-    t.integer  "support_rating_id"
-    t.string   "support_rating_type"
     t.integer  "has_assigned_self_rating"
     t.integer  "has_assigned_supervisor_rating"
     t.integer  "has_assigned_peer_rating"
     t.integer  "has_assigned_student_rating"
+    t.string   "support_area"
   end
 
   add_index "qces", ["employee_id"], name: "index_qces_on_employee_id"
@@ -327,11 +327,13 @@ ActiveRecord::Schema.define(version: 20160527145207) do
   add_index "rating_periods", ["nbc_id"], name: "index_rating_periods_on_nbc_id"
 
   create_table "specializations", force: :cascade do |t|
-    t.string   "name",       limit: 50, null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "name",           limit: 50, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "career_path_id",            null: false
   end
 
+  add_index "specializations", ["career_path_id"], name: "index_specializations_on_career_path_id"
   add_index "specializations", ["name"], name: "index_specializations_on_name", unique: true
 
   create_table "students", force: :cascade do |t|

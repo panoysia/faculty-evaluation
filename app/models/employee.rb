@@ -75,9 +75,10 @@ class Employee < ActiveRecord::Base
   #   belongs_to :evaluator, polymorphic: true
 
   has_many :leaves, dependent: :destroy 
-  #has_one :career_path, dependent: :destroy
+ 
   belongs_to :career_path
-  has_many :career_path_actions, through: :career_path
+  has_many :career_path_actions, through: :career_path,
+                                  class_name: 'CareerPathAction'
 
   belongs_to :rank, class_name: 'AcademicRanking', foreign_key: 'academic_ranking_id'
   belongs_to :specialization

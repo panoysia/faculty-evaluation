@@ -1,11 +1,14 @@
 class Admin::CareerPathsController < Admin::ApplicationController
   before_action :set_career_path, only: [:show, :edit, :update, :destroy]
 
+
   def index
     @career_paths = CareerPath.all
   end
 
   def show
+    @specializations = @career_path.specializations
+    @actions = @career_path.actions.latest
   end
 
   def edit

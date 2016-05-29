@@ -1,11 +1,8 @@
 class Admin::QCE::QuestionsController < Admin::ApplicationController
 
-  
-  def index
-    @questions = QCE::Question.all
-  end
 
-  # def new
-  # end
+  def index
+    @questions = ::QCE::Question.all
+  end
 
 end

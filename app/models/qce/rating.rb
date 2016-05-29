@@ -22,6 +22,14 @@ class QCE::Rating < ActiveRecord::Base
   scope :production, -> { where type: 'Production' }
   scope :extension, -> { where type: 'Extension' }
 
+  # scope :clientele_instruments, -> { where instrument: 'Client Satisfaction' }
+  # scope :leadership_instruments, -> { where instrument: 'Leadership' }
+
+  # scope :partnership_instruments, -> { where instrument: 'Partnership Development' }
+
+  # scope :community_instruments, -> { where instrument: 'Community Responsibility' }
+
+
   after_save :create_questions, :assign_task_to_evaluator
 
 
