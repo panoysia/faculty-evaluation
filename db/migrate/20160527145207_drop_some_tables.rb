@@ -7,6 +7,6 @@ class DropSomeTables < ActiveRecord::Migration
     
     drop_table :rating_questions, force: :cascade
     drop_table :rating_scores, force: :cascade
-    # drop_table :rating_tasks , force: :cascade
+    drop_table :rating_tasks , force: :cascade
   end
 end
