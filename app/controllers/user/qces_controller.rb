@@ -1,5 +1,5 @@
 class User::QCEsController < User::ApplicationController
-  before_action :set_qce, only: [:show, :edit, :update, :destroy]
+  before_action :set_qce, only: [:show, :edit, :update, :destroy, :destroy_support_area]
 
 
   def index
@@ -48,8 +48,8 @@ class User::QCEsController < User::ApplicationController
     respond_to do |format|
       if @qce.update(qce_params)
         format.html { 
-          redirect_to edit_qce_path(@qce, anchor: 'assign-support-area'),
-          notice: "Support area for #{support_area} has been created." 
+          redirect_to edit_qce_path(@qce), 
+            notice: "Support area for #{support_area} has been created." 
         }
         
         # format.js
@@ -61,12 +61,13 @@ class User::QCEsController < User::ApplicationController
   end   # def update
 
   def destroy_support_area
-    render html: params.inspect and return true
+    # render html: params.inspect and return true
 
     support_area = qce_params[:support_area]
     @qce.update support_area: nil
     @qce.ratings.where(type: support_area).destroy_all
-    redirect_to edit_qce_path(@qce), notice: "Support area for #{support_area} has been deleted."
+    redirect_to edit_qce_path(@qce), 
+      notice: "Support area for #{support_area} has been deleted."
   end
 
 

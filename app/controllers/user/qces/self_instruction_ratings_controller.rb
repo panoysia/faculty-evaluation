@@ -4,10 +4,6 @@ class User::QCEs::SelfInstructionRatingsController < User::ApplicationController
   before_action :set_qce
 
 
-  # def create
-  #   render html: current_user.inspect
-  # end
-
   def create
     rating = QCE::Instruction.new
     rating.qce_id = @qce.id

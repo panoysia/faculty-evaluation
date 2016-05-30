@@ -1,1 +1,82 @@
-<p>Monitor QCE</p>
+
+<%
+  evaluators = []
+  ratings = @qce.instruction_ratings.includes(:evaluator)
+  self_rating = ratings.find { |r| r.evaluation_context == 'Self' }
+  supervisor_rating = ratings.find { |r| r.evaluation_context == 'Supervisor' }
+  peer_ratings = ratings.select { |r| r.evaluation_context == 'Peer' }
+  # student_ratings = = ratings.select { |r| r.evaluation_context == 'Student' }
+%>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">
+      <span><%= "My QCE for #{@qce.rating_period.coverage}" %></span>
+      <span class="pull-right label <%= @qce.completed? ? 'label-success' : 'label-danger' %>"><%= @qce.completed? ? 'Completed' : 'Incomplete' %></span>
+    </h2>
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<div>
+  <h4>Your current rank: <%= @current_user.account.rank.full_name %></h4>
+</div>
+<div class="qce-options">  
+  <h3 class="page-header">Ratings for Instruction/Teaching Effectiveness</h3>
+  <table class="table table-bordered table-striped table-master">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Context</th>
+        <th>Evaluator</th>
+        <th>Score</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <th>Self (1)</th>
+        <td><%= self_rating.evaluator_name if self_rating.present? %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <th>Supervisor (1)</th>
+        <td><%= supervisor_rating.evaluator_name if supervisor_rating.present? %></td>
+        <td></td>
+        <td></td>
+      </tr>      
+      <tr>
+        <td>3</td>
+        <th colspan="4">Peers (5)</th>
+      </tr>
+      <% unless peer_ratings.empty? %>
+        <% peer_ratings.each_with_index do |rating, index| %>
+          <tr>
+            <td></td>
+            <td colspan="1" class="center">Peer <%= index + 1 %></td>
+            <td><%= rating.evaluator_name %></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <tr>
+        <td>4</td>
+        <th colspan="4">Students (30)</th>
+      </tr>
+      <% if false %>
+        <% unless student_ratings.empty? %>
+          <% student_ratings.each_with_index do |rating, index| %>
+            <tr>
+              <td></td>
+              <td colspan="1" class="center">Student <%= index + 1 %></td>
+              <td><%= rating.evaluator_name %></td>
+              <td></td>
+              <td></td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>    
+  </table>
+</div>

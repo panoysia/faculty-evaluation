@@ -36,7 +36,7 @@ class QCE < ActiveRecord::Base
     class_name: 'QCE::Rating', dependent: :destroy
 
 
-  has_many :clientele_instruments, -> { where instrument: 'Client Satisfaction' }, class_name: 'QCE::Rating'
+  has_many :clientele_instruments, -> { where instrument: 'Clientele Satisfaction' }, class_name: 'QCE::Rating'
 
   has_one :leadership_instrument, -> { where instrument: 'Leadership' }, class_name: 'QCE::Rating'
 

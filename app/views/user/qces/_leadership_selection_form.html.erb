@@ -1,9 +1,19 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="col-md-3">          
-      <div class="form-group">
-        <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true }, class: 'form-control', name: 'leader', id: 'leader' %>
+<%= form_tag qce_leadership_instrument_path(@qce), method: :post do %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3">          
+        <div class="form-group">
+          <% value = params[:leader] if params[:leader].present? %>
+          <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true, selected: value }, class: 'form-control', name: 'leader', id: 'leader' %>
+        </div>
+      </div>
+    </div> <!-- .col-md-12 -->
+  </div> <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <%= submit_tag 'Assign', class: 'btn btn-success' %>
       </div>
     </div>
-  </div> <!-- .col-md-12 -->
-</div> <!-- .row -->
+  </div>
+<% end %>

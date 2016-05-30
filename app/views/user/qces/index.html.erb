@@ -6,7 +6,7 @@
 <% display_number = 0 %>
 <div>
   <h4>Available Ratings Periods for creating QCEs</h4>
-  <table id="table-master" class="table table-bordered table-striped content">
+  <table class="table table-bordered table-striped table-master content">
     <thead>
       <tr>
         <th>#</th>
@@ -32,7 +32,7 @@
 <% display_number = 0 %>
 <div>
   <h4>QCEs</h4>
-  <table id="table-master" class="table table-bordered table-striped content">
+  <table class="table table-bordered table-striped table-master content">
     <thead>
       <tr>
         <th>#</th>
@@ -52,8 +52,8 @@
             </span>
           </td>
           <td>
-            <%= link_to qce_path(qce), { title: 'View', data: { toggle: 'tooltip' } } do %>
-              <span class="glyphicon glyphicon-zoom-in"></span> Monitor
+            <%= link_to qce_path(qce), { title: 'Check', data: { toggle: 'tooltip' } } do %>
+              <span class="glyphicon glyphicon-zoom-in"></span> Check
             <% end %>
             <%= link_to edit_qce_path(qce), { title: 'Edit', data: { toggle: 'tooltip' } } do %>
               <span class="glyphicon glyphicon-pencil"></span> Edit

@@ -1,19 +1,31 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="col-md-3">          
-      <div class="form-group">
-        <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true }, class: 'form-control', name: 'partners[]', id: 'partner1' %>
+<%= form_tag qce_partnership_instrument_path(@qce), method: :post do %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3">          
+        <div class="form-group">
+          <% value = params[:partners][0] if params[:partners].present? %>
+          <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true, selected: value }, class: 'form-control', name: 'partners[]', id: 'partner1' %>
+        </div>
+      </div>
+      <div class="col-md-3">          
+        <div class="form-group">
+          <% value = params[:partners][1] if params[:partners].present? %>
+          <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true, selected: value }, class: 'form-control', name: 'partners[]', id: 'partner2' %>
+        </div>
+      </div>
+      <div class="col-md-3">          
+        <div class="form-group">
+          <% value = params[:partners][2] if params[:partners].present? %>
+          <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true, selected: value }, class: 'form-control', name: 'partners[]', id: 'partner3' %>
+        </div>
+      </div>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <%= submit_tag 'Assign', class: 'btn btn-success' %>
       </div>
     </div>
-    <div class="col-md-3">          
-      <div class="form-group">
-        <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true }, class: 'form-control', name: 'partners[]', id: 'partner2' %>
-      </div>
-    </div>
-    <div class="col-md-3">          
-      <div class="form-group">
-        <%= collection_select nil, nil, @employees, :id, :full_name, { include_blank: 'Select Peer 3' }, class: 'form-control', name: 'partners[]', id: 'partner3' %>
-      </div>
-    </div>
-  </div>  <!-- .col-md-12 -->
-</div>  <!-- .row -->          
+  </div>
+<% end %>

@@ -1,7 +1,7 @@
-class User::QCEs::ClienteleInstrumentsController < User::ApplicationController
+class User::QCEs::PartnershipInstrumentsController < User::ApplicationController
 
   EVALUATION_CONTEXT = 'Faculty Member'
-  INSTRUMENT_CONTEXT = 'Clientele Satisfaction'
+  INSTRUMENT_CONTEXT = 'Partnership Development'
 
   before_action :set_qce
 
@@ -9,17 +9,17 @@ class User::QCEs::ClienteleInstrumentsController < User::ApplicationController
   def create    
     # render html: params.inspect and return true
 
-    client_ids = params[:clients].uniq
-    client_ids.delete ""
-    client_ids.delete current_user.account_id.to_s
+    partner_ids = params[:partners].uniq
+    partner_ids.delete ""
+    partner_ids.delete current_user.account_id.to_s
 
-    if client_ids.count < 3
+    if partner_ids.count < 3
       flash.now.alert = "Please complete all 3 unique evaluators."
       @employees = Employee.all
       render 'user/qces/edit' and return true
     else
       # NOTE: An error might be raised here if one employee_id isn't found
-      employees = Employee.includes(:rank).find client_ids
+      employees = Employee.includes(:rank).find partner_ids
       employees.each do |employee|
         rating = QCE::Rating.new
         rating.qce_id = @qce.id
@@ -34,8 +34,7 @@ class User::QCEs::ClienteleInstrumentsController < User::ApplicationController
       end
 
       respond_to do |format|
-        #@qce.update(has_assigned_peer_rating: 1)
-        format.html { redirect_to edit_qce_path(@qce), notice: 'Clientele Satisfaction instrument for 3 evaluators has been created.'}
+        format.html { redirect_to edit_qce_path(@qce), notice: 'Partnership Development instrument for 3 evaluators has been created.'}
       end      
 
     end   # if client_ids.count < 3
@@ -46,14 +45,6 @@ class User::QCEs::ClienteleInstrumentsController < User::ApplicationController
     render html: params.inspect and return true
   end
 
-  # def destroy
-  #   if @qce.peer_instruction_ratings.present?
-  #     @qce.peer_instruction_ratings.destroy_all
-  #     @qce.update(has_assigned_peer_rating: 0)
-      
-  #     redirect_to edit_qce_path(@qce), notice: 'Instruction ratings for Peers has been deleted.'
-  #   end
-  # end
 
   private
 
@@ -61,4 +52,4 @@ class User::QCEs::ClienteleInstrumentsController < User::ApplicationController
     @qce = current_user.account.qces.find(params[:qce_id])
   end
 
-end   # class User::QCEs::ClienteleInstrumentsController
+end   # class User::QCEs::PartnershipInstrumentsController

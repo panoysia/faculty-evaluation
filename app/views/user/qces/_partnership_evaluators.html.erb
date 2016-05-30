@@ -1,0 +1,13 @@
+<% evaluators = [] %>
+<% @qce.partnership_instruments.includes(:evaluator).each do |rating| %>
+  <% evaluators << rating.evaluator.full_name %>
+<% end %>  
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= text_area_tag :partnership_evaluators, evaluators.join("\n"), class: 'form-control', disabled: true, rows: 3 %>        
+      </div>
+    </div>
+  </div>
+</div>

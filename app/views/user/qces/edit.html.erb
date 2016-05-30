@@ -1,27 +1,7 @@
-<style>
-  #support_area-select {
-    margin-left: 10px;
-  }
-
-  div.qce-options {
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-
-  /*li, p {
-    display: ;
-  }*/
-
-  span.assignment {
-    color: green;
-    margin-left: 30px;
-  }
-</style>
-
 <div class="row">
   <div class="col-md-12">
     <h2 class="page-header">
-      <span><%= "QCE for #{@qce.rating_period.coverage}" %></span>
+      <span><%= "My QCE for #{@qce.rating_period.coverage}" %></span>
       <span class="pull-right label <%= @qce.completed? ? 'label-success' : 'label-danger' %>"><%= @qce.completed? ? 'Completed' : 'Incomplete' %></span>
     </h2>
   </div>  <!-- .col-md-12 -->
@@ -136,7 +116,7 @@
           </h4>
           <% if @qce.clientele_instruments.present? %>
             <%= render 'user/qces/clientele_evaluators' %>
-            <%#= render partial: 'user/qces/delete_button', locals: { route_path: qce_peer_instruction_rating_path(@qce) } %>
+            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_clientele_instrument_path(@qce) } %>
           <% else %>
             <%= render 'user/qces/clientele_selection_form' %>
           <% end %>
@@ -148,7 +128,7 @@
           </h4>
           <% if @qce.leadership_instrument.present? %>
             <%= render 'user/qces/leadership_evaluator' %>
-            <%#= render partial: 'user/qces/delete_button', locals: { route_path: qce_peer_instruction_rating_path(@qce) } %>
+            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_leadership_instrument_path(@qce) } %>
           <% else %>
             <%= render 'user/qces/leadership_selection_form' %>
           <% end %>               
@@ -156,12 +136,12 @@
 
         <div id="partnership-development">
           <h4>
-            <li>Partnership Development (3 persons) <span class="assignment <%= 'glyphicon glyphicon-ok' if @qce.leadership_instrument.present? %>"></span>
+            <li>Partnership Development (3 persons) <span class="assignment <%= 'glyphicon glyphicon-ok' if @qce.partnership_instruments.present? %>"></span>
             </li>
           </h4>
           <% if @qce.partnership_instruments.present? %>
             <%= render 'user/qces/partnership_evaluators' %>
-            <%#= render partial: 'user/qces/delete_button', locals: { route_path: qce_peer_instruction_rating_path(@qce) } %>
+            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_partnership_instrument_path(@qce) } %>
           <% else %>
             <%= render 'user/qces/partnership_selection_form' %>
           <% end %>                                   
@@ -183,3 +163,7 @@
 
   </div> <!-- .qce-options -->
 <% end # if current_user.account.rank.allows_qce_support? %>
+<div class="links">
+  <%= link_to 'View/Check', qce_path(@qce), class: 'btn btn-link' %> |
+  <%= link_to 'Back to QCEs', qces_path, class: 'btn btn-link' %>
+</div>
