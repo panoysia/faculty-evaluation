@@ -1,5 +1,5 @@
 <% evaluators = [] %>
-<% @qce.peer_instruction_ratings.includes(:evaluator).each do |rating| %>
+<% @qce.student_instruction_ratings.includes(:evaluator).each do |rating| %>
   <% evaluators << rating.evaluator.full_name %>
 <% end %>  
 <div class="row">

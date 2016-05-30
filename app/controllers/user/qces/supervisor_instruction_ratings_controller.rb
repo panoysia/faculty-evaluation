@@ -29,7 +29,7 @@ class User::QCEs::SupervisorInstructionRatingsController < User::ApplicationCont
       end
     else
       flash.now.alert = 'Please select your supervisor first.'
-      @employees = Employee.all
+      @employees = Employee.where.not(id: current_user.account.id)
       render 'user/qces/edit'
     end   # if params[:supervisor_id]
 
@@ -48,7 +48,7 @@ class User::QCEs::SupervisorInstructionRatingsController < User::ApplicationCont
   private
 
   def set_qce
-    @qce = QCE.find(params[:qce_id])
+    @qce = current_user.account.qces.find(params[:qce_id])
   end
 
 end

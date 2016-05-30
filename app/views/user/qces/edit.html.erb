@@ -58,23 +58,18 @@
     </div>  <!-- #assign-peers -->    
 
     <!-- Assign to 30 students -->
-    <div id="assign-supervisor">
-      <h4><li>Assign to 30 Students</li></h4>
-      <%= form_for qce_student_instruction_rating_path(@qce) do |f| %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="col-md-3">
-              <div class="form-group">
-                <%= f.collection_select :student_group_id, Student.select(:group_no).distinct, :group_no, :group_no, { include_blank: '--- Select Student Group ---' }, class: 'form-control' %>
-              </div>
-              <div class="form-group">
-                <%= f.submit 'Assign', class: 'btn btn-success' %>
-              </div>              
-            </div>
-          </div>
-        </div>
+    <div id="assign-students">
+      <h4>
+        <li>Assign to 30 Students (Randomly selected) <span class="assignment <%= 'glyphicon glyphicon-ok' if @qce.has_assigned_student_rating? %>"</li>
+      </h4>
+      <% if @qce.has_assigned_student_rating? %>
+        <%= render 'user/qces/selected_students' %>
+        <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_student_instruction_rating_path(@qce) } %>
+      <% else %>
+        <%= render 'user/qces/student_selection_form' %>
       <% end %>
-    </div>
+    </div>  <!-- #assign-students -->
+
   </ol>
 </div> <!-- .qce-options -->
 <!-- QCE Support Ratings: Researh/Extension/Production -->

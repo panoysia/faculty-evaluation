@@ -27,7 +27,7 @@ class User::QCEs::LeadershipInstrumentsController < User::ApplicationController
       rating.instrument = INSTRUMENT_CONTEXT
     else
       flash.now.alert = 'Please select your evaluator for the Leadership instrument.'
-      @employees = Employee.where.not(id: current_user.account.id) 
+      @employees = Employee.where.not(id: current_user.account.id)
       render 'user/qces/edit' and return true
     end   # if params[:leader].present?
       

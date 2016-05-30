@@ -12,7 +12,7 @@ class User::QCEs::PeerInstructionRatingsController < User::ApplicationController
     
     if params[:employee_ids].blank?
       flash.now.alert = "No peers selected. Please select 5 unique peers."
-      @employees = Employee.all
+      @employees = Employee.where.not(id: current_user.account.id)
       render 'user/qces/edit' and return true
     end
 
@@ -23,7 +23,7 @@ class User::QCEs::PeerInstructionRatingsController < User::ApplicationController
 
     if employee_ids.count < 5
       flash.now.alert = "Please complete all five unique peers."
-      @employees = Employee.all
+      @employees = Employee.where.not(id: current_user.account.id) 
       render 'user/qces/edit' and return true
     else
       peer_ratings = []
@@ -45,7 +45,7 @@ class User::QCEs::PeerInstructionRatingsController < User::ApplicationController
 
       respond_to do |format|
         @qce.update(has_assigned_peer_rating: 1)
-        format.html { redirect_to edit_qce_path(@qce), notice: 'Instruction rating for 5 peers has been created.'}
+        format.html { redirect_to edit_qce_path(@qce), notice: 'Instruction ratings for 5 peers have been created.'}
       end
       # @ids = params[:employee_ids]
       # @data = peer_ratings
@@ -57,7 +57,7 @@ class User::QCEs::PeerInstructionRatingsController < User::ApplicationController
       @qce.peer_instruction_ratings.destroy_all
       @qce.update(has_assigned_peer_rating: 0)
       
-      redirect_to edit_qce_path(@qce), notice: 'Instruction ratings for Peers has been deleted.'
+      redirect_to edit_qce_path(@qce), notice: 'Instruction ratings for peers have been deleted.'
     end
   end
 
@@ -65,7 +65,7 @@ class User::QCEs::PeerInstructionRatingsController < User::ApplicationController
   private
 
   def set_qce
-    @qce = QCE.find(params[:qce_id])
+    @qce = current_user.account.qces.find(params[:qce_id])
   end
 
 end   # class User::QCEs::PeerInstructionRatingsController

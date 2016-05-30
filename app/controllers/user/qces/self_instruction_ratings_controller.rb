@@ -40,7 +40,7 @@ class User::QCEs::SelfInstructionRatingsController < User::ApplicationController
   private
 
   def set_qce
-    @qce = QCE.find(params[:qce_id])
+    @qce = current_user.account.qces.find(params[:qce_id])
   end
 
 end

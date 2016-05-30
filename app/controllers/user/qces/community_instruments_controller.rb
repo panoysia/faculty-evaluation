@@ -15,7 +15,7 @@ class User::QCEs::CommunityInstrumentsController < User::ApplicationController
 
     if ids.count < 3
       flash.now.alert = "Please complete all 3 unique evaluators. You selected only #{ids.count} unique evaluator(s)."
-      @employees = Employee.where.not(id: current_user.account.id) 
+      @employees = Employee.where.not(id: current_user.account.id)
       render 'user/qces/edit' and return true
     else
       # NOTE: An error might be raised here if one employee_id isn't found
