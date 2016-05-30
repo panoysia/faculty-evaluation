@@ -33,7 +33,7 @@ class User::QCEsController < User::ApplicationController
   end
 
   def edit
-    @employees = Employee.all
+    @employees = Employee.where.not(id: current_user.account.id)
   end
 
   def update

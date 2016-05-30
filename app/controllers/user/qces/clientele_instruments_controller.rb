@@ -15,7 +15,7 @@ class User::QCEs::ClienteleInstrumentsController < User::ApplicationController
 
     if client_ids.count < 3
       flash.now.alert = "Please complete all 3 unique evaluators."
-      @employees = Employee.all
+      @employees = Employee.where.not(id: current_user.account.id) 
       render 'user/qces/edit' and return true
     else
       # NOTE: An error might be raised here if one employee_id isn't found
@@ -43,7 +43,12 @@ class User::QCEs::ClienteleInstrumentsController < User::ApplicationController
   end   # create
 
   def destroy
-    render html: params.inspect and return true
+    # render html: params.inspect and return true
+    
+    if @qce.clientele_instruments.present?
+      @qce.clientele_instruments.destroy_all
+      redirect_to edit_qce_path(@qce), notice: 'Clientele Satisfaction instruments has been deleted.'
+    end
   end
 
   # def destroy

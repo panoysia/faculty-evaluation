@@ -153,7 +153,7 @@
           </h4>
           <% if @qce.community_instruments.present? %>
             <%= render 'user/qces/community_evaluators' %>
-            <%#= render partial: 'user/qces/delete_button', locals: { route_path: qce_peer_instruction_rating_path(@qce) } %>
+            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_community_instrument_path(@qce) } %>
           <% else %>
             <%= render 'user/qces/community_selection_form' %>
           <% end %>

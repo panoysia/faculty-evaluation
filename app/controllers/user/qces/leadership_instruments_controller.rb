@@ -27,7 +27,7 @@ class User::QCEs::LeadershipInstrumentsController < User::ApplicationController
       rating.instrument = INSTRUMENT_CONTEXT
     else
       flash.now.alert = 'Please select your evaluator for the Leadership instrument.'
-      @employees = Employee.all
+      @employees = Employee.where.not(id: current_user.account.id) 
       render 'user/qces/edit' and return true
     end   # if params[:leader].present?
       
@@ -40,7 +40,12 @@ class User::QCEs::LeadershipInstrumentsController < User::ApplicationController
   end   # create
 
   def destroy
-    render html: params.inspect and return true
+    # render html: params.inspect and return true
+
+    if @qce.leadership_instrument.present?
+      @qce.leadership_instrument.destroy
+      redirect_to edit_qce_path(@qce), notice: 'Leadership instrument has been deleted.'
+    end
   end
 
 

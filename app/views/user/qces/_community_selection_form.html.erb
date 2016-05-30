@@ -9,13 +9,13 @@
       </div>
       <div class="col-md-3">          
         <div class="form-group">
-          <% value = params[:communities][0] if params[:communities].present? %>
+          <% value = params[:communities][1] if params[:communities].present? %>
           <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true, selected: value }, class: 'form-control', name: 'communities[]', id: 'community2' %>
         </div>
       </div>
       <div class="col-md-3">          
         <div class="form-group">
-          <% value = params[:communities][0] if params[:communities].present? %>
+          <% value = params[:communities][2] if params[:communities].present? %>
           <%= collection_select nil, nil, @employees, :id, :full_name, { prompt: true, selected: value }, class: 'form-control', name: 'communities[]', id: 'community3' %>
         </div>
       </div>
