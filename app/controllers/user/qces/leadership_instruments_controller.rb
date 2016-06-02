@@ -16,7 +16,14 @@ class User::QCEs::LeadershipInstrumentsController < User::ApplicationController
       # NOTE: An error might be raised here if one employee_id isn't found
       employees = Employee.includes(:rank).find id
 
-      rating = QCE::Rating.new
+        if @qce.support_area == 'Research'
+          rating = QCE::Research.new
+        elsif @qce.support_area == 'Extension'
+          rating = QCE::Extension.new
+        elsif @qce.support_area == 'Production'
+          rating = QCE::Production.new
+        end
+        
       rating.qce_id = @qce.id
       rating.type = @qce.support_area
       

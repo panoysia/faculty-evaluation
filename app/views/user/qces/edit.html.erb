@@ -1,3 +1,6 @@
+<div class="links">
+  <%= link_to '< Back to QCEs', qces_path, class: 'btn btn-link' %>
+</div>
 <div class="row">
   <div class="col-md-12">
     <h2 class="page-header">
@@ -9,8 +12,8 @@
 <div>
   <h4>Your current rank: <%= @current_user.account.rank.full_name %></h4>
 </div>
-<div class="qce-options">  
-  <h3 class="page-header">Ratings for Instruction/Teaching Effectiveness</h3>
+<div class="qce-options">
+  <h3 id="instruction-ratings" class="page-header">Ratings for Instruction/Teaching Effectiveness <%= link_to '(View/Check)', qce_path(@qce, anchor: 'instruction-ratings') if @qce.instruction_ratings.present? %></h3>
   <ol>
     <!-- Assign to Self -->
     <div id="assign-self">
@@ -73,10 +76,11 @@
   </ol>
 </div> <!-- .qce-options -->
 <!-- QCE Support Ratings: Researh/Extension/Production -->
-<% if current_user.account.rank.allows_qce_support? %>
+<%# if current_user.account.rank.allows_qce_support? %>
   <div class="qce-options">  
-    <h3 class="page-header">Specify a support area to rate:</h3>
-    <div id="assign-support-area" >
+    <h3 id="support-ratings" class="page-header">Specify a support area to rate: <%= link_to '(View/Check)', qce_path(@qce, anchor: 'support-ratings') if @qce.support_area.present? %></h3>
+    <!-- id="assign-support-area" -->
+    <div>
       <div class="row">
         <div class="col-md-8">
           <div class="col-md-1">
@@ -157,7 +161,7 @@
     <% end # @qce.support_area.present? %>
 
   </div> <!-- .qce-options -->
-<% end # if current_user.account.rank.allows_qce_support? %>
+<%# end # if current_user.account.rank.allows_qce_support? %>
 <div class="links">
   <%= link_to 'View/Check', qce_path(@qce), class: 'btn btn-link' %> |
   <%= link_to 'Back to QCEs', qces_path, class: 'btn btn-link' %>

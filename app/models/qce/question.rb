@@ -6,7 +6,15 @@ class QCE::Question < ActiveRecord::Base
   scope :instruction, -> { where(rating_type: 'Instruction') }  
   scope :research, -> { where(rating_type: 'Research') }
   scope :production, -> { where(rating_type: 'Production') }
-  scope :extension, -> { where(rating_type: 'Extension') }
+  scope :extension, -> (instrument = '') { where(rating_type: 'Extension') }
+  scope :latest, -> (size = 8) { order(start_at: :desc, end_at: :desc).limit(size) }  
+
+
+  scope :clientele, -> { where(instrument: 'Clientele Satisfaction') }
+  scope :leadership, -> { where(instrument: 'Leadership') }
+  scope :partnership, -> { where(instrument: 'Partnership Development') }
+  scope :community, -> { where(instrument: 'Community Responsibility') }
+
   #   scope :latest, -> (size = 8) { order(filed_at: :desc).limit(size) }
 
 

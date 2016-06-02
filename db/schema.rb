@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160529161558) do
+ActiveRecord::Schema.define(version: 20160602021958) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -30,7 +30,10 @@ ActiveRecord::Schema.define(version: 20160529161558) do
     t.date     "end_at",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "nbc_id"
   end
+
+  add_index "academic_years", ["nbc_id"], name: "index_academic_years_on_nbc_id"
 
   create_table "admins", force: :cascade do |t|
     t.string   "username",        limit: 20, null: false
@@ -256,12 +259,12 @@ ActiveRecord::Schema.define(version: 20160529161558) do
   end
 
   create_table "qce_rating_evaluations", force: :cascade do |t|
-    t.integer  "question_id", null: false
-    t.integer  "score"
-    t.integer  "rating_id",   null: false
-    t.string   "rating_type", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "question_id",             null: false
+    t.integer  "score",       default: 0
+    t.integer  "rating_id",               null: false
+    t.string   "rating_type",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "qce_rating_evaluations", ["question_id"], name: "index_qce_rating_evaluations_on_question_id"

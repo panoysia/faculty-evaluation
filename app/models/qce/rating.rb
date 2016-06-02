@@ -22,6 +22,11 @@ class QCE::Rating < ActiveRecord::Base
   scope :production, -> { where type: 'Production' }
   scope :extension, -> { where type: 'Extension' }
 
+  scope :clientele, -> { where instrument: 'Clientele Satisfaction' }
+  scope :leadership, -> { where instrument: 'Leadership' }
+  scope :partnership, -> { where instrument: 'Partnership Development' }  
+  scope :community, -> { where instrument: 'Community Responsibility' }
+
   # scope :clientele_instruments, -> { where instrument: 'Client Satisfaction' }
   # scope :leadership_instruments, -> { where instrument: 'Leadership' }
 
@@ -29,8 +34,7 @@ class QCE::Rating < ActiveRecord::Base
 
   # scope :community_instruments, -> { where instrument: 'Community Responsibility' }
 
-
-  after_save :create_questions, :assign_task_to_evaluator
+  after_create :create_questions, :assign_task_to_evaluator
 
 
   # Use this for resolving namespaced models in polymorphic route generation and when prefer to build routes using arrays instead of named route helpers.
@@ -38,22 +42,36 @@ class QCE::Rating < ActiveRecord::Base
     true
   end
 
+  def completed?
+    finished_at.present?
+  end
+
+  def total_score
+    evaluations.sum(:score)
+  end
+
 
   private
 
   def create_questions
-    ids = QCE::Question.instruction.ids
-    # TODO: Optimize code to prefer a bulk insert instead of looping.
-
-    ids.each do |id|
-      QCE::RatingEvaluation.create question_id: id, rating: self
-    end
   end
 
   def assign_task_to_evaluator
-    pending = QCE::RatingTask.statuses[:pending]
-    QCE::RatingTask.create evaluator: evaluator, rating: self, 
-                          employee_id: qce.employee_id, status: pending
   end
+  
+  # def create_questions
+  #   ids = QCE::Question.instruction.ids
+  #   # TODO: Optimize code to prefer a bulk insert instead of looping.
+
+  #   ids.each do |id|
+  #     QCE::RatingEvaluation.create question_id: id, rating: self
+  #   end
+  # end
+
+  # def assign_task_to_evaluator
+  #   pending = QCE::RatingTask.statuses[:pending]
+  #   QCE::RatingTask.create evaluator: evaluator, rating: self, 
+  #                         employee_id: qce.employee_id, status: pending
+  # end
 
 end   # class QCE::Rating

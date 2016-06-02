@@ -24,13 +24,7 @@ class QCE::RatingTask < ActiveRecord::Base
     owner_name = employee.full_name
     context = rating.evaluation_context
     context << " (yourself)" if context == 'Self'
-    
-    # if rating_type == INSTRUCTION
-    #   type_of_rating = 'Instruction'
-    # elsif rating_type == RESEARCH
-    #   type_of_rating = 'Research'
-    # end
-
+  
     "Rate #{owner_name} as #{context} for #{rating.type}"
   end
 
@@ -38,6 +32,12 @@ end
 
 =begin
 
+    # if rating_type == INSTRUCTION
+    #   type_of_rating = 'Instruction'
+    # elsif rating_type == RESEARCH
+    #   type_of_rating = 'Research'
+    # end
+    
 Steve Kerr:
   Rate Steve Kerr as Self for Instruction
 

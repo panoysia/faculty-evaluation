@@ -20,7 +20,11 @@ Rails.application.routes.draw do
     resource :dashboard, only: [:show]
     resources :admins
     resources :users
-    resources :nbcs
+    resources :nbcs do
+      # member do
+      #   get 'update_NBC'
+      # end
+    end
     resources :holidays
     resources :qces
     resources :cces
@@ -42,18 +46,7 @@ Rails.application.routes.draw do
         resources :rankings
         resources :leaves
       end
-
-      # member do
-        # perform_ranking_admin_employee_path
-        # admin/perform_rankings#index
-        # /admin/employees/:id/perform-ranking(.:format) 
-
-        # get 'perform-ranking'
-      # end
-
-      # collection do
-      # end
-    end
+    end   # resources :employees
 
     resources :leaves
     resources :leave_service_credits
@@ -69,7 +62,7 @@ Rails.application.routes.draw do
     resource :account, only: [:edit, :update]
   end   # namespace :admin
 
-
+  
   scope module: :user do
     root 'sessions#new'
 
@@ -93,6 +86,8 @@ Rails.application.routes.draw do
       scope module: :qces do
         # Should have been an object that manages adding these different type of QCE::InstructionRating
         resource :self_instruction_rating, only: [:create, :destroy]
+        # class User::QCEs::SelfInstructionRatingsController
+
         resource :supervisor_instruction_rating, only: [:create, :destroy]
         resource :peer_instruction_rating, only: [:create, :destroy]
         resource :student_instruction_rating, only: [:create, :destroy]
@@ -101,60 +96,34 @@ Rails.application.routes.draw do
         resource :leadership_instrument, only: [:create, :destroy]
         resource :partnership_instrument, only: [:create, :destroy]
         resource :community_instrument, only: [:create, :destroy]
-      end 
-    end
 
-    namespace :qce do
-      resources :ratings, only: [:edit, :update],
-                          path_names: { edit: :evaluate }
-      resources :instructions
-    end
-    # User::QCE::RatingsController
-    # user/qce/ratings/:id/
-    # user/qce/ratings/:id/evaluate
-=begin
+        # concern :rateable do
+        #   scope path_names: { edit: :evaluate }
+        # end
 
-    user/qces/:id
-    user/qces/:id/instruction_ratings/:rating_id
-    user/qces/:id/research_ratings/:rating_id
+        rating_types = [:instructions, :extensions,
+                        :productions, :researches]
+        rating_actions = [:show, :edit, :update]
+        custom_path_names = { edit: :evaluate }
 
-    User::EvaluationsController
-    User::RatingEvaluationsController
+        resources *rating_types, only: rating_actions,
+                                  path_names: custom_path_names #do
+        #   patch 'finalize', on: :member
+        # end
 
-    user/evaluations/:id/evaluate
-    user/rating_evaluations/1/evaluate
-    user/rating_tasks
+        # resources :instructions, :productions,
+        #           :extensions, :researches,
+        #       only: [:show, :edit, :update],
+        #       path_names: { edit: :evaluate }
 
-    /rating_tasks
-    /rating_tasks/55/evaluate
 
-    /instruction_ratings/3/evaluate
-    /research_ratings/88/evaluate
-    
-    edit: evaluate
-    patch: 
+        # User::QCEs::InstructionsController
 
-    current_user.account.instruction_ratings
-=end    
-
+      end   # scope module: :qces
+    end   # resources :qces
   end   # scope module: :user
 
-
-  #scope ':username' do
-    # resources :ratings
-    # => /panoy/leaves/3
-    # => params[:username] in controller, helper, views
-  #end
-end
-
-# namespace :ratings do
-#   resources :instructions, only: [:new, :create, :show]
-#   resources :researches, only: [:new, :create, :show]
-#   resources :extensions, only: [:new, :create, :show]
-#   resources :productions, only: [:new, :create, :show]
-
-#   resources :questions
-# end
+end   # Rails.application.routes.draw do
 
 # scope module: :evaluations do      
 #     resources :instruction_ratings,

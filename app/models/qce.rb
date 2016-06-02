@@ -1,4 +1,8 @@
 class QCE < ActiveRecord::Base
+  def self.use_relative_model_naming?
+    true
+  end
+    
   has_many :ratings, class_name: 'QCE::Rating',
                     dependent: :destroy
 
@@ -63,17 +67,3 @@ class QCE < ActiveRecord::Base
   end
 
 end   # class QCE
-
-  # def has_self_rating?
-  #   result = QCE::InstructionRating.where(qce_id: id, evaluator_type: 'Self').limit(1)
-  #   result.present? ? true : false
-  # end
-
-  # def has_supervisor_rating?
-  # end
-
-  # def has_peer_ratings?
-  # end
-
-  # def has_student_ratings?
-  # end

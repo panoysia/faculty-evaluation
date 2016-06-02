@@ -12,10 +12,23 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :description %>
-        <%= f.text_field :description, class: 'form-control' %>
+        <%= f.text_area :description, class: 'form-control', rows: 4 %>
       </div>
     </div>
   </div>
+  <% if action_name == 'edit' %>
+    <h3 class="page-header">Associate 3 Academic Year Periods</h3>
+    <%= f.fields_for :academic_year do |fb| %>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= user_account_fb.label :username %>
+            <%= user_account_fb.text_field :username, class: 'form-control', maxlength: User::USERNAME_MAX_LENGTH %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">

@@ -18,8 +18,20 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= display_number += 1 %></td>
-        <td><%= link_to task.description, edit_qce_rating_path(task.rating) %></td>
-        <td><%= task.status %></td>
+        <td><%= link_to task.description, [:edit, task.rating.qce, task.rating] %></td>
+        
+        <% if task.pending? %>
+          <td>
+            <span class="label label-warning"><%= task.status %></span>
+          </td>
+        <% elsif task.completed? %>
+          <td>
+            <span class="label label-success"><%= task.status %></span>
+          </td>
+        <% elsif task.cancelled? %>
+          <td><span class="label label-danger"><%= task.status %></span>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
