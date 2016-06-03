@@ -1,5 +1,9 @@
 class Admin::NBCsController < Admin::ApplicationController
-  before_action :set_nbc, only: [:show, :edit, :update, :destroy]
+  before_action :set_nbc, only: [:show, :edit, :update, :destroy,
+                                  :associate_academic_years,
+                                  :update_academic_years,
+                                  :remove_academic_years_association
+                                ]
 
   def index
     @nbcs = NBC.all
@@ -28,6 +32,8 @@ class Admin::NBCsController < Admin::ApplicationController
   end
 
   def update
+    # render html: params.inspect and return true
+
     respond_to do |format|    
       if @nbc.update(nbc_params)
         format.html {
@@ -50,6 +56,28 @@ class Admin::NBCsController < Admin::ApplicationController
     end
   end
 
+  def associate_academic_years
+    # @years = AcademicYear.display_all
+  end
+
+  def update_academic_years
+    # TODO: Make sure to have 3 unique Academic Year records
+    
+    # render html: params.inspect and return true  
+    ids = params[:academic_year_ids]
+    AcademicYear.where(id: ids).update_all(nbc_id: @nbc.id)
+    redirect_to associate_academic_years_admin_nbc_path(@nbc),
+      notice: 'Selected academic years have been successfully associated to this NBC record.'
+  end
+
+  def remove_academic_years_association
+    # render html: params.inspect and return true
+
+    @nbc.academic_years.update_all nbc_id: nil
+    redirect_to associate_academic_years_admin_nbc_path(@nbc),
+      notice: 'Association of NBC from selected academic years have been removed successfully.'
+  end
+
 
   private  
 
@@ -58,7 +86,7 @@ class Admin::NBCsController < Admin::ApplicationController
   end
 
   def nbc_params
-    params.require(:nbc).permit(:name, :description)
+    params.require(:nbc).permit(:name, :description, academic_years_attributes: [:id])
   end
-  
+
 end

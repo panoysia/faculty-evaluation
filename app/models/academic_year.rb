@@ -11,6 +11,8 @@ class AcademicYear < ActiveRecord::Base
 
   after_create :create_two_rating_periods
 
+  scope :unused, -> { where(nbc_id: nil) }
+
 
   def self.display_all
     order(start_at: :desc, end_at: :desc)

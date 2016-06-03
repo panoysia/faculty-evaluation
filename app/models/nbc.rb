@@ -8,7 +8,6 @@ class NBC < ActiveRecord::Base
   accepts_nested_attributes_for :academic_years
     #reject_if: lambda { |attributes| attributes['username'].blank? && attributes['password'].blank? }
 
-
   #  scope :current, -> { where(is_current: 1).limit(1) }
   
   validates :name, presence: true

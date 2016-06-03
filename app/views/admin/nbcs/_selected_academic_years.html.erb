@@ -1,0 +1,23 @@
+<% years = @nbc.academic_years.display_all %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= label_tag 'academic_year1', 'Academic Year 1' %>
+        <%= text_field_tag :year1, years.first.coverage, class: 'form-control', disabled: true %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= label_tag 'academic_year2', 'Academic Year 2' %>
+        <%= text_field_tag :year2, years.second.coverage, class: 'form-control', disabled: true %>        
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= label_tag 'academic_year3', 'Academic Year 3' %>
+        <%= text_field_tag :year3, years.third.coverage, class: 'form-control', disabled: true %>
+      </div>
+    </div>
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->

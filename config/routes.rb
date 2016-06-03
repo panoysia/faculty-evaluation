@@ -21,9 +21,11 @@ Rails.application.routes.draw do
     resources :admins
     resources :users
     resources :nbcs do
-      # member do
-      #   get 'update_NBC'
-      # end
+      member do
+        get 'associate-academic-years'
+        patch 'update-academic-years'
+        delete 'remove_academic_years_association'
+      end
     end
     resources :holidays
     resources :qces
@@ -42,6 +44,7 @@ Rails.application.routes.draw do
         resources :voluntary_works
         resources :work_experiences
 
+        resources :cce_histories
         resources :career_paths
         resources :rankings
         resources :leaves

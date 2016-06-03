@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header"><%= @nbc.name %></h2>
+    <h4><%= @nbc.description %></h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h3 class="page-header">Academic years covered:</h3>
+    <ul>
+      <% @nbc.academic_years.display_all.each do |year| %>
+        <li><%= year.coverage %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="links">
+  <%= link_to 'Edit', edit_admin_nbc_path(@nbc), class: 'btn btn-link' %> |
+  <%= link_to 'Back to NBCs', admin_nbcs_path, class: 'btn btn-link' %>  
+</div>

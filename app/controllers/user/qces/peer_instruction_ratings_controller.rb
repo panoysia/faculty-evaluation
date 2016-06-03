@@ -23,7 +23,7 @@ class User::QCEs::PeerInstructionRatingsController < User::ApplicationController
 
     if employee_ids.count < 5
       flash.now.alert = "Please complete all five unique peers."
-      @employees = Employee.where.not(id: current_user.account.id) 
+      @employees = Employee.where.not(id: current_user.account.id)
       render 'user/qces/edit' and return true
     else
       peer_ratings = []

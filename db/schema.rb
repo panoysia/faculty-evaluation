@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602021958) do
+ActiveRecord::Schema.define(version: 20160602082026) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -62,6 +62,10 @@ ActiveRecord::Schema.define(version: 20160602021958) do
     t.string   "name",       limit: 100, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "employee_cce_scorings", force: :cascade do |t|
+    t.decimal "score", precision: 5, scale: 2, null: false
   end
 
   create_table "employee_civil_service_eligibilities", force: :cascade do |t|

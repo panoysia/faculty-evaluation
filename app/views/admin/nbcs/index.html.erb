@@ -27,11 +27,16 @@
         <td><%= link_to nbc.name, admin_nbc_path(nbc) %></td>
         <td><%= nbc.description %></td>
         <td>
-          <%= link_to edit_admin_nbc_path(nbc)   do %>
+          <%= link_to edit_admin_nbc_path(nbc), title: 'Edit', data: { toggle: 'tooltip'} do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %>
-          <%= link_to admin_nbc_path(nbc), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+          <%= link_to admin_nbc_path(nbc), method: :delete,
+                title: 'Delete',
+                data: { toggle: 'tooltip', confirm: 'Do you really want to delete this record?' } do %>
             <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+          <%= link_to associate_academic_years_admin_nbc_path(nbc), title: 'Associate', data: { toggle: 'tooltip' }  do %>
+          <span class="glyphicon glyphicon-random"></span>
           <% end %>
         </td>
       </tr>

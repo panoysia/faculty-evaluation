@@ -1,0 +1,27 @@
+<style>
+  form {
+    margin-top: 10px;
+  }
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">Academic year association to NBC <%= @nbc.name %></h2>
+  </div>
+</div>
+<% if @nbc.academic_years.present? %>
+  <%= render 'selected_academic_years' %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-4">
+        <%= button_to 'Delete',
+            remove_academic_years_association_admin_nbc_path(@nbc),
+            method: :delete, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render 'academic_year_selection_form' %>
+<% end %>
+<div class="links">
+  <%= link_to '< Back to NBCs', admin_nbcs_path, class: 'btn btn-link' %>
+</div>
