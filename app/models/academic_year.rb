@@ -23,7 +23,7 @@ class AcademicYear < ActiveRecord::Base
   end
   
   def coverage_in_years
-    "#{start_at.year} - #{end_at.year}"
+    "#{start_at.year}-#{end_at.year}"
   end
 
   def coverage_with_details

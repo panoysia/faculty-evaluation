@@ -10,6 +10,7 @@ class User::QCEs::InstructionsController < User::ApplicationController
   end
 
   def show
+    @qce_id = ::QCE.find(params[:qce_id])
     @rating = ::QCE::Instruction.find(params[:id]) 
   end
 

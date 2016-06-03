@@ -2,6 +2,8 @@ class Employee::CivilServiceEligibility < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: 'Employee::CCEScoring'
 
   validates :career_service, presence: true, length: { maximum: 30 }
   validates :rating, presence: true # validate numericality?

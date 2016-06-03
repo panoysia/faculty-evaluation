@@ -4,6 +4,8 @@ class Employee::Education < ActiveRecord::Base
   LEVEL_TYPES = %w[College Masters Doctorate]
 
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: 'Employee::CCEScoring'
 
   validates :level, presence: true, inclusion: { 
     in: LEVEL_TYPES.each_index.map { |index| index } 

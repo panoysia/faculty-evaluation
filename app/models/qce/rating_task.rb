@@ -24,8 +24,10 @@ class QCE::RatingTask < ActiveRecord::Base
     owner_name = employee.full_name
     context = rating.evaluation_context
     context << " (yourself)" if context == 'Self'
-  
-    "Rate #{owner_name} as #{context} for #{rating.type}"
+
+    # "Rate #{owner_name} as #{context} for #{rating.type}"
+    
+    "Rate #{owner_name} as #{context} for #{rating.type} — #{rating.qce.rating_period.coverage_in_years}"
   end
 
 end

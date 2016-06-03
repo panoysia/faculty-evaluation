@@ -2,6 +2,8 @@ class Employee::WorkExperience < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: 'Employee::CCEScoring'
 
   validates :position_title, :company, 
               presence: true,

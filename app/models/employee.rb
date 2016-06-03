@@ -70,6 +70,9 @@ class Employee < ActiveRecord::Base
   has_many :rating_tasks, as: :evaluator,
                           class_name: 'QCE::RatingTask',
                           dependent: :destroy
+  
+  has_many :cce_scorings, class_name: 'Employee::CCEScoring',
+                          dependent: :destroy
 
   # QCE::RatingTask association:
   #   belongs_to :evaluator, polymorphic: true

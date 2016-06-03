@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     #get 'leaves/view' => "leave_viewings#index"
     #get 'leaves/search' => "leave_searches#index"
     #get 'leave_service_credits/search' => "leave_service_credits#index"
-    
+
     resource :dashboard, only: [:show]
     resources :admins
     resources :users
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     resources :holidays
     resources :qces
     resources :cces
-    
+
     namespace :qce do
       resources :questions, only: [:index]
     end
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
         resources :voluntary_works
         resources :work_experiences
 
-        resources :cce_histories
+        resources :cce_scorings, only: [:index]
         resources :career_paths
         resources :rankings
         resources :leaves
@@ -65,7 +65,6 @@ Rails.application.routes.draw do
     resource :account, only: [:edit, :update]
   end   # namespace :admin
 
-  
   scope module: :user do
     root 'sessions#new'
 
@@ -100,28 +99,13 @@ Rails.application.routes.draw do
         resource :partnership_instrument, only: [:create, :destroy]
         resource :community_instrument, only: [:create, :destroy]
 
-        # concern :rateable do
-        #   scope path_names: { edit: :evaluate }
-        # end
-
         rating_types = [:instructions, :extensions,
-                        :productions, :researches]
+                            :productions, :researches]
         rating_actions = [:show, :edit, :update]
         custom_path_names = { edit: :evaluate }
 
         resources *rating_types, only: rating_actions,
                                   path_names: custom_path_names #do
-        #   patch 'finalize', on: :member
-        # end
-
-        # resources :instructions, :productions,
-        #           :extensions, :researches,
-        #       only: [:show, :edit, :update],
-        #       path_names: { edit: :evaluate }
-
-
-        # User::QCEs::InstructionsController
-
       end   # scope module: :qces
     end   # resources :qces
   end   # scope module: :user

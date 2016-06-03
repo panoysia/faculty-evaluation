@@ -4,7 +4,8 @@
 <div class="row">
   <div class="col-md-12">
     <h2 class="page-header">
-      <span><%= "My QCE for #{@qce.rating_period.coverage}" %></span>
+      <!-- <span><%#= "My QCE for #{@qce.rating_period.coverage}" %></span> -->
+      <span><%= "My QCE for #{@qce.rating_period.coverage_in_years}" %></span>
       <span class="pull-right label <%= @qce.completed? ? 'label-success' : 'label-danger' %>"><%= @qce.completed? ? 'Completed' : 'Incomplete' %></span>
     </h2>
   </div>  <!-- .col-md-12 -->
@@ -76,7 +77,7 @@
   </ol>
 </div> <!-- .qce-options -->
 <!-- QCE Support Ratings: Researh/Extension/Production -->
-<%# if current_user.account.rank.allows_qce_support? %>
+<% if current_user.account.rank.allows_qce_support? %>
   <div class="qce-options">  
     <h3 id="support-ratings" class="page-header">Specify a support area to rate: <%= link_to '(View/Check)', qce_path(@qce, anchor: 'support-ratings') if @qce.support_area.present? %></h3>
     <!-- id="assign-support-area" -->
@@ -161,7 +162,7 @@
     <% end # @qce.support_area.present? %>
 
   </div> <!-- .qce-options -->
-<%# end # if current_user.account.rank.allows_qce_support? %>
+<% end # if current_user.account.rank.allows_qce_support? %>
 <div class="links">
   <%= link_to 'View/Check', qce_path(@qce), class: 'btn btn-link' %> |
   <%= link_to 'Back to QCEs', qces_path, class: 'btn btn-link' %>

@@ -33,6 +33,9 @@
     color: red;
   }
 </style>
+<div class="links">
+  <%= link_to '< Back to QCE', qce_path(@qce_id), class: 'btn btn-link' %>
+</div>
 <div id="rating-info" class="center">  
   <% if @rating.completed? %>
     <h4><span class="label label-success">Completed</span></h4>
@@ -40,7 +43,8 @@
     <h4><span class="label label-warning">Pending</span></h4>
   <% end %>
   <h3>Rating for Instruction</h3>
-  <p>Rating Period: <strong><%= @rating.qce.rating_period.coverage %></strong></p>
+  <!-- <p>Rating Period: <strong><%#= @rating.qce.rating_period.coverage %></strong></p> -->
+  <p>Rating Period: <strong><%= @rating.qce.rating_period.coverage_in_years %></strong></p>  
   <p>Name of Faculty: <strong><%= @rating.qce.employee.full_name %></strong></p>
   <p>Academic Rank: <strong><%= @rating.qce.employee.rank.full_name %></strong></p>
   <p>Evaluator: <strong><%= "#{@rating.evaluator_name} (as #{@rating.evaluation_context})" %></strong></p>
@@ -115,7 +119,7 @@
       <% end %>
       <tr>
         <td colspan="2" class="text-right">
-          <strong>Total Score</strong>
+          <strong>Subtotal</strong>
         </td>
         <td colspan="5" class="text-right">
           <strong><%= commitment_evaluations.sum(&:score) %></strong>
@@ -152,7 +156,7 @@
       <% end %>
       <tr>
         <td colspan="2" class="text-right">
-          <strong>Total Score</strong>
+          <strong>Subtotal</strong>
         </td>
         <td colspan="5" class="text-right">
           <strong><%= knowledge_evaluations.sum(&:score) %></strong>
@@ -189,7 +193,7 @@
       <% end %>
       <tr>
         <td colspan="2" class="text-right">
-          <strong>Total Score</strong>
+          <strong>Subtotal</strong>
         </td>
         <td colspan="5" class="text-right">
           <strong><%= teaching_evaluations.sum(&:score) %></strong>
@@ -226,7 +230,7 @@
       <% end %>
       <tr>
         <td colspan="2" class="text-right">
-          <strong>Total Score</strong>
+          <strong>Subtotal</strong>
         </td>
         <td colspan="5" class="text-right">
           <strong><%= management_evaluations.sum(&:score) %></strong>
@@ -237,7 +241,7 @@
         <td colspan="5"></td>
       </tr>
 
-      <!-- Overall score -->
+      <!-- Total score -->
       <tr>
         <td colspan="2" class="text-right">
           <strong>Total Score</strong>
@@ -249,3 +253,6 @@
     </tbody>
   </table>
 <% end # form_tag %>
+<div class="links">
+  <%= link_to '< Back to QCE', qce_path(@qce_id), class: 'btn btn-link' %>
+</div>

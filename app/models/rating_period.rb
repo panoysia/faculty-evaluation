@@ -16,6 +16,11 @@ class RatingPeriod < ActiveRecord::Base
     "#{semester.ordinalize} Semester of #{academic_year.coverage}"
   end
 
+  def coverage_in_years
+    # 1st Semester SY 2016-2017 (not 1st Sem June 2016-March 2017)
+    "#{semester.ordinalize} Semester SY #{academic_year.coverage_in_years}"
+  end
+  
 end
 
 # start_at_year = start_at.strftime '%b %e %Y'

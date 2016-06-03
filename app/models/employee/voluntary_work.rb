@@ -2,6 +2,8 @@ class Employee::VoluntaryWork < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: 'Employee::CCEScoring'
 
   validates :organization, presence: true, length: { maximum: 70 }
   validates :start_at, :end_at, presence: true

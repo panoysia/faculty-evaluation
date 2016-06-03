@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602082026) do
+ActiveRecord::Schema.define(version: 20160603203048) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -64,9 +64,31 @@ ActiveRecord::Schema.define(version: 20160602082026) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "employee_cce_scorings", force: :cascade do |t|
-    t.decimal "score", precision: 5, scale: 2, null: false
+  create_table "cce_scoring_guides", force: :cascade do |t|
+    t.string   "description",                         null: false
+    t.integer  "criteria",                            null: false
+    t.decimal  "points",      precision: 5, scale: 2, null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
+
+  create_table "employee_cce_scorings", force: :cascade do |t|
+    t.integer  "employee_id",                                    null: false
+    t.integer  "cce_scorable_id",                                null: false
+    t.string   "cce_scorable_type",                              null: false
+    t.integer  "nbc_id"
+    t.integer  "cce_scoring_guide_id",                           null: false
+    t.decimal  "score",                  precision: 5, scale: 2, null: false
+    t.integer  "criteria",                                       null: false
+    t.string   "supporting_description"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+  end
+
+  add_index "employee_cce_scorings", ["cce_scorable_type", "cce_scorable_id"], name: "idx_cce_scorable_on_employee_cce_scorings"
+  add_index "employee_cce_scorings", ["cce_scoring_guide_id"], name: "idx_cce_scoring_guide_id_on_employee_cce_scorings"
+  add_index "employee_cce_scorings", ["employee_id"], name: "idx_employee_id_on_employee_cce_scorings"
+  add_index "employee_cce_scorings", ["nbc_id"], name: "idx_nbc_id_on_employee_cce_scorings"
 
   create_table "employee_civil_service_eligibilities", force: :cascade do |t|
     t.string   "career_service",          limit: 30, null: false

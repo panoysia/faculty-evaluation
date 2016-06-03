@@ -19,7 +19,8 @@
       <% @available_rating_periods.each do |period| %>
         <tr>
           <td><%= display_number += 1 %></td>
-          <td><%= period.coverage %></td>
+          <!-- <td><%#= period.coverage %></td> -->
+          <td><%= period.coverage_in_years %></td>
           <td><%= button_to 'Begin', { action: :create }, class: 'btn btn-success', params: { 'qce[rating_period_id]': period.id } %></td>
         </tr>
       <% end %>
@@ -45,7 +46,8 @@
       <% @qces.each do |qce| %>
         <tr>
           <td><%= display_number += 1 %></td>
-          <td><%= qce.rating_period.coverage %></td>
+          <!-- <td><%#= qce.rating_period.coverage %></td> -->
+          <td><%= qce.rating_period.coverage_in_years %></td>
           <td>
             <span class="label <%= qce.completed? ? 'label-success' : 'label-danger' %>">
               <%= qce.completed? ? 'Completed' : 'Incomplete' %>

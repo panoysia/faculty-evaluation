@@ -31,7 +31,8 @@
     <h4><span class="label label-warning">Pending</span></h4>
   <% end %>  
   <h3>Rating for Instruction</h3>
-  <p>Rating Period: <strong><%= @rating.qce.rating_period.coverage %></strong></p>
+  <!-- <p>Rating Period: <strong><%#= @rating.qce.rating_period.coverage %></strong></p> -->
+  <p>Rating Period: <strong><%= @rating.qce.rating_period.coverage_in_years %></strong></p>
   <p>Name of Faculty: <strong><%= @rating.qce.employee.full_name %></strong></p>
   <p>Academic Rank: <strong><%= @rating.qce.employee.rank.full_name %></strong></p>
   <p>Evaluator: <strong><%= "#{@rating.evaluator_name} (as #{@rating.evaluation_context})" %></strong></p>

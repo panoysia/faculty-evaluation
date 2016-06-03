@@ -7,7 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>  
-  <%= render 'user/navbar' unless controller_name == 'sessions' %>
+  
+  <% unless controller_name == 'sessions' %>
+    <% if @current_user.account.is_a? Employee  %>
+      <%= render 'user/navbar' %>
+    <% else %>
+      <%= render 'user/student_navbar' %>
+    <% end %>
+  <% end %>
   <div class="app-container">
     <%= render 'shared/alert' %>
     <div class="container-fluid">    
