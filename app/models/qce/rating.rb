@@ -27,6 +27,8 @@ class QCE::Rating < ActiveRecord::Base
   scope :partnership, -> { where instrument: 'Partnership Development' }  
   scope :community, -> { where instrument: 'Community Responsibility' }
 
+  scope :completed, -> { where.not(finished_at: nil) }
+  
   # scope :clientele_instruments, -> { where instrument: 'Client Satisfaction' }
   # scope :leadership_instruments, -> { where instrument: 'Leadership' }
 

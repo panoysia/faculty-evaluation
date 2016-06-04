@@ -6,6 +6,9 @@
     <h2 class="page-header">
       <!-- <span><%#= "My QCE for #{@qce.rating_period.coverage}" %></span> -->
       <span><%= "My QCE for #{@qce.rating_period.coverage_in_years}" %></span>
+      <% if @qce.completed? %>
+        <!--  -->
+      <% end %>
       <span class="pull-right label <%= @qce.completed? ? 'label-success' : 'label-danger' %>"><%= @qce.completed? ? 'Completed' : 'Incomplete' %></span>
     </h2>
   </div>  <!-- .col-md-12 -->

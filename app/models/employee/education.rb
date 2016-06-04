@@ -17,6 +17,8 @@ class Employee::Education < ActiveRecord::Base
   validates :grade_units, length: { maximum: 7 }
   validates :honors_received, length: { maximum: 65535 }
 
+  after_create :add_cce_scoring_record
+
   # Use this for resolving namespaced models in polymorphic route generation and when prefer to build routes using arrays instead of named route helpers.
   def self.use_relative_model_naming?
     true
@@ -26,4 +28,8 @@ class Employee::Education < ActiveRecord::Base
     column_for_attribute(field_name.to_s.to_sym).limit
   end
   
+  def add_cce_scoring_record
+    puts self
+  end
+
 end
