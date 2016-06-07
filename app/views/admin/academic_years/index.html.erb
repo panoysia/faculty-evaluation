@@ -1,4 +1,3 @@
-<% display_number = 0 %>
 <div class="row">
   <div class="col-md-12">
     <h2 class="page-header">
@@ -21,9 +20,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @academic_years.each do |academic_year| %>
+    <% @academic_years.each_with_index do |academic_year, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= date_format_readable(academic_year.start_at) %></td>
         <td><%= date_format_readable(academic_year.end_at) %></td>
         <td>

@@ -35,7 +35,6 @@
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
 <%= render 'admin/leave_service_credits/search_box' %>
-<% display_number = 0 %>
 <% unless @remaining_leaves.nil? %>
   <div class="row">
     <div class="col-md-6">
@@ -69,9 +68,9 @@
       </tr>
     </thead>
     <tbody>
-      <% @leaves.each do |leave| %>
+      <% @leaves.each_with_index do |leave, index| %>
         <tr>
-          <td><%= display_number += 1 %></td>
+          <td><%= index += 1 %></td>
           <td><%= link_to leave.employee.full_name, admin_employee_leaves_path(leave.employee) %></td>
           <td><%= date_format_readable(leave.filed_at) %></td>
           <td><%= date_format_readable(leave.start_at) %></td>

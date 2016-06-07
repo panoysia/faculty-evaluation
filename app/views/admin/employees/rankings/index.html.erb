@@ -1,5 +1,4 @@
 <% provide(:content_id, 'id=rankings-content') %>
-<% display_number = 0 %>
 <div>
   <%= link_to new_admin_employee_ranking_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span> New
@@ -18,9 +17,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @rankings.each do |ranking| %>
+    <% @rankings.each_with_index do |ranking, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= ranking.nbc.name %></td>
         <td><%= ranking.cce_total_points %></td>
         <td><%= ranking.qce_total_points %></td>

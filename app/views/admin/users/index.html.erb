@@ -1,4 +1,3 @@
-<% display_number = 0 %>
 <h2 class="page-header">Users</h2>
 <%= link_to 'New User', new_admin_user_path, class: 'btn btn-primary' %>
 <table class="table">
@@ -11,9 +10,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
+    <% @users.each_with_index do |user, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <!-- <td><%#= 'link employee name' %></td> -->
         <td><%= user.username %></td>
         <td><%= link_to 'Show', [:admin, user] %></td>

@@ -3,7 +3,6 @@
     <h2 class="page-header">QCEs</h2>
   </div>  <!-- .col-md-12 -->
 </div> <!-- .row -->
-<% display_number = 0 %>
 <div>
   <h4>Available Ratings Periods for creating QCEs</h4>
   <table class="table table-bordered table-striped table-master content">
@@ -16,9 +15,9 @@
     </thead>
     <tbody>
       <%# if true %>
-      <% @available_rating_periods.each do |period| %>
+      <% @available_rating_periods.each_with_index do |period, index| %>
         <tr>
-          <td><%= display_number += 1 %></td>
+          <td><%= index += 1 %></td>
           <!-- <td><%#= period.coverage %></td> -->
           <td><%= period.coverage_in_years %></td>
           <td><%= button_to 'Begin', { action: :create }, class: 'btn btn-success', params: { 'qce[rating_period_id]': period.id } %></td>
@@ -30,7 +29,6 @@
 </div>
 
 <!-- Show previous and completed QCEs -->
-<% display_number = 0 %>
 <div>
   <h4>QCEs</h4>
   <table class="table table-bordered table-striped table-master content">
@@ -43,9 +41,9 @@
       </tr>
     </thead>
     <tbody>
-      <% @qces.each do |qce| %>
+      <% @qces.each_with_index do |qce, index| %>
         <tr>
-          <td><%= display_number += 1 %></td>
+          <td><%= index += 1 %></td>
           <!-- <td><%#= qce.rating_period.coverage %></td> -->
           <td><%= qce.rating_period.coverage_in_years %></td>
           <td>

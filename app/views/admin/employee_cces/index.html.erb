@@ -26,7 +26,7 @@
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
 <%= render 'search_box' %>
-<% display_number = 0 %>
+
 
 
 
@@ -47,9 +47,9 @@
       </tr>
     </thead>
     <tbody>
-      <% @actions.each do |action| %>
+      <% @actions.each_with_index do |action, index| %>
         <tr>
-          <td><%= display_number += 1 %></td>
+          <td><%= index += 1 %></td>
           <td><%= action.name %></td>
           <td><%= category_type_to_string(action.category) %></td>
           <td><%= action.start_at %></td>

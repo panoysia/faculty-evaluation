@@ -31,7 +31,6 @@
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
 <%= render 'search_box' %>
-<% display_number = 0 %>
 <table class="table table-bordered table-striped table-master content">
   <thead>
     <tr>
@@ -46,9 +45,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @leave_service_credits.each do |credit| %>
+    <% @leave_service_credits.each_with_index do |credit, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= credit.employee.full_name %></td>
         <td><%= credit.academic_year.coverage_with_details %></td>
         <td><%= credit.no_of_days %></td>

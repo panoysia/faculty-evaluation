@@ -10,9 +10,8 @@ class QCE::RatingTask < ActiveRecord::Base
   belongs_to :evaluator, polymorphic: true
   belongs_to :rating, polymorphic: true
   
-  # get the recent tasks 
-  # scope :latest, -> { where }
-
+  scope :latest, -> (size = 8) { order(created_at: :desc).limit(size) }
+  
   enum status: { pending: 0, completed: 1, cancelled: 2 }
 
   # Use this for resolving namespaced models in polymorphic route generation and when prefer to build routes using arrays instead of named route helpers.

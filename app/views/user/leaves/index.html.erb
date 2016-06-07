@@ -3,7 +3,6 @@
     <h2 class="page-header"><span>My Filed Leaves<span></h2>
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
-<% display_number = 0 %>
 <table class="table table-bordered table-striped table-master content">
   <thead>
     <tr>
@@ -18,9 +17,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @leaves.each do |leave| %>
+    <% @leaves.each_with_index do |leave, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= leave.employee.full_name %></td>
         <td><%= date_format_readable(leave.filed_at) %></td>
         <td><%= date_format_readable(leave.start_at) %></td>

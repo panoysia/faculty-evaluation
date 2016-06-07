@@ -8,10 +8,9 @@
     </tr>
   </thead>
   <tbody>
-    <% display_number = 0 %>
-    <% @employees.each do |employee| %>
+    <% @employees.each_with_index do |employee, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= link_to employee.full_name, admin_employee_path(employee) %></td>
       </tr>
     <% end %>

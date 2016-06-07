@@ -1,5 +1,4 @@
 <% provide(:content_id, 'id=voluntary-works-content') %>
-<% display_number = 0 %>
 <div>
   <%= link_to new_admin_employee_voluntary_work_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span> New
@@ -18,9 +17,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @voluntary_works.each do |work| %>
+    <% @voluntary_works.each_with_index do |work, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= work.organization %></td>
         <td><%= work.position %></td>
         <td><%= work.no_of_hours %></td>

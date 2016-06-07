@@ -1,20 +1,23 @@
-<!-- <h3 class="page-header">Welcome back, <%#= current_user.username %></h3> -->
-<h2 class="page-header">Dashboard</h2>
-<% if false %>
-<div id="panel-tasks" class="panel">
-  <h4 class="page-header">Tasks</h4>
-  <p><strong><%= link_to "1# You are required to rate Virginia Figueroa" %></strong></p>
-  <p><strong><%= link_to "2# You are required to rate Anrem Balontong" %></strong></p>  
-</div>
-<% end %>
-<% if false %>
-  <div id="panel-ratings" class="panel">
-    <h4 class="page-header">Available Ratings</h4>
-    <% @opened_rating_periods.each do |period| %>
-      <p><strong><%= link_to period.coverage %></strong></p>
-    <% end %>
+<style>
+  .dashboard-container {
+    /*border: 1px solid red;*/
+    /*margin-top: 10px;*/
+  }
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">Dashboard</h2>
   </div>
-<% end %>
-<!-- 
-  qce_ratings/2016-2017/dashboard/
--->
+</div>
+<div class="row">
+  <%= render 'cce_status' %>
+</div>
+<div class="row">
+  <%= render 'latest_qces' %>
+</div>
+<div class="row">
+  <%= render 'latest_rating_tasks' %>
+</div>
+<div class="row">
+  <%= render 'latest_leaves' %>
+</div>

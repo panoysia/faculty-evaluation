@@ -76,6 +76,7 @@ class QCE < ActiveRecord::Base
 
   scope :completed, -> { where(completed: 1) }
   scope :incomplete, -> { where(completed: 0) }
+  scope :latest, -> (size = 8) { order(created_at: :desc).limit(size) }
 
 
   def for_finalization?  

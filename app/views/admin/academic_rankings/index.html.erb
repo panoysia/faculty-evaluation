@@ -3,7 +3,6 @@
     <!-- <span class="glyphicon glyphicon-plus"></span> New -->
   <%# end %>
 <!-- </span> -->
-<% display_number = 0 %>
 <div class="row">
   <div class="col-md-12">
     <h2 class="page-header">
@@ -20,9 +19,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @academic_rankings.each do |academic_rank| %>
+    <% @academic_rankings.each_with_index do |academic_rank, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= academic_rank.full_name %></td>
         <!-- <td><%#= academic_rank.position %></td> -->
       </tr>

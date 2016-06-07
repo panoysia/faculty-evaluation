@@ -1,6 +1,5 @@
 <%= render template: 'admin/leaves/index' %>
 <% unless @leaves.nil? %>
-  <% display_number = 0 %>
   <% results = "#{pluralize(@leaves.count, 'record')} found" %>
   <h3 class="page-header">Search Results: <span style="font-style: italic"><%= results %><span></h3>  
   <table class="table table-bordered table-striped table-master content">
@@ -17,9 +16,9 @@
       </tr>
     </thead>
     <tbody>
-      <% @leaves.each do |leave| %>
+      <% @leaves.each_with_index do |leave, index| %>
         <tr>
-          <td><%= display_number += 1 %></td>
+          <td><%= index += 1 %></td>
           <td><%= link_to leave.employee.full_name, admin_employee_leaves_path(leave.employee) %></td>
           <td><%= date_format_readable(leave.filed_at) %></td>
           <td><%= date_format_readable(leave.start_at) %></td>

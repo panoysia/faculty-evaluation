@@ -1,5 +1,4 @@
 <% provide(:content_id, 'id=civil-services-content') %>
-<% display_number = 0 %>
 <div>
   <%= link_to new_admin_employee_civil_service_eligibility_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span> New
@@ -19,9 +18,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @civil_services.each do |service| %>
+    <% @civil_services.each_with_index do |service, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= service.career_service %></td>
         <td><%= service.rating %></td>
         <td><%= service.date_of_exam %></td>

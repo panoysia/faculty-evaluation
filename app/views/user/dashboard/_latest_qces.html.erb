@@ -1,0 +1,40 @@
+<div class="col-md-12">
+  <h4 class="page-header">Recent <span><%= link_to 'QCEs', qces_path %> started</span></h4>
+</div>
+<div class="col-md-12">
+  <table class="table table-bordered table-striped table-condensed table-master">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th class="center">Rating Period</th>
+        <th class="center">Status</th>
+        <th class="center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @qces.each_with_index do |qce, index| %>
+        <tr>
+          <td><%= index += 1 %></td>
+          <td class="center"><%= qce.rating_period.coverage_in_years %></td>
+          <td class="center">
+            <span class="label <%= qce.completed? ? 'label-success' : 'label-danger' %>">
+              <%= qce.completed? ? 'Completed' : 'Incomplete' %>
+            </span>
+          </td>
+          <td class="center">
+            <%= link_to qce_path(qce), { title: 'Check', data: { toggle: 'tooltip' } } do %>
+              <span class="glyphicon glyphicon-zoom-in"></span> Check
+            <% end %>
+            <%= link_to edit_qce_path(qce), { title: 'Edit', data: { toggle: 'tooltip' } } do %>
+              <span class="glyphicon glyphicon-pencil"></span> Edit
+            <% end %>            
+            <%#= link_to qce_path(qce), method: :delete, title: 'Delete', data: { confirm: 'Do you really want to delete this record?',
+            toggle: 'tooltip' } do %>
+              <!-- <span class="glyphicon glyphicon-remove"></span> -->
+            <%# end %>
+          </td>              
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
+</div>

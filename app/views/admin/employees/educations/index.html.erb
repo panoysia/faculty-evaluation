@@ -1,5 +1,4 @@
 <% provide(:content_id, 'id=educations-content') %>
-<% display_number = 0 %>
 <div>
   <%= link_to new_admin_employee_education_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span> New
@@ -19,9 +18,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @educations.each do |education| %>
+    <% @educations.each_with_index do |index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= education.school_name %></td>
         <td><%= link_to education.degree_course, admin_employee_education_path(@employee, education) %></td>
         <td><%= education_level_to_string(education.level) %></td>

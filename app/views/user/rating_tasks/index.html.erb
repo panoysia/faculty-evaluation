@@ -1,9 +1,6 @@
-<% display_number = 0 %>
 <div class="row">
   <div class="col-md-12">
-    <h2 class="page-header">
-      <span>Rating Tasks</span>
-    </h2>
+    <h2 class="page-header">Rating Tasks</h2>
   </div>  <!-- .col-md-12 -->
 </div> <!-- .row -->
 <table class="table table-bordered table-striped table-master content">
@@ -15,9 +12,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @tasks.each do |task| %>
+    <% @tasks.each_with_index do |task, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= link_to task.description, [:edit, task.rating.qce, task.rating] %></td>
         
         <% if task.pending? %>

@@ -1,5 +1,4 @@
 <% provide(:content_id, 'id=other-infos-content') %>
-<% display_number = 0 %>
 <div>
   <%= link_to new_admin_employee_other_info_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span> New
@@ -15,9 +14,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @other_infos.each do |other_info| %>
+    <% @other_infos.each_with_index do |other_info, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= other_info.context %></td>
         <td><%= other_info.info %></td>
       </tr>

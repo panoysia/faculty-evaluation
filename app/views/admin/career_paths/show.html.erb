@@ -9,10 +9,9 @@
     </tr>
   </thead>
   <tbody>
-    <% display_number = 0 %>
-    <% @specializations.each do |specialization| %>
+    <% @specializations.each_with_index do |specialization, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= link_to specialization.name, admin_specialization_path(specialization) %></td>
         <td>
           <%= link_to edit_admin_specialization_path(specialization), { title: 'Edit', data: { toggle: 'tooltip' } }  do %>
@@ -41,9 +40,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @actions.each do |action| %>
+    <% @actions.each_with_index do |action, index| %>
       <tr>
-        <td><%= display_number += 1 %></td>
+        <td><%= index += 1 %></td>
         <td><%= link_to action.name, admin_career_path_action_path(action) %></td>
         <td><%= category_type_to_string(action.category) %></td>        
         <td><%= date_format_readable(action.start_at) if action.start_at.present? %></td>
