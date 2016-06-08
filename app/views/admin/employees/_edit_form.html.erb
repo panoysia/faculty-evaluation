@@ -157,16 +157,16 @@
         <div class="col-md-12">
           <div class="col-md-4">
             <div class="form-group">
-              <%= f.label :specialization_id, 'Specialization', class: 'control-label' %>
-              <%= f.collection_select :specialization_id, Specialization.order(name: :asc), :id, :name, { include_blank: true }, class: 'form-control' %>
+              <%= f.label :specialization_id, 'Specialization (Career Path)', class: 'control-label' %>
+              <%= f.collection_select :specialization_id, Specialization.order(name: :asc), :id, :name, { include_blank: '-- Select Specialization --' }, class: 'form-control' %>
             </div>
           </div>
-          <div class="col-md-4">
+<!--           <div class="col-md-4">
             <div class="form-group">
-              <%= f.label :career_path_id, 'Career Path', class: 'control-label' %>
-              <%= f.collection_select :career_path_id, CareerPath.all, :id, :name, { include_blank: '--- Select Career Path ---' }, class: 'form-control' %>
+              <%#= f.label :career_path_id, 'Career Path', class: 'control-label' %>
+              <%#= f.collection_select :career_path_id, CareerPath.all, :id, :name, { include_blank: '--- Select Career Path ---' }, class: 'form-control' %>
             </div>
-          </div>
+          </div> -->
         </div>  <!-- .col-md-12 -->
       </div>  <!-- .row -->
             

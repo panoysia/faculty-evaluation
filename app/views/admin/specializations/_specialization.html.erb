@@ -1,0 +1,14 @@
+<tr>
+  <td><%= specialization_counter += 1 %></td>
+  <td><%= link_to specialization.name, admin_specialization_path(specialization) %></td>
+  <td>
+    <% unless specialization.is_generalize? %>
+      <%= link_to edit_admin_specialization_path(specialization), { title: 'Edit', data: { toggle: 'tooltip' } }  do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+      <% end %>
+      <%= link_to admin_specialization_path(specialization), method: :delete, title: 'Delete', data: { toggle: 'tooltip', confirm: 'Do you really want to delete this record?' } do %>
+        <span class="glyphicon glyphicon-remove"></span>
+      <% end %>
+    <% end %>
+  </td>
+</tr>

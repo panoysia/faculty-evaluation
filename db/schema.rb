@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607075722) do
+ActiveRecord::Schema.define(version: 20160608022052) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -59,10 +59,12 @@ ActiveRecord::Schema.define(version: 20160607075722) do
   add_index "career_path_actions", ["career_path_id"], name: "index_career_path_actions_on_career_path_id"
 
   create_table "career_paths", force: :cascade do |t|
-    t.string   "name",       limit: 100, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",       limit: 50, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
+
+  add_index "career_paths", ["name"], name: "index_career_paths_on_name", unique: true
 
   create_table "cce_scoring_guides", force: :cascade do |t|
     t.string   "description",                         null: false
@@ -356,10 +358,11 @@ ActiveRecord::Schema.define(version: 20160607075722) do
   add_index "rating_periods", ["nbc_id"], name: "index_rating_periods_on_nbc_id"
 
   create_table "specializations", force: :cascade do |t|
-    t.string   "name",           limit: 50, null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "career_path_id",            null: false
+    t.string   "name",           limit: 100,             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "career_path_id",                         null: false
+    t.integer  "is_generalize",              default: 0
   end
 
   add_index "specializations", ["career_path_id"], name: "index_specializations_on_career_path_id"

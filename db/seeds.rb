@@ -3,8 +3,21 @@
 #   experience  = 25
 #   profdev     = 90
 #     Total = 200
+=begin
 
-# area/context/category/criteria
+# area/context/category/criteria:
+  1 is for education
+  2 is for experience
+  3 is for profdev
+  
+=end
+CCE::ScoringGuide.create [
+  {
+    description: '',
+    criteria: 2,
+    points: 0
+  }
+]
 
 # Point system for Educational Qualification
 

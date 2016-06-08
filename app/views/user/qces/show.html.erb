@@ -27,10 +27,10 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Context</th>
-        <th>Evaluator</th>
-        <th>Score</th>
-        <th>Status</th>
+        <th class="center">Context</th>
+        <th class="center">Evaluator</th>
+        <th class="center">Score</th>
+        <th class="center">Status</th>
         <th colspan="2" class="center">Actions</th>
       </tr>
     </thead>
@@ -41,14 +41,20 @@
         <th>Self (1)</th>
         <% if self_rating.present? %>
           <td><%= self_rating.evaluator_name %></td>
-          <td><%= self_rating.total_score %></td>
+          <td class="center"><%= self_rating.total_score %></td>
           
           <% if self_rating.completed? %>
-            <td><span class="label label-success">Completed</span></td>
-            <td><%= link_to 'View', [@qce, self_rating] %>&nbsp;</td>
+            <td class="center">
+              <span class="label label-success">Completed</span>
+            </td>
+            <td class="center">
+              <%= link_to 'View', [@qce, self_rating] %>&nbsp;
+            </td>
           <% else %>
-            <td><span class="label label-warning">Pending</span></td>
-            <td>
+            <td class="center">
+              <span class="label label-warning">Pending</span>
+            </td>
+            <td class="center">
               <% if self_rating.evaluator == current_user.account %>
                 <%= link_to 'Evaluate', [:edit, @qce, self_rating] %>
               <% end %>
@@ -63,12 +69,19 @@
         <th>Supervisor (1)</th>
         <% if supervisor_rating.present? %>
           <td><%= supervisor_rating.evaluator_name %></td>
-          <td><%= supervisor_rating.total_score %></td>
+          <td class="center"><%= supervisor_rating.total_score %></td>
           <% if supervisor_rating.completed? %>
-            <td><span class="label label-success">Completed</span></td>
-            <td><%= link_to 'View', [@qce, supervisor_rating] %>&nbsp;</td>
+            <td class="center">
+              <span class="label label-success">Completed</span>
+            </td>
+            <td class="center">
+              <%= link_to 'View', [@qce, supervisor_rating] %>&nbsp;
+            </td>
           <% else %>
-            <td><span class="label label-warning">Pending</span></td>
+            <td class="center">
+              <span class="label label-warning">Pending</span>
+            </td>
+            <!-- Display empty cell for pending evaluation -->
             <td></td>
           <% end %>
         <% end # if supervisor_rating.present? %>
@@ -85,12 +98,18 @@
             <td></td>
             <td colspan="1" class="center"><%= index + 1 %></td>
             <td><%= rating.evaluator_name %></td>
-            <td><%= rating.total_score %></td>
+            <td class="center"><%= rating.total_score %></td>
             <% if rating.completed? %>
-              <td><span class="label label-success">Completed</span></td>
-              <td><%= link_to 'View', [@qce, rating] %>&nbsp;</td>
+              <td class="center">
+                <span class="label label-success">Completed</span>
+              </td>
+              <td class="center">
+                <%= link_to 'View', [@qce, rating] %>&nbsp;
+              </td>
             <% else %>
-              <td><span class="label label-warning">Pending</span></td>
+              <td class="center">
+                <span class="label label-warning">Pending</span>
+              </td>
               <td></td>
             <% end %>
           </tr>
@@ -108,12 +127,18 @@
             <td></td>
             <td colspan="1" class="center"><%= index + 1 %></td>
             <td><%= rating.evaluator_name %></td>
-            <td><%= rating.total_score %></td>
+            <td class="center"><%= rating.total_score %></td>
             <% if rating.completed? %>
-              <td><span class="label label-success">Completed</span></td>
-              <td><%= link_to 'View', [@qce, rating] %>&nbsp;</td>
+              <td class="center">
+                <span class="label label-success">Completed</span>
+              </td>
+              <td class="center">
+                <%= link_to 'View', [@qce, rating] %>&nbsp;
+              </td>
             <% else %>
-              <td><span class="label label-warning">Pending</span></td>
+              <td class="center">
+                <span class="label label-warning">Pending</span>
+              </td>
               <td></td>
             <% end %>
           </tr>

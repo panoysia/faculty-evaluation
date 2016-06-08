@@ -15,6 +15,10 @@
   margin-bottom: 10px;    
 }
 
+.btn-link {
+  padding-left: 0px;
+  //border: 6px solid red;
+}
 
 // Application-related CSS
 
@@ -108,6 +112,7 @@ div#cce-scorings {
   }
 }
 
+// for elements to have a little distance
 .content {
   margin: 15px 3px;
   //border: 1px orange solid;

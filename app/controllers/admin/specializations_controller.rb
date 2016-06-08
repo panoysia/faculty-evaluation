@@ -3,7 +3,7 @@ class Admin::SpecializationsController < Admin::ApplicationController
 
 
   def index
-    @specializations = Specialization.order(name: :asc)
+    @career_paths = CareerPath.order(name: :asc)
   end
 
   def show

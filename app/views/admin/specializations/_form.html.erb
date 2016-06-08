@@ -1,3 +1,9 @@
+<%  if params[:specialization].present?
+      career_path_id = params[:specialization]
+    else
+      career_path_id = @specialization.career_path_id
+    end
+%>
 <%= form_for [:admin, @specialization] do |f| %>
   <%= error_messages_for(@specialization) %>
   <div class="row">
@@ -12,14 +18,14 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :career_path %>
-        <%= f.collection_select :career_path_id, CareerPath.order(name: :asc), :id, :name, {}, { class: 'form-control' } %>
+        <%= f.collection_select :career_path_id, CareerPath.order(name: :asc), :id, :name, { include_blank: '-- Select Career Path --', selected: career_path_id }, { class: 'form-control' } %>
       </div>
     </div>
   </div>  
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.submit class: 'btn btn-primary' %>
+        <%= f.submit class: 'btn btn-primary', disabled: @specialization.is_generalize? %>
       </div>      
     </div>
   </div>

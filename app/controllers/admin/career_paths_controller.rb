@@ -3,7 +3,7 @@ class Admin::CareerPathsController < Admin::ApplicationController
 
 
   def index
-    @career_paths = CareerPath.all
+    @career_paths = CareerPath.order(name: :asc)
   end
 
   def show

@@ -1,44 +1,57 @@
+<!-- <div class="col-md-2">
+  <div class="form-group">
+    <%#= link_to 'Check', '#', class: 'btn btn-primary' %>
+  </div>
+</div> -->
 <%= form_for([:admin, @leave]) do |f| %>
   <%= error_messages_for(@leave) %>
   <div class="row">
-    <div class="col-md-4 form-group">
-      <%= f.label 'Faculty' %>
-      <%= f.collection_select :employee_id, Employee.order(last_name: :asc), :id, :full_name, 
-      {}, { class: 'form-control', autofocus: true } %>
-    </div>
-    <!-- <div class="col-md-2">
+    <div class="col-md-4">
       <div class="form-group">
-        <%#= link_to 'Check', '#', class: 'btn btn-primary' %>
+        <%= f.label 'Faculty' %>
+        <%= f.collection_select :employee_id,
+              Employee.order(last_name: :asc), :id, :full_name, {},
+              { class: 'form-control', autofocus: true } %>
       </div>
-    </div> --> 
-  </div>  <!-- .row -->
-  <div class="row">
-    <div class="col-md-4 form-group">
-      <%= f.label :academic_year_id, 'Academic Year' %>
-      <%= f.collection_select :academic_year_id, AcademicYear.display_all, :id, :coverage_with_details, {}, { class: 'form-control', autofocus: true } %>
-    </div>
-  </div>  <!-- .row -->  
-  <div class="row">
-    <div class="col-md-4 form-group">
-      <%= f.label :filed_at %>
-      <%= f.date_field :filed_at, class: 'form-control' %>
     </div>
   </div>  <!-- .row -->
   <div class="row">
-    <div class="col-md-4 form-group">
-      <%= f.label :start_at %>
-      <%= f.date_field :start_at, class: 'form-control' %>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :academic_year_id, 'Academic Year' %>
+        <%= f.collection_select :academic_year_id, AcademicYear.display_all, :id, :coverage_with_details, {}, { class: 'form-control', autofocus: true } %>
+      </div>
     </div>
   </div>  <!-- .row -->
   <div class="row">
-    <div class="col-md-4 form-group">
-      <%= f.label :end_at %>
-      <%= f.date_field :end_at, class: 'form-control' %>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :filed_at %>
+        <%= f.date_field :filed_at, class: 'form-control' %>
+      </div>
     </div>
   </div>  <!-- .row -->
   <div class="row">
-    <div class="col-md-4 form-group">
-      <%= f.submit class: 'btn btn-primary' %>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :start_at %>
+        <%= f.date_field :start_at, class: 'form-control' %>
+      </div>
+    </div>
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :end_at %>
+        <%= f.date_field :end_at, class: 'form-control' %>
+      </div>
+    </div>
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
     </div>
   </div>
 <% end %>
