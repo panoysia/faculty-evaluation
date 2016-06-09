@@ -1,22 +1,66 @@
 <h2 class="page-header"><%= @specialization.name %></h2>
-<h4 class="page-header career-paths-subheader">Faculty members who specialize under this:</h4>
+<h4 class="page-header career-paths-subheader"><span><%= link_to 'Faculty members', admin_employees_path %></span> who specialize under this:</h4>
 <table class="table table-bordered table-striped table-master content">
   <thead>
     <tr>
       <th>#</th>
       <th>Faculty</th>
+      <td>Hired Date</td>
+      <td>Years of Service</td>
     </tr>
   </thead>
   <tbody>
     <% @employees.each_with_index do |employee, index| %>
       <tr>
         <td><%= index += 1 %></td>
-        <td><%= link_to employee.full_name, admin_employee_path(employee) %></td>
+        <td><%= link_to employee.full_name, admin_employee_path(employee), title: 'View Employee', data: { toggle: 'tooltip' } %></td>
+        <td><%= date_format_readable(employee.hired_date) %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<!-- Career Path Actions -->
+<h4 class="page-header career-paths-subheader"><span><%= link_to 'Career actions', admin_career_path_actions_path %></span> under this specialization:</h4>
+<table class="table table-bordered table-striped table-master content">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Company</th>
+      <th>Description</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @actions.each_with_index do |action, index| %>
+      <tr>
+        <td><%= index += 1 %></td>
+        <td><%= link_to action.name, admin_career_path_action_path(action), title: 'View Career Path Action', data: { toggle: 'tooltip' } %></td>
+        <td><%= category_type_to_string(action.category) %></td>        
+        <td><%= date_format_readable(action.start_at) if action.start_at.present? %></td>
+        <td><%= date_format_readable(action.end_at) if action.end_at.present? %></td>
+        <td><%= action.company %></td>
+        <td><%= action.description %></td>
+        <td>
+          <%= link_to edit_admin_career_path_action_path(action), { title: 'Edit', data: { toggle: 'tooltip' } } do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_career_path_action_path(action), method: :delete, title: 'Delete', data: { confirm: 'Do you really want to delete this record?', toggle: 'tooltip' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <div class="links">
-  <%= link_to 'Edit', [:edit, :admin, @specialization], class: 'btn btn-link' %> |
-  <%= link_to 'Back to List', admin_specializations_path, class: 'btn btn-link' %>
+  <%= link_to '< Back to Specializations', admin_specializations_path, class: 'btn btn-link' %> 
+  <% unless @specialization.is_generalize? %>
+    |&nbsp;
+    <%= link_to 'Edit', [:edit, :admin, @specialization], class: 'btn btn-link' %>
+  <% end %>
 </div>

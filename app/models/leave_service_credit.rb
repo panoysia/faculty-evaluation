@@ -3,6 +3,9 @@ class LeaveServiceCredit < ActiveRecord::Base
   belongs_to :academic_year
 
   validates :employee_id, :academic_year_id, :valid_at, presence: true
+  
+  validates :valid_at, presence: :true
+  # validates :employee, :academic_year, presence: true 
   validates :no_of_days, presence: true # numericality also
   validate :ensure_within_academic_year
 

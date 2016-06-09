@@ -1,5 +1,7 @@
 class Specialization < ActiveRecord::Base
   has_many :employees
+  has_many :career_path_actions
+  
   belongs_to :career_path
 
   scope :non_generalize, -> { where(is_generalize: 0) }

@@ -8,7 +8,7 @@ class Admin::CareerPathsController < Admin::ApplicationController
 
   def show
     @specializations = @career_path.specializations
-    @actions = @career_path.actions.latest
+    @actions = @career_path.actions.reorder(category: :asc, start_at: :desc, end_at: :desc)
   end
 
   def edit

@@ -1,16 +1,16 @@
 class AcademicRanking < ActiveRecord::Base
   ASSOCIATE_PROFESSOR_5 = 12
 
-  # Instruction only for: instructor - associate professor 4
-  # associate professor 5 - research, extension, production k
+  # Instruction only for: Instructor to Associate Professor 4
+  # Associate Professor 5 - Research, Extension, Production
 
   has_many :employees
 
-  validates :name, presence: true, 
+  validates :name, presence: true,
                     length: { maximum: 50 }
-  
+
   validates :position, presence: true,
-                      numericality: { greater_than: 0, less_than: 50 }
+                        numericality: { greater_than: 0, less_than: 50 }
 
   def full_name
     result = "#{name}"

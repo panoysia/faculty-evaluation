@@ -3,8 +3,8 @@ class Admin::EmployeesController < Admin::ApplicationController
 
 
   def index
-    @employees = Employee.includes(:rank).all
-    #@employees = Employee.all
+    @employees = Employee.includes(:rank, :specialization).order(last_name: :asc, first_name: :asc)
+    # @employees = Employee.all
   end
 
   def show
@@ -53,7 +53,8 @@ class Admin::EmployeesController < Admin::ApplicationController
   private
 
   def set_employee
-    @employee = Employee.includes(:rank).find(params[:id])
+    @employee = Employee.includes(:rank, :specialization).find(params[:id])
+    # @employee = Employee.find(params[:id])
   end
 
   def employee_params_for_create
@@ -62,6 +63,6 @@ class Admin::EmployeesController < Admin::ApplicationController
   end
   
   def employee_params_for_update
-    params.require(:employee).permit(:first_name, :last_name, :middle_name, :name_extension, :designation, :gender, :civil_status, :birth_date, :citizenship, :height, :weight, :blood_type, :gsis_no, :pagibig_no, :philhealth_no, :sss_no, :r_address, :r_zip_code, :r_telephone_no, :p_address, :p_zip_code, :p_telephone_no, :email_address, :cellphone_no, :agency_employee_no, :tin, :academic_ranking_id, :hired_date, :picture, :specialization_id, :career_path_id)
+    params.require(:employee).permit(:first_name, :last_name, :middle_name, :name_extension, :designation, :gender, :civil_status, :birth_date, :citizenship, :height, :weight, :blood_type, :gsis_no, :pagibig_no, :philhealth_no, :sss_no, :r_address, :r_zip_code, :r_telephone_no, :p_address, :p_zip_code, :p_telephone_no, :email_address, :cellphone_no, :agency_employee_no, :tin, :academic_ranking_id, :hired_date, :picture, :specialization_id)
   end
 end

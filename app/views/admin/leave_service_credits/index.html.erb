@@ -35,7 +35,7 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>Employee</th>
+      <th>Faculty</th>
       <th>Academic Year</th>
       <th># of days</th>
       <th>Valid At</th>
@@ -55,10 +55,10 @@
         <td><%= date_format_readable(credit.expire_at) %></td>
         <td><%= credit.description %></td>
         <td>
-          <%= link_to edit_admin_leave_service_credit_path(credit)   do %>
+          <%= link_to edit_admin_leave_service_credit_path(credit), title: 'Edit', data: { toggle: 'tooltip' } do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %>
-          <%= link_to admin_leave_service_credit_path(credit), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+          <%= link_to admin_leave_service_credit_path(credit), title: 'Delete', method: :delete, data: { toggle: 'tooltip', confirm: 'Do you really want to delete this record?' } do %>
             <span class="glyphicon glyphicon-remove"></span>
           <% end %>
         </td>

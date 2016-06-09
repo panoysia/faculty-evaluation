@@ -7,7 +7,9 @@ class Admin::SpecializationsController < Admin::ApplicationController
   end
 
   def show
-    @employees = @specialization.employees
+    @employees = @specialization.employees.order(hired_date: :asc, last_name: :asc, first_name: :asc)
+    @actions = @specialization.career_path_actions.
+                order(category: :asc, start_at: :desc, end_at: :desc)
   end
 
   def new

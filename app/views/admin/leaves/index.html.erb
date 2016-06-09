@@ -71,7 +71,7 @@
       <% @leaves.each_with_index do |leave, index| %>
         <tr>
           <td><%= index += 1 %></td>
-          <td><%= link_to leave.employee.full_name, admin_employee_leaves_path(leave.employee) %></td>
+          <td><%= link_to leave.employee.full_name, admin_employee_leaves_path(leave.employee), title: 'View Employee Leave data', data: { toggle: 'tooltip' } %></td>
           <td><%= date_format_readable(leave.filed_at) %></td>
           <td><%= date_format_readable(leave.start_at) %></td>
           <td><%= date_format_readable(leave.end_at) %></td>

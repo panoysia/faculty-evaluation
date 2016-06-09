@@ -11,10 +11,13 @@
   </div>  <!-- .col-md-12 -->
 </div> <!-- .row -->
 <div class="row">  
-  <% @career_paths.each do |path| %>
+  <% @career_paths.each_with_index do |path, index| %>
     <div class="col-md-12">
       <h4 class="page-header">
-        <%= link_to path.name, admin_career_path_path(path) %>
+        <strong>
+          <% text = "#{index + 1}. #{path.name} Career Path" %>
+          <%= link_to text, admin_career_path_path(path), title: 'View Career path', data: { toggle: 'tooltip' } %>
+        </strong>
       </h4>
     </div>
     <div class="col-md-12">

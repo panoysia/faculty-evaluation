@@ -79,11 +79,18 @@ class Employee < ActiveRecord::Base
 
   has_many :leaves, dependent: :destroy 
  
-  belongs_to :career_path
-  has_many :career_path_actions, through: :career_path,
-                                  class_name: 'CareerPathAction'
+ 
+  # has_many :career_path_actions, through: :specializations,
+  #                                source: : 
+  #                                 class_name: 'CareerPathAction'
 
-  belongs_to :rank, class_name: 'AcademicRanking', foreign_key: 'academic_ranking_id'
+  # Guide:
+  # has_many :replies, through: :articles, source: :comments
+  has_many :actions, through: :specialization,
+                      source: :career_path_actions
+
+  belongs_to :rank, class_name: 'AcademicRanking',
+                    foreign_key: 'academic_ranking_id'
   belongs_to :specialization
 
   #, inverse_of: :employee
@@ -97,6 +104,10 @@ class Employee < ActiveRecord::Base
     length: { maximum: 50 }
 
   with_options on: :update do |record|
+    # Check for validity of association
+    record.validates :specialization, presence: true
+    record.validates :rank, presence: true
+
     record.validates :gender, 
       inclusion: { in: GENDER_TYPES.keys.map(&:to_s) }
     
@@ -127,6 +138,8 @@ class Employee < ActiveRecord::Base
     record.validates :citizenship, :sss_no, :cellphone_no, :tin, 
                       length: { maximum: 15 } 
     
+    record.validates :hired_date, presence: true
+
     # has_attached_file :picture # styles: {}
     # validates_attachment_content_type :picture, :content_type => //    
   end
@@ -170,8 +183,14 @@ class Employee < ActiveRecord::Base
       end
     else
       (Date.current.year - birth_date.year) - 1
-    end
-    
+    end    
+  end
+
+  def years_in_service
+
+=begin    
+  6/9/2016
+=end
   end
 
 end

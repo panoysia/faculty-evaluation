@@ -1,4 +1,5 @@
 <h2 class="page-header">Academic Year</h2>
 <h5>Start: <%= date_format_readable(@academic_year.start_at )%></h5>
 <h5>End: <%= date_format_readable(@academic_year.end_at) %></h5>
-<%= link_to 'Back to Academic Years', admin_academic_years_path, class: 'btn btn-link' %>
+<%= link_to '< Back to Academic Years', admin_academic_years_path, class: 'btn btn-link' %> |&nbsp;
+<%= link_to 'Edit', edit_admin_academic_year_path(@academic_year), class: 'btn btn-link' %>

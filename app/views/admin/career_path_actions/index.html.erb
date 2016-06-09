@@ -15,10 +15,11 @@
     <tr>
       <th>#</th>
       <th>Name</th>
-      <th>Career Path</th>
+      <th>Specialization</th>
       <th>Category</th>
       <th>Start</th>
       <th>End</th>
+      <th>Company</th>
       <th>Description</th>
       <th colspan="2">Actions</th>
     </tr>
@@ -27,11 +28,13 @@
     <% @actions.each_with_index do |action, index| %>
       <tr>
         <td><%= index += 1 %></td>
-        <td><%= link_to action.name, admin_career_path_action_path(action) %></td>
-        <td><%= action.career_path.name %></td>
+        <td><%= link_to action.name, admin_career_path_action_path(action), title: 'View qualified faculty members', 
+            data: { toggle: 'tooltip' } %></td>
+        <td><%= action.specialization.name %></td>
         <td><%= category_type_to_string(action.category) %></td>        
         <td><%= date_format_readable(action.start_at) if action.start_at.present? %></td>
         <td><%= date_format_readable(action.end_at) if action.end_at.present? %></td>
+        <td><%= action.company %></td>
         <td><%= action.description %></td>
         <td>
           <%= link_to edit_admin_career_path_action_path(action), { title: 'Edit', data: { toggle: 'tooltip' } } do %>

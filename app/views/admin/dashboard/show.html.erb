@@ -1,37 +1,14 @@
 <div class="row">
-  <h2 class="page-header">Dashboard</h2>
-    
-  <div class="col-sm-12">
-   <!--  <div id="panel-nbcs" class="col-sm-6">
-      <div class="panel panel-warning">
-        <div class="panel-heading">
-          <h4 class="panel-title">NBC & Rating Periods</h4>
-        </div>
-        <div class="panel-body">
-        </div>
-      </div>
-    </div>   -->
-    <!-- .col-sm-6 for NBC -->
-
-    <div class="col-sm-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">Records Management</h4>
-        </div>
-        <div class="panel-body">    
-          <li><%= link_to 'New Faculty', new_admin_employee_path %></li>
-        </div>
-      </div>
-    </div>   <!-- .col-sm-6 for Records Management -->
-
-    <!-- Latest QCE ratings -->
-    <%#= render 'latest_QCE_ratings' %>
-
-    <!-- Latest Leaves -->
-    <%= render 'latest_leaves' %>
-
-    <!-- Upcoming Seminars/Trainings -->
-    <%#= render 'upcoming_seminars' %>
-
-  </div> <!-- .col-sm-12 -->
+  <div class="col-md-12">
+    <h2 class="page-header">Dashboard</h2>
+  </div>  
 </div>  <!-- .row -->
+<div class="row">
+  <%= render 'upcoming_career_actions' %> 
+</div>
+<div class="row">
+  <%#= render 'latest_qces' %>
+</div>
+<div class="row">
+  <%= render 'latest_leaves' %>  
+</div>

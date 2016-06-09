@@ -23,7 +23,7 @@
     <% @nbcs.each_with_index do |nbc, index| %>
       <tr>
         <td><%= index += 1 %></td>
-        <td><%= link_to nbc.name, admin_nbc_path(nbc) %></td>
+        <td><%= link_to nbc.name, admin_nbc_path(nbc), title: 'View', data: { toggle: 'tooltip' } %></td>
         <td><%= nbc.description %></td>
         <td>
           <%= link_to edit_admin_nbc_path(nbc), title: 'Edit', data: { toggle: 'tooltip'} do %>

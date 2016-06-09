@@ -26,13 +26,13 @@
         <td><%= date_format_readable(academic_year.start_at) %></td>
         <td><%= date_format_readable(academic_year.end_at) %></td>
         <td>
-          <%= link_to admin_academic_year_path(academic_year) do %>
+          <%= link_to admin_academic_year_path(academic_year), title: 'View', data: { toggle: 'tooltip' } do %>
             <span class="glyphicon glyphicon-zoom-in"></span>
           <% end %>          
-          <%= link_to edit_admin_academic_year_path(academic_year) do %>
+          <%= link_to edit_admin_academic_year_path(academic_year), title: 'Edit', data: { toggle: 'tooltip' } do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %>
-          <%= link_to admin_academic_year_path(academic_year), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+          <%= link_to admin_academic_year_path(academic_year), title: 'Delete', method: :delete, data: { toggle: 'tooltip', confirm: 'Do you really want to delete this record?' } do %>
             <span class="glyphicon glyphicon-remove"></span>
           <% end %>
         </td>

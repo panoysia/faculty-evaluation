@@ -3,10 +3,13 @@ class Admin::CareerPathActionsController < Admin::ApplicationController
 
 
   def index
-    @actions = CareerPathAction.includes(:career_path).order(category: :asc)
+    @actions = CareerPathAction.includes(:specialization).
+                order(category: :asc, start_at: :desc, end_at: :desc)
   end
 
   def show
+    @employees = @action.employees.
+                order(hired_date: :asc, last_name: :asc, first_name: :asc)
   end
 
   def new
@@ -60,7 +63,7 @@ class Admin::CareerPathActionsController < Admin::ApplicationController
   end
 
   def action_params
-    params.require(:career_path_action).permit(:name, :start_at, :end_at, :description, :category, :career_path_id, :company)
+    params.require(:career_path_action).permit(:name, :start_at, :end_at, :description, :category, :specialization_id, :company)
   end
 
 end

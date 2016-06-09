@@ -1,12 +1,12 @@
 class Admin::HolidaysController < Admin::ApplicationController
-  before_action :set_holiday, only: [:show, :edit, :update, :destroy]
+  before_action :set_holiday, only: [:edit, :update, :destroy]
 
   def index
     @holidays = Holiday.order(occurs_at: :desc)
   end
 
-  def show
-  end
+  # def show
+  # end
 
   def new
     @holiday = Holiday.new

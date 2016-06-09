@@ -1,17 +1,27 @@
+=begin
+  CareerPath
+    Specialization
+      CareerPathActions
+=end
+
 class CareerPath < ActiveRecord::Base
-  has_many :employees
-  
   has_many :specializations,
     -> { order(is_generalize: :asc, name: :asc) },
     dependent: :destroy
 
-  has_many :actions, class_name: 'CareerPathAction',
+  # Guide:
+  # has_many :replies, through: :articles, source: :comments
+  has_many :actions, through: :specializations,
+                      source: :career_path_actions,
+                      class_name: 'CareerPathAction',
                       dependent: :destroy
+
+  has_many :employees, through: :specializations,
+                        source: :employees # redundant
 
   validates :name, presence: true, 
                     uniqueness: true, 
                     length: { maximum: 50 }
-
 
   after_create :create_generalize_specialization
   after_update :update_generalize_specialization
@@ -31,7 +41,7 @@ class CareerPath < ActiveRecord::Base
   def create_generalize_specialization
     new_name = "Generalized (#{self[:name]})"
     Specialization.create name: new_name, is_generalize: true,
-                            career_path_id: self[:id]          
+                            career_path_id: self[:id]
   end
 
   def update_generalize_specialization
@@ -42,21 +52,3 @@ class CareerPath < ActiveRecord::Base
   end
 
 end
-
-=begin
-  class Employee
-    has_many :schooling
-    has_many :courses, through: :schooling
-  end
-
-  class Schooling
-    belongs_to :employee
-    belongs_to :courses
-  end
-
-  class Courses
-    has_many :schooling
-    has_many :employees, through: :schooling
-  end
-
-=end

@@ -1,6 +1,6 @@
 <tr>
   <td><%= specialization_counter += 1 %></td>
-  <td><%= link_to specialization.name, admin_specialization_path(specialization) %></td>
+  <td><%= link_to specialization.name, admin_specialization_path(specialization), title: 'View Specialization', data: { toggle: 'tooltip' } %></td>
   <td>
     <% unless specialization.is_generalize? %>
       <%= link_to edit_admin_specialization_path(specialization), { title: 'Edit', data: { toggle: 'tooltip' } }  do %>

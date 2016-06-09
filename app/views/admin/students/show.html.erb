@@ -1,11 +1,10 @@
 <p>
   <strong>First Name:</strong>
-  <%= @student.first_name %>   
+  <%= @student.first_name %>
 </p>
 <p>
   <strong>Last Name:</strong>
   <%= @student.last_name %>
 </p>
-
-<%= link_to 'Edit', edit_admin_student_path(@student), class: 'btn btn-link' %> |
-<%= link_to 'Back to Students', admin_students_path, class: 'btn btn-link' %>
+<%= link_to '< Back to Students', admin_students_path, class: 'btn btn-link' %> |&nbsp;
+<%= link_to 'Edit', edit_admin_student_path(@student), class: 'btn btn-link' %>

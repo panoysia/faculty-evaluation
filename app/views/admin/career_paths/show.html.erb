@@ -1,6 +1,10 @@
-<h2 class="page-header"><%= @career_path.name %> Career Path</h2>
+<h2 class="page-header">
+  <%= @career_path.name %> Career Path <span><%= link_to '(Edit)', edit_admin_career_path_path(@career_path) %></span>
+</h2>
 <h4 class="page-header career-paths-subheader"><span><%= link_to 'Specializations', admin_specializations_path %></span> under this path:</h4>
-<%= link_to 'New', new_admin_specialization_path(specialization: @career_path.id), class: 'btn btn-primary' %>
+<%= link_to new_admin_specialization_path(specialization: @career_path.id), class: 'btn btn-primary' do %>
+  <span class="glyphicon glyphicon-plus"></span> New
+<% end %>
 <table class="table table-bordered table-striped table-master content">
   <thead>
     <tr>
@@ -13,7 +17,7 @@
     <% @specializations.each_with_index do |specialization, index| %>
       <tr>
         <td><%= index += 1 %></td>
-        <td><%= link_to specialization.name, admin_specialization_path(specialization) %></td>
+        <td><%= link_to specialization.name, admin_specialization_path(specialization), title: 'View Specialization', data: { toggle: 'tooltip' } %></td>
         <td>
           <% unless specialization.is_generalize? %>
             <%= link_to edit_admin_specialization_path(specialization), { title: 'Edit', data: { toggle: 'tooltip' } }  do %>
@@ -29,7 +33,7 @@
   </tbody>
 </table>
 <!-- Career Path Actions -->
-<h4 class="page-header career-paths-subheader">Career actions under this path:</h4>
+<h4 class="page-header career-paths-subheader"><span><%= link_to 'Career actions', admin_career_path_actions_path %></span> under this path:</h4>
 <table class="table table-bordered table-striped table-master content">
   <thead>
     <tr>
@@ -38,6 +42,7 @@
       <th>Category</th>
       <th>Start</th>
       <th>End</th>
+      <th>Company</th>
       <th>Description</th>
       <th colspan="2">Actions</th>
     </tr>
@@ -46,10 +51,11 @@
     <% @actions.each_with_index do |action, index| %>
       <tr>
         <td><%= index += 1 %></td>
-        <td><%= link_to action.name, admin_career_path_action_path(action) %></td>
+        <td><%= link_to action.name, admin_career_path_action_path(action), title: 'View Career Path Action', data: { toggle: 'tooltip' } %></td>
         <td><%= category_type_to_string(action.category) %></td>        
         <td><%= date_format_readable(action.start_at) if action.start_at.present? %></td>
         <td><%= date_format_readable(action.end_at) if action.end_at.present? %></td>
+        <td><%= action.company %></td>
         <td><%= action.description %></td>
         <td>
           <%= link_to edit_admin_career_path_action_path(action), { title: 'Edit', data: { toggle: 'tooltip' } } do %>
@@ -64,6 +70,6 @@
   </tbody>
 </table>
 <div class="links">
-  <%= link_to 'Edit', [:edit, :admin, @career_path], class: 'btn btn-link' %> |
-  <%= link_to 'Back to List', admin_career_paths_path, class: 'btn btn-link' %>
+  <%= link_to '< Back to Career Paths', admin_career_paths_path, class: 'btn btn-link' %> |&nbsp;
+  <%= link_to 'Edit', edit_admin_career_path_path(@career_path), class: 'btn btn-link' %>  
 </div>

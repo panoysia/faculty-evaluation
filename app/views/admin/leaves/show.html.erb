@@ -10,6 +10,5 @@
   <strong>End Date:</strong>
   <%= @leave.end_at %>
 </p>
-
-<%= link_to 'Edit', edit_admin_leave_path(@leave), class: 'btn btn-link' %> |
-<%= link_to 'Back to Leaves', admin_leaves_path, class: 'btn btn-link' %>
+<%= link_to '< Back to Leaves', admin_leaves_path, class: 'btn btn-link' %> |&nbsp;
+<%= link_to 'Edit', edit_admin_leave_path(@leave), class: 'btn btn-link' %>
