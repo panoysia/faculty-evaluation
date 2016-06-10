@@ -16,7 +16,7 @@ class Admin::AdminsController < Admin::ApplicationController
     @admin = Admin.new(admin_params)
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to [:admin, @admin], notice: 'Admin was successfully created.' }
+        format.html { redirect_to admin_admins_path, notice: 'Admin was successfully created.' }
       else
         format.html { render :new }
       end
@@ -29,7 +29,7 @@ class Admin::AdminsController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @admin.update(admin_params)
-        format.html { redirect_to [:admin, @admin], notice: 'Admin was successfully updated.' }
+        format.html { redirect_to admin_admins_path, notice: 'Admin was successfully updated.' }
       else
         format.html { render :edit }
       end

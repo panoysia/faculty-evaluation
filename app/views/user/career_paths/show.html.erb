@@ -1,1 +1,75 @@
-<h1>user/career_paths#show</h1>
+<% 
+  specialization = @specialization.name
+  career_path = @specialization.career_path.name
+%>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">My Career Path - <%= career_path %></h2>
+    <h4><strong>Specialization: </strong> <%= specialization %></h4>
+  </div>
+  <div class="col-md-12">
+    <h3>Career path actions in <%= specialization %></h3>
+    <table class="table table-bordered table-striped table-master">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Company</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @actions.each_with_index do |action, index| %>
+          <tr>
+            <td><%= index += 1 %></td>
+            <td><%= action.name %></td>
+            <td><%= category_type_to_string(action.category) %></td>
+            <td><%= date_format_readable(action.start_at) if action.start_at.present? %></td>
+            <td><%= date_format_readable(action.end_at) if action.end_at.present? %></td>
+            <td><%= action.company %></td>
+            <td><%= action.description %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>  
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h3 class="page-header">Other career path actions in <%= career_path %> per specialization</h3>
+  </div>
+</div>
+<%
+  other_specializations = @specialization.career_path.specializations.
+                            where.not(id: @specialization.id)
+%>
+<% unless other_specializations.empty? %>
+  <div class="row">
+    <% other_specializations.each_with_index do |spec, index| %>
+      <div class="col-md-12">
+        <h4 class="page-header"><%= spec.name %></h4>
+      </div>
+      <div class="col-md-12">
+        <table class="table table-bordered table-striped table-master">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Company</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render spec.career_path_actions %>
+          </tbody>
+        </table>        
+      </div>
+    <% end # other_specializations.each %>
+  </div>
+<% end # unless %>

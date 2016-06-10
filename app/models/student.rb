@@ -14,7 +14,14 @@ class Student < ActiveRecord::Base
   # accepts_nested_attributes_for :user_account, 
   #   reject_if: lambda { |attributes| attributes['username'].blank? && attributes['password'].blank? }
 
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name,
+              presence: true,
+              length: { minimum: 5, maximum: 50 }
+
+
+  def self.get_field_limit_of(field_name)
+    column_for_attribute(field_name.to_s.to_sym).limit
+  end
 
   def full_name
     "#{first_name} #{last_name}"

@@ -1,0 +1,26 @@
+<%= form_for [:admin, @admin] do |f| %>
+  <%= error_messages_for(@admin) %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :username %>
+        <%= f.text_field :username, class: 'form-control', autofocus: true, maxlength: Admin.get_field_limit_of(:username) %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control', maxlength: Admin.get_field_limit_of(:password) %>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>      
+    </div>
+  </div>
+<% end %>

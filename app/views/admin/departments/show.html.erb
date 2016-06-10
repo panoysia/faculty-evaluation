@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header"><%= @department.name %></h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h4 class="page-header">Employees under this department:</h4>
+    <table class="table table-bordered table-striped table-master content">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Rank</th>
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @department.employees.each_with_index do |emp, index| %>
+          <tr>
+            <td><%= index += 1 %></td>
+            <td><%= link_to emp.full_name, admin_employee_path(emp), title: 'View', data: { toggle: 'tooltip' } %></td>
+            <td><%= emp.rank.full_name %></td>
+            <td>
+              <%= link_to edit_admin_employee_path(emp), title: 'Edit', data: { toggle: 'tooltip'} do %>
+                <span class="glyphicon glyphicon-pencil"></span>
+              <% end %>
+              <%= link_to admin_employee_path(emp), method: :delete,
+                    title: 'Delete',
+                    data: { toggle: 'tooltip', confirm: 'Do you really want to delete this record?' } do %>
+                <span class="glyphicon glyphicon-remove"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>  
+  </div>
+</div>
+<div class="links">
+  <%= link_to '< Back to Departments', admin_departments_path, class: 'btn btn-link' %> |&nbsp;
+  <%= link_to 'Edit', edit_admin_department_path(@department), class: 'btn btn-link' %>
+</div>

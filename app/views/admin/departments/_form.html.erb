@@ -1,0 +1,18 @@
+<%= form_for [:admin, @department] do |f| %>
+  <%= error_messages_for(@department) %>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', autofocus: true, maxlength: Department.get_field_limit_of(:name) %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>      
+    </div>
+  </div>
+<% end %>

@@ -6,7 +6,7 @@ class Specialization < ActiveRecord::Base
 
   scope :non_generalize, -> { where(is_generalize: 0) }
   scope :generalize, -> { where(is_generalize: 1) }
-
+  
   validates :name, presence: true, uniqueness: true,
                     length: { maximum: 100 }
   validates :career_path, presence: true 

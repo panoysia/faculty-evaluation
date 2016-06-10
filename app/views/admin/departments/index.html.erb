@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-md-12">
     <h2 class="page-header">
-      <span>Admins</span>
+      <span>Departments</span>
       <span class="pull-right">
-        <%= link_to new_admin_admin_path, class: 'btn btn-primary' do %>
+        <%= link_to new_admin_department_path, class: 'btn btn-primary' do %>
           <span class="glyphicon glyphicon-plus"></span> New
         <% end %>
       </span>
@@ -14,20 +14,20 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>Username</th>
+      <th>Name</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <% @admins.each_with_index do |admin, index| %>
+    <% @departments.each_with_index do |department, index| %>
       <tr>
         <td><%= index += 1 %></td>
-        <td><%= link_to admin.username, admin_admin_path(admin), title: 'View', data: { toggle: 'tooltip' } %></td>
+        <td><%= link_to department.name, admin_department_path(department), title: 'View', data: { toggle: 'tooltip' } %></td>
         <td>
-          <%= link_to edit_admin_admin_path(admin), title: 'Edit', data: { toggle: 'tooltip'} do %>
+          <%= link_to edit_admin_department_path(department), title: 'Edit', data: { toggle: 'tooltip'} do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %>
-          <%= link_to admin_admin_path(admin), method: :delete,
+          <%= link_to admin_department_path(department), method: :delete,
                 title: 'Delete',
                 data: { toggle: 'tooltip', confirm: 'Do you really want to delete this record?' } do %>
             <span class="glyphicon glyphicon-remove"></span>

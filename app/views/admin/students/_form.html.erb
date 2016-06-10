@@ -4,7 +4,7 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :first_name %>
-        <%= f.text_field :first_name, class: 'form-control', autofocus: true %>
+        <%= f.text_field :first_name, class: 'form-control', autofocus: true, maxlength: Student.get_field_limit_of(:first_name) %>
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :last_name %>
-        <%= f.text_field :last_name, class: 'form-control' %>
+        <%= f.text_field :last_name, class: 'form-control', maxlength: Student.get_field_limit_of(:last_name)  %>
       </div>
     </div>
   </div>

@@ -18,8 +18,7 @@ Rails.application.routes.draw do
     #get 'leave_service_credits/search' => "leave_service_credits#index"
 
     resource :dashboard, only: [:show]
-    resources :admins
-    resources :users
+
     resources :nbcs do
       member do
         get 'associate-academic-years'
@@ -27,10 +26,11 @@ Rails.application.routes.draw do
         delete 'remove_academic_years_association'
       end
     end
-    resources :holidays
+
     resources :qces
     resources :cces
 
+    # Just to make use of 'qce' for path, i.e., could have used path scope instead
     namespace :qce do
       resources :questions, only: [:index]
     end
@@ -51,17 +51,24 @@ Rails.application.routes.draw do
       end
     end   # resources :employees
 
+    resources :departments
     resources :leaves
     resources :leave_service_credits
-    
+    resources :holidays
+
     resources :career_paths
-    resources :career_path_actions
     resources :specializations
+    resources :career_path_actions
     
     resources :academic_years, path: 'academic-years'
     # resources :rating_periods, path: 'rating-periods'
     resources :academic_rankings, only: [:index], path: 'academic-rankings'
+
+    resources :admins
+    resources :users
     resources :students
+    resources :clients
+
     resource :account, only: [:edit, :update]
   end   # namespace :admin
 

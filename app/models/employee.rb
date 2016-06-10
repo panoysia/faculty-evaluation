@@ -60,7 +60,6 @@ class Employee < ActiveRecord::Base
   # QCE::Rating association:
   #   belongs_to :evaluator, polymorphic: true
   
-
   has_many :owned_tasks, class_name: 'QCE::RatingTask',
                           foreign_key: 'employee_id',
                           dependent: :destroy
@@ -79,19 +78,15 @@ class Employee < ActiveRecord::Base
 
   has_many :leaves, dependent: :destroy 
  
- 
-  # has_many :career_path_actions, through: :specializations,
-  #                                source: : 
-  #                                 class_name: 'CareerPathAction'
-
-  # Guide:
-  # has_many :replies, through: :articles, source: :comments
   has_many :actions, through: :specialization,
                       source: :career_path_actions
+  has_one :career_path, through: :specialization,
+                        source: :career_path
 
   belongs_to :rank, class_name: 'AcademicRanking',
                     foreign_key: 'academic_ranking_id'
   belongs_to :specialization
+  belongs_to :department
 
   #, inverse_of: :employee
   accepts_nested_attributes_for :user_account, 
@@ -107,7 +102,8 @@ class Employee < ActiveRecord::Base
     # Check for validity of association
     record.validates :specialization, presence: true
     record.validates :rank, presence: true
-
+    record.validates :department, presence: true
+    
     record.validates :gender, 
       inclusion: { in: GENDER_TYPES.keys.map(&:to_s) }
     
