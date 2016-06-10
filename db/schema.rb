@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610082656) do
+ActiveRecord::Schema.define(version: 20160610085429) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -243,7 +243,7 @@ ActiveRecord::Schema.define(version: 20160610082656) do
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.integer  "specialization_id"
-    t.integer  "department_id",                   null: false
+    t.integer  "department_id"
   end
 
   add_index "employees", ["academic_ranking_id"], name: "index_employees_on_academic_ranking_id"
