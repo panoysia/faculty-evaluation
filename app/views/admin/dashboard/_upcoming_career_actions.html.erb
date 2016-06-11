@@ -1,3 +1,43 @@
 <div class="col-md-12">
-  <h4 class="page-header">Upcoming Trainings & Seminars</h4>
+  <h4 class="page-header">Upcoming <span><%= link_to 'Trainings, Seminars, and Conferences', admin_career_path_actions_path %></span></h4>
+</div>
+<div class="col-md-12">
+  <table class="table table-bordered table-striped table-condensed table-master">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Specialization</th>
+        <th>Category</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Company</th>
+        <th colspan="2" class="center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @career_actions.each_with_index do |action, index| %>
+        <tr>
+          <td><%= index += 1 %></td>
+          <td><%= link_to action.name,
+                    admin_career_path_action_path(action),
+                    title: 'View qualified faculty members',
+                    data: { toggle: 'tooltip' } %></td>
+          <td><%= action.specialization.name %></td>
+          <td><%= category_type_to_string(action.category) %></td>
+          <td><%= date_format_readable(action.start_at) %></td>
+          <td><%= date_format_readable(action.end_at) %></td>
+          <td><%= action.company %></td>
+          <td class="center">
+            <%= link_to edit_admin_career_path_action_path(action), { title: 'Edit', data: { toggle: 'tooltip' } }  do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+            <%= link_to admin_career_path_action_path(action), method: :delete, title: 'Delete', data: { toggle: 'tooltip', confirm: 'Do you really want to delete this record?' } do %>
+              <span class="glyphicon glyphicon-remove"></span>
+            <% end %>                
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
 </div>

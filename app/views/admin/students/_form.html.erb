@@ -19,8 +19,43 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
+        <%= f.label :department %>
+        <%= f.collection_select :department_id,
+                Department.order(name: :asc), :id, :name,
+                { prompt: '-- Select Department --' },
+                class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+  <% if @student.new_record? %>
+    <!-- User Account form builder (user_account_fb) -->
+    <h3 class="page-header">Required associated user account</h3>
+    <%= f.fields_for :user_account do |user_account_fb| %>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= user_account_fb.label :username %>
+            <%= user_account_fb.text_field :username, class: 'form-control', maxlength: User::USERNAME_MAX_LENGTH %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= user_account_fb.label :password %>
+            <%= user_account_fb.password_field :password, class: 'form-control', maxlength: User::PASSWORD_MAX_LENGTH %>
+          </div>
+        </div>
+      </div>
+    <% end # f.fields_for %>
+  <% end # if @student.new_record? %>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
         <%= f.submit class: 'btn btn-primary' %>
       </div>
     </div>
   </div>
-<% end %>
+<% end # form_for %>

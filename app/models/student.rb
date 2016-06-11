@@ -11,12 +11,18 @@ class Student < ActiveRecord::Base
                           class_name: 'QCE::RatingTask',
                           dependent: :destroy
   
+  belongs_to :department
+
   # accepts_nested_attributes_for :user_account, 
   #   reject_if: lambda { |attributes| attributes['username'].blank? && attributes['password'].blank? }
 
+  accepts_nested_attributes_for :user_account
+
   validates :first_name, :last_name,
               presence: true,
-              length: { minimum: 5, maximum: 50 }
+              length: { maximum: 50 }
+
+  validates :department, presence: true
 
 
   def self.get_field_limit_of(field_name)

@@ -15,6 +15,7 @@
     <tr>
       <th>#</th>
       <th>Student Name</th>
+      <th>Department</th>
       <th colspan="2">Actions</th>      
     </tr>
   </thead>
@@ -22,7 +23,10 @@
     <% @students.each_with_index do |student, index| %>
       <tr>
         <td><%= index += 1 %></td>
-        <td><%= link_to student.full_name, admin_student_path(student), title: 'View', data: { toggle: 'tooltip' } %></td>
+        <td>
+          <%= link_to student.full_name, admin_student_path(student), title: 'View', data: { toggle: 'tooltip' } %>
+        </td>
+        <td><%= student.department.name if student.department %></td>
         <td>
           <%= link_to edit_admin_student_path(student), title: 'Edit', data: { toggle: 'tooltip' } do %>
             <span class="glyphicon glyphicon-pencil"></span>

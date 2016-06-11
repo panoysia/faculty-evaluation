@@ -12,7 +12,8 @@
     <% if @current_user.account.is_a? Employee  %>
       <%= render 'user/navbar' %>
     <% else %>
-      <%= render 'user/student_navbar' %>
+      <!-- for client and student users -->
+      <%= render 'user/student_client_navbar' %>
     <% end %>
   <% end %>
   <div class="app-container">

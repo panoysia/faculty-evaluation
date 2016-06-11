@@ -167,6 +167,6 @@
   </div> <!-- .qce-options -->
 <% end # if current_user.account.rank.allows_qce_support? %>
 <div class="links">
-  <%= link_to 'View/Check', qce_path(@qce), class: 'btn btn-link' %> |
-  <%= link_to 'Back to QCEs', qces_path, class: 'btn btn-link' %>
+  <%= link_to '< Back to QCEs', qces_path, class: 'btn btn-link' %> |&nbsp;
+  <%= link_to 'View/Check', qce_path(@qce), class: 'btn btn-link' %>
 </div>

@@ -1,10 +1,18 @@
-<p>
-  <strong>First Name:</strong>
-  <%= @student.first_name %>
-</p>
-<p>
-  <strong>Last Name:</strong>
-  <%= @student.last_name %>
-</p>
-<%= link_to '< Back to Students', admin_students_path, class: 'btn btn-link' %> |&nbsp;
-<%= link_to 'Edit', edit_admin_student_path(@student), class: 'btn btn-link' %>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header"><%= @student.full_name %></h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <p><strong>First Name: </strong><%= @student.first_name %></p>
+    <p><strong>Last Name: </strong><%= @student.last_name %></p>
+    <p><strong>Department: </strong><%= @student.department.name%></p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to '< Back to Students', admin_students_path, class: 'btn btn-link' %> |&nbsp;
+    <%= link_to 'Edit', edit_admin_student_path(@student), class: 'btn btn-link' %>
+  </div>
+</div>

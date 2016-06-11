@@ -1,9 +1,11 @@
 class User::DashboardController < User::ApplicationController
   
   def show
-    # @opened_rating_periods = RatingPeriod.open
-    @leaves = current_user.account.leaves.latest(5)
-    @qces = current_user.account.qces.latest(5)
+    if @current_user.account.is_a? Employee 
+      @leaves = current_user.account.leaves.latest(5)
+      @qces = current_user.account.qces.latest(5)
+    end
+
     @tasks = current_user.account.rating_tasks.
               includes(:employee, rating: [:qce]).latest
 

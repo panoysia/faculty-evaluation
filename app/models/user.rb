@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
 
   scope :employee, -> { where(account_type: 'Employee') }
   scope :student, -> { where(account_type: 'Student') }
+  scope :client, -> { where(account_type: 'Client') }
 
-  validates :username, 
-    presence: true,
-    length: { minimum: 5, maximum: 20 }, 
-    uniqueness: true
+  validates :username, presence: true,
+                        length: { minimum: 5, maximum: 20 }, 
+                        uniqueness: true
 end

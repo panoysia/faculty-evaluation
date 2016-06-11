@@ -2,7 +2,7 @@ class AcademicYear < ActiveRecord::Base
 
   has_many :rating_periods, dependent: :destroy
   has_many :leaves, dependent: :destroy
-
+  # belongs_to :nbc
   validates :start_at, :end_at, presence: true   
   validate :correct_date_range #, unless: :date_values_are_nil?
 
