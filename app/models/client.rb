@@ -1,6 +1,16 @@
 class Client < ActiveRecord::Base
   has_one :user_account, as: :account, class_name: 'User', dependent: :destroy
 
+  has_many :ratings, as: :evaluator,
+                      class_name: 'QCE::Rating',
+                      dependent: :destroy
+
+  has_many :rating_tasks, as: :evaluator,
+                          class_name: 'QCE::RatingTask',
+                          dependent: :destroy
+                          
+  accepts_nested_attributes_for :user_account
+
   validates :first_name, :last_name,
               presence: true,
               length: { minimum: 5, maximum: 50 }

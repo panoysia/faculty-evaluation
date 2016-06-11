@@ -15,7 +15,8 @@ class Student < ActiveRecord::Base
 
   # accepts_nested_attributes_for :user_account, 
   #   reject_if: lambda { |attributes| attributes['username'].blank? && attributes['password'].blank? }
-
+  
+  # New student is required to have an account
   accepts_nested_attributes_for :user_account
 
   validates :first_name, :last_name,

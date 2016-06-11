@@ -2,7 +2,7 @@ class Admin::ClientsController < Admin::ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   def index
-    @clients = Client.all
+    @clients = Client.order(last_name: :asc, first_name: :asc)
   end
 
   def show
@@ -10,6 +10,7 @@ class Admin::ClientsController < Admin::ApplicationController
 
   def new
     @client = Client.new
+    @client.build_user_account
   end
 
   def create
@@ -19,6 +20,7 @@ class Admin::ClientsController < Admin::ApplicationController
       if @client.save
         format.html { redirect_to admin_clients_path, notice: 'Client record was successfully created.' }
       else
+        @client.build_user_account
         format.html { render :new }
       end
     end    
@@ -60,7 +62,7 @@ class Admin::ClientsController < Admin::ApplicationController
   end
 
   def client_params
-    params.require(:client).permit(:first_name, :last_name, :description)
+    params.require(:client).permit(:first_name, :last_name, :description, user_account_attributes: [:username, :password])
   end
 
 end

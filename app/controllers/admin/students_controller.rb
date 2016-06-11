@@ -17,7 +17,7 @@ class Admin::StudentsController < Admin::ApplicationController
   end
 
   def create
-    @student = Student.new(student_params_for_create)
+    @student = Student.new(student_params)
     respond_to do |format|
       if @student.save
         format.html { redirect_to [:admin, @student], notice: 'Student was successfully created.' }
@@ -33,7 +33,7 @@ class Admin::StudentsController < Admin::ApplicationController
 
   def update
     respond_to do |format|
-      if @student.update(student_params_for_update)
+      if @student.update(student_params)
         format.html { redirect_to [:admin, @student], notice: 'Student was successfully updated.' }
       else
         format.html { render :edit }
@@ -55,11 +55,7 @@ class Admin::StudentsController < Admin::ApplicationController
     @student = Student.find(params[:id])
   end
 
-  def student_params_for_update
-    params.require(:student).permit(:first_name, :last_name, :department_id)    
-  end
-
-  def student_params_for_create
+  def student_params
     params.require(:student).permit(:first_name, :last_name, :department_id, user_account_attributes: [:username, :password])
   end
 
