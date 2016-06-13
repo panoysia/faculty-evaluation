@@ -10,7 +10,7 @@
       <tr>
         <th>#</th>
         <th>Academic Year Coverage</th>
-        <th>Action</th>
+        <th class="center">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -47,9 +47,15 @@
           <!-- <td><%#= qce.rating_period.coverage %></td> -->
           <td><%= qce.rating_period.coverage_in_years %></td>
           <td>
-            <span class="label <%= qce.completed? ? 'label-success' : 'label-danger' %>">
-              <%= qce.completed? ? 'Completed' : 'Incomplete' %>
-            </span>
+            <% if qce.for_finalization? %>
+              <!-- display for finalization -->
+              <span class="label label-primary">For finalization</span>
+            <% else %>
+              <!-- display incomplete or completed status -->
+              <span class="label <%= qce.completed? ? 'label-success' : 'label-danger' %>">
+                <%= qce.completed? ? 'Completed' : 'Incomplete' %>
+              </span>              
+            <% end %>
           </td>
           <td>
             <%= link_to qce_path(qce), { title: 'Check', data: { toggle: 'tooltip' } } do %>
@@ -57,11 +63,13 @@
             <% end %>
             <%= link_to edit_qce_path(qce), { title: 'Edit', data: { toggle: 'tooltip' } } do %>
               <span class="glyphicon glyphicon-pencil"></span> Edit
-            <% end %>            
-            <%#= link_to qce_path(qce), method: :delete, title: 'Delete', data: { confirm: 'Do you really want to delete this record?',
-            toggle: 'tooltip' } do %>
-              <!-- <span class="glyphicon glyphicon-remove"></span> -->
-            <%# end %>
+            <% end %>
+            <%= link_to qce_path(qce), method: :delete, title: 'Delete', data: { 
+                  confirm: 'Do you really want to delete this record?',
+                  toggle: 'tooltip' 
+                } do %>
+              <span class="glyphicon glyphicon-remove"></span> Delete
+            <% end %>
           </td>
         </tr>
       <% end %>

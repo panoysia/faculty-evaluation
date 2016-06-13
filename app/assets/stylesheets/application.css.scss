@@ -70,6 +70,34 @@ span.rating-status {
   margin-top: 20px;
 }
 
+// Evaluation-related styles
+td.number {
+  width: 1%;
+}
+
+td.question {
+  width: 75%;
+}
+
+td.score {
+  width: 4%;
+}
+
+.answered {
+  color: red;
+}  
+
+/*
+
+input[type=radio]:checked + .radio-button-label {
+  color: #f00;
+  font-style: italic;
+} 
+
+*/
+
+// end of Evaluation-related styles
+
 
 div#login-panel {
   margin-top: 70px;

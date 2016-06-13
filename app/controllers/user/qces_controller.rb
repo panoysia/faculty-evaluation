@@ -1,5 +1,5 @@
 class User::QCEsController < User::ApplicationController
-  before_action :set_qce, only: [:show, :edit, :update, :destroy, :destroy_support_area]
+  before_action :set_qce, only: [:show, :edit, :update, :destroy, :destroy_support_area, :finalize]
 
 
   def index
@@ -34,6 +34,7 @@ class User::QCEsController < User::ApplicationController
 
   def edit
     @employees = Employee.where.not(id: current_user.account.id)
+    # @clients = Client.order(last_name: :asc, first_name: :asc)
   end
 
   def update
@@ -60,6 +61,17 @@ class User::QCEsController < User::ApplicationController
 
   end   # def update
 
+  def destroy
+    # TODO: Know what related records get deleted here.
+    @qce.destroy
+    respond_to do |format|
+      format.html {
+        redirect_to qces_path,
+        notice: 'QCE record was successfully deleted.'
+      }
+    end
+  end
+
   def destroy_support_area
     # render html: params.inspect and return true
 
@@ -68,6 +80,12 @@ class User::QCEsController < User::ApplicationController
     @qce.ratings.where(type: support_area).destroy_all
     redirect_to edit_qce_path(@qce), 
       notice: "Support area for #{support_area} has been deleted."
+  end
+
+  def finalize
+    # render html: params.inspect and return true
+    @qce.update completed: 1
+    redirect_to qces_path, notice: 'Your QCE for SY has been finalized.'
   end
 
 

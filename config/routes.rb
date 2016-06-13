@@ -87,9 +87,10 @@ Rails.application.routes.draw do
     resources :leaves, only: [:index, :show]
     resources :rating_tasks, only: [:index]
 
-    resources :qces, except: [:new, :destroy] do
+    resources :qces, except: [:new] do
       member do
         delete 'support_area' => 'qces#destroy_support_area'
+        patch 'finalize' => 'qces#finalize'
       end
 
       scope module: :qces do
@@ -112,7 +113,11 @@ Rails.application.routes.draw do
         custom_path_names = { edit: :evaluate }
 
         resources *rating_types, only: rating_actions,
-                                  path_names: custom_path_names #do
+                                  path_names: custom_path_names do
+          member do
+            patch 'randomize_save'
+          end
+        end
       end   # scope module: :qces
     end   # resources :qces
   end   # scope module: :user

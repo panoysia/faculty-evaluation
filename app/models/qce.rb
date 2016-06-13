@@ -20,7 +20,6 @@ class QCE < ActiveRecord::Base
                                 PARTNERSHIP_INSTRUMENTS +
                                 COMMUNITY_RESPONSIBILITY_INSTRUMENTS
 
-
   def self.use_relative_model_naming?
     true
   end
@@ -28,10 +27,12 @@ class QCE < ActiveRecord::Base
   has_many :ratings, class_name: 'QCE::Rating',
                     dependent: :destroy
 
-
   has_many :instruction_ratings, -> { instruction },
                                 class_name: 'QCE::Rating',
                                 dependent: :destroy
+
+  has_many :support_ratings, -> { where.not(type: 'Instruction') },
+                              class_name: 'QCE::Rating'
 
   has_many :research_ratings, -> { research },
                               class_name: 'QCE::Rating',
@@ -62,30 +63,48 @@ class QCE < ActiveRecord::Base
     class_name: 'QCE::Rating', dependent: :destroy
 
 
-  has_many :clientele_instruments, -> { where instrument: 'Clientele Satisfaction' }, class_name: 'QCE::Rating'
+  # has_many :clientele_instruments, -> { where instrument: 'Clientele Satisfaction' }, class_name: 'QCE::Rating'
+  has_many :clientele_instruments, -> { clientele },
+                                    class_name: 'QCE::Rating'
 
-  has_one :leadership_instrument, -> { where instrument: 'Leadership' }, class_name: 'QCE::Rating'
+  has_one :leadership_instrument, -> { leadership},
+                                    class_name: 'QCE::Rating'
 
-  has_many :partnership_instruments, -> { where instrument: 'Partnership Development' }, class_name: 'QCE::Rating'
+  has_many :partnership_instruments, -> { partnership },
+                                      class_name: 'QCE::Rating'
 
-  has_many :community_instruments, -> { where instrument: 'Community Responsibility' }, class_name: 'QCE::Rating'
-
+  has_many :community_instruments, -> { community },
+                                    class_name: 'QCE::Rating'
 
   belongs_to :employee
   belongs_to :rating_period
 
   scope :completed, -> { where(completed: 1) }
   scope :incomplete, -> { where(completed: 0) }
-  # scope :latest, -> (size = 8) { order(created_at: :desc).limit(size) }
   scope :latest, -> (size = 8) { order(updated_at: :desc).limit(size) }
 
-  def for_finalization?  
+
+  # completed, for_finalization, incomplete
+
+  # def status
+  #   completed? and for_finalization
+  # end
+
+  # def completed?
+  #   finished_at.present?
+  # end
+
+  def for_finalization?
+    completed_ratings = nil
+
     if support_area.present?
-      ratings.completed.count ==  (INSTRUCTION_RATINGS_COUNT +
-                                    SUPPORT_AREA_RATINGS_COUNT)
+      completed_ratings = (ratings.completed.count == 
+        (INSTRUCTION_RATINGS_COUNT + SUPPORT_AREA_RATINGS_COUNT))
     else
-      instruction_ratings.completed.count == INSTRUCTION_RATINGS_COUNT
+      completed_ratings = (instruction_ratings.completed.count == INSTRUCTION_RATINGS_COUNT)
     end
+
+    (completed == 0) && completed_ratings
   end
 
   # private

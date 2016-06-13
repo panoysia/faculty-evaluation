@@ -5,6 +5,25 @@
   supervisor_rating = ratings.find { |r| r.evaluation_context == 'Supervisor' }
   peer_ratings = ratings.select { |r| r.evaluation_context == 'Peer' }
   student_ratings = ratings.select { |r| r.evaluation_context == 'Student' }
+
+  if @qce.support_area.present?
+    support_ratings = @qce.support_ratings.includes(:evaluator)
+    
+    clientele_ratings = support_ratings.select do |r|
+      r.instrument == 'Clientele Satisfaction'
+    end
+
+    leadership_rating = support_ratings.
+                          find { |r| r.instrument == 'Leadership' }
+
+    partnership_ratings = support_ratings.select do |r|
+      r.instrument == 'Partnership Development'
+    end
+
+    community_ratings = support_ratings.select do |r|
+      r.instrument == 'Community Responsibility'
+    end
+  end
 %>
 <div class="links">
   <%= link_to '< Back to QCEs', qces_path, class: 'btn btn-link' %>
@@ -14,12 +33,18 @@
     <h2 class="page-header">
       <!-- <span><%#= "My QCE for #{@qce.rating_period.coverage}" %></span> -->
       <span><%= "My QCE for #{@qce.rating_period.coverage_in_years}" %></span>
-      <span class="pull-right label <%= @qce.completed? ? 'label-success' : 'label-danger' %>"><%= @qce.completed? ? 'Completed' : 'Incomplete' %></span>
+      <% if @qce.for_finalization? %>
+        <span class="label label-primary pull-right">For finalization</span>
+      <% else %>
+        <span class="label <%= @qce.completed? ? 'label-success' : 'label-danger' %> pull-right">
+          <%= @qce.completed? ? 'Completed' : 'Incomplete' %>
+        </span>
+      <% end %>
     </h2>
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
 <div>
-  <h4>Your current rank: <%= @current_user.account.rank.full_name %></h4>
+  <h4>Your current rank in this QCE: <%= @current_user.account.rank.full_name %></h4>
 </div>
 <div class="qce-options">  
   <h3 id="instruction-ratings" class="page-header">Ratings for Instruction/Teaching Effectiveness <%= link_to '(Edit)', edit_qce_path(@qce, anchor: 'instruction-ratings') %></h3>
@@ -29,7 +54,7 @@
         <th>#</th>
         <th class="center">Context</th>
         <th class="center">Evaluator</th>
-        <th class="center">Score</th>
+        <th class="center">Score<br>(100 pts)</th>
         <th class="center">Status</th>
         <th colspan="2" class="center">Actions</th>
       </tr>
@@ -38,8 +63,8 @@
       <!-- Rating for Self  -->
       <tr>
         <td>1</td>
-        <th>Self (1)</th>
         <% if self_rating.present? %>
+          <th>Self (1)</th>
           <td><%= self_rating.evaluator_name %></td>
           <td class="center"><%= self_rating.total_score %></td>
           
@@ -60,16 +85,23 @@
               <% end %>
             </td>
           <% end # if self_rating.completed? %>
+        <% else %>
+          <th colspan="3">Self (1)</th>
+          <td class="center">
+            <span class="label label-danger">Unassigned</span>
+          </td>
+          <td></td>
         <% end #if self_rating.present? %>
       </tr>
 
       <!-- Rating Supervisor -->
       <tr>
         <td>2</td>
-        <th>Supervisor (1)</th>
         <% if supervisor_rating.present? %>
+          <th>Supervisor (1)</th>
           <td><%= supervisor_rating.evaluator_name %></td>
           <td class="center"><%= supervisor_rating.total_score %></td>
+
           <% if supervisor_rating.completed? %>
             <td class="center">
               <span class="label label-success">Completed</span>
@@ -84,19 +116,34 @@
             <!-- Display empty cell for pending evaluation -->
             <td></td>
           <% end %>
+        <% else %>
+          <th colspan="3">Supervisor (1)</th>
+          <td class="center">
+            <span class="label label-danger">Unassigned</span>
+          </td>
+          <td></td>
         <% end # if supervisor_rating.present? %>
       </tr>
 
-      <!-- Rating for 5 Peers -->
-      <tr>
-        <td>3</td>
-        <th colspan="5">Peers (5)</th>
-      </tr>
-      <% unless peer_ratings.empty? %>
+      <!-- Rating for 5 Peers --> 
+      <% if peer_ratings.empty? %>
+        <tr>
+          <td>3</td>
+          <th colspan="3">Peers (5)</th>
+          <td class="center">
+            <span class="label label-danger">Unassigned</span>
+          </td>
+          <td></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td>3</td>
+          <th colspan="5">Peers (5)</th>
+        </tr>
         <% peer_ratings.each_with_index do |rating, index| %>
           <tr>
             <td></td>
-            <td colspan="1" class="center"><%= index + 1 %></td>
+            <td class="center"><%= index + 1 %></td>
             <td><%= rating.evaluator_name %></td>
             <td class="center"><%= rating.total_score %></td>
             <% if rating.completed? %>
@@ -114,18 +161,28 @@
             <% end %>
           </tr>
         <% end %>
-      <% end %>
+      <% end # if peer_ratings.empty? %>
+
 
       <!-- Rating for 30 Students-->
-      <tr>
-        <td>4</td>
-        <th colspan="5">Students (30)</th>
-      </tr>
-      <% unless student_ratings.empty? %>
+      <% if student_ratings.empty? %>
+        <tr>
+          <td>4</td>
+          <th colspan="3">Students (30)</th>
+          <td class="center">
+            <span class="label label-danger">Unassigned</span>
+          </td>
+          <td></td>          
+        </tr>
+      <% else %>
+        <tr>
+          <td>4</td>
+          <th colspan="5">Students (30)</th>
+        </tr>
         <% student_ratings.each_with_index do |rating, index| %>
           <tr>
             <td></td>
-            <td colspan="1" class="center"><%= index + 1 %></td>
+            <td class="center"><%= index + 1 %></td>
             <td><%= rating.evaluator_name %></td>
             <td class="center"><%= rating.total_score %></td>
             <% if rating.completed? %>
@@ -142,17 +199,175 @@
               <td></td>
             <% end %>
           </tr>
-        <% end %>
-      <% end %>
+        <% end %>      
+      <% end  # if students_ratings.empty? %>
+
     </tbody>    
   </table>
 </div>
 <% if @qce.support_area.present? %>
   <div class="qce-options">  
     <h3 id="support-ratings" class="page-header">Ratings for <%= @qce.support_area %> <%= link_to '(Edit)', edit_qce_path(@qce, anchor: 'support-ratings') %></h3>
+    <table class="table table-bordered table-striped table-master">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th class="center">Context</th>
+          <th class="center">Evaluator</th>
+          <th class="center">Score<br>(25 pts.)</th>
+          <th class="center">Status</th>
+          <th colspan="2" class="center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Clientele Satisfaction -->
+        <% if clientele_ratings.empty? %>
+          <tr>
+            <td>1</td>
+            <th colspan="3">Clientele Satisfaction (3)</th>
+            <td class="center">
+              <span class="label label-danger">Unassigned</span>
+            </td>
+            <td></td>
+          </tr>
+        <% else %>
+          <tr>
+            <td>1</td>
+            <th colspan="5">Clientele Satisfaction (3)</th>
+          </tr>
+          <% clientele_ratings.each_with_index do |rating, index| %>
+            <tr>
+              <td></td>
+              <td class="center"><%= index += 1 %></td>
+              <td><%= rating.evaluator_name %></td>
+              <td class="center"><%= rating.total_score %></td>
+              <% if rating.completed? %>
+                <td class="center">
+                  <span class="label label-success">Completed</span>
+                </td>
+                <td class="center">
+                  <%= link_to 'View', [@qce, rating] %>&nbsp;
+                </td>  
+              <% else %>
+                <td class="center">
+                  <span class="label label-warning">Pending</span>
+                </td>
+                <td></td>
+              <% end %>
+            </tr>
+          <% end # clientele_ratings.each_with_index %>          
+        <% end  # if clientele_ratings.empty? %>
+
+        <!-- Leadership -->
+        <tr>
+          <td>2</td>
+          <% if leadership_rating.present? %>
+            <th>Leadership (1)</th>
+            <td><%= leadership_rating.evaluator_name %></td>
+            <td class="center"><%= leadership_rating.total_score %></td>
+            <% if leadership_rating.completed? %>
+              <td class="center">
+                <span class="label label-success">Completed</span>
+              </td>
+              <td class="center">
+                <%= link_to 'View', [@qce, leadership_rating] %>&nbsp;
+              </td>
+            <% else %>
+              <td class="center">
+                <span class="label label-warning">Pending</span>
+              </td>
+              <td></td>
+            <% end %>
+          <% else %>
+            <th colspan="3">Leadership (1)</th>
+            <td class="center">
+              <span class="label label-danger">Unassigned</span>
+            </td>
+            <td></td>
+          <% end %>
+        </tr>
+
+        <!-- Partnership Development -->
+        <% if partnership_ratings.empty? %>
+          <tr>
+            <td>3</td>
+            <th colspan="3">Partnership Development (3)</th>
+            <td class="center">
+              <span class="label label-danger">Unassigned</span>
+            </td>
+            <td></td>
+          </tr>
+        <% else %>
+          <tr>
+            <td>3</td>
+            <th colspan="5">Partnership Development (3)</th>
+          </tr>        
+          <% partnership_ratings.each_with_index do |rating, index| %>
+            <tr>
+              <td></td>
+              <td class="center"><%= index += 1 %></td>
+              <td><%= rating.evaluator_name %></td>
+              <td class="center"><%= rating.total_score %></td>
+              <% if rating.completed? %>
+                <td class="center">
+                  <span class="label label-success">Completed</span>
+                </td>
+                <td class="center">
+                  <%= link_to 'View', [@qce, rating] %>&nbsp;
+                </td>  
+              <% else %>
+                <td class="center">
+                  <span class="label label-warning">Pending</span>
+                </td>
+                <td></td>
+              <% end %>
+            </tr>        
+          <% end  # partnership_ratings.each_with_index %>
+        <% end  # if partnership_ratings.empty? %>
+
+        <!-- Community Responsibility -->
+        <% if community_ratings.empty? %>
+          <tr>
+            <td>4</td>
+            <th colspan="3">Community Responsibility (3)</th>
+            <td class="center">
+              <span class="label label-danger">Unassigned</span>
+            </td>
+            <td></td>
+          </tr>
+        <% else %>
+          <tr>
+            <td>4</td>
+            <th colspan="5">Community Responsibility (3)</th>
+          </tr>        
+          <% community_ratings.each_with_index do |rating, index| %>
+            <tr>
+              <td></td>
+              <td class="center"><%= index += 1 %></td>
+              <td><%= rating.evaluator_name %></td>
+              <td class="center"><%= rating.total_score %></td>
+              <% if rating.completed? %>
+                <td class="center">
+                  <span class="label label-success">Completed</span>
+                </td>
+                <td class="center">
+                  <%= link_to 'View', [@qce, rating] %>&nbsp;
+                </td>  
+              <% else %>
+                <td class="center">
+                  <span class="label label-warning">Pending</span>
+                </td>
+                <td></td>
+              <% end %>
+            </tr>
+          <% end  # community_ratings.each_with_index %>
+        <% end  # if community_ratings.empty? %>
+
+      </tbody>
+    </table>
   </div>
-<% end %>
+<% end # if @qce.support_area.present? %>
 <div class="links">
-  <%= link_to 'Edit', edit_qce_path(@qce), class: 'btn btn-link' %> |
-  <%= link_to 'Back to QCEs', qces_path, class: 'btn btn-link' %>
+  <%= link_to '< Back to QCEs', qces_path, class: 'btn btn-link' %> |&nbsp;
+  <%= link_to 'Edit', edit_qce_path(@qce), class: 'btn btn-link' %>
 </div>

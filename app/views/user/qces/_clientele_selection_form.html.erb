@@ -1,7 +1,7 @@
 <%= form_tag qce_clientele_instrument_path(@qce), method: :post do %>
   <div class="row">
     <div class="col-md-12">
-      <div class="col-md-3">          
+      <div class="col-md-3">
         <div class="form-group">
           <%# selection = params[:clients][0] if params[:clients][0].present? %>
           <% value = params[:clients][0] if params[:clients].present? %>
@@ -22,6 +22,7 @@
       </div>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
+
   <div class="row">
     <div class="col-md-12">
       <div class="col-md-3">

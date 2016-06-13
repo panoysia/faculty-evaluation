@@ -6,18 +6,26 @@
     <h2 class="page-header">
       <!-- <span><%#= "My QCE for #{@qce.rating_period.coverage}" %></span> -->
       <span><%= "My QCE for #{@qce.rating_period.coverage_in_years}" %></span>
-      <% if @qce.completed? %>
-        <!--  -->
+      <% if @qce.for_finalization? %>      
+        <span class="label label-primary pull-right">For finalization</span>
+      <% else %>
+        <span class="label <%= @qce.completed? ? 'label-success' : 'label-danger' %> pull-right">
+          <%= @qce.completed? ? 'Completed' : 'Incomplete' %>
+        </span>
       <% end %>
-      <span class="pull-right label <%= @qce.completed? ? 'label-success' : 'label-danger' %>"><%= @qce.completed? ? 'Completed' : 'Incomplete' %></span>
     </h2>
+    <% if @qce.completed? %>
+      <div class="alert alert-success">
+        <p>This QCE has been finalized. You can no longer edit or modify it.</p>
+      </div>
+    <% end %>
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
 <div>
-  <h4>Your current rank: <%= @current_user.account.rank.full_name %></h4>
+  <h4>Your current rank in this QCE: <%= @current_user.account.rank.full_name %></h4>
 </div>
 <div class="qce-options">
-  <h3 id="instruction-ratings" class="page-header">Ratings for Instruction/Teaching Effectiveness <%= link_to '(View/Check)', qce_path(@qce, anchor: 'instruction-ratings') if @qce.instruction_ratings.present? %></h3>
+  <h3 id="instruction-ratings" class="page-header">Ratings for Instruction/Teaching Effectiveness <%= link_to '(View/Check)', qce_path(@qce, anchor: 'instruction-ratings') %></h3>
   <ol>
     <!-- Assign to Self -->
     <div id="assign-self">
@@ -43,7 +51,8 @@
       </h4>
       <% if @qce.has_assigned_supervisor_rating? %>
         <%= render 'user/qces/selected_supervisor' %>
-        <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_supervisor_instruction_rating_path(@qce) } %>
+        <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_supervisor_instruction_rating_path(@qce),
+          button_state: @qce.completed? } %>
         <!-- display link to supervisor -->
       <% else %>
         <%= render 'user/qces/supervisor_selection_form' %>
@@ -57,7 +66,8 @@
       </h4>
       <% if @qce.has_assigned_peer_rating? %>
         <%= render 'user/qces/selected_peers' %>
-        <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_peer_instruction_rating_path(@qce) } %>
+        <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_peer_instruction_rating_path(@qce),
+          button_state: @qce.completed? } %>
         <!-- display link to Peer -->
       <% else %>
         <%= render 'user/qces/peer_selection_form' %>
@@ -71,7 +81,8 @@
       </h4>
       <% if @qce.has_assigned_student_rating? %>
         <%= render 'user/qces/selected_students' %>
-        <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_student_instruction_rating_path(@qce) } %>
+        <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_student_instruction_rating_path(@qce),
+          button_state: @qce.completed? } %>
       <% else %>
         <%= render 'user/qces/student_selection_form' %>
       <% end %>
@@ -100,7 +111,11 @@
             </div>
             <div id="delete-support-area" class="col-md-2">
               <div class="form-group">
-                <%= button_to 'Delete', support_area_qce_path(@qce), method: :delete, class: 'btn btn-danger', params: { 'qce[support_area]': @qce.support_area } %>
+                <%= button_to 'Delete', support_area_qce_path(@qce),
+                      method: :delete, class: 'btn btn-danger',
+                      disabled: @qce.completed?,
+                      params: { 'qce[support_area]': @qce.support_area }
+                %>
               </div>
             </div>
           <% else %>
@@ -119,7 +134,8 @@
           </h4>
           <% if @qce.clientele_instruments.present? %>
             <%= render 'user/qces/clientele_evaluators' %>
-            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_clientele_instrument_path(@qce) } %>
+            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_clientele_instrument_path(@qce),
+              button_state: @qce.completed? } %>
           <% else %>
             <%= render 'user/qces/clientele_selection_form' %>
           <% end %>
@@ -131,7 +147,8 @@
           </h4>
           <% if @qce.leadership_instrument.present? %>
             <%= render 'user/qces/leadership_evaluator' %>
-            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_leadership_instrument_path(@qce) } %>
+            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_leadership_instrument_path(@qce),
+              button_state: @qce.completed? } %>
           <% else %>
             <%= render 'user/qces/leadership_selection_form' %>
           <% end %>               
@@ -144,7 +161,8 @@
           </h4>
           <% if @qce.partnership_instruments.present? %>
             <%= render 'user/qces/partnership_evaluators' %>
-            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_partnership_instrument_path(@qce) } %>
+            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_partnership_instrument_path(@qce),
+              button_state: @qce.completed? } %>
           <% else %>
             <%= render 'user/qces/partnership_selection_form' %>
           <% end %>                                   
@@ -156,7 +174,8 @@
           </h4>
           <% if @qce.community_instruments.present? %>
             <%= render 'user/qces/community_evaluators' %>
-            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_community_instrument_path(@qce) } %>
+            <%= render partial: 'user/qces/delete_button', locals: { route_path: qce_community_instrument_path(@qce),
+              button_state: @qce.completed? } %>
           <% else %>
             <%= render 'user/qces/community_selection_form' %>
           <% end %>
@@ -166,6 +185,20 @@
 
   </div> <!-- .qce-options -->
 <% end # if current_user.account.rank.allows_qce_support? %>
+
+<!-- Finalize button -->
+<% if @qce.for_finalization? %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-4">
+      <ul style="list-style: none;">
+        <li><%= button_to 'Finalize', finalize_qce_path(@qce), method: :patch, class: 'btn btn-success', disabled: @qce.completed?,
+          data: { confirm: "Do you want to finalize this QCE?\nYou can no longer edit or modify it after you finalize." } %></li>
+      </ul>
+      </div>
+    </div>
+  </div>
+<% end %>
 <div class="links">
   <%= link_to '< Back to QCEs', qces_path, class: 'btn btn-link' %> |&nbsp;
   <%= link_to 'View/Check', qce_path(@qce), class: 'btn btn-link' %>

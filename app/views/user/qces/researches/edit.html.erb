@@ -1,10 +1,21 @@
-<h1>user/qce/researches#edit</h1>
+<%
+  evaluations = @rating.evaluations.includes(:question)
+  message = "This will finalize your evaluation. After this you can no longer update or edit it.\n\nDo you want to continue?"
+  button_state = @rating.completed?
+%>
 <div id="rating-info" class="center">
-  <p>Rating for Research</p>
-  <p>Rating Period _____ to _____ </p>
-  <p>Name of Faculty _____</p>
-  <p>Academic Rank _____</p>
-  <p>Evaluator _____</p>
+  <% if @rating.completed? %>
+    <h3><span class="label label-success">Completed</span></h3>
+  <% else %>
+    <h3><span class="label label-warning">Pending</span></h3>
+  <% end %>  
+  <h3>Rating for Research</h3>
+  <h4>Instrument: <%= @rating.instrument %></h4>
+  <!-- <p>Rating Period: <strong><%#= @rating.qce.rating_period.coverage %></strong></p> -->
+  <p>Rating Period: <strong><%= @rating.qce.rating_period.coverage_in_years %></strong></p>
+  <p>Name of Faculty: <strong><%= @rating.qce.employee.full_name %></strong></p>
+  <p>Academic Rank: <strong><%= @rating.qce.employee.rank.full_name %></strong></p>
+  <p>Evaluator: <strong><%= "#{@rating.evaluator_name} (as #{@rating.evaluation_context})" %></strong></p>
 </div>
 <div id="evaluation-guide">
   <p class="center"><strong>Instruction: Please evaluate the faculty using the scale below. Encircle your rating.</strong></p>
@@ -49,13 +60,14 @@
   <table class="table table-bordered">
     <tbody>
       <%#= f.fields_for :user_account do |user_account_fb| %>
-      <% @rating.evaluations.includes(:question).each do |evaluation| %>
+      <% evaluations.each_with_index do |evaluation, index| %>
         <tr>
+          <td class="number"><%= index += 1 %></td>
           <td class="question"><%= evaluation.question.question %></td>
           <% 1.upto(5) do |number| %>
             <% name = "evaluations[#{evaluation.id}][score]" %>
             <% checked = (evaluation.score == number) %>
-            <td>
+            <td class="score">
               <%= label name, number %>
               <%= radio_button_tag name, number, checked %>
             </td>
@@ -63,13 +75,17 @@
         </tr>
       <% end %>
       <tr id="row-action">
-        <td colspan="6">
+        <td colspan="7">          
           <p class="text-right">
             <%= link_to 'Back to Rating Tasks', rating_tasks_path, class: 'btn btn-link' %>
-            <%= submit_tag 'Save', class: 'btn btn-success' %>
-          </p>
+            <%= submit_tag 'Save', class: 'btn btn-primary',
+                                    disabled: button_state  %>
+            <%= submit_tag 'Finalize', class: 'btn btn-success',
+                                        disabled: button_state,
+                                        data: { confirm: message } %>
+          </p>          
         </td>
       </tr>
     </tbody>
   </table>
-<% end %>
+<% end # form_tag %>

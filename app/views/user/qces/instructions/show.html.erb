@@ -8,39 +8,18 @@
   teaching_evaluations = instruments[types[:teaching]]
   management_evaluations = instruments[types[:management]]
 
-  # message = "This will finalize your evaluation. After this you can no longer update or edit it.\n\nDo you want to continue?"
-  # button_state = @rating.completed?
-%>
-<style>
-  td.number {
-    width: 1%;
-  }
-
-  td.question {
-    width: 75%;
-  }
-
-  td.score {
-    width: 4%;
-  }
-
-/*  input[type=radio]:checked + .radio-button-label {
-    color: #f00;
-    font-style: italic;
-  } 
-*/
-  .answered {
-    color: red;
-  }
-</style>
+  qce_owner = (@rating.qce.employee == current_user.account)
+%> 
 <div class="links">
-  <%= link_to '< Back to QCE', qce_path(@qce_id), class: 'btn btn-link' %>
+  <% if qce_owner %>
+    <%= link_to '< Back to QCE', qce_path(@qce_id), class: 'btn btn-link' %>
+  <% end %>
 </div>
 <div id="rating-info" class="center">  
   <% if @rating.completed? %>
-    <h4><span class="label label-success">Completed</span></h4>
+    <h3><span class="label label-success">Completed</span></h3>
   <% else %>
-    <h4><span class="label label-warning">Pending</span></h4>
+    <h3><span class="label label-warning">Pending</span></h3>
   <% end %>
   <h3>Rating for Instruction</h3>
   <!-- <p>Rating Period: <strong><%#= @rating.qce.rating_period.coverage %></strong></p> -->
@@ -249,10 +228,12 @@
         <td colspan="5" class="text-right">
           <strong><%= @rating.total_score %></strong>
         </td>
-      </tr>      
+      </tr>
     </tbody>
   </table>
 <% end # form_tag %>
 <div class="links">
-  <%= link_to '< Back to QCE', qce_path(@qce_id), class: 'btn btn-link' %>
+  <% if qce_owner %>
+    <%= link_to '< Back to QCE', qce_path(@qce_id), class: 'btn btn-link' %>
+  <% end %>  
 </div>

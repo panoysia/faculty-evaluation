@@ -15,11 +15,15 @@
       <% @qces.each_with_index do |qce, index| %>
         <tr>
           <td><%= index += 1 %></td>
-          <td class="center"><%= qce.rating_period.coverage_in_years %></td>
+          <td><%= qce.rating_period.coverage_in_years %></td>
           <td class="center">
-            <span class="label <%= qce.completed? ? 'label-success' : 'label-danger' %>">
-              <%= qce.completed? ? 'Completed' : 'Incomplete' %>
-            </span>
+            <% if qce.for_finalization? %>      
+              <span class="label label-primary pull-right">For finalization</span>
+            <% else %>
+              <span class="label <%= qce.completed? ? 'label-success' : 'label-danger' %> pull-right">
+                <%= qce.completed? ? 'Completed' : 'Incomplete' %>
+              </span>
+            <% end %>
           </td>
           <td class="center">
             <%= link_to qce_path(qce), { title: 'Check', data: { toggle: 'tooltip' } } do %>

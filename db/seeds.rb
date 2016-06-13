@@ -11,6 +11,21 @@
   3 is for profdev
   
 =end
+
+1.upto(100).each do |num|
+  first_name = "client#{num}"
+  last_name = "lastname#{num}"
+  description = "description#{num}"
+  c = Client.create first_name: first_name,
+                    last_name: last_name,
+                    description: description
+  c.build_user_account username: first_name, password: 'password'
+  c.save
+end
+
+exit
+
+
 CCE::ScoringGuide.create [
   {
     description: '',

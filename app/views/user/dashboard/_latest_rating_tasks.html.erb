@@ -15,7 +15,7 @@
       <% @tasks.each_with_index do |task, index| %>
         <tr>
           <td><%= index += 1 %></td>
-          <td class="center"><%= task.description %></td>
+          <td><%= task.description %></td>
 
           <% if task.pending? %>
             <td class="center">
