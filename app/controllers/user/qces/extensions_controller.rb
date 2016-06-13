@@ -3,7 +3,7 @@ class User::QCEs::ExtensionsController < User::ApplicationController
   QUESTIONS_COUNT = 5
 
   # Except for :show, because we need to display ratings not owned by the current user.
-  before_action :set_rating, except: [:show]
+  before_action :set_rating, except: [:show, :randomize_save]
 
 
   def edit
@@ -13,6 +13,29 @@ class User::QCEs::ExtensionsController < User::ApplicationController
     @qce_id = ::QCE.find(params[:qce_id])
     @rating = ::QCE::Extension.find(params[:id])     
   end
+
+  def randomize_save
+    # render html: params.inspect and return true
+    # ["6747", "6748", "6749", "6750", {"score"=>"3"}, {"score"=>"3"}, {"score"=>"5"}, {"score"=>"1"}]
+
+    rating = QCE::Extension.find(params[:id])
+    
+    ids = rating.evaluation_ids
+    answers = []
+    answer_range = (4..5).to_a
+
+    1.upto(5).each do |number|
+      answers << { score: answer_range.sample }
+    end
+
+    if QCE::RatingEvaluation.update ids, answers
+      rating.touch(:finished_at)
+      rating.task.completed!
+      message = "Your evaluation for this rating has been finalized successfully."
+      redirect_to rating_tasks_path, notice: message
+    end
+    
+  end   # def randomize_save
 
   def update
     # render html: params.inspect and return true

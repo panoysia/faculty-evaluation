@@ -18,7 +18,7 @@ class User::QCEs::InstructionsController < User::ApplicationController
     # render html: params.inspect and return true
     # ["6747", "6748", "6749", "6750", {"score"=>"3"}, {"score"=>"3"}, {"score"=>"5"}, {"score"=>"1"}]
 
-    rating = QCE::Rating.find(params[:id])
+    rating = QCE::Instruction.find(params[:id])
     
     ids = rating.evaluation_ids
     answers = []

@@ -80,6 +80,10 @@
             <%= link_to 'Back to Rating Tasks', rating_tasks_path, class: 'btn btn-link' %>
             <%= submit_tag 'Save', class: 'btn btn-primary',
                                     disabled: button_state  %>
+            <span>&nbsp;</span><span>&nbsp;</span>
+            <%= link_to 'Finalize using random answers (4 to 5)', randomize_save_qce_extension_path(@rating.qce, @rating),
+              method: :patch,
+              class: 'btn btn-primary', disabled: button_state %>
             <%= submit_tag 'Finalize', class: 'btn btn-success',
                                         disabled: button_state,
                                         data: { confirm: message } %>
