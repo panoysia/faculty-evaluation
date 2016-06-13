@@ -12,6 +12,14 @@
   
 =end
 
+Student.all.each do |s|
+  name = s.first_name + s.last_name
+  s.build_user_account username: name, password: 'password'
+  s.save
+end
+
+exit
+
 1.upto(100).each do |num|
   first_name = "client#{num}"
   last_name = "lastname#{num}"
