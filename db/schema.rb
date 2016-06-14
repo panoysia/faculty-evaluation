@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610185744) do
+ActiveRecord::Schema.define(version: 20160614054604) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -123,21 +123,23 @@ ActiveRecord::Schema.define(version: 20160610185744) do
   add_index "employee_civil_service_eligibilities", ["employee_id"], name: "index_employee_civil_service_eligibilities_on_employee_id"
 
   create_table "employee_educations", force: :cascade do |t|
-    t.integer  "level",           limit: 1,                             null: false
-    t.string   "school_name",     limit: 50,                            null: false
-    t.string   "degree_course",   limit: 50,                            null: false
-    t.string   "grade_units",     limit: 7
+    t.integer  "level",            limit: 1,     null: false
+    t.string   "school_name",      limit: 50,    null: false
+    t.string   "degree_course",    limit: 50,    null: false
+    t.integer  "grade_units",      limit: 7
     t.date     "graduated_at"
     t.date     "start_at"
     t.date     "end_at"
-    t.text     "honors_received", limit: 65535
-    t.integer  "employee_id",                                           null: false
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
-    t.integer  "is_recent"
-    t.decimal  "points",                        precision: 4, scale: 2
+    t.text     "honors_received",  limit: 65535
+    t.integer  "employee_id",                    null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "attainment_level"
+    t.integer  "criteria"
   end
 
+  add_index "employee_educations", ["attainment_level"], name: "index_employee_educations_on_attainment_level"
+  add_index "employee_educations", ["criteria"], name: "index_employee_educations_on_criteria"
   add_index "employee_educations", ["employee_id"], name: "index_employee_educations_on_employee_id"
 
   create_table "employee_other_infos", force: :cascade do |t|

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     #get 'leaves/search' => "leave_searches#index"
     #get 'leave_service_credits/search' => "leave_service_credits#index"
 
+    resources :faculty_evaluations
     resource :dashboard, only: [:show]
 
     resources :nbcs do

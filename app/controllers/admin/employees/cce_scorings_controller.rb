@@ -6,7 +6,7 @@ class Admin::Employees::CCEScoringsController < Admin::ApplicationController
 
 
   def index
-    @scorings = @employee.cce_scorings      
+    @scorings = @employee.cce_scorings.order(criteria: :asc)
   end
 
 

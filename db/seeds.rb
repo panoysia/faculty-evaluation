@@ -1,24 +1,14 @@
-# criteria is { 1: education, 2: experience, 3: profdev }
-#   education   = 85
-#   experience  = 25
-#   profdev     = 90
-#     Total = 200
-=begin
-
-# area/context/category/criteria:
-  1 is for education
-  2 is for experience
-  3 is for profdev
-  
-=end
-
-Student.all.each do |s|
-  name = s.first_name + s.last_name
-  s.build_user_account username: name, password: 'password'
-  s.save
-end
+# Student.all.each do |s|
+#   name = s.first_name + s.last_name
+#   s.build_user_account username: name.downcase,
+#                         password: 'password'
+#   s.department = Department.all.sample
+#   s.save
+# end
 
 exit
+
+# Client
 
 1.upto(100).each do |num|
   first_name = "client#{num}"
@@ -32,96 +22,6 @@ exit
 end
 
 exit
-
-
-CCE::ScoringGuide.create [
-  {
-    description: '',
-    criteria: 2,
-    points: 0
-  }
-]
-
-# Point system for Educational Qualification
-
-CCE::ScoringGuide.create [
-  {
-    description: 'Doctorate',
-    criteria: 1,
-    points: 85
-  },
-
-  {
-    description: "Master's Degree",
-    criteria: 1, 
-    points: 65
-  },
-
-  {
-    description: "LLB / MD",
-    criteria: 1,
-    points: 65
-  },
-
-  {
-    description: "Diploma Course",
-    criteria: 1,
-    points: 55
-  },
-
-  {
-    description: "Bachelor's Degree (4 years)",
-    criteria: 1,
-    points: 45
-  },
-
-  {
-    description: "3-years post secondary course",
-    criteria: 1,
-    points: 30
-  },  
-
-  {
-    description: "Special Course (Non-degree)",
-    criteria: 1,
-    points: 25
-  }
-]
-
-exit
-
-# Point system for Experience and Length of Service
-
-CCE::ScoringGuid.create [
-  {
-    description: 'Doctorate',
-    criteria: 1,
-    points: 85
-  },
-
-  {
-    description: "Master's Degree",
-    criteria: 1, 
-    points: 65
-  },
-
-  {
-    description: "LLB / MD",
-    criteria: 1,
-    points: 65
-  },
-
-  {
-    description: "Diploma Course",
-    criteria: 1,
-    points: 55
-  }
-
-]
-
-
-exit
-
 
 # Run: rake db:seed / rake db:setup
 =begin

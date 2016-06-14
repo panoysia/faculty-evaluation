@@ -13,7 +13,7 @@ class Client < ActiveRecord::Base
 
   validates :first_name, :last_name,
               presence: true,
-              length: { minimum: 5, maximum: 50 }
+              length: { maximum: 50 }
 
   validates :description, length: { maximum: 30 }
 
@@ -25,5 +25,5 @@ class Client < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
-  
+
 end

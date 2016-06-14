@@ -3,11 +3,27 @@
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
-        <%= f.label :level %>
+        <%= f.label :level, 'Level' %>
         <%= f.select :level, level_types_for_select, {}, class: 'form-control' %>
       </div>      
     </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :criteria, 'Educational Criteria (for CCE)' %>
+        <%= f.select :criteria, criteria_types_for_select, {}, class: 'form-control' %>
+      </div>
+    </div>
   </div>
+<!--   <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%#= f.label :attainment_level, 'Level of Attainment' %>
+        <%#= f.collection_select :attainment_level, CCE::ScoringGuide.education, :id, :description, {}, class: 'form-control' %>
+      </div>
+    </div>
+  </div>   -->
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
@@ -26,18 +42,9 @@
   </div>
   <div class="row">
     <div class="col-md-5">
-      <div class="form-group bg bg-info">
-        <%= f.label :is_recent do %>
-          <%= f.check_box :is_recent %> Is this the recent education of the faculty?
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-5">
       <div class="form-group">
         <%= f.label :grade_units, 'Grade/Units' %>
-        <%= f.text_field :grade_units, class: 'form-control', maxlength: Employee::Education.get_field_limit_of(:grade_units) %>          
+        <%= f.number_field :grade_units, class: 'form-control', maxlength: Employee::Education.get_field_limit_of(:grade_units) %>          
       </div>
     </div>
   </div>

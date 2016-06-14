@@ -16,11 +16,11 @@
         <tr>
           <td><%= index += 1 %></td>
           <td><%= qce.rating_period.coverage_in_years %></td>
-          <td class="center">
+          <td>
             <% if qce.for_finalization? %>      
-              <span class="label label-primary pull-right">For finalization</span>
+              <span class="label label-primary">For finalization</span>
             <% else %>
-              <span class="label <%= qce.completed? ? 'label-success' : 'label-danger' %> pull-right">
+              <span class="label <%= qce.completed? ? 'label-success' : 'label-danger' %>">
                 <%= qce.completed? ? 'Completed' : 'Incomplete' %>
               </span>
             <% end %>

@@ -18,6 +18,8 @@ class Admin::Employees::EducationsController < Admin::ApplicationController
   end
 
   def create
+    # render html: params.inspect and return true
+
     @education = @employee.educations.new(education_params)
     respond_to do |format|
       if @education.save
@@ -69,7 +71,9 @@ class Admin::Employees::EducationsController < Admin::ApplicationController
   end
 
   def education_params
-    params.require(:education).permit(:level, :school_name, :degree_course, :grade_units, :graduated_at, :start_at, :end_at, :honors_received, :is_recent)
+    params.require(:education).permit(:level, :school_name,
+      :degree_course, :grade_units, :graduated_at, :start_at, :end_at,
+      :honors_received, :level, :attainment_level, :criteria)
   end
 
 end

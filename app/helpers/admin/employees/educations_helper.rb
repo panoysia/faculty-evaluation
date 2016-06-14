@@ -8,4 +8,18 @@ module Admin::Employees::EducationsHelper
     Employee::Education::LEVEL_TYPES[level]
   end
 
+  def criteria_types_for_select
+    Employee::Education::CRITERIA_TYPES.each_with_index.map { |criteria, index| [criteria, index] }
+  end
+  
+  # CRITERIA_TYPES = [
+  #           'Highest Degree',
+  #           'Additional Degree',
+  #           'Additional Credits'
+  #         ]
+  
+  def education_criteria_to_string(criteria)
+    Employee::Education::CRITERIA_TYPES[criteria]
+  end
+
 end
