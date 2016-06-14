@@ -22,6 +22,9 @@ gem 'paperclip', '~> 4.3', '>= 4.3.4'
 #gem 'aws-sdk', '~> 2.2', '>= 2.2.26'
 gem 'aws-sdk-v1'
 
+# gem 'pdfkit'
+# gem 'render_anywhere', require: false
+
 group :development do
   gem 'sqlite3'
   gem 'web-console', '~> 2.0'

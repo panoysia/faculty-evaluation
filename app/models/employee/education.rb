@@ -41,29 +41,31 @@ class Employee::Education < ActiveRecord::Base
               presence: true,
               length: { maximum: 50 }
 
-  validates :grade_units, length: { maximum: 7 }
-  validates :grade_units, 
-  # validates 
+  validates :grade_units, numericality: true
   validates :honors_received, length: { maximum: 65535 }
 
-  validate :ensure_years_start_and_end_presence, if: Proc.new { level == 7 }
+  # validate :ensure_years_start_and_end_presence, if: Proc.new { level == 7 }
+  # validates :start_at, :end_at, presence: true,
+  #           if: Proc.new { level == 7 }
 
-  # validate :correct_date_range, unless: :date_values_are_nil?
-  #  unless: Proc.new { (start_at.nil? && end_at.nil?) }
 
   after_save :create_or_update_cce_scoring_record
+
+  # validate :years_of_study, 
+  # validate :ensure_masters_and_bachelors
+
+# * bachelor 4 years -> check for 'years of study'
+# * for equivalent degree -> make sure 'masters' and 'bachelors' only
+
+#   * for additional credits -> make sure 'grade_units' field is present
+
+#  validate :grade_units, presence: true, if: {}
 
   def ensure_years_start_and_end_presence
     unless start_at.present?  && end_at.present?
       errors[:base] << "[Year Started] and [Year Ended] date values are required for Bachelor's exceeding 4 years."
     end
   end
-
-  # def ensure_within_academic_year
-  #   unless (academic_year.start_at..academic_year.end_at).include?(valid_at.to_date)
-  #     errors[:base] << "Ensure that the Valid At date must be within the date range of the selected academic year period."
-  #   end
-  # end
 
   # Use this for resolving namespaced models in polymorphic route generation and when prefer to build routes using arrays instead of named route helpers.
   def self.use_relative_model_naming?

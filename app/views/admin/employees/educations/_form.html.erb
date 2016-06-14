@@ -44,7 +44,7 @@
     <div class="col-md-5">
       <div class="form-group">
         <%= f.label :grade_units, 'Grade/Units' %>
-        <%= f.number_field :grade_units, class: 'form-control', maxlength: Employee::Education.get_field_limit_of(:grade_units) %>          
+        <%= f.text_field :grade_units, class: 'form-control' %>
       </div>
     </div>
   </div>

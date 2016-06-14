@@ -1,5 +1,4 @@
 class CCE::EducationScorer
-
 =begin
   
   Constants below are for reference only. Please see: 'class Employee::Education' for their proper declaration.

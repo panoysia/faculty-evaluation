@@ -1,27 +1,11 @@
-class CCE::Ranker
-  attr_accessor :name
+class CCE::ExperienceScorer
 
-  def initialize(name)
-    @name = name
-  end
-
-  def to_s
-    "ehllo from CCE::Ranker"
-  end
-
-  def employee
-    Employee.all.sample
-  end
 end
 
 =begin
 
-1. Save in education
-2. Then before saving in Employee::CCEScorings, use CCE::Scorer object to determine score of education record
-
-# Do the same with update
-
 ## CCE::ExperienceScorer --> (Experience & Length of Service :25 pts. max)
+
   2.1 Academic Experience
     2.1.1
       For every year of full-time academic service     
@@ -67,16 +51,5 @@ end
       Basic Education Teacher       0.50
 
       * what field?
-
-
-## CCE::ProfDevelopmentScorer
-
-
-=end
-
-=begin
-
-  1. Loop through all the records in educations table
-  *1. Filter records in educations table by criteria
 
 =end
