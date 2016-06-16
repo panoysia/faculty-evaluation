@@ -55,7 +55,8 @@ class Employee::Education < ActiveRecord::Base
                           presence: true,
                           if: :for_additional_credits?
 
-  validates :graduated_at, presence: { message: "Graduated At needs a value." }
+
+  validates :graduated_at, :start_at, :end_at, presence: { message: "Graduated At needs a value." }
   validates :end_at, presence: { message: "Year Ended needs a value." }
   validates :start_at, presence: {message: Proc.new { "Year Started needs a value." } }
 
