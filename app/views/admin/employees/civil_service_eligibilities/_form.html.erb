@@ -1,30 +1,58 @@
 <%= form_for [:admin, @employee, @civil_service] do |f| %>
-  <%= error_messages_for(@civil_service) %>    
-  <div class="form-group">
-    <%= f.label :career_service %>
-    <%= f.text_field :career_service, class: 'form-control', autofocus: true, maxlength: Employee::CivilServiceEligibility.get_field_limit_of(:career_service) %>
+  <%= error_messages_for(@civil_service) %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :career_service %>
+        <%= f.text_field :career_service, class: 'form-control', autofocus: true, maxlength: Employee::CivilServiceEligibility.get_field_limit_of(:career_service) %>
+      </div>      
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :rating, 'Rating' %>
-    <%= f.text_field :rating, class: 'form-control' %>
-  </div>  
-  <div class="form-group">
-    <%= f.label :date_of_exam, 'Exam Date' %>
-    <%= f.date_field :date_of_exam, class: 'form-control' %>
-  </div>  
-  <div class="form-group">
-    <%= f.label :place_of_exam, 'Place of Exam' %>
-    <%= f.text_field :place_of_exam, class: 'form-control', maxlength: Employee::CivilServiceEligibility.get_field_limit_of(:place_of_exam) %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :rating, 'Rating' %>
+        <%= f.text_field :rating, class: 'form-control' %>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :license_number, 'License No.' %>
-    <%= f.text_field :license_number, class: 'form-control', maxlength: Employee::CivilServiceEligibility.get_field_limit_of(:license_number) %>
-  </div>  
-  <div class="form-group">
-    <%= f.label :date_release_of_license, 'Date release of license' %>
-    <%= f.date_field :date_release_of_license, class: 'form-control' %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :date_of_exam, 'Exam Date' %>
+        <%= f.date_field :date_of_exam, class: 'form-control' %>
+      </div>      
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.submit class: 'btn btn-primary' %>
-  </div>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :place_of_exam, 'Place of Exam' %>
+        <%= f.text_field :place_of_exam, class: 'form-control', maxlength: Employee::CivilServiceEligibility.get_field_limit_of(:place_of_exam) %>
+      </div>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :license_number, 'License No.' %>
+        <%= f.text_field :license_number, class: 'form-control', maxlength: Employee::CivilServiceEligibility.get_field_limit_of(:license_number) %>
+      </div>       
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :date_release_of_license, 'Date release of license' %>
+        <%= f.date_field :date_release_of_license, class: 'form-control' %>
+      </div>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>      
+    </div>
+  </div>
 <% end %>

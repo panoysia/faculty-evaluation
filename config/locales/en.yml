@@ -21,3 +21,9 @@
 
 en:
   hello: "Hello world"
+  # activerecord:
+  #   attributes:
+  #     employee/education:
+  #       start_at: 'Year Started'
+  #     user:
+  #       username: 'Year Started'

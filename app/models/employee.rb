@@ -167,20 +167,28 @@ class Employee < ActiveRecord::Base
     end
   end
 
-  # TODO: Age computation is unfinished
+
   def age
     return nil if birth_date.nil?
-    # 3/23/16         3/20/1985
-    if Date.current.month >= birth_date.month
-      if Date.current.day >= birth_date.day
-        Date.current.year - birth_date.year
-      else
 
-      end
-    else
-      (Date.current.year - birth_date.year) - 1
-    end    
+    now = Time.now.utc.to_date
+    now.year - birth_date.year - ((now.month > birth_date.month || (now.month == birth_date.month && now.day >= birth_date.day)) ? 0 : 1)
   end
+
+  # TODO: Age computation is unfinished
+  # def age
+  #   return nil if birth_date.nil?
+  #   # 3/23/16         3/20/1985
+  #   if Date.current.month >= birth_date.month
+  #     if Date.current.day >= birth_date.day
+  #       Date.current.year - birth_date.year
+  #     else
+
+  #     end
+  #   else
+  #     (Date.current.year - birth_date.year) - 1
+  #   end    
+  # end
 
   def years_in_service
 

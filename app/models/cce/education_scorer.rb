@@ -1,46 +1,7 @@
 class CCE::EducationScorer
-=begin
-  
-  Constants below are for reference only. Please see: 'class Employee::Education' for their proper declaration.
+  include EducationConstants
 
-  CRITERIA_TYPES = [
-            'Highest Degree',
-            'Additional Degree',
-            'Additional Credits'
-          ]
-
-  LEVEL_TYPES = [
-    'Doctorate',
-    "Master's Degree",
-    'LLB',
-    'MD',
-    'MD - Licensed',
-    'Diploma Course',
-    "Bachelor's",
-    "Bachelor's (> 4 yrs.)",
-    '3 yrs. post secondary course',
-    'Special Course (non-degree)'
-  ]
-=end
-  
-  # Constants declared here are based on the declarations in 'class Employee::Education'.
-
-  HIGHEST_DEGREE = 0
-  ADDITIONAL_DEGREE = 1
-  ADDITIONAL_CREDIT = 2
-
-  DOCTORATE = 0
-  MASTERS_DEGREE = 1
-  LLB = 2
-  MD = 3
-  MD_LICENSED = 4
-  DIPLOMA_COURSE = 5
-  BACHELORS = 6
-  BACHELORS_PLUS = 7
-  THREE_YEARS_POST_SECONDARY = 8
-  SPECIAL_COURSE = 9
-
-  MINIMUM_BACHELOR_YEARS = 4
+  MAX_SCORE = 85
 
 
   def self.rate(record)
@@ -50,25 +11,27 @@ class CCE::EducationScorer
       score = case record.level
               when DOCTORATE        then 85
               when MD_LICENSED      then 85
-              when MASTERS_DEGREE   then 65
+              when MASTERS          then 65
               when LLB              then 65
               when MD               then 65
               when DIPLOMA_COURSE   then 55
               when BACHELORS        then 45
               when BACHELORS_PLUS
-                if record.years_of_study.present?
+                # if record.years_of_study.present?
                   rateable_years = record.years_of_study - MINIMUM_BACHELOR_YEARS
+
                   45 + (rateable_years * 5)
-                else
-                  45
-                end
+                # else
+                #   45
+                # end
 
               when THREE_YEARS_POST_SECONDARY   then 30
               when SPECIAL_COURSE               then 25
               else 0
               end
+
     elsif record.criteria == ADDITIONAL_DEGREE
-      if record.level == MASTERS_DEGREE
+      if record.level == MASTERS
         score = 4
       elsif record.level == BACHELORS || record.level == BACHELORS_PLUS
         score = 3
@@ -93,6 +56,26 @@ class CCE::EducationScorer
   end   # def self.rate
 
 end   # class CCE::EducationScorer
+
+
+# Constants declared here are based on the declarations in 'class Employee::Education'.
+
+# HIGHEST_DEGREE = 0
+# ADDITIONAL_DEGREE = 1
+# ADDITIONAL_CREDIT = 2
+
+# DOCTORATE = 0
+# MASTERS = 1
+# LLB = 2
+# MD = 3
+# MD_LICENSED = 4
+# DIPLOMA_COURSE = 5
+# BACHELORS = 6
+# BACHELORS_PLUS = 7
+# THREE_YEARS_POST_SECONDARY = 8
+# SPECIAL_COURSE = 9
+
+# MINIMUM_BACHELOR_YEARS = 4
 
 =begin
 

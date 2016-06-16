@@ -1,4 +1,6 @@
 class Employee::Education < ActiveRecord::Base
+  include EducationConstants
+
   self.table_name_prefix = 'employee_'
 
   # LEVEL_TYPES = %w[College Masters Doctorate]
@@ -10,7 +12,7 @@ class Employee::Education < ActiveRecord::Base
 
   LEVEL_TYPES = [
     'Doctorate',
-    "Master's Degree",
+    "Master's",
     'LLB',
     'MD',
     'MD - Licensed',
@@ -21,17 +23,23 @@ class Employee::Education < ActiveRecord::Base
     'Special Course (non-degree)'
   ]
 
+
   belongs_to :employee
   has_one :cce_scoring, as: :cce_scorable,
                         class_name: 'Employee::CCEScoring',
                         dependent: :destroy
 
+
   validates :level, presence: true, inclusion: { 
     in: LEVEL_TYPES.each_index.map { |index| index } 
-  }  
+  }
 
-  # validates :attainment_level, presence: true,
-  #           inclusion: { in: CCE::ScoringGuide.education.ids }
+  validates :level, inclusion: { 
+      in: [MASTERS, BACHELORS, BACHELORS_PLUS],
+      message: "inline with additional degree is only for: Master's or Bachelor's",
+    },
+  if: :for_additional_degree?
+  
 
   validates :criteria, presence: true, inclusion: {
     in: CRITERIA_TYPES.each_index.map { |index| index }
@@ -41,31 +49,26 @@ class Employee::Education < ActiveRecord::Base
               presence: true,
               length: { maximum: 50 }
 
-  validates :grade_units, numericality: true
   validates :honors_received, length: { maximum: 65535 }
 
-  # validate :ensure_years_start_and_end_presence, if: Proc.new { level == 7 }
-  # validates :start_at, :end_at, presence: true,
-  #           if: Proc.new { level == 7 }
+  validates :grade_units, numericality: true,
+                          presence: true,
+                          if: :for_additional_credits?
+
+  validates :graduated_at, presence: { message: "Graduated At needs a value." }
+  validates :end_at, presence: { message: "Year Ended needs a value." }
+  validates :start_at, presence: {message: Proc.new { "Year Started needs a value." } }
+
+  validate :correct_date_range, if: :date_values_are_present?
+  validate :four_years_minimum, if: :bachelors_plus?
+
+# * bachelor 4 years -> check for 'years of study'
+# validate :years_of_study, 
+
 
 
   after_save :create_or_update_cce_scoring_record
 
-  # validate :years_of_study, 
-  # validate :ensure_masters_and_bachelors
-
-# * bachelor 4 years -> check for 'years of study'
-# * for equivalent degree -> make sure 'masters' and 'bachelors' only
-
-#   * for additional credits -> make sure 'grade_units' field is present
-
-#  validate :grade_units, presence: true, if: {}
-
-  def ensure_years_start_and_end_presence
-    unless start_at.present?  && end_at.present?
-      errors[:base] << "[Year Started] and [Year Ended] date values are required for Bachelor's exceeding 4 years."
-    end
-  end
 
   # Use this for resolving namespaced models in polymorphic route generation and when prefer to build routes using arrays instead of named route helpers.
   def self.use_relative_model_naming?
@@ -75,26 +78,66 @@ class Employee::Education < ActiveRecord::Base
   def self.get_field_limit_of(field_name)
     column_for_attribute(field_name.to_s.to_sym).limit
   end
-  
+
   def years_of_study
+    YearCalculator.calculate(start_at, end_at)
+  end
+  
+
+  private
+
+  def date_values_are_present?
+    start_at.present? && end_at.present?
+  end
+
+  def correct_date_range
+    unless end_at > start_at
+      errors[:base] << "Invalid date range.\n'End at' date value must be greater than 'Start at' date value."
+    end
+  end
+
+  def four_years_minimum
+    if years_of_study < 4
+      errors[:base] << "Minimum of four years between [Start at] date and [End at] date is required for Bachelor's plus."
+    end
+  end
+
+  def bachelors_plus?
+    level == BACHELORS_PLUS
+  end
+
+  def for_additional_degree?
+    criteria == ADDITIONAL_DEGREE
+  end
+
+  def for_additional_credits?
+    criteria == ADDITIONAL_CREDIT
   end
 
   def create_or_update_cce_scoring_record
     scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
-    
-    # id = self[:attainment_level]
-    # scoring_guide = CCE::ScoringGuide.education.find(id)
-    # scoring.cce_scoring_guide_id = id
-
+  
     scoring.employee = self.employee
     scoring.cce_scoring_guide_id = 0
     scoring.score = CCE::EducationScorer.rate(self)
     scoring.criteria = Employee::CCEScoring::EDUCATION
     scoring.save
+
+    # id = self[:attainment_level]
+    # scoring_guide = CCE::ScoringGuide.education.find(id)
+    # scoring.cce_scoring_guide_id = id    
   end
 
 end
+
+  # def bachelors?
+  #   (level == BACHELORS) || (level == BACHELORS_PLUS)
+  # end
+
 =begin
+
+# validates :attainment_level, presence: true,
+#           inclusion: { in: CCE::ScoringGuide.education.ids }
 
 scoring = Employee::CCEScoring.new
 scoring.employee = employee

@@ -3,9 +3,10 @@ class AcademicYear < ActiveRecord::Base
   has_many :rating_periods, dependent: :destroy
   has_many :leaves, dependent: :destroy
   # belongs_to :nbc
-  validates :start_at, :end_at, presence: true   
-  validate :correct_date_range #, unless: :date_values_are_nil?
 
+  validates :start_at, :end_at, presence: true   
+  validate :correct_date_range, if: :date_values_are_present?
+  
   # TODO: solve this!
   # validate :start_date_overlap
 
@@ -46,9 +47,9 @@ class AcademicYear < ActiveRecord::Base
     end    
   end
 
-  # def date_values_are_nil?
-  #   start_at.nil? && end_at.nil?
-  # end
+  def date_values_are_present?
+    start_at.present? && end_at.present?
+  end
 
   def correct_date_range
     unless end_at > start_at

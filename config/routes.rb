@@ -32,9 +32,9 @@ Rails.application.routes.draw do
     resources :cces
 
     # Just to make use of 'qce' for path, i.e., could have used path scope instead
-    namespace :qce do
-      resources :questions, only: [:index]
-    end
+    # namespace :qce do
+    #   resources :questions, only: [:index]
+    # end
 
     resources :employees do
       scope module: :employees do
