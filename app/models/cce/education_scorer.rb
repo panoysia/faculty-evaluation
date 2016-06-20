@@ -1,14 +1,14 @@
 class CCE::EducationScorer
   include EducationConstants
 
-  MAX_SCORE = 85
+  MAX_POINTS = 85
 
 
   def self.rate(record)
     # level, years_of_study, units_earned, criteria
 
     if record.criteria == HIGHEST_DEGREE
-      score = case record.level
+      points = case record.level
               when DOCTORATE        then 85
               when MD_LICENSED      then 85
               when MASTERS          then 65
@@ -32,11 +32,11 @@ class CCE::EducationScorer
 
     elsif record.criteria == ADDITIONAL_DEGREE
       if record.level == MASTERS
-        score = 4
+        points = 4
       elsif record.level == BACHELORS || record.level == BACHELORS_PLUS
-        score = 3
+        points = 3
       else
-        score = 0
+        points = 0
       end
 
     elsif record.criteria == ADDITIONAL_CREDIT
@@ -47,9 +47,9 @@ class CCE::EducationScorer
           grade_units = 30
         end
 
-        score = (grade_units / 3)
+        points = (grade_units / 3)
       else
-        score = 0
+        points = 0
       end      
     end   # def record.criteria == HIGHEST_DEGREE
 

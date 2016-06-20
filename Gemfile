@@ -13,15 +13,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# gem 'activeadmin', '~> 0.6.6'
-# gem 'activeadmin', github: 'activeadmin'
-# gem 'devise', '~> 3.5', '>= 3.5.3'
 gem 'awesome_print', '~> 1.6', '>= 1.6.1'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'paperclip', '~> 4.3', '>= 4.3.4'
 #gem 'aws-sdk', '~> 2.2', '>= 2.2.26'
 gem 'aws-sdk-v1'
-
 # gem 'pdfkit'
 # gem 'render_anywhere', require: false
 
@@ -42,6 +38,8 @@ group :production do
   gem 'rails_12factor'
   gem 'pg'
 end
+
+# gem 'devise', '~> 3.5', '>= 3.5.3'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

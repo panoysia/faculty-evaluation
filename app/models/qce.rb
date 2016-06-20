@@ -1,5 +1,7 @@
 class QCE < ActiveRecord::Base
 
+  PERCENTAGE_WEIGHT = 0.25  # 25%
+
   SELF_RATING_COUNT = 1
   SUPERVISOR_RATING_COUNT = 1
   PEER_RATINGS_COUNT = 5
@@ -82,17 +84,14 @@ class QCE < ActiveRecord::Base
   scope :completed, -> { where(completed: 1) }
   scope :incomplete, -> { where(completed: 0) }
   scope :latest, -> (size = 8) { order(updated_at: :desc).limit(size) }
+  
 
+  def self.order_by_academic_year
+    order('academic_years.start_at DESC, academic_years.end_at DESC,
+            rating_periods.semester DESC').
+            references(:academic_year)
+  end
 
-  # completed, for_finalization, incomplete
-
-  # def status
-  #   completed? and for_finalization
-  # end
-
-  # def completed?
-  #   finished_at.present?
-  # end
 
   def for_finalization?
     completed_ratings = nil
@@ -107,6 +106,47 @@ class QCE < ActiveRecord::Base
     (completed == 0) && completed_ratings
   end
 
+
+  def clientele_instruments_total_score
+    clientele_instruments.joins(:evaluations).sum('qce_rating_evaluations.score')
+  end
+
+  def clientele_instruments_average
+    clientele_instruments_total_score / CLIENTELE_INSTRUMENTS    
+  end
+
+  def partnership_instruments_total_score
+    partnership_instruments.joins(:evaluations).sum('qce_rating_evaluations.score')
+  end
+
+  def partnership_instruments_average
+    partnership_instruments_total_score / PARTNERSHIP_INSTRUMENTS
+  end
+
+  def community_instruments_total_score
+    community_instruments.joins(:evaluations).sum('qce_rating_evaluations.score')
+  end  
+
+  def community_instruments_average
+    community_instruments_total_score / COMMUNITY_RESPONSIBILITY_INSTRUMENTS
+  end
+
+  def peer_instruction_ratings_total_score
+    peer_instruction_ratings.joins(:evaluations).sum('qce_rating_evaluations.score')
+  end
+
+  def peer_instruction_ratings_average
+    peer_instruction_ratings_total_score / PEER_RATINGS_COUNT.to_f
+  end
+
+  def student_instruction_ratings_total_score
+    student_instruction_ratings.joins(:evaluations).sum('qce_rating_evaluations.score')
+  end
+
+  def student_instruction_ratings_average
+    student_instruction_ratings_total_score / STUDENT_RATINGS_COUNT.to_f
+  end
+
   # private
 
   def clear_ratings
@@ -118,3 +158,13 @@ class QCE < ActiveRecord::Base
   end
 
 end   # class QCE
+
+# completed, for_finalization, incomplete
+
+# def status
+#   completed? and for_finalization
+# end
+
+# def completed?
+#   finished_at.present?
+# end

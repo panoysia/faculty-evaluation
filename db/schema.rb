@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160614054604) do
+ActiveRecord::Schema.define(version: 20160620075439) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 20160614054604) do
     t.string   "cce_scorable_type",                              null: false
     t.integer  "nbc_id"
     t.integer  "cce_scoring_guide_id",                           null: false
-    t.decimal  "score",                  precision: 5, scale: 2, null: false
+    t.decimal  "points",                 precision: 5, scale: 2, null: false
     t.integer  "criteria",                                       null: false
     t.string   "supporting_description"
     t.datetime "created_at",                                     null: false

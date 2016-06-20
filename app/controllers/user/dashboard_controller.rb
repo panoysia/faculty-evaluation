@@ -3,7 +3,10 @@ class User::DashboardController < User::ApplicationController
   def show
     if @current_user.account.is_a? Employee 
       @leaves = current_user.account.leaves.latest(5)
-      @qces = current_user.account.qces.latest(5)
+      @qces = current_user.account.
+                qces.
+                includes(rating_period: [:academic_year]).
+                latest(5)
     end
 
     @tasks = current_user.account.rating_tasks.
