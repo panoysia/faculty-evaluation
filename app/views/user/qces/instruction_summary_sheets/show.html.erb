@@ -1,0 +1,284 @@
+<%
+  types = QCE::Instruction::INSTRUMENTS
+
+  student_ratings = @qce.student_instruction_ratings
+  peer_ratings = @qce.peer_instruction_ratings
+
+  period = "#{@qce.rating_period.semester.ordinalize} Semester"
+  school_year = @qce.rating_period.academic_year.coverage_in_years
+
+  sums = {
+    commitment: 0,
+    knowledge: 0,
+    teaching: 0,
+    management: 0,
+    total: 0
+  }
+
+  totals = {
+    commitment: 0,
+    knowledge: 0,
+    teaching: 0,
+    management: 0,
+    total: 0
+  }
+
+%>
+<style>
+  #period {
+    text-decoration: underline;
+  }
+</style>
+<div class="links">
+  <%= link_to '< Back to QCE', @qce, class: 'btn btn-link' %>  
+</div>  
+<div class="row">
+  <div class="col-md-12">
+    <h3 class="center">QCE Summary Sheet for Instruction/Teaching Effectiveness by Evaluator Type</h3>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <h4 class="text-right"><span>Period: <u><%= period %></u></span></h4>
+    </div>
+    <div class="col-md-6">
+      <h4 class="text-left"><span>School Year: <u><%= school_year %></u></span>&nbsp;</h4>
+    </div>
+  </div>
+    
+  <div class="col-md-12">
+    <table class="table table-bordered table-master" style="margin: 8px auto;">
+      <thead>
+        <tr>
+          <th class="center">Students</th>
+          <th class="center">ID</th>
+          <td class="center"><br>Evaluator Name</td>
+          <th class="center">Commitment</th>
+          <th class="center">Knowledge<br>of Subject</th>
+          <th class="center">Teaching for<br>Independent Learning</th>
+          <th class="center">Management of<br>Learning</th>
+          <th>Total</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% student_ratings.each_with_index do |rating, index| %>
+          <%
+            instruments = rating.evaluations.includes(:question).
+                            group_by { |evaluation| evaluation.question.instrument } 
+
+            commitment_evaluations = instruments[types[:commitment]]
+            knowledge_evaluations = instruments[types[:knowledge]]
+            teaching_evaluations = instruments[types[:teaching]]
+            management_evaluations = instruments[types[:management]]
+
+            sums[:commitment] = commitment_evaluations.sum(&:score)
+            sums[:knowledge] = knowledge_evaluations.sum(&:score)
+            sums[:teaching] = teaching_evaluations.sum(&:score)
+            sums[:management] = management_evaluations.sum(&:score)
+            sums[:total] = sums[:commitment] + sums[:knowledge] +
+                            sums[:teaching] + sums[:management]
+
+            totals[:commitment] += sums[:commitment]
+            totals[:knowledge] += sums[:knowledge]
+            totals[:teaching] += sums[:teaching]
+            totals[:management] += sums[:management]
+            totals[:total] += sums[:total]
+          %>
+          <tr>
+            <td class="center"><%= index += 1 %></td>
+            <td><%= rating.id %></td>
+            <td><%= rating.evaluator.full_name %></td>
+            <td class="text-right">
+              <%= number_with_precision(sums[:commitment],
+                                        precision: 2) %>
+            </td>
+            <td class="text-right">
+              <%= number_with_precision(sums[:knowledge],
+                                        precision: 2) %>
+            </td>
+            <td class="text-right">
+              <%= number_with_precision(sums[:teaching],
+                                        precision: 2) %>
+            </td>
+            <td class="text-right">
+              <%= number_with_precision(sums[:management],
+                                        precision: 2) %>
+            </td>
+            <td class="text-right">
+              <%= number_with_precision(rating.total_score,
+                                        precision: 2) %>
+            </td>
+            <td>
+              <%= number_with_precision(sums[:total], precision: 2) %>
+            </td>
+          </tr>
+        <% end %>
+
+        <%
+          totals[:commitment] = totals[:commitment] / 30.0
+          totals[:knowledge] = totals[:knowledge] / 30.0
+          totals[:teaching] = totals[:teaching] / 30.0
+          totals[:management] = totals[:management] / 30.0
+          totals[:total] = totals[:total] / 30.0
+        %>
+        <!-- Total for Student ratings -->
+        <tr>
+          <td class="center"><strong>Total</strong></td>
+          <td></td>
+          <td></td>
+          <td class="text-right">
+            <strong>
+              <%= number_with_precision(totals[:commitment],
+                                        precision: 2) %>
+            </strong>
+          </td>
+          <td class="text-right">
+            <strong>
+              <%= number_with_precision(totals[:knowledge],
+                                        precision: 2) %>
+            </strong>
+          </td>
+          <td class="text-right">
+            <strong>
+              <%= number_with_precision(totals[:teaching],
+                                        precision: 2) %>
+            </strong>
+          </td>
+          <td class="text-right">
+            <strong>
+              <%= number_with_precision(totals[:management],
+                                        precision: 2) %>
+            </strong>
+          </td>
+          <td>
+            <strong>
+              <%= number_with_precision(totals[:total],
+                                        precision: 2) %>
+            </strong>
+          </td>
+        </tr>
+
+        <!-- Self rating -->
+        <%
+          instruments = @qce.self_instruction_rating.
+                          evaluations.includes(:question).
+                          group_by { |evaluation| evaluation.question.instrument } 
+
+          commitment_evaluations = instruments[types[:commitment]]
+          knowledge_evaluations = instruments[types[:knowledge]]
+          teaching_evaluations = instruments[types[:teaching]]
+          management_evaluations = instruments[types[:management]]
+        %>
+        <tr>
+          <td class="center"><strong>Self</strong></td>
+          <td><%= @qce.self_instruction_rating.id %></td>
+          <td><%= @qce.self_instruction_rating.evaluator.full_name %></td>
+          <td class="text-right">
+            <%= number_with_precision(commitment_evaluations.sum(&:score), precision: 2) %>
+          </td>          
+          <td class="text-right">
+            <%= number_with_precision(knowledge_evaluations.sum(&:score), precision: 2) %>
+          </td>
+          <td class="text-right">
+            <%= number_with_precision(teaching_evaluations.sum(&:score), precision: 2) %>
+          </td>
+          <td class="text-right">
+            <%= number_with_precision(management_evaluations.sum(&:score), precision: 2) %>
+          </td>
+          <td class="text-right">
+            <%= number_with_precision(@qce.self_instruction_rating.total_score, precision: 2) %>
+          </td>
+        </tr>
+
+        <!-- Start of Peer Ratings -->
+        <tr>
+          <td class="center"><strong>Peer</strong></td>
+          <td colspan="7"></td>
+        </tr>
+        <% peer_ratings.each_with_index do |rating, index| %>
+          <%
+            instruments = rating.evaluations.includes(:question).
+                            group_by { |evaluation| evaluation.question.instrument } 
+
+            commitment_evaluations = instruments[types[:commitment]]
+            knowledge_evaluations = instruments[types[:knowledge]]
+            teaching_evaluations = instruments[types[:teaching]]
+            management_evaluations = instruments[types[:management]]
+          %>
+          <tr>
+            <td class="center"><%= index += 1 %></td>
+            <td><%= rating.id %></td>
+            <td><%= rating.evaluator.full_name %></td>
+            <td class="text-right">
+              <%= number_with_precision(commitment_evaluations.sum(&:score), precision: 2) %>
+            </td>
+            <td class="text-right">
+              <%= number_with_precision(knowledge_evaluations.sum(&:score), precision: 2) %>
+            </td>
+            <td class="text-right">
+              <%= number_with_precision(teaching_evaluations.sum(&:score), precision: 2) %>
+            </td>
+            <td class="text-right">
+              <%= number_with_precision(management_evaluations.sum(&:score), precision: 2) %>
+            </td>
+            <td class="text-right">
+              <%= number_with_precision(rating.total_score, precision: 2) %>
+            </td>
+          </tr>
+        <% end %>
+
+        <!-- Total for Peer ratings -->
+        <tr>
+          <td class="center"><strong>Total</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <!-- Supervisor rating -->
+        <%
+          instruments = @qce.supervisor_instruction_rating.
+                          evaluations.includes(:question).
+                          group_by { |evaluation| evaluation.question.instrument } 
+
+          commitment_evaluations = instruments[types[:commitment]]
+          knowledge_evaluations = instruments[types[:knowledge]]
+          teaching_evaluations = instruments[types[:teaching]]
+          management_evaluations = instruments[types[:management]]
+        %>
+        <tr>
+          <td class="center"><strong>Supervisor</strong></td>
+          <td><%= @qce.supervisor_instruction_rating.id %></td>
+          <td><%= @qce.supervisor_instruction_rating.evaluator.full_name %></td>
+          <td class="text-right">
+            <%= number_with_precision(commitment_evaluations.sum(&:score), precision: 2) %>
+          </td>          
+          <td class="text-right">
+            <%= number_with_precision(knowledge_evaluations.sum(&:score), precision: 2) %>
+          </td>
+          <td class="text-right">
+            <%= number_with_precision(teaching_evaluations.sum(&:score), precision: 2) %>
+          </td>
+          <td class="text-right">
+            <%= number_with_precision(management_evaluations.sum(&:score), precision: 2) %>
+          </td>
+          <td class="text-right">
+            <%= number_with_precision(@qce.supervisor_instruction_rating.total_score, precision: 2) %>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div>
+  <%= link_to '< Back to QCE', @qce, class: 'btn btn-link' %>
+</div>  
+
+

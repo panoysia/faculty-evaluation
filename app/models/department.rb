@@ -2,7 +2,7 @@ class Department < ActiveRecord::Base
   has_many :employees, -> { includes(:rank).
                             order(last_name: :asc, first_name: :asc)
                           }
-  has_many :students
+  has_many :students, dependent: :destroy
   
   validates :name, presence: true,
                     uniqueness: true,

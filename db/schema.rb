@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620075439) do
+ActiveRecord::Schema.define(version: 20160621051626) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -141,6 +141,15 @@ ActiveRecord::Schema.define(version: 20160620075439) do
   add_index "employee_educations", ["attainment_level"], name: "index_employee_educations_on_attainment_level"
   add_index "employee_educations", ["criteria"], name: "index_employee_educations_on_criteria"
   add_index "employee_educations", ["employee_id"], name: "index_employee_educations_on_employee_id"
+
+  create_table "employee_instructional_manuals", force: :cascade do |t|
+    t.string   "name",         limit: 50, null: false
+    t.integer  "level",                   null: false
+    t.date     "published_at",            null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "category"
+  end
 
   create_table "employee_other_infos", force: :cascade do |t|
     t.integer  "context",     limit: 1,   null: false
@@ -289,10 +298,11 @@ ActiveRecord::Schema.define(version: 20160620075439) do
   add_index "leaves", ["employee_id"], name: "index_leaves_on_employee_id"
 
   create_table "nbcs", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",                    null: false
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "status",      default: 1, null: false
   end
 
   create_table "qce_questions", force: :cascade do |t|

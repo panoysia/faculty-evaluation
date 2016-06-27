@@ -17,14 +17,17 @@ Rails.application.routes.draw do
     #get 'leaves/search' => "leave_searches#index"
     #get 'leave_service_credits/search' => "leave_service_credits#index"
 
-    resources :faculty_evaluations
+    resource :faculty_evaluation, only: [:show]
     resource :dashboard, only: [:show]
 
     resources :nbcs do
       member do
+        patch 'close'
+        patch 'open'
+        
         get 'associate-academic-years'
         patch 'update-academic-years'
-        delete 'remove_academic_years_association'
+        patch 'remove_academic_years_association'
       end
     end
 
@@ -49,6 +52,8 @@ Rails.application.routes.draw do
         resources :career_paths
         resources :rankings
         resources :leaves
+
+        resources :professional_developments, only: [:index]
       end
     end   # resources :employees
 
@@ -92,6 +97,7 @@ Rails.application.routes.draw do
       member do
         delete 'support_area' => 'qces#destroy_support_area'
         patch 'finalize' => 'qces#finalize'
+        # get 'summary_sheet_by_evaluator' => 'qces/summary_sheet_by_evaluator#show'        
       end
 
       scope module: :qces do
@@ -119,6 +125,10 @@ Rails.application.routes.draw do
             patch 'randomize_save'
           end
         end
+        
+        resource :instruction_summary_sheet, only: [:show], path: 'instruction-summary-sheet-by-evaluator-type'
+        resource :support_area_summary_sheet, only: [:show]
+        # resource :semestery
       end   # scope module: :qces
     end   # resources :qces
   end   # scope module: :user

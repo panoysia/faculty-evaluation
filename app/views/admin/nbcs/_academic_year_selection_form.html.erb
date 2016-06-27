@@ -1,23 +1,39 @@
-<% @years = AcademicYear.unused.display_all %>
+<%
+  if params[:academic_year_ids].present?
+    academic_year1 = params[:academic_year_ids][0]
+    academic_year2 = params[:academic_year_ids][1]
+    academic_year3 = params[:academic_year_ids][2]
+  end
+  @years = AcademicYear.unused.display_all
+%>
 <%= form_tag update_academic_years_admin_nbc_path, method: :patch do |f| %>
   <div class="row">
     <div class="col-md-12">
       <div class="col-md-3">
         <div class="form-group">
           <%= label_tag 'academic_year1', 'Academic Year 1' %>
-          <%= collection_select nil, nil, @years, :id, :coverage, { prompt: true }, class: 'form-control', name: 'academic_year_ids[]', id: 'academic_year1' %>
+          <%= collection_select nil, nil, @years, :id, :coverage_in_years,
+              { prompt: true, selected: academic_year1 },
+              class: 'form-control', name: 'academic_year_ids[]',
+              id: 'academic_year1' %>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
           <%= label_tag 'academic_year2', 'Academic Year 2' %>
-          <%= collection_select nil, nil, @years, :id, :coverage, { prompt: true }, class: 'form-control', name: 'academic_year_ids[]', id: 'academic_year2' %>
+          <%= collection_select nil, nil, @years, :id, :coverage_in_years,
+              { prompt: true, selected: academic_year2 },
+              class: 'form-control', name: 'academic_year_ids[]',
+              id: 'academic_year2' %>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
           <%= label_tag 'academic_year3', 'Academic Year 3' %>
-          <%= collection_select nil, nil, @years, :id, :coverage, { prompt: true }, class: 'form-control', name: 'academic_year_ids[]', id: 'academic_year3' %>
+          <%= collection_select nil, nil, @years, :id, :coverage_in_years,
+              { prompt: true, selected: academic_year3 },
+              class: 'form-control', name: 'academic_year_ids[]',
+              id: 'academic_year3' %>
         </div>
       </div>
     </div>  <!-- .col-md-12 -->

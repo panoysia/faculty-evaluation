@@ -1,14 +1,14 @@
 class User::QCEs::StudentInstructionRatingsController < User::ApplicationController
 
   EVALUATION_CONTEXT = 'Student'
-  NUMBER_OF_STUDENTS = 30
   
   before_action :set_qce
 
 
   def create
     # No validation needed, all we need to do is retrieve the ids of 30 Student records so that we can use them as objects.
-    student_ids = Student.ids.sample(NUMBER_OF_STUDENTS)
+    department_id = @qce.employee.department_id
+    student_ids = Student.get_ids_in_department(department_id)
     students = Student.find(student_ids)
 
     students.each do |student|

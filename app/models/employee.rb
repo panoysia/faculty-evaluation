@@ -49,6 +49,8 @@ class Employee < ActiveRecord::Base
   has_many :voluntary_works, dependent: :destroy
   has_many :other_infos, dependent: :destroy
   
+  has_many :instructional_manuals, dependent: :destroy
+  
   # Employee's own QCEs as (owner)
   has_many :qces, dependent: :destroy
   # QCE association: belongs_to :qce

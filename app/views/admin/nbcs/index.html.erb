@@ -16,7 +16,8 @@
       <th>#</th>
       <th>Name</th>
       <th>Description</th>
-      <th colspan="2">Actions</th>
+      <th>Status</th>
+      <th colspan="2" class="text-center">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -26,6 +27,11 @@
         <td><%= link_to nbc.name, admin_nbc_path(nbc), title: 'View', data: { toggle: 'tooltip' } %></td>
         <td><%= nbc.description %></td>
         <td>
+          <span class="label <%= nbc.open? ? 'label-success' : 'label-danger' %>">
+            <%= nbc.status.titleize %>
+          </span>
+        </td>
+        <td>
           <%= link_to edit_admin_nbc_path(nbc), title: 'Edit', data: { toggle: 'tooltip'} do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %>
@@ -34,8 +40,25 @@
                 data: { toggle: 'tooltip', confirm: 'Do you really want to delete this record?' } do %>
             <span class="glyphicon glyphicon-remove"></span>
           <% end %>
-          <%= link_to associate_academic_years_admin_nbc_path(nbc), title: 'Associate', data: { toggle: 'tooltip' }  do %>
-          <span class="glyphicon glyphicon-random"></span>
+
+          <% if nbc.open? %>
+            <%= link_to associate_academic_years_admin_nbc_path(nbc),
+                  title: 'Associate', data: { toggle: 'tooltip' } do %>
+              <span class="glyphicon glyphicon-random"></span> Associate
+            <% end %>
+          <% else %>
+            <span class="glyphicon glyphicon-random"></span> Associate
+          <% end %>
+        </td>
+        <td>
+          <% if nbc.open? %>
+            <%= button_to 'Close', close_admin_nbc_path(nbc),
+                  method: :patch,
+                  class: 'btn btn-danger btn-xs' %>
+          <% else %>
+            <%= button_to 'Open', open_admin_nbc_path(nbc),
+                  method: :patch,
+                  class: 'btn btn-success btn-xs' %>          
           <% end %>
         </td>
       </tr>

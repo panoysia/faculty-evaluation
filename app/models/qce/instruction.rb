@@ -13,10 +13,6 @@ class QCE::Instruction < QCE::Rating
       management: 'Management of Learning'
   }
 
-  # COMMITMENT = 'Commitment'
-  # KNOWLEDGE = 'Knowledge of Subject'
-  # TEACHING = 'Teaching for Independent Learning'
-  # MANAGEMENT = 'Management of Learning'
 
   private
 

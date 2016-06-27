@@ -1,15 +1,11 @@
 class AcademicYear < ActiveRecord::Base
-
   has_many :rating_periods, dependent: :destroy
   has_many :leaves, dependent: :destroy
-  # belongs_to :nbc
+  belongs_to :nbc
 
   validates :start_at, :end_at, presence: true   
   validate :correct_date_range, if: :date_values_are_present?
   
-  # TODO: solve this!
-  # validate :start_date_overlap
-
   after_create :create_two_rating_periods
 
   scope :unused, -> { where(nbc_id: nil) }
@@ -18,6 +14,7 @@ class AcademicYear < ActiveRecord::Base
   def self.display_all
     order(start_at: :desc, end_at: :desc)
   end
+
 
   def coverage
     "#{start_at.strftime('%b %d %Y')} - #{end_at.strftime('%b %d %Y')}"
@@ -66,3 +63,26 @@ class AcademicYear < ActiveRecord::Base
   end
 
 end   # class Academic Year
+
+# NO_OF_YEARS_PER_NBC = 3
+
+# TODO: solve this!
+# validate :start_date_overlap
+
+
+# def self.associate_to_nbc(ids, nbc_id)
+#   AcademicYear.transaction do
+#     valid_count = where(id: ids).count
+#     if valid_count < NO_OF_YEARS_PER_NBC
+#       errors[:base] << "Pleaes associate at least 3 academic years. You only selected #{valid count}."      
+#     end
+
+#     if NBC.exists?(nbc_id)
+#       AcademicYear.where(id: ids).update_all(nbc_id: nbc_id)
+#     else
+#       errors[:base] << "The NBC record is invalid. It does not exist anymore! "
+#     end
+
+#   end   # AcademicYear.transaction
+
+# end

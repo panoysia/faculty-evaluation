@@ -1,78 +1,59 @@
 <%
-  evaluators = {}
+  evaluators = {
+    students: { average_rating: 0, weighted_score: 0 },
+    peers: { average_rating: 0, weighted_score: 0 },
+    supervisor: { average_rating: 0, weighted_score: 0 },
+    self: { average_rating: 0, weighted_score: 0 },
+    clientele: { average_rating: 0, weighted_score: 0 },
+    leadership: { average_rating: 0, weighted_score: 0 },
+    partnership: { average_rating: 0, weighted_score: 0 },
+    community: { average_rating: 0, weighted_score: 0 }
+  }
+
   subtotals = { instruction: 0, support: 0 }
+  
+  if @qce.has_assigned_self_rating?
+    average_rating = @qce.self_instruction_rating.total_score / 1
+    weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+    subtotals[:instruction] += weighted_score
+    evaluators[:self] = {
+      average_rating: number_with_precision(average_rating, precision: 2),
+      weighted_score: number_with_precision(weighted_score, precision: 2)
+    }
+  end
 
-  average_rating = @qce.self_instruction_rating.total_score / 1
-  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
-  subtotals[:instruction] += weighted_score
-  evaluators[:self] = {
-    average_rating: number_with_precision(average_rating, precision: 2),
-    weighted_score: number_with_precision(weighted_score, precision: 2)
-  }
+  if @qce.has_assigned_supervisor_rating?
+    average_rating = @qce.supervisor_instruction_rating.total_score / 1
+    weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+    subtotals[:instruction] += weighted_score
+    evaluators[:supervisor] = {
+      average_rating: number_with_precision(average_rating, precision: 2),
+      weighted_score: number_with_precision(weighted_score, precision: 2)
+    }
+  end
 
-  average_rating = @qce.supervisor_instruction_rating.total_score / 1
-  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
-  subtotals[:instruction] += weighted_score
-  evaluators[:supervisor] = {
-    average_rating: number_with_precision(average_rating, precision: 2),
-    weighted_score: number_with_precision(weighted_score, precision: 2)
-  }
+  if @qce.has_assigned_peer_rating?
+    average_rating = @qce.peer_instruction_ratings_average
+    weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+    subtotals[:instruction] += weighted_score
+    evaluators[:peers] = {
+      average_rating: number_with_precision(average_rating, precision: 2),
+      weighted_score: number_with_precision(weighted_score, precision: 2)
+    }
+  end
 
-  average_rating = @qce.peer_instruction_ratings_average
-  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
-  subtotals[:instruction] += weighted_score
-  evaluators[:peers] = {
-    average_rating: number_with_precision(average_rating, precision: 2),
-    weighted_score: number_with_precision(weighted_score, precision: 2)
-  }
-
-  average_rating = @qce.student_instruction_ratings_average
-  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
-  subtotals[:instruction] += weighted_score
-  evaluators[:students] = {
-    average_rating: number_with_precision(average_rating, precision: 2),
-    weighted_score: number_with_precision(weighted_score, precision: 2)
-  }
-
+  if @qce.has_assigned_student_rating?
+    average_rating = @qce.student_instruction_ratings_average
+    weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+    subtotals[:instruction] += weighted_score
+    evaluators[:students] = {
+      average_rating: number_with_precision(average_rating, precision: 2),
+      weighted_score: number_with_precision(weighted_score, precision: 2)
+    }
+  end
+  
   # Subtotal for Instruction
   subtotals[:instruction] = number_with_precision(subtotals[:instruction], precision: 2)
-
-
-  average_rating = @qce.leadership_instrument.total_score / 1
-  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
-  subtotals[:support] += weighted_score
-  evaluators[:leadership] = {
-    average_rating: number_with_precision(average_rating, precision: 2),
-    weighted_score: number_with_precision(weighted_score, precision: 2)
-  }
-
-  average_rating = @qce.clientele_instruments_average
-  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
-  subtotals[:support] += weighted_score
-  evaluators[:clientele] = {
-    average_rating: number_with_precision(average_rating, precision: 2),
-    weighted_score: number_with_precision(weighted_score, precision: 2)
-  }
-
-  average_rating = @qce.partnership_instruments_average
-  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
-  subtotals[:support] += weighted_score
-  evaluators[:partnership] = {
-    average_rating: number_with_precision(average_rating, precision: 2),
-    weighted_score: number_with_precision(weighted_score, precision: 2)
-  }
-
-  average_rating = @qce.community_instruments_average
-  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
-  subtotals[:support]+= weighted_score
-  evaluators[:community] = {
-    average_rating: number_with_precision(average_rating, precision: 2),
-    weighted_score: number_with_precision(weighted_score, precision: 2)
-  }
-
-  # Subtotal for chosen support area: Research/Extension/Production
-  subtotals[:support] = number_with_precision(subtotals[:support], precision: 2)
-  
 
   ratings = @qce.instruction_ratings.includes(:evaluator)
   self_rating = ratings.find { |r| r.evaluation_context == 'Self' }
@@ -81,6 +62,58 @@
   student_ratings = ratings.select { |r| r.evaluation_context == 'Student' }
 
   if @qce.support_area.present?
+    if @qce.leadership_instrument.present?
+      average_rating = @qce.leadership_instrument.total_score / 1
+      average_rating = (average_rating / 25.0) * 100
+
+      weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+      subtotals[:support] += weighted_score
+      evaluators[:leadership] = {
+        average_rating: number_with_precision(average_rating, precision: 2),
+        weighted_score: number_with_precision(weighted_score, precision: 2)
+      }
+    end
+
+    if @qce.clientele_instruments.present?
+      average_rating = @qce.clientele_instruments_average
+      average_rating = (average_rating / 25.0) * 100
+
+      weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+      subtotals[:support] += weighted_score
+      evaluators[:clientele] = {
+        average_rating: number_with_precision(average_rating, precision: 2),
+        weighted_score: number_with_precision(weighted_score, precision: 2)
+      }
+    end
+
+    if @qce.partnership_instruments.present?
+      average_rating = @qce.partnership_instruments_average
+      average_rating = (average_rating / 25.0) * 100
+
+      weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+      subtotals[:support] += weighted_score
+      evaluators[:partnership] = {
+        average_rating: number_with_precision(average_rating, precision: 2),
+        weighted_score: number_with_precision(weighted_score, precision: 2)
+      }
+    end
+
+    if @qce.community_instruments.present?
+      average_rating = @qce.community_instruments_average
+      average_rating = (average_rating / 25.0) * 100
+
+      weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+      subtotals[:support]+= weighted_score
+      evaluators[:community] = {
+        average_rating: number_with_precision(average_rating, precision: 2),
+        weighted_score: number_with_precision(weighted_score, precision: 2)
+      }
+    end
+
+    # Subtotal for chosen support area: Research/Extension/Production
+    subtotals[:support] = number_with_precision(subtotals[:support], precision: 2)
+
+
     support_ratings = @qce.support_ratings.includes(:evaluator)
     
     clientele_ratings = support_ratings.select do |r|
@@ -347,7 +380,9 @@
         <div class="summary-sheet">
           <ul>
             <li>
-              <p><%= link_to 'View Summary Sheet for Instruction by Evaluator Type', '#' %></p>
+              <!-- View Summary Sheet for Instruction by Evaluator Type -->
+              <p><%= link_to 'View Summary Sheet by Evaluator Type',
+                    qce_instruction_summary_sheet_path(@qce) %></p>
             </li>
             <!-- . Computation of Summary of Rating Per Semester -->
             <!-- 2. QCE Summary Sheet for Teaching Effectiveness by Evaluator Type -->
@@ -588,6 +623,17 @@
               </tr>
             </tbody>
           </table>
+          <div class="summary-sheet">
+            <ul>
+              <li>
+                <!-- View Summary Sheet for Instruction by Evaluator Type -->
+                <p><%= link_to 'View Summary Sheet by Evaluator Type',
+                      qce_support_area_summary_sheet_path(@qce) %></p>
+              </li>
+              <!-- . Computation of Summary of Rating Per Semester -->
+              <!-- 2. QCE Summary Sheet for Teaching Effectiveness by Evaluator Type -->
+            </ul>
+          </div>          
         </div>  <!-- .col-md-6 -->
       </div>  <!-- .col-md-12 -->
     </div>  <!-- .row -->

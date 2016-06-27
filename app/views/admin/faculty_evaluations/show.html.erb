@@ -1,0 +1,33 @@
+<style>
+  #evaluate-button {
+    margin-top: 25px;
+  }
+</style>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="page-header">Faculty Evaluation</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_tag '/path', method: :get do %>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag :employee_id, 'Faculty' %>
+          <%= collection_select :employee, :id, Employee.all, :id, :full_name, { include_blank: ' --- Select Faculty --- ' }, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag :nbc_id, 'NBC' %>
+          <%= collection_select :nbc, :id, NBC.all, :id, :name, { include_blank: ' --- Select NBC --- ' }, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= submit_tag 'Evaluate', class: 'btn btn-success', id: 'evaluate-button' %>
+        </div>
+      </div>      
+    <% end %>
+  </div>
+</div>

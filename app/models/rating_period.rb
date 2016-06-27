@@ -1,10 +1,10 @@
 class RatingPeriod < ActiveRecord::Base 
   
-  has_many :qce_ratings, dependent: :destroy
+  has_many :qces, dependent: :destroy
   has_many :leaves
 
   belongs_to :academic_year
-  belongs_to :nbcs
+  #belongs_to :nbcs
   
   validates :academic_year, :semester,  presence: true
   validates :semester, inclusion: { in: [1, 2] }

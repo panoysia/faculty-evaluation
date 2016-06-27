@@ -3,13 +3,13 @@ class User::QCEsController < User::ApplicationController
 
 
   def index
-    @qces = current_user.account.qces.includes(:employee, rating_period: [:academic_year])
-
     employee_id = current_user.account.id
     join_criteria = "LEFT OUTER JOIN qces ON qces.rating_period_id = rating_periods.id AND qces.employee_id = #{employee_id}" 
     where_criteria = "qces.rating_period_id IS NULL AND qces.employee_id IS NULL"
     order_criteria = 'academic_years.start_at DESC, academic_years.end_at DESC, rating_periods.semester DESC'
 
+    @qces = current_user.account.qces.includes(:employee, rating_period: [:academic_year]).order(order_criteria)
+    
     @available_rating_periods = RatingPeriod.includes(:academic_year).joins(join_criteria).where(where_criteria).order(order_criteria).references(:academic_year)
 
     # @employees = Employee.includes(:educations).where(criteria).order('employee_educations.level DESC').references(:employee_educations)
