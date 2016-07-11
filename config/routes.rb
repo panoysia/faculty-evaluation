@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     #get 'leaves/search' => "leave_searches#index"
     #get 'leave_service_credits/search' => "leave_service_credits#index"
 
-    resource :faculty_evaluation, only: [:show]
+    resources :faculty_evaluations, path: 'faculty-evaluation'
     resource :dashboard, only: [:show]
 
     resources :nbcs do
@@ -97,7 +97,6 @@ Rails.application.routes.draw do
       member do
         delete 'support_area' => 'qces#destroy_support_area'
         patch 'finalize' => 'qces#finalize'
-        # get 'summary_sheet_by_evaluator' => 'qces/summary_sheet_by_evaluator#show'        
       end
 
       scope module: :qces do
@@ -125,10 +124,25 @@ Rails.application.routes.draw do
             patch 'randomize_save'
           end
         end
-        
-        resource :instruction_summary_sheet, only: [:show], path: 'instruction-summary-sheet-by-evaluator-type'
-        resource :support_area_summary_sheet, only: [:show]
-        # resource :semestery
+
+        # QCE Summary Sheet for Teaching Effectiveness by Evaluator Type
+        resource :instruction_summary_sheet, only: [:show],
+          path: 'instruction-summary-sheet-by-evaluator-type'
+
+        # QCE Summary Sheet for Research, Extension, Production by Evaluator Type
+        resource :support_area_summary_sheet, only: [:show],
+          path: 'support-area-summary-sheet-by-evaluator-type'
+
+        # Computation of Summary of Rating Per Semester
+        resource :computation_summary_rating, only: [:show],
+          path: 'computation-of-summary-rating-per-semester'
+
+        # QCE Computation of the Summary of Rating for the Whole Evaluation Period
+        # (Summary Sheet for Whole Evaluation Period)
+        # resource :whole_evaluation_period_summary_sheet
+
+
+
       end   # scope module: :qces
     end   # resources :qces
   end   # scope module: :user

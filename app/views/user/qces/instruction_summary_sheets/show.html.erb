@@ -25,9 +25,9 @@
 
 %>
 <style>
-  #period {
-    text-decoration: underline;
-  }
+  p.report-label {
+    font-size: 16px;
+  }  
 </style>
 <div class="links">
   <%= link_to '< Back to QCE', @qce, class: 'btn btn-link' %>  
@@ -43,21 +43,28 @@
     <div class="col-md-6">
       <h4 class="text-left"><span>School Year: <u><%= school_year %></u></span>&nbsp;</h4>
     </div>
-  </div>
-    
+  </div>  <!-- div.col-md-12 -->
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <p class="text-right report-label"><span>Name of Faculty: <u><%= @qce.employee.full_name %></u></span></p>
+    </div>
+    <div class="col-md-6">
+      <p class="text-left report-label"><span>Present Rank: <u><%= @qce.employee.rank.full_name %></u></span>&nbsp;</p>
+    </div>    
+  </div>  <!-- div.col-md-12 -->
   <div class="col-md-12">
     <table class="table table-bordered table-master" style="margin: 8px auto;">
       <thead>
         <tr>
           <th class="center">Students</th>
-          <th class="center">ID</th>
-          <td class="center"><br>Evaluator Name</td>
+          <!-- <th class="center">ID</th> -->
+          <th class="center"><br>Evaluator Name</th>
           <th class="center">Commitment</th>
           <th class="center">Knowledge<br>of Subject</th>
           <th class="center">Teaching for<br>Independent Learning</th>
           <th class="center">Management of<br>Learning</th>
-          <th>Total</th>
-          <th>Score</th>
+          <th class="center">Total</th>
+          <!-- <th class="center">Score</th> -->
         </tr>
       </thead>
       <tbody>
@@ -87,7 +94,7 @@
           %>
           <tr>
             <td class="center"><%= index += 1 %></td>
-            <td><%= rating.id %></td>
+            <!-- <td><%#= rating.id %></td> -->
             <td><%= rating.evaluator.full_name %></td>
             <td class="text-right">
               <%= number_with_precision(sums[:commitment],
@@ -109,9 +116,9 @@
               <%= number_with_precision(rating.total_score,
                                         precision: 2) %>
             </td>
-            <td>
-              <%= number_with_precision(sums[:total], precision: 2) %>
-            </td>
+<!--             <td>
+              <%#= number_with_precision(sums[:total], precision: 2) %>
+            </td> -->
           </tr>
         <% end %>
 
@@ -125,7 +132,6 @@
         <!-- Total for Student ratings -->
         <tr>
           <td class="center"><strong>Total</strong></td>
-          <td></td>
           <td></td>
           <td class="text-right">
             <strong>
@@ -151,7 +157,7 @@
                                         precision: 2) %>
             </strong>
           </td>
-          <td>
+          <td class="text-right">
             <strong>
               <%= number_with_precision(totals[:total],
                                         precision: 2) %>
@@ -172,30 +178,51 @@
         %>
         <tr>
           <td class="center"><strong>Self</strong></td>
-          <td><%= @qce.self_instruction_rating.id %></td>
+          <!-- <td><%#= @qce.self_instruction_rating.id %></td> -->
           <td><%= @qce.self_instruction_rating.evaluator.full_name %></td>
           <td class="text-right">
-            <%= number_with_precision(commitment_evaluations.sum(&:score), precision: 2) %>
+            <strong>
+              <%= number_with_precision(commitment_evaluations.
+                    sum(&:score), precision: 2) %>
+            </strong>
           </td>          
           <td class="text-right">
-            <%= number_with_precision(knowledge_evaluations.sum(&:score), precision: 2) %>
+            <strong>
+              <%= number_with_precision(knowledge_evaluations.
+                    sum(&:score), precision: 2) %>
+            </strong>
           </td>
           <td class="text-right">
-            <%= number_with_precision(teaching_evaluations.sum(&:score), precision: 2) %>
+            <strong>
+              <%= number_with_precision(teaching_evaluations.
+                    sum(&:score), precision: 2) %>
+            </strong>
           </td>
           <td class="text-right">
-            <%= number_with_precision(management_evaluations.sum(&:score), precision: 2) %>
+            <strong>
+              <%= number_with_precision(management_evaluations.
+                    sum(&:score), precision: 2) %>
+            </strong>
           </td>
           <td class="text-right">
-            <%= number_with_precision(@qce.self_instruction_rating.total_score, precision: 2) %>
+            <strong>
+              <%= number_with_precision(@qce.self_instruction_rating.total_score, precision: 2) %>
+            </strong>
           </td>
         </tr>
 
         <!-- Start of Peer Ratings -->
         <tr>
           <td class="center"><strong>Peer</strong></td>
-          <td colspan="7"></td>
+          <td colspan="6"></td>
         </tr>
+        <% 
+          totals[:commitment] = 0
+          totals[:knowledge] = 0
+          totals[:teaching] = 0
+          totals[:management] = 0
+          totals[:total] = 0
+        %>
         <% peer_ratings.each_with_index do |rating, index| %>
           <%
             instruments = rating.evaluations.includes(:question).
@@ -205,10 +232,22 @@
             knowledge_evaluations = instruments[types[:knowledge]]
             teaching_evaluations = instruments[types[:teaching]]
             management_evaluations = instruments[types[:management]]
+
+            sums[:commitment] = commitment_evaluations.sum(&:score)
+            sums[:knowledge] = knowledge_evaluations.sum(&:score)
+            sums[:teaching] = teaching_evaluations.sum(&:score)
+            sums[:management] = management_evaluations.sum(&:score)
+            sums[:total] = sums[:commitment] + sums[:knowledge] +
+                            sums[:teaching] + sums[:management]            
+            totals[:commitment] += sums[:commitment]
+            totals[:knowledge] += sums[:knowledge]
+            totals[:teaching] += sums[:teaching]
+            totals[:management] += sums[:management]
+            totals[:total] += sums[:total]                            
           %>
           <tr>
             <td class="center"><%= index += 1 %></td>
-            <td><%= rating.id %></td>
+            <!-- <td><%#= rating.id %></td> -->
             <td><%= rating.evaluator.full_name %></td>
             <td class="text-right">
               <%= number_with_precision(commitment_evaluations.sum(&:score), precision: 2) %>
@@ -228,16 +267,47 @@
           </tr>
         <% end %>
 
+        <%
+          totals[:commitment] = totals[:commitment] / 5.0
+          totals[:knowledge] = totals[:knowledge] / 5.0
+          totals[:teaching] = totals[:teaching] / 5.0
+          totals[:management] = totals[:management] / 5.0
+          totals[:total] = totals[:total] / 5.0
+        %>
         <!-- Total for Peer ratings -->
         <tr>
           <td class="center"><strong>Total</strong></td>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td class="text-right">
+            <strong>
+              <%= number_with_precision(totals[:commitment],
+                                        precision: 2) %>
+            </strong>
+          </td>
+          <td class="text-right">
+            <strong>
+              <%= number_with_precision(totals[:knowledge],
+                                        precision: 2) %>              
+            </strong>
+          </td>
+          <td class="text-right">
+            <strong>
+              <%= number_with_precision(totals[:teaching],
+                                        precision: 2) %>              
+            </strong>
+          </td>
+          <td class="text-right">
+            <strong>
+              <%= number_with_precision(totals[:management],
+                                        precision: 2) %>              
+            </strong>
+          </td>
+          <td class="text-right">
+            <strong>
+              <%= number_with_precision(totals[:total],
+                                        precision: 2) %>              
+            </strong>
+          </td>
         </tr>
 
         <!-- Supervisor rating -->
@@ -253,32 +323,42 @@
         %>
         <tr>
           <td class="center"><strong>Supervisor</strong></td>
-          <td><%= @qce.supervisor_instruction_rating.id %></td>
+          <!-- <td><%#= @qce.supervisor_instruction_rating.id %></td> -->
           <td><%= @qce.supervisor_instruction_rating.evaluator.full_name %></td>
           <td class="text-right">
-            <%= number_with_precision(commitment_evaluations.sum(&:score), precision: 2) %>
+            <strong>
+              <%= number_with_precision(commitment_evaluations.
+                    sum(&:score), precision: 2) %>
+            </strong>
           </td>          
           <td class="text-right">
-            <%= number_with_precision(knowledge_evaluations.sum(&:score), precision: 2) %>
+            <strong>
+              <%= number_with_precision(knowledge_evaluations.sum(&:score), precision: 2) %>
+            </strong>
           </td>
           <td class="text-right">
-            <%= number_with_precision(teaching_evaluations.sum(&:score), precision: 2) %>
+            <strong>
+              <%= number_with_precision(teaching_evaluations.
+                    sum(&:score), precision: 2) %>
+            </strong>
           </td>
           <td class="text-right">
-            <%= number_with_precision(management_evaluations.sum(&:score), precision: 2) %>
+            <strong>
+              <%= number_with_precision(management_evaluations.
+                    sum(&:score), precision: 2) %>
+            </strong>
           </td>
           <td class="text-right">
-            <%= number_with_precision(@qce.supervisor_instruction_rating.total_score, precision: 2) %>
+            <strong>
+              <%= number_with_precision(@qce.supervisor_instruction_rating.total_score, precision: 2) %>
+            </strong>
           </td>
         </tr>
 
       </tbody>
     </table>
-  </div>
-</div>
-
+  </div>  <!-- div.col-md-12 -->
+</div>  <!-- div.row -->
 <div>
   <%= link_to '< Back to QCE', @qce, class: 'btn btn-link' %>
 </div>  
-
-

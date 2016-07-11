@@ -112,7 +112,7 @@ class QCE < ActiveRecord::Base
   end
 
   def clientele_instruments_average
-    clientele_instruments_total_score / CLIENTELE_INSTRUMENTS    
+    clientele_instruments_total_score / CLIENTELE_INSTRUMENTS.to_f
   end
 
   def partnership_instruments_total_score
@@ -120,7 +120,7 @@ class QCE < ActiveRecord::Base
   end
 
   def partnership_instruments_average
-    partnership_instruments_total_score / PARTNERSHIP_INSTRUMENTS
+    partnership_instruments_total_score / PARTNERSHIP_INSTRUMENTS.to_f
   end
 
   def community_instruments_total_score
@@ -128,7 +128,7 @@ class QCE < ActiveRecord::Base
   end  
 
   def community_instruments_average
-    community_instruments_total_score / COMMUNITY_RESPONSIBILITY_INSTRUMENTS
+    community_instruments_total_score / COMMUNITY_RESPONSIBILITY_INSTRUMENTS.to_f
   end
 
   def peer_instruction_ratings_total_score

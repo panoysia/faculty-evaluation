@@ -1,0 +1,342 @@
+<% 
+  period = "#{@qce.rating_period.semester.ordinalize} Semester"
+  school_year = @qce.rating_period.academic_year.coverage_in_years  
+
+  evaluators = {
+    students: { average_rating: 0, weighted_score: 0 },
+    peers: { average_rating: 0, weighted_score: 0 },
+    supervisor: { average_rating: 0, weighted_score: 0 },
+    # To avoid unexpected errors, append an underscore prefix to 'self' since it's a Ruby kewyord
+    _self: { average_rating: 0, weighted_score: 0 },
+    clientele: { average_rating: 0, weighted_score: 0 },
+    leadership: { average_rating: 0, weighted_score: 0 },
+    partnership: { average_rating: 0, weighted_score: 0 },
+    community: { average_rating: 0, weighted_score: 0 }
+  }
+
+  # subtotals = { instruction: 0, support: 0 }
+  subtotals = {
+    instruction:  { total: 0, weighted_score: 0 },
+    support:      { total: 0, weighted_score: 0 }
+  }
+
+  # Self rating computation
+  average_rating = @qce.self_instruction_rating.total_score / 1
+  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+  subtotals[:instruction][:total] += weighted_score
+  evaluators[:_self] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Supervisor rating computation
+  average_rating = @qce.supervisor_instruction_rating.total_score / 1
+  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+  subtotals[:instruction][:total] += weighted_score
+  evaluators[:supervisor] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Peer ratings computation
+  average_rating = @qce.peer_instruction_ratings_average
+  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+  subtotals[:instruction][:total] += weighted_score
+  evaluators[:peers] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Student ratings computation
+  average_rating = @qce.student_instruction_ratings_average
+  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+  subtotals[:instruction][:total] += weighted_score
+  evaluators[:students] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Subtotal for Instruction
+  subtotal_weighted_score = subtotals[:instruction][:total] * 0.50
+  subtotals[:instruction][:weighted_score] = number_with_precision(subtotal_weighted_score, precision: 2)
+
+  subtotals[:instruction][:total] = number_with_precision(
+    subtotals[:instruction][:total], precision: 2)
+
+  total_weighted_score = subtotal_weighted_score
+
+  # For support area ratings: (Research/Extension/Production)
+
+  # Client Satisfaction
+  average_rating = @qce.clientele_instruments_average
+  average_rating = (average_rating / 25.0) * 100
+
+  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+  subtotals[:support][:total] += weighted_score
+  evaluators[:clientele] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Partnership Development
+  average_rating = @qce.partnership_instruments_average
+  average_rating = (average_rating / 25.0) * 100
+
+  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+  subtotals[:support][:total] += weighted_score
+  evaluators[:partnership] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Community Responsibility
+  average_rating = @qce.community_instruments_average
+  average_rating = (average_rating / 25.0) * 100
+
+  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+  subtotals[:support][:total] += weighted_score
+  evaluators[:community] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Leadership  
+  average_rating = @qce.leadership_instrument.total_score / 1
+  average_rating = (average_rating / 25.0) * 100
+
+  weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
+  subtotals[:support][:total] += weighted_score
+  evaluators[:leadership] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Subtotal for chosen support area: Research/Extension/Production
+  subtotal_weighted_score = subtotals[:support][:total] * 0.50
+  subtotals[:support][:weighted_score] = number_with_precision(subtotal_weighted_score, precision: 2)
+
+  subtotals[:support][:total] = number_with_precision(
+    subtotals[:support][:total], precision: 2)
+
+  total_weighted_score += subtotal_weighted_score
+
+%>
+<style>
+/*  table > tbody > tr > td.borderless {
+    border-style: none;
+  }
+
+  td.report-label {
+    font-size: 16px;
+  }*/
+</style>
+<div class="links">
+  <%= link_to '< Back to QCE', @qce, class: 'btn btn-link' %>  
+</div>  
+<div class="row">
+  <div class="col-md-12">
+    <h3 class="center">Computation of Summary of Rating Per Semester</h3>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <h4 class="text-right"><span>Period: <u><%= period %></u></span></h4>
+    </div>
+    <div class="col-md-6">
+      <h4 class="text-left"><span>School Year: <u><%= school_year %></u></span>&nbsp;</h4>
+    </div>
+  </div>  <!-- div.col-md-12 -->
+  <div class="col-md-12">
+    <table class="table table-master">
+      <tbody>
+        <tr>
+          <td class="borderless report-label">Name of Faculty:</td>
+          <td class="borderless report-label">
+            <u><%= @qce.employee.full_name %></u>
+          </td>
+        </tr>
+        <tr>
+          <td class="borderless report-label">Present Rank or Position:</td>
+          <td class="borderless report-label">
+            <u><%= @qce.employee.rank.full_name %></u>
+          </td>
+        </tr>
+      </tbody>
+    </table>    
+  </div>  <!-- div.col-md-12 -->
+  <div class="col-md-12">
+    <table class="table table-master">
+      <thead>
+        <tr>
+          <th class="center" colspan="2">Performance Target</th>
+          <th class="center">Subtotal</th>
+          <th class="center">Weighted Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Instruction total -->
+        <tr>
+          <td>Instruction</td>
+          <% if @qce.support_area.present? %>
+            <td>(50%)</td>
+          <% else %>
+            <td>(100%)</td>
+          <% end %>
+          <td class="center"><%= subtotals[:instruction][:total] %></td>
+          <td class="center"><%= subtotals[:instruction][:weighted_score] %></td>
+        </tr>
+        <!-- Support area total -->
+        <% if @qce.support_area.present? %>
+          <tr>
+            <td><%= @qce.support_area %></td>
+            <td>(50%)</td>
+            <td class="center"><%= subtotals[:support][:total] %></td>
+            <td class="center"><%= subtotals[:support][:weighted_score] %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td class="center" colspan="2"><strong>Total</strong></td>
+          <td></td>
+          <td class="center">
+            <strong>
+              <%= number_with_precision(total_weighted_score,
+                                        precision: 2) %>
+            </strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  <!-- div.col-md-12 -->
+  
+  <div class="col-md-12">
+    <!-- style="margin: 8px auto;" -->
+    <table class="table table-bordered table-master">
+      <thead>
+        <tr>
+          <th>Area: INSTRUCTION</th>
+          <th>Average Rating</th>
+          <th>Weight</th>
+          <th>Weighted Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A. Student</td>
+          <td class="center">
+            <%= evaluators[:students][:average_rating] %>
+          </td>
+          <td class="center">25%</td>
+          <td class="center">
+            <%= evaluators[:students][:weighted_score] %>
+          </td>
+        </tr>
+        <tr>
+          <td>B. Peer</td>
+          <td class="center">
+            <%= evaluators[:peers][:average_rating] %>
+          </td>
+          <td class="center">25%</td>
+          <td class="center">
+            <%= evaluators[:peers][:weighted_score] %>
+          </td>
+        </tr>
+        <tr>
+          <td>C. Self</td>
+          <td class="center">
+            <%= evaluators[:_self][:average_rating] %>
+          </td>
+          <td class="center">25%</td>
+          <td class="center">
+            <%= evaluators[:_self][:weighted_score] %>
+          </td>
+        </tr>
+        <tr>
+          <td>D. Immediate Supervisor</td>
+          <td class="center">
+            <%= evaluators[:supervisor][:average_rating] %>
+          </td>
+          <td class="center">25%</td>
+          <td class="center">
+            <%= evaluators[:supervisor][:weighted_score] %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-right">
+            <strong>Subtotal</strong>
+          </td>
+          <td class="center">
+            <strong><%= subtotals[:instruction][:total] %></strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  <!-- < div.col-md-12 -->
+
+  <% if @qce.support_area.present? %>
+    <div class="col-md-12">
+      <!-- style="margin: 8px auto;" -->
+      <table class="table table-bordered table-master">
+        <thead>
+          <tr>
+            <th>Area: <%= @qce.support_area.upcase %></th>
+            <th>Average Rating</th>
+            <th>Weight</th>
+            <th>Weighted Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A. Client Satisfaction</td>
+            <td class="center">
+              <%= evaluators[:clientele][:average_rating] %>
+            </td>
+            <td class="center">25%</td>
+            <td class="center">
+              <%= evaluators[:clientele][:weighted_score] %>
+            </td>
+          </tr>
+          <tr>
+            <td>B. Leadership</td>
+            <td class="center">
+              <%= evaluators[:leadership][:average_rating] %>
+            </td>
+            <td class="center">25%</td>
+            <td class="center">
+              <%= evaluators[:leadership][:weighted_score] %>
+            </td>
+          </tr>
+          <tr>
+            <td>C. Partnership Development</td>
+            <td class="center">
+              <%= evaluators[:partnership][:average_rating] %>
+            </td>
+            <td class="center">25%</td>
+            <td class="center">
+              <%= evaluators[:partnership][:weighted_score] %>
+            </td>
+          </tr>
+          <tr>
+            <td>D. Community Responsibility</td>
+            <td class="center">
+              <%= evaluators[:community][:average_rating] %>
+            </td>
+            <td class="center">25%</td>
+            <td class="center">
+              <%= evaluators[:community][:weighted_score] %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" class="text-right">
+              <strong>Subtotal</strong>
+            </td>
+            <td class="center">
+              <strong><%= subtotals[:support][:total] %></strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>  <!-- < div.col-md-12 -->
+  <% end %>
+</div>  <!-- div.row -->
+<div>
+  <%= link_to '< Back to QCE', @qce, class: 'btn btn-link' %>
+</div>  

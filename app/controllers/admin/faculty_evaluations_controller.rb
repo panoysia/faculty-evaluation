@@ -1,40 +1,50 @@
 class Admin::FacultyEvaluationsController < Admin::ApplicationController
-  
-  def index
-  end
 
-  def show
-  end
-  
 =begin
-  show
-  new
-  create
 
-  employees/1/evaluate_faculty/
-  evaluate_faculty
-  
-
-  PerformFacultyEvaluation
-    index
-    
-    new - create
-    edit - update
-    index - destroy
-    show
-
-  Faculty Evaluation
-    
-    id
-    employee_id
-    current_position/rank
-    current_cce_score
-
-    nbc_id
-    evaluated_score
-    evaluation_rank
-    description
+  # render html: params.inspect and return true
+  # employee = Employee.find(employee_id)
 
 =end
+
+  def index
+    if searching?
+      if params[:employee_id].present? && params[:nbc_id].present?
+        employee_id = params[:employee_id]
+        nbc_id = params[:nbc_id]
+        evaluation = FacultyEvaluation.find_or_initialize_by(
+                        employee_id: employee_id,
+                        nbc_id: nbc_id
+                      )
+
+        if evaluation.persisted?
+          # redirect_to faculty_evaluation#show
+        else
+          # redirect_to
+        end
+      else
+        render html: 'select both' and return true
+      end
+    end
+  end
+
+  def new
+    
+  end
+
+  def create
+  end
+
+
+  def show
+
+  end
+
+  
+  private
+
+  def searching?
+    params[:commit] == 'Search'
+  end
 
 end

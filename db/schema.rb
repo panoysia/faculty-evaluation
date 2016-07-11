@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621051626) do
+ActiveRecord::Schema.define(version: 20160627175220) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -260,6 +260,17 @@ ActiveRecord::Schema.define(version: 20160621051626) do
   add_index "employees", ["academic_ranking_id"], name: "index_employees_on_academic_ranking_id"
   add_index "employees", ["department_id"], name: "index_employees_on_department_id"
   add_index "employees", ["specialization_id"], name: "index_employees_on_specialization_id"
+
+  create_table "faculty_evaluations", force: :cascade do |t|
+    t.integer  "employee_id",  null: false
+    t.integer  "nbc_id",       null: false
+    t.string   "current_rank", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "faculty_evaluations", ["employee_id"], name: "index_faculty_evaluations_on_employee_id"
+  add_index "faculty_evaluations", ["nbc_id"], name: "index_faculty_evaluations_on_nbc_id"
 
   create_table "holidays", force: :cascade do |t|
     t.string   "name",                   null: false

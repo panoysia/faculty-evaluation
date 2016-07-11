@@ -1,1 +1,209 @@
-<p>hello there! this is support_area_summary_sheets#show</p>
+<% 
+  period = "#{@qce.rating_period.semester.ordinalize} Semester"
+  school_year = @qce.rating_period.academic_year.coverage_in_years  
+  overall_rating = 0
+
+  evaluators = {
+    clientele: { average_rating: 0, weighted_score: 0 },
+    leadership: { average_rating: 0, weighted_score: 0 },
+    partnership: { average_rating: 0, weighted_score: 0 },
+    community: { average_rating: 0, weighted_score: 0 }
+  }
+
+  # Clientele Satisfaction
+  average_rating = @qce.clientele_instruments_total_score
+  weighted_score = @qce.clientele_instruments_average
+  overall_rating += weighted_score
+  evaluators[:clientele] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Leadership
+  average_rating = @qce.leadership_instrument.total_score
+  weighted_score = average_rating / 1.0
+  overall_rating += weighted_score
+  evaluators[:leadership] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Partnership Development
+  average_rating = @qce.partnership_instruments_total_score
+  weighted_score = @qce.partnership_instruments_average
+  overall_rating += weighted_score
+  evaluators[:partnership] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  # Community Responsibility
+  average_rating = @qce.community_instruments_total_score
+  weighted_score = @qce.community_instruments_average
+  overall_rating += weighted_score
+  evaluators[:community] = {
+    average_rating: number_with_precision(average_rating, precision: 2),
+    weighted_score: number_with_precision(weighted_score, precision: 2)
+  }
+
+  overall_rating = number_with_precision(overall_rating, precision: 2)
+
+  
+  support_ratings = @qce.support_ratings.includes(:evaluator)
+  
+  clientele_ratings = support_ratings.select do |r|
+    r.instrument == 'Clientele Satisfaction'
+  end
+
+  leadership_rating = support_ratings.
+                        find { |r| r.instrument == 'Leadership' }
+
+  partnership_ratings = support_ratings.select do |r|
+    r.instrument == 'Partnership Development'
+  end
+
+  community_ratings = support_ratings.select do |r|
+    r.instrument == 'Community Responsibility'
+  end
+%>
+<div class="links">
+  <%= link_to '< Back to QCE', @qce, class: 'btn btn-link' %>  
+</div>  
+<div class="row">
+  <div class="col-md-12">
+    <h3 class="center">QCE Summary Sheet for Research, Extension &amp; Production by Evaluator Type</h3>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <h4 class="text-right"><span>Period: <u><%= period %></u></span></h4>
+    </div>
+    <div class="col-md-6">
+      <h4 class="text-left"><span>School Year: <u><%= school_year %></u></span>&nbsp;</h4>
+    </div>
+  </div>  <!-- div.col-md-12 -->
+  <div class="col-md-12">
+    <table class="table table-master">
+      <tbody>
+        <tr>
+          <td class="borderless report-label">Name of Faculty:</td>
+          <td class="borderless report-label">
+            <u><%= @qce.employee.full_name %></u>
+          </td>
+        </tr>
+        <tr>
+          <td class="borderless report-label">Present Rank or Position:</td>
+          <td class="borderless report-label">
+            <u><%= @qce.employee.rank.full_name %></u>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  <!-- div.col-md-12 -->
+
+  <style>
+/*    tr, td {
+      border: 1px solid;
+    }*/
+  </style>
+  <div class="col-md-12">
+    <!-- style="margin: 8px auto;" -->
+    <table class="table table-bordered table-master">
+      <thead>
+        <tr>
+          <th class="center">Area Evaluators</th>
+          <th class="center">Rater</th>
+          <th class="center">Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center" rowspan="4" style="vertical-align: middle;">
+            Clientele Satisfaction
+          </td>
+        </tr>
+        <% clientele_ratings.each do |rating| %>
+          <tr>
+            <td><%= rating.evaluator.full_name %></td>  
+            <td class="center"><%= rating.total_score %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td><strong>Average Rating</strong></td>
+          <td></td>
+          <td class="center">
+            <strong>
+              <%= evaluators[:clientele][:average_rating] %>
+            </strong>&nbsp;
+            <em>
+              <%= "(#{evaluators[:clientele][:weighted_score]})" %>
+            </em>
+          </td>
+        </tr>
+        <tr>
+          <td class="center"><strong>Leadership</strong></td>
+          <td><%= leadership_rating.evaluator.full_name %></td>
+          <td class="center">
+            <strong><%= evaluators[:leadership][:average_rating] %></strong>&nbsp;
+            <em>
+              <%= "(#{evaluators[:leadership][:weighted_score]})" %>
+            </em>            
+          </td>
+        </tr>
+        <tr>
+          <td class="center" rowspan="4" style="vertical-align: middle;">
+            Partnership Development
+          </td>
+        </tr>
+        <% partnership_ratings.each do |rating| %>
+          <tr>
+            <td><%= rating.evaluator.full_name %></td>  
+            <td class="center"><%= rating.total_score %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td><strong>Average Rating</strong></td>
+          <td></td>
+          <td class="center">
+            <strong>
+              <%= evaluators[:partnership][:average_rating] %>
+            </strong>&nbsp;
+            <em>
+              <%= "(#{evaluators[:partnership][:weighted_score]})" %>
+            </em>            
+          </td>
+        </tr>
+        <tr>
+          <td class="center" rowspan="4" style="vertical-align: middle;">
+            Community Responsiblity
+          </td>
+        </tr>
+        <% community_ratings.each do |rating| %>
+          <tr>
+            <td><%= rating.evaluator.full_name %></td>  
+            <td class="center"><%= rating.total_score %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td><strong>Average Rating</strong></td>
+          <td></td>
+          <td class="center">
+            <strong>
+              <%= evaluators[:community][:average_rating] %>
+            </strong>&nbsp;
+            <em>
+              <%= "(#{evaluators[:community][:weighted_score]})" %>
+            </em>            
+          </td>
+        </tr> 
+        <tr style="font-size: 16px;">
+          <td><strong>Overall Rating</strong></td>
+          <td></td>
+          <td class="center"><strong><%= overall_rating %></strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  <!-- div.col-md-12 -->
+</div>  <!-- div.row -->
+<div>
+  <%= link_to '< Back to QCE', @qce, class: 'btn btn-link' %>
+</div>  

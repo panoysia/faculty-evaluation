@@ -18,7 +18,15 @@ class NBC < ActiveRecord::Base
   def self.get_field_limit_of(field_name)
     column_for_attribute(field_name.to_s.to_sym).limit
   end
-    
+
+  def self.valid
+    select(&:has_academic_years?)
+  end
+
+  def has_academic_years?
+    academic_years.count > 0
+  end
+
 end
 
 # reject_if: lambda { |attributes| attributes['username'].blank? && attributes['password'].blank? }

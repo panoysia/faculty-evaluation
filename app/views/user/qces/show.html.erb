@@ -3,7 +3,9 @@
     students: { average_rating: 0, weighted_score: 0 },
     peers: { average_rating: 0, weighted_score: 0 },
     supervisor: { average_rating: 0, weighted_score: 0 },
-    self: { average_rating: 0, weighted_score: 0 },
+    # To avoid unexpected errors, append an underscore prefix to 'self' since it's a Ruby kewyord
+    _self: { average_rating: 0, weighted_score: 0 },
+
     clientele: { average_rating: 0, weighted_score: 0 },
     leadership: { average_rating: 0, weighted_score: 0 },
     partnership: { average_rating: 0, weighted_score: 0 },
@@ -16,7 +18,7 @@
     average_rating = @qce.self_instruction_rating.total_score / 1
     weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
     subtotals[:instruction] += weighted_score
-    evaluators[:self] = {
+    evaluators[:_self] = {
       average_rating: number_with_precision(average_rating, precision: 2),
       weighted_score: number_with_precision(weighted_score, precision: 2)
     }
@@ -63,7 +65,7 @@
 
   if @qce.support_area.present?
     if @qce.leadership_instrument.present?
-      average_rating = @qce.leadership_instrument.total_score / 1
+      average_rating = @qce.leadership_instrument.total_score / 1.0
       average_rating = (average_rating / 25.0) * 100
 
       weighted_score = average_rating * QCE::PERCENTAGE_WEIGHT
@@ -130,7 +132,7 @@
     community_ratings = support_ratings.select do |r|
       r.instrument == 'Community Responsibility'
     end
-  end
+  end   # if @qce.support_area.present?
 %>
 <div class="links">
   <%= link_to '< Back to QCEs', qces_path, class: 'btn btn-link' %>
@@ -153,6 +155,31 @@
 <div>
   <h4>Your current rank in this QCE: <%= @current_user.account.rank.full_name %></h4>
 </div>
+<% if @qce.completed? || @qce.for_finalization? %>
+  <div id="summary-sheet-panel" class="qce-options">
+    <h3 class="page-header">Summary Sheets</h3>
+    <ul>
+      <li>
+        <!-- View Summary Sheet for Instruction by Evaluator Type -->
+        <%= link_to 'View Summary Sheet by Evaluator Type',
+              qce_instruction_summary_sheet_path(@qce) %>
+      </li>
+
+      <% if @qce.support_area.present? %>
+        <li>
+          <%= link_to 'View Summary Sheet for Research/Extension/Production by Evaluator Type',
+              qce_support_area_summary_sheet_path(@qce) %>
+        </li>
+      <% end %>
+
+      <li>
+        <!-- . Computation of Summary of Rating Per Semester -->
+        <%= link_to 'View Computation of Summary of Rating Per Semester',
+              qce_computation_summary_rating_path(@qce) %>
+      </li>
+    </ul>
+  </div>
+<% end %>
 <div class="qce-options">  
   <h3 id="instruction-ratings" class="page-header">Ratings for Instruction/Teaching Effectiveness <%= link_to '(Edit)', edit_qce_path(@qce, anchor: 'instruction-ratings') %></h3>
   <div class="row">
@@ -353,11 +380,11 @@
             <tr>
               <th>C. Self (1)</th>
               <td class="text-right">
-                <%= evaluators[:self][:average_rating] %>
+                <%= evaluators[:_self][:average_rating] %>
               </td>
               <td class="center">25%</td>
               <td class="text-right">
-                <%= evaluators[:self][:weighted_score] %>
+                <%= evaluators[:_self][:weighted_score] %>
               </td>
             </tr>
             <tr>
@@ -377,17 +404,6 @@
             </tr>
           </tbody>
         </table>
-        <div class="summary-sheet">
-          <ul>
-            <li>
-              <!-- View Summary Sheet for Instruction by Evaluator Type -->
-              <p><%= link_to 'View Summary Sheet by Evaluator Type',
-                    qce_instruction_summary_sheet_path(@qce) %></p>
-            </li>
-            <!-- . Computation of Summary of Rating Per Semester -->
-            <!-- 2. QCE Summary Sheet for Teaching Effectiveness by Evaluator Type -->
-          </ul>
-        </div>
       </div>  <!-- .col-md-6 -->
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
@@ -623,17 +639,6 @@
               </tr>
             </tbody>
           </table>
-          <div class="summary-sheet">
-            <ul>
-              <li>
-                <!-- View Summary Sheet for Instruction by Evaluator Type -->
-                <p><%= link_to 'View Summary Sheet by Evaluator Type',
-                      qce_support_area_summary_sheet_path(@qce) %></p>
-              </li>
-              <!-- . Computation of Summary of Rating Per Semester -->
-              <!-- 2. QCE Summary Sheet for Teaching Effectiveness by Evaluator Type -->
-            </ul>
-          </div>          
         </div>  <!-- .col-md-6 -->
       </div>  <!-- .col-md-12 -->
     </div>  <!-- .row -->
