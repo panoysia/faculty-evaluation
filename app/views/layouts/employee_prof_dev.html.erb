@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CAPSU HR Admin</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= render 'admin/navbar' unless controller_name == 'sessions' %>
+  <div class="app-container">
+    <%= render 'shared/alert' %>
+    <div class="container-fluid">
+      <%= render partial: 'admin/employees/card', locals: { model: @employee } %> <!-- row -->
+      
+      <%= render 'admin/employees/tabs' %><!-- row -->
+      <div <%= yield :content_id %> class="row content">
+        <%= yield %>
+      </div>
+    </div>  <!-- <div.container-fluid> --> 
+    <%= render 'shared/footer' %>
+  </div>  <!-- <div.app-container> -->
+</body>
+</html>

@@ -1,3 +1,146 @@
-<p>profdev#index</p>
+<div id="inventions" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Inventions</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_invention_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'inventions' %>    
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+</div>  <!-- #invention.category -->
 
+<div id="discoveries" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Discoveries</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_discovery_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'discoveries' %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+</div>  <!-- #discoveries.category -->
 
+<div id="creative-works" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Creative Works</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_creative_work_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'creative_works' %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+</div>  <!-- #creative-works.category -->
+
+<div id="innovations" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Innovations</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_innovation_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'innovations' %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+</div>  <!-- #innovation.category -->
+
+<div id="publications" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Publications (Book, Journal)</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_publication_path,
+                class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'publications' %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->  
+</div>  <!-- #publication.category -->
+
+<div id="technical-articles" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Technical Articles (Scholarly Research, Monograph)</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_technical_article_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'technical_articles' %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->  
+</div>  <!-- #technical-articles.category -->
+
+<div id="instructional-manuals" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Instructional Manuals</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_instructional_manual_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'instructional_manuals' %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->  
+</div>  <!-- #instructional-manuals.category -->

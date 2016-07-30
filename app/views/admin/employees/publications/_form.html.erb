@@ -1,0 +1,60 @@
+<%= form_for [:admin, @employee, @publication] do |f| %>
+  <%= error_messages_for(@publication) %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :title, 'Title' %>
+        <%= f.text_field :title, class: 'form-control',
+            autofocus: true,
+            maxlength: Employee::Publication.get_field_limit_of(:title) %>
+      </div>      
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :nature, 'Nature' %>
+        <%= f.number_field :nature, class: 'form-control' %>
+      </div>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :role, 'Role' %>
+        <%= f.number_field :role, class: 'form-control' %>
+      </div>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :academic_level, 'Academic Level' %>
+        <%= f.number_field :academic_level, class: 'form-control' %>
+      </div>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :publisher, 'Publisher' %>
+        <%= f.text_field :publisher, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :date_of_publication, 'Date of Publication' %>
+        <%= f.date_field :date_of_publication, class: 'form-control' %>
+      </div>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>    
+      </div>
+    </div>
+  </div>
+<% end %>

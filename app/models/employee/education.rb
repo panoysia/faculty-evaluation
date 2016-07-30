@@ -1,5 +1,6 @@
 class Employee::Education < ActiveRecord::Base
   include EducationConstants
+  # prefer: include Employee::EducationConstants
 
   self.table_name_prefix = 'employee_'
 

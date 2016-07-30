@@ -9,9 +9,8 @@
 <body>
   <%= render 'admin/navbar' unless controller_name == 'sessions' %>
   <div class="app-container">
-    <%#= debug(session[:nbc_id]) %>
     <%= render 'shared/alert' %>
-    <div class="container-fluid">    
+    <div class="container-fluid">
       <%= yield %>
     </div>  <!-- .container-fluid -->
     <%= render 'shared/footer' %>

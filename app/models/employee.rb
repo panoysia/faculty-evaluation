@@ -49,6 +49,14 @@ class Employee < ActiveRecord::Base
   has_many :voluntary_works, dependent: :destroy
   has_many :other_infos, dependent: :destroy
   
+  # prof. dev-related resources
+  has_many :inventions, dependent: :destroy
+  has_many :discoveries, dependent: :destroy
+  has_many :creative_works, dependent: :destroy
+  has_many :innovations, dependent: :destroy
+
+  has_many :publications, dependent: :destroy
+  has_many :technical_articles, dependent: :destroy
   has_many :instructional_manuals, dependent: :destroy
   
   # Employee's own QCEs as (owner)

@@ -4,10 +4,11 @@
       <%= link_to 'Profile', admin_employee_path(@employee) %>
     </li>
     <li role="presentation" class="<%= set_active_tab(:career_paths) %>">
-      <%= link_to 'Career Path', '#' %>
+      <%= link_to 'Career Path',
+          admin_employee_career_path_path(@employee) %>
     </li>
-    <li role="presentation" class="<%= set_active_tab(:cce_scorings) %>">
-      <%= link_to 'QCEs', '#' %>
+    <li role="presentation" class="<%= set_active_tab(:qces) %>">
+      <%= link_to 'QCEs', admin_employee_qces_path(@employee) %>
     </li>    
     <li role="presentation" class="<%= set_active_tab(:cce_scorings) %>">
       <%= link_to 'CCE', admin_employee_cce_scorings_path(@employee) %>
@@ -18,7 +19,8 @@
     <li role="presentation" class="<%= set_active_tab(:work_experiences) %>">
       <%= link_to 'Work Experiences', admin_employee_work_experiences_path(@employee)%>
     </li>
-    <li role="presentation" class="<%= set_active_tab(:educations) %>">
+    <li role="presentation"
+        class="<%= set_active_tab(:professional_developments) %>">
       <%= link_to 'Prof. Developments', admin_employee_professional_developments_path(@employee) %>
     </li>
     <li role="presentation" class="<%= set_active_tab(:leaves) %>">

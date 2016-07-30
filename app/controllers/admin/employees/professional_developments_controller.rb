@@ -6,7 +6,7 @@ class Admin::Employees::ProfessionalDevelopmentsController < Admin::ApplicationC
   layout 'employee_profile'
 
   def index
-    @records = %w(mon tue wed thu fri)
+    # @records = %w(mon tue wed thu fri)
   end
 
 

@@ -69,7 +69,7 @@ class QCE < ActiveRecord::Base
   has_many :clientele_instruments, -> { clientele },
                                     class_name: 'QCE::Rating'
 
-  has_one :leadership_instrument, -> { leadership},
+  has_one :leadership_instrument, -> { leadership },
                                     class_name: 'QCE::Rating'
 
   has_many :partnership_instruments, -> { partnership },

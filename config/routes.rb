@@ -12,12 +12,14 @@ Rails.application.routes.draw do
     get 'faculty/search' => "employee_searches#index"
     get 'faculty/query' => "employee_queries#index"
     get 'faculty-career-pathing' => "employee_career_pathings#index"
+    get 'faculty-evaluation' => "faculty_evaluation_searches#index", as: :faculty_evaluation_search
 
     #get 'leaves/view' => "leave_viewings#index"
     #get 'leaves/search' => "leave_searches#index"
     #get 'leave_service_credits/search' => "leave_service_credits#index"
 
-    resources :faculty_evaluations, path: 'faculty-evaluation'
+    # resources :faculty_evaluations, path: 'faculty-evaluation'
+
     resource :dashboard, only: [:show]
 
     resources :nbcs do
@@ -47,13 +49,25 @@ Rails.application.routes.draw do
         resources :other_infos
         resources :voluntary_works
         resources :work_experiences
-
+        
+        # profdev-related resources (Prof. Development)
+        resources :inventions, except: [:index]
+        resources :discoveries, except: [:index]
+        resources :creative_works, except: [:index]
+        
+        resources :innovations, except: [:index]
+        resources :publications, except: [:index]
+        resources :technical_articles, except: [:index]
+        resources :instructional_manuals, except: [:index]
+        
         resources :cce_scorings, only: [:index]
-        resources :career_paths
+        resources :qces, only: [:index, :show]
         resources :rankings
         resources :leaves
 
         resources :professional_developments, only: [:index]
+
+        resource :career_path, only: [:show]
       end
     end   # resources :employees
 
@@ -140,8 +154,6 @@ Rails.application.routes.draw do
         # QCE Computation of the Summary of Rating for the Whole Evaluation Period
         # (Summary Sheet for Whole Evaluation Period)
         # resource :whole_evaluation_period_summary_sheet
-
-
 
       end   # scope module: :qces
     end   # resources :qces

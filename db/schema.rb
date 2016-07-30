@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627175220) do
+ActiveRecord::Schema.define(version: 20160730194445) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -122,6 +122,33 @@ ActiveRecord::Schema.define(version: 20160627175220) do
 
   add_index "employee_civil_service_eligibilities", ["employee_id"], name: "index_employee_civil_service_eligibilities_on_employee_id"
 
+  create_table "employee_creative_works", force: :cascade do |t|
+    t.string   "patent_no",                   null: false
+    t.integer  "year_patented",               null: false
+    t.string   "description",     limit: 150
+    t.integer  "employee_id",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "name",                        null: false
+    t.integer  "criteria",                    null: false
+    t.integer  "competitiveness",             null: false
+  end
+
+  add_index "employee_creative_works", ["employee_id"], name: "index_employee_creative_works_on_employee_id"
+
+  create_table "employee_discoveries", force: :cascade do |t|
+    t.string   "patent_no",                 null: false
+    t.integer  "year_patented",             null: false
+    t.string   "description",   limit: 150
+    t.integer  "employee_id",               null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "name",                      null: false
+    t.integer  "criteria",                  null: false
+  end
+
+  add_index "employee_discoveries", ["employee_id"], name: "index_employee_discoveries_on_employee_id"
+
   create_table "employee_educations", force: :cascade do |t|
     t.integer  "level",            limit: 1,     null: false
     t.string   "school_name",      limit: 50,    null: false
@@ -142,6 +169,17 @@ ActiveRecord::Schema.define(version: 20160627175220) do
   add_index "employee_educations", ["criteria"], name: "index_employee_educations_on_criteria"
   add_index "employee_educations", ["employee_id"], name: "index_employee_educations_on_employee_id"
 
+  create_table "employee_innovations", force: :cascade do |t|
+    t.string   "patent_no",                 null: false
+    t.integer  "year_patented",             null: false
+    t.string   "description",   limit: 150
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "employee_id",               null: false
+  end
+
+  add_index "employee_innovations", ["employee_id"], name: "idx_emp_innovations_on_emp_id"
+
   create_table "employee_instructional_manuals", force: :cascade do |t|
     t.string   "name",         limit: 50, null: false
     t.integer  "level",                   null: false
@@ -149,7 +187,23 @@ ActiveRecord::Schema.define(version: 20160627175220) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "category"
+    t.integer  "employee_id",             null: false
   end
+
+  add_index "employee_instructional_manuals", ["employee_id"], name: "idx_emp_instructioinal_manuals_on_emp_id"
+
+  create_table "employee_inventions", force: :cascade do |t|
+    t.string   "patent_no",                 null: false
+    t.integer  "year_patented",             null: false
+    t.string   "description",   limit: 150
+    t.integer  "employee_id",               null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "patent_type",               null: false
+    t.string   "name",                      null: false
+  end
+
+  add_index "employee_inventions", ["employee_id"], name: "index_employee_inventions_on_employee_id"
 
   create_table "employee_other_infos", force: :cascade do |t|
     t.integer  "context",     limit: 1,   null: false
@@ -160,6 +214,20 @@ ActiveRecord::Schema.define(version: 20160627175220) do
   end
 
   add_index "employee_other_infos", ["employee_id"], name: "index_employee_other_infos_on_employee_id"
+
+  create_table "employee_publications", force: :cascade do |t|
+    t.string   "title",               null: false
+    t.integer  "nature",              null: false
+    t.integer  "role",                null: false
+    t.integer  "academic_level",      null: false
+    t.string   "publisher"
+    t.date     "date_of_publication", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "employee_id",         null: false
+  end
+
+  add_index "employee_publications", ["employee_id"], name: "idx_emp_publications_on_emp_id"
 
   create_table "employee_rankings", force: :cascade do |t|
     t.integer  "employee_id"
@@ -174,6 +242,18 @@ ActiveRecord::Schema.define(version: 20160627175220) do
 
   add_index "employee_rankings", ["employee_id"], name: "index_employee_rankings_on_employee_id"
   add_index "employee_rankings", ["nbc_id"], name: "index_employee_rankings_on_nbc_id"
+
+  create_table "employee_technical_articles", force: :cascade do |t|
+    t.string   "name",         limit: 50,  null: false
+    t.integer  "level",                    null: false
+    t.date     "published_at",             null: false
+    t.string   "description",  limit: 150
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "employee_id",              null: false
+  end
+
+  add_index "employee_technical_articles", ["employee_id"], name: "idx_emp_technical_articles_on_emp_id"
 
   create_table "employee_trainings", force: :cascade do |t|
     t.string   "title",        limit: 100, null: false

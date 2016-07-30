@@ -29,15 +29,15 @@ class Employee::CCEScoring < ActiveRecord::Base
   
 end
 
-# integer "employee_id",                                    null: false
+=begin
+  :employee_id, integer, null: false  
+  :cce_scorable_id, integer, null: false
+  :cce_scorable_type, string, null: false
 
-# integer "cce_scorable_id",                                null: false
-# string  "cce_scorable_type",                              null: false
+  :nbc_id, integer
+  :cce_scoring_guide_id, integer, null: false
 
-# integer "nbc_id"
-
-# integer "cce_scoring_guide_id",                           null: false
-
-# decimal "score",                  precision: 5, scale: 2, null: false
-# integer "criteria",                                       null: false
-# string  "supporting_description"
+  :points, decimal, precision: 5, scale: 2, null: false
+  :criteria, integer, null: false  
+  :supporting_description, string
+=end

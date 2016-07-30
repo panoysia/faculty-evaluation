@@ -1,0 +1,39 @@
+<%= form_for [:admin, @employee, @creative_work] do |f| %>
+  <%= error_messages_for(@creative_work) %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :patent_no, 'Patent No.' %>
+        <%= f.text_field :patent_no, class: 'form-control',
+            autofocus: true,
+            maxlength: Employee::CreativeWork.get_field_limit_of(:patent_no) %>
+      </div>      
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :year_patented, 'Year Patented' %>
+        <%= f.number_field :year_patented, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: 'form-control',
+            rows: 3,
+            maxlength: Employee::CreativeWork.
+                        get_field_limit_of(:description) %>
+      </div>      
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>    
+      </div>
+    </div>
+  </div>
+<% end %>

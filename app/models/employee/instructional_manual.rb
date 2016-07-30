@@ -2,7 +2,7 @@ class Employee::InstructionalManual < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 
   LEVELS = %w(International National Local)
-  CATEGORIES = %w(Manual, Audio-visual)
+  CATEGORIES = %w(Manual Audio-visual)
 
   belongs_to :employee
 

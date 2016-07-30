@@ -1,4 +1,5 @@
 class Admin::NBCsController < Admin::ApplicationController
+  # comment this line below?
   before_action :set_nbc, only: [:show, :edit, :update, :destroy,
                                   :associate_academic_years,
                                   :update_academic_years,
@@ -65,7 +66,8 @@ class Admin::NBCsController < Admin::ApplicationController
   def update_academic_years
     # TODO: Make sure to have 3 unique Academic Year records
      # render html: params.inspect and return true
-
+    render html: params.inspect and return true
+    
     ids = params[:academic_year_ids]
     ids.delete ""
     count = ids.uniq.count
