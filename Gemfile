@@ -28,7 +28,7 @@ group :development do
   gem 'better_errors', '~> 2.1', '>= 2.1.1'
   gem 'quiet_assets', '~> 1.1'    
   gem 'rails-footnotes', '~> 4.1', '>= 4.1.8'
-  gem 'annotate', '~> 2.7.1'
+  # gem 'annotate', '~> 2.7.1'
 end
 
 group :development, :test do

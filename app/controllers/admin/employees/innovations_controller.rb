@@ -14,9 +14,8 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
     render html: params.inspect and return true
     @innovation = @employee.innovations.new(innovation_params)
     if @innovation.save
-      redirect_to admin_employee_professional_developments_path(
-                    anchor: 'innovations'),
-      notice: 'Innovation was successfully created.'
+      redirect_to admin_employee_professional_developments_path,
+        notice: 'Innovation was successfully created.'
     else
       render :new
     end
@@ -34,10 +33,8 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
 
   def destroy
     @innovation.destroy
-    redirect_to admin_employee_professional_developments_path(
-                  @employee,
-                  anchor: 'innovations'),
-    notice: 'Innovation was successfully deleted.'     
+    redirect_to admin_employee_professional_developments_path,
+      notice: 'Innovation was successfully deleted.'     
   end
 
 
@@ -52,8 +49,8 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
   end
 
   def innovation_params
-    params.require(:innovation).permit(:patent_no, :nature,
-      :year_patented, :description)
+    params.require(:innovation).permit(:name, :criteria, :patent_no,
+                                        :year_patented, :description)
   end
 
 end

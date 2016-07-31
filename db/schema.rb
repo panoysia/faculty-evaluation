@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730194445) do
+ActiveRecord::Schema.define(version: 20160730205603) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -176,6 +176,8 @@ ActiveRecord::Schema.define(version: 20160730194445) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "employee_id",               null: false
+    t.string   "name",                      null: false
+    t.integer  "criteria",                  null: false
   end
 
   add_index "employee_innovations", ["employee_id"], name: "idx_emp_innovations_on_emp_id"
