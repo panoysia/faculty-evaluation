@@ -7,6 +7,7 @@ class Employee::Discovery < ActiveRecord::Base
   ]
 
   belongs_to :employee
+  # has_and_belongs_to_many :criteria
 
   validates :name, :patent_no, presence: true
   validates :year_patented, presence: true, length: { is: 4 }

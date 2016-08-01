@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730205603) do
+ActiveRecord::Schema.define(version: 20160801005215) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -90,6 +90,12 @@ ActiveRecord::Schema.define(version: 20160730205603) do
 
   add_index "departments", ["name"], name: "index_departments_on_name", unique: true
 
+  create_table "discovery_criteria", force: :cascade do |t|
+    t.string   "description", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "employee_cce_scorings", force: :cascade do |t|
     t.integer  "employee_id",                                    null: false
     t.integer  "cce_scorable_id",                                null: false
@@ -148,6 +154,14 @@ ActiveRecord::Schema.define(version: 20160730205603) do
   end
 
   add_index "employee_discoveries", ["employee_id"], name: "index_employee_discoveries_on_employee_id"
+
+  create_table "employee_discoveries_criteria", id: false, force: :cascade do |t|
+    t.integer "employee_discovery_id",  null: false
+    t.integer "discovery_criterium_id", null: false
+  end
+
+  add_index "employee_discoveries_criteria", ["discovery_criterium_id"], name: "idx_edc_on_discovery_criterium_id"
+  add_index "employee_discoveries_criteria", ["employee_discovery_id"], name: "idx_edc_on_employee_discovery_id"
 
   create_table "employee_educations", force: :cascade do |t|
     t.integer  "level",            limit: 1,     null: false
