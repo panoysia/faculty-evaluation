@@ -1,3 +1,43 @@
+=begin
+
+  # Data for Employee::InnovationCriterium
+  data = [ 
+    { description: 'Use of indigenous materials' },
+    { description: 'Relevance and value to education, science and technology' },
+    { description: 'Cost/time/energy/saving' },
+    { description: 'Acceptability of peers' },
+    { description: 'Dissemination/documentation' }
+  ]
+
+  Employee::InnovationCriterium.create data
+
+=end
+
+
+# Data for Employee::CreativeWorkCriterium
+data = [ 
+  { description: 'Originality' },
+  { description: 'Acceptability and recognition' },
+  { description: 'Relevance and value' },
+  { description: 'Documentation and evidence of dissemination' }
+]
+
+Employee::CreativeWorkCriterium.create data
+
+exit
+
+# Data for Employee::DiscoveryCriterium
+description1 = 'Originality, educational impact, documentation'
+description2 = 'Evidence of wide dissemination (exhibits, publication)'
+
+data = [ { description: description1 },
+          { description: description2 } 
+      ]
+
+Employee::DiscoveryCriterium.create data
+
+exit
+
 # Student.all.each do |s|
 #   name = s.first_name + s.last_name
 #   s.build_user_account username: name.downcase,

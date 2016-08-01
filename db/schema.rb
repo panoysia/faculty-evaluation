@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801005215) do
+ActiveRecord::Schema.define(version: 20160801182941) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -82,6 +82,12 @@ ActiveRecord::Schema.define(version: 20160801005215) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "creative_work_criteria", force: :cascade do |t|
+    t.string   "description", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string   "name",       limit: 40, null: false
     t.datetime "created_at",            null: false
@@ -136,11 +142,18 @@ ActiveRecord::Schema.define(version: 20160801005215) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.string   "name",                        null: false
-    t.integer  "criteria",                    null: false
     t.integer  "competitiveness",             null: false
   end
 
   add_index "employee_creative_works", ["employee_id"], name: "index_employee_creative_works_on_employee_id"
+
+  create_table "employee_creative_works_criteria", id: false, force: :cascade do |t|
+    t.integer "employee_creative_work_id",  null: false
+    t.integer "creative_work_criterium_id", null: false
+  end
+
+  add_index "employee_creative_works_criteria", ["creative_work_criterium_id"], name: "idx_ecwc_on_creative_work_criterium_id"
+  add_index "employee_creative_works_criteria", ["employee_creative_work_id"], name: "idx_ecwc_on_employee_creative_work_id"
 
   create_table "employee_discoveries", force: :cascade do |t|
     t.string   "patent_no",                 null: false
@@ -150,7 +163,6 @@ ActiveRecord::Schema.define(version: 20160801005215) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.string   "name",                      null: false
-    t.integer  "criteria",                  null: false
   end
 
   add_index "employee_discoveries", ["employee_id"], name: "index_employee_discoveries_on_employee_id"
