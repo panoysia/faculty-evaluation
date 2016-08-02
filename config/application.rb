@@ -25,6 +25,7 @@ module CapsuHrSystem
 
     config.generators do |g|
       g.test_framework nil
+      # g.assets false
     end
     
   end   # class Application < Rails::Application

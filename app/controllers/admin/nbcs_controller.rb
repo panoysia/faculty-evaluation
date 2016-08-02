@@ -46,7 +46,7 @@ class Admin::NBCsController < Admin::ApplicationController
       else
         format.html { render :edit }
       end
-    end    
+    end
   end
 
   def destroy

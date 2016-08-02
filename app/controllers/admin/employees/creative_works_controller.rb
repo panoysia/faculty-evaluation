@@ -49,7 +49,7 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
   end
 
   def creative_work_params
-    params.require(:creative_work).permit(:name, :patent_no, :criteria, :competitiveness, :year_patented, :description)
+    params.require(:creative_work).permit(:name, :patent_no, :criteria, :competitiveness, :year_patented, :description, criterium_ids: [])
   end
 
 end

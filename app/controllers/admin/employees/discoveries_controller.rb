@@ -29,6 +29,12 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
   end
 
   def update
+    if @discovery.update(discovery_params)
+      redirect_to admin_employee_professional_developments_path,
+        notice: 'Discovery record was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -45,12 +51,13 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
   end
 
   def set_discovery
+    # includes(:criteria).
     @discovery = @employee.discoveries.find(params[:id])
   end
 
   def discovery_params
     params.require(:discovery).permit(:name, :patent_no, :year_patented,
-                                      :description, :criteria)
+                                      :description, criterium_ids: [])
   end
 
 end

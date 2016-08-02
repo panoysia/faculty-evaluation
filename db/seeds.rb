@@ -1,18 +1,15 @@
-=begin
+# Data for Employee::InnovationCriterium
+data = [ 
+  { description: 'Use of indigenous materials' },
+  { description: 'Relevance and value to education, science and technology' },
+  { description: 'Cost/time/energy/saving' },
+  { description: 'Acceptability of peers' },
+  { description: 'Dissemination/documentation' }
+]
 
-  # Data for Employee::InnovationCriterium
-  data = [ 
-    { description: 'Use of indigenous materials' },
-    { description: 'Relevance and value to education, science and technology' },
-    { description: 'Cost/time/energy/saving' },
-    { description: 'Acceptability of peers' },
-    { description: 'Dissemination/documentation' }
-  ]
+Employee::InnovationCriterium.create data
 
-  Employee::InnovationCriterium.create data
-
-=end
-
+exit
 
 # Data for Employee::CreativeWorkCriterium
 data = [ 

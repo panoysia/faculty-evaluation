@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801182941) do
+ActiveRecord::Schema.define(version: 20160801184639) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -203,10 +203,17 @@ ActiveRecord::Schema.define(version: 20160801182941) do
     t.datetime "updated_at",                null: false
     t.integer  "employee_id",               null: false
     t.string   "name",                      null: false
-    t.integer  "criteria",                  null: false
   end
 
   add_index "employee_innovations", ["employee_id"], name: "idx_emp_innovations_on_emp_id"
+
+  create_table "employee_innovations_criteria", id: false, force: :cascade do |t|
+    t.integer "employee_innovation_id",  null: false
+    t.integer "innovation_criterium_id", null: false
+  end
+
+  add_index "employee_innovations_criteria", ["employee_innovation_id"], name: "idx_eic_on_employee_innovation_id"
+  add_index "employee_innovations_criteria", ["innovation_criterium_id"], name: "idx_eic_on_innovation_criterium_id"
 
   create_table "employee_instructional_manuals", force: :cascade do |t|
     t.string   "name",         limit: 50, null: false
@@ -386,6 +393,12 @@ ActiveRecord::Schema.define(version: 20160801182941) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "is_weekend", default: 0, null: false
+  end
+
+  create_table "innovation_criteria", force: :cascade do |t|
+    t.string   "description", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "leave_service_credits", force: :cascade do |t|

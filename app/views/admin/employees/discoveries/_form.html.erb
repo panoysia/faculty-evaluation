@@ -14,13 +14,17 @@
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
-        <%= f.label :criteria, 'Criteria' %>
-        <%= f.select :criteria,
-                    Employee::Discovery.criteria_type_options, {},
-                    class: 'form-control' %>
-      </div>      
+        <%= f.label :criteria, 'Criteria:' %>
+        <%= f.collection_check_boxes :criterium_ids, 
+            Employee::DiscoveryCriterium.all, :id, :description do |b| %>
+          <div class="collection-check-box">
+            <%= b.check_box %>
+            <%= b.label(class: 'criteria') %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>  
+  </div>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
@@ -28,7 +32,7 @@
         <%= f.text_field :patent_no, class: 'form-control',
             required: true,
             maxlength: Employee::Discovery.get_field_limit_of(:patent_no) %>
-      </div>      
+      </div>
     </div>
   </div>  
   <div class="row">
