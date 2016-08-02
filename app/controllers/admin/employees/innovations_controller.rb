@@ -1,7 +1,7 @@
 class Admin::Employees::InnovationsController < Admin::ApplicationController
 
   before_action :set_employee
-  before_action :set_innovation, only: [:show, :edit, :update, :destroy]
+  before_action :set_innovation, only: [:edit, :update, :destroy]
 
   layout 'employee_profile'
 
@@ -19,9 +19,6 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
     else
       render :new
     end
-  end
-
-  def show
   end
 
   def edit
@@ -54,7 +51,7 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
   end
 
   def innovation_params
-    params.require(:innovation).permit(:name, :criteria, :patent_no,
+    params.require(:innovation).permit(:name, :patent_no,
                                         :year_patented, :description, criterium_ids: [])
   end
 

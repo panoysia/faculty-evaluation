@@ -1,8 +1,8 @@
 class Admin::Employees::PublicationsController < Admin::ApplicationController
 
   before_action :set_employee
-  before_action :set_publication, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_publication, only: [:edit, :update, :destroy]
+  
   layout 'employee_profile'
 
 
@@ -11,26 +11,32 @@ class Admin::Employees::PublicationsController < Admin::ApplicationController
   end
 
   def create
-    render html: params.inspect and return true
+    # render html: params.inspect and return true
     @publication = @employee.publications.new(publication_params)
     if @publication.save
-      redirect_to admin_employee_professional_developments_path(
-                    anchor: 'publications'),
-      notice: 'Publication was successfully created.'
+      redirect_to admin_employee_professional_developments_path,
+        notice: 'Publication record was successfully created.'
     else
       render :new
     end    
   end
 
-  def show
+  def edit
+  end
+
+  def update
+    if @publication.update(publication_params)
+      redirect_to admin_employee_professional_developments_path,
+        notice: 'Publication record was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
     @publication.destroy
-    redirect_to admin_employee_professional_developments_path(
-                  @employee,
-                  anchor: 'publications'),
-    notice: 'Publication was successfully deleted.'
+    redirect_to admin_employee_professional_developments_path,
+      notice: 'Publication record was successfully deleted.'
   end
 
 
@@ -45,8 +51,8 @@ class Admin::Employees::PublicationsController < Admin::ApplicationController
   end
 
   def publication_params
-    params.require(:publication).permit(:title, :nature,
-      :role, :academic_level, :publisher, :date_of_publication)
+    params.require(:publication).permit(:title, :role, :academic_level,
+      :publisher, :date_of_publication, :description)
   end
 
 end

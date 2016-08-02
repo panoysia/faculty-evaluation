@@ -1,7 +1,7 @@
 class Admin::Employees::DiscoveriesController < Admin::ApplicationController
 
   before_action :set_employee
-  before_action :set_discovery, only: [:show, :edit, :update, :destroy]
+  before_action :set_discovery, only: [:edit, :update, :destroy]
 
   layout 'employee_profile'
 
@@ -19,10 +19,6 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
     else
       render :new
     end
-  end
-
-
-  def show
   end
 
   def edit

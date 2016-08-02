@@ -35,6 +35,7 @@ class Employee::CreativeWork < ActiveRecord::Base
     COMPETITIVENESS_TYPES.each_with_index.map { |type, index| [type, index] }
   end
 
+
   def competitiveness_to_string
     COMPETITIVENESS_TYPES[competitiveness]
   end

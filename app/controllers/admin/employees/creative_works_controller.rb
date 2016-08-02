@@ -1,7 +1,7 @@
 class Admin::Employees::CreativeWorksController < Admin::ApplicationController
 
   before_action :set_employee
-  before_action :set_creative_work, only: [:show, :edit, :update, :destroy]
+  before_action :set_creative_work, only: [:edit, :update, :destroy]
 
   layout 'employee_profile'
 
@@ -19,10 +19,6 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
     else
       render :new
     end
-  end
-
-
-  def show
   end
 
   def edit
@@ -55,7 +51,8 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
   end
 
   def creative_work_params
-    params.require(:creative_work).permit(:name, :patent_no, :criteria, :competitiveness, :year_patented, :description, criterium_ids: [])
+    params.require(:creative_work).permit(:name, :patent_no,
+      :competitiveness, :year_patented, :description, criterium_ids: [])
   end
 
 end

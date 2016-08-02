@@ -1,7 +1,7 @@
 class Admin::Employees::InventionsController < Admin::ApplicationController
 
   before_action :set_employee
-  before_action :set_invention, only: [:show, :edit, :update, :destroy]
+  before_action :set_invention, only: [:edit, :update, :destroy]
 
   layout 'employee_profile'
 
@@ -15,26 +15,28 @@ class Admin::Employees::InventionsController < Admin::ApplicationController
     @invention = @employee.inventions.new(invention_params)
     if @invention.save
       redirect_to admin_employee_professional_developments_path,
-        notice: 'Invention was successfully created.'
+        notice: 'Invention record was successfully created.'
     else
       render :new
     end
-  end
-
-
-  def show
   end
 
   def edit
   end
 
   def update
+    if @invention.update(invention_params)
+      redirect_to admin_employee_professional_developments_path,
+        notice: 'Invention record was successfully deleted.'      
+    else
+      render :edit
+    end
   end
 
   def destroy
     @invention.destroy
     redirect_to admin_employee_professional_developments_path(@employee),
-      notice: 'Invention was successfully deleted.'
+      notice: 'Invention record was successfully deleted.'
   end
 
 
