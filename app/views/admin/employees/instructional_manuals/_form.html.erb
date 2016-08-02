@@ -5,7 +5,7 @@
       <div class="form-group">
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control',
-            autofocus: true,
+            autofocus: true, required: true,
             maxlength: Employee::InstructionalManual.get_field_limit_of(:name) %>
       </div>
     </div>
@@ -13,16 +13,10 @@
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
-        <%= f.label :level %>
-        <%= f.number_field :level, class: 'form-control' %>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-5">
-      <div class="form-group">
         <%= f.label :category %>
-        <%= f.number_field :category, class: 'form-control' %>
+        <%= f.select :category,
+              Employee::InstructionalManual.category_options, {},
+              class: 'form-control' %>
       </div>
     </div>
   </div>
@@ -30,10 +24,22 @@
     <div class="col-md-5">
       <div class="form-group">
         <%= f.label :published_at %>
-        <%= f.date_field :published_at, class: 'form-control' %>
+        <%= f.date_field :published_at, class: 'form-control',
+              required: true %>
       </div>      
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: 'form-control',
+            rows: 3,
+            maxlength: Employee::InstructionalManual.
+                        get_field_limit_of(:description) %>
+      </div>      
+    </div>
+  </div>    
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">

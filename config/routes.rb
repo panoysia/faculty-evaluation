@@ -57,8 +57,7 @@ Rails.application.routes.draw do
         resources :innovations, except: [:index, :show]
         resources :publications, except: [:index, :show]
         resources :technical_articles, except: [:index, :show]
-        
-        resources :instructional_manuals, except: [:index]
+        resources :instructional_manuals, except: [:index, :show]
         
         resources :cce_scorings, only: [:index]
         resources :qces, only: [:index, :show]
