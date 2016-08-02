@@ -5,7 +5,7 @@
       <div class="form-group">
         <%= f.label :name, 'Name' %>
         <%= f.text_field :name, class: 'form-control',
-            autofocus: true,
+            autofocus: true, required: true,
             maxlength: Employee::TechnicalArticle.get_field_limit_of(:name) %>
       </div>      
     </div>
@@ -14,7 +14,8 @@
     <div class="col-md-5">
       <div class="form-group">
         <%= f.label :level, 'Level' %>
-        <%= f.number_field :level, class: 'form-control' %>
+        <%= f.select :level, Employee::TechnicalArticle.level_options,
+              {}, class: 'form-control' %>
       </div>      
     </div>
   </div>
@@ -22,7 +23,8 @@
     <div class="col-md-5">
       <div class="form-group">
         <%= f.label :published_at %>
-        <%= f.date_field :published_at, class: 'form-control' %>
+        <%= f.date_field :published_at, class: 'form-control',
+              required: true %>
       </div>      
     </div>
   </div>

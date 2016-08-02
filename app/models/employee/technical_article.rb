@@ -21,4 +21,13 @@ class Employee::TechnicalArticle < ActiveRecord::Base
     column_for_attribute(field_name.to_s.to_sym).limit
   end
 
+  def self.level_options
+    LEVELS.each_with_index.map { |level, index| [level, index] }
+  end
+
+
+  def level_to_string
+    LEVELS[level]
+  end
+
 end

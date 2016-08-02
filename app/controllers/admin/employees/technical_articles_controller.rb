@@ -1,9 +1,8 @@
 class Admin::Employees::TechnicalArticlesController < Admin::ApplicationController
 
   before_action :set_employee
-  before_action :set_technical_article,
-                only: [:show, :edit, :update, :destroy]
-
+  before_action :set_technical_article, only: [:edit, :update, :destroy]
+  
   layout 'employee_profile'
 
 
@@ -12,27 +11,32 @@ class Admin::Employees::TechnicalArticlesController < Admin::ApplicationControll
   end
 
   def create
-    render html: params.inspect and return true
+    # render html: params.inspect and return true
     @technical_article = @employee.technical_articles.new(technical_article_params)
     if @technical_article.save
-      redirect_to admin_employee_professional_developments_path(
-                    anchor: 'technical-articles'),
-      notice: 'Technical article was successfully created.'
+      redirect_to admin_employee_professional_developments_path,
+        notice: 'Technical article record was successfully created.'
     else
       render :new
     end    
   end
 
-  def show
+  def edit
+  end
+
+  def update
+    if @technical_article.update(technical_article_params)
+      redirect_to admin_employee_professional_developments_path,
+        notice: 'Technical article record was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
     @technical_article.destroy
-    redirect_to admin_employee_professional_developments_path(
-                  @employee,
-                  anchor: 'technical-articles'),
-    notice: 'Technical article was successfully deleted.'     
-    
+    redirect_to admin_employee_professional_developments_path,
+      notice: 'Technical article record was successfully deleted.'
   end
 
 
