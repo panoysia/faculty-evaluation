@@ -15,7 +15,7 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
     @creative_work = @employee.creative_works.new(creative_work_params)
     if @creative_work.save
       redirect_to admin_employee_professional_developments_path,
-        notice: 'Creative work was successfully created.'
+        notice: 'Creative work record was successfully created.'
     else
       render :new
     end
@@ -29,12 +29,18 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
   end
 
   def update
+    if @creative_work.update(creative_work_params)
+      redirect_to admin_employee_professional_developments_path,
+        notice: 'Creative work record was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
     @creative_work.destroy
     redirect_to admin_employee_professional_developments_path(@employee),
-      notice: 'Creative work was successfully deleted.'     
+      notice: 'Creative work record was successfully deleted.'
   end
 
 

@@ -11,16 +11,15 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
   end
 
   def create
-    render html: params.inspect and return true
+    # render html: params.inspect and return true
     @innovation = @employee.innovations.new(innovation_params)
     if @innovation.save
       redirect_to admin_employee_professional_developments_path,
-        notice: 'Innovation was successfully created.'
+        notice: 'Innovation record was successfully created.'
     else
       render :new
     end
   end
-
 
   def show
   end
@@ -29,12 +28,18 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
   end
 
   def update
+    if @innovation.update(innovation_params)
+      redirect_to admin_employee_professional_developments_path,
+        notice: 'Innovation record was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
     @innovation.destroy
     redirect_to admin_employee_professional_developments_path,
-      notice: 'Innovation was successfully deleted.'     
+      notice: 'Innovation record was successfully deleted.'
   end
 
 

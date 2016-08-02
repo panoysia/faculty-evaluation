@@ -15,7 +15,7 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
     @discovery = @employee.discoveries.new(discovery_params)
     if @discovery.save
       redirect_to admin_employee_professional_developments_path,
-        notice: 'Discovery was successfully created.'
+        notice: 'Discovery record was successfully created.'
     else
       render :new
     end
@@ -40,7 +40,7 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
   def destroy
     @discovery.destroy
     redirect_to admin_employee_professional_developments_path(@employee),
-      notice: 'Discovery was successfully deleted.'     
+      notice: 'Discovery record was successfully deleted.'     
   end
 
 

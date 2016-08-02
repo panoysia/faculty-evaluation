@@ -1,17 +1,36 @@
-<!-- 
-name
-patent_no
-year_patented
-
- -->
 <%= form_for [:admin, @employee, @innovation] do |f| %>
   <%= error_messages_for(@innovation) %>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
+        <%= f.label :name, 'Name' %>
+        <%= f.text_field :name, class: 'form-control',
+            autofocus: true, required: true,
+            maxlength: Employee::Innovation.get_field_limit_of(:name)
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :criteria, 'Criteria:' %>
+        <%= f.collection_check_boxes :criterium_ids, 
+            Employee::InnovationCriterium.all, :id, :description do |b| %>
+          <div class="collection-check-box">
+            <%= b.check_box %>
+            <%= b.label(class: 'criteria') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
         <%= f.label :patent_no, 'Patent No.' %>
         <%= f.text_field :patent_no, class: 'form-control',
-            autofocus: true,
+            required: true,
             maxlength: Employee::Innovation.get_field_limit_of(:patent_no) %>
       </div>      
     </div>
@@ -20,7 +39,8 @@ year_patented
     <div class="col-md-5">
       <div class="form-group">
         <%= f.label :year_patented, 'Year Patented' %>
-        <%= f.number_field :year_patented, class: 'form-control' %>
+        <%= f.number_field :year_patented, class: 'form-control',
+              required: true %>
       </div>
     </div>
   </div>
