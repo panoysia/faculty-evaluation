@@ -35,7 +35,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :conducted_by %>
+        <%= f.label :conducted_by, 'Conducted by (Sponsoring Agency/Company)' %>
         <%= f.text_field :conducted_by, class: 'form-control', maxlength: Employee::Training.get_field_limit_of(:conducted_by) %>
       </div>      
     </div>

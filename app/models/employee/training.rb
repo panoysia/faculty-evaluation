@@ -1,14 +1,15 @@
 class Employee::Training < ActiveRecord::Base  
   self.table_name_prefix = 'employee_'
 
-  LEVEL_TYPES = %w[National International]
-
+  LEVELS = ['National/Regional', 'International', 'Local']
+  CATEGORIES = ['Training', 'Seminars/Conferences']
+  
   belongs_to :employee
   has_one :cce_scoring, as: :cce_scorable,
                         class_name: 'Employee::CCEScoring'
 
   validates :level, presence: true, inclusion: { 
-    in: LEVEL_TYPES.each_index.map { |index| index } 
+    in: LEVELS.each_index.map { |index| index } 
   }
 
   validates :title, presence: true, length: { maximum: 100 }
@@ -25,6 +26,15 @@ class Employee::Training < ActiveRecord::Base
 
   def self.get_field_limit_of(field_name)
     column_for_attribute(field_name.to_s.to_sym).limit
+  end
+
+  def self.level_options
+    LEVELS.each_with_index.map { |level, index| [level, index] }
+  end
+
+
+  def level_to_string
+    LEVELS[level]
   end
 
 end
