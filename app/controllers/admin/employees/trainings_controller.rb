@@ -71,7 +71,9 @@ class Admin::Employees::TrainingsController < Admin::ApplicationController
   end
 
   def training_params
-    params.require(:training).permit(:title, :start_at, :end_at, :no_of_hours, :conducted_by, :level)
+    params.require(:training).permit(:title, :category, :level,
+                                      :start_at, :end_at, :conducted_by,
+                                      :nature_of_participation)
   end
 
 end

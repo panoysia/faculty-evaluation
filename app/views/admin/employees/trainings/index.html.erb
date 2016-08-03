@@ -9,10 +9,12 @@
     <tr>
       <th>#</th>  
       <th>Title</th>
+      <th>Level</th>
+      <th>Category</th>
       <th>Start</th>
       <th>End</th>
-      <th>Level</th>
       <th>Conducted by</th>
+      <th>Participation</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
@@ -21,10 +23,12 @@
       <tr>
         <td><%= index += 1 %></td>
         <td><%= training.title %></td>
+        <td><%= training.level_to_string %></td>
+        <td><%= training.category_to_string %></td>        
         <td><%= training.start_at %></td>
         <td><%= training.end_at %></td>
-        <td><%= training_level_to_string(training.level) %></td>
         <td><%= training.conducted_by %></td>
+        <td><%= training.nature_of_participation %></td>
         <td>
           <%= link_to edit_admin_employee_training_path(@employee, training) do %>
             <span class="glyphicon glyphicon-pencil"></span>

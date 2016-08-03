@@ -30,6 +30,10 @@
       <%= link_to 'Trainings', admin_employee_trainings_path(@employee)%>
     </li>
 
+    <li role="presentation" class="<%= set_active_tab(:rankings) %>">
+      <%= link_to 'Prof. Examinations', admin_employee_rankings_path(@employee) %>
+    </li>
+
 
     <% if false %>
       <li role="presentation" class="<%= set_active_tab(:civil_service_eligibilities) %>">
