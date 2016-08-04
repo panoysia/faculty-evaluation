@@ -48,7 +48,10 @@
       <%= link_to 'Academic Honors',
             admin_employee_academic_honors_path(@employee) %>
     </li>
-
+    <li role="presentation" class="<%= set_active_tab(:professional_memberships) %>">
+      <%= link_to 'Prof. Memberships',
+            admin_employee_professional_memberships_path(@employee) %>
+    </li>
 
     <% if false %>
       <li role="presentation" class="<%= set_active_tab(:civil_service_eligibilities) %>">

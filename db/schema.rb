@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804183728) do
+ActiveRecord::Schema.define(version: 20160804205828) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -298,6 +298,18 @@ ActiveRecord::Schema.define(version: 20160804183728) do
   end
 
   add_index "employee_professional_examinations", ["employee_id"], name: "index_employee_professional_examinations_on_employee_id"
+
+  create_table "employee_professional_memberships", force: :cascade do |t|
+    t.integer  "employee_id",                    null: false
+    t.string   "organization",       limit: 150, null: false
+    t.date     "date_of_membership",             null: false
+    t.integer  "organization_type",              null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "membership_type"
+  end
+
+  add_index "employee_professional_memberships", ["employee_id"], name: "index_employee_professional_memberships_on_employee_id"
 
   create_table "employee_publications", force: :cascade do |t|
     t.string   "title",                                        null: false

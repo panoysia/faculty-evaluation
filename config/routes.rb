@@ -59,6 +59,7 @@ Rails.application.routes.draw do
         resources :technical_articles, except: [:index, :show]
         resources :instructional_manuals, except: [:index, :show]
         
+        resources :professional_memberships, except: :show
         resources :academic_honors, except: :show
         resources :scholarships, except: :show
         resources :awards, except: :show
