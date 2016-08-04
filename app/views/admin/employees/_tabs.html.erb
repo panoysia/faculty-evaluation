@@ -37,7 +37,9 @@
       <%= link_to 'Community Outreaches',
             admin_employee_community_outreaches_path(@employee) %>
     </li>
-
+    <li role="presentation" class="<%= set_active_tab(:awards) %>">
+      <%= link_to 'Awards', admin_employee_awards_path(@employee) %>
+    </li>
 
     <% if false %>
       <li role="presentation" class="<%= set_active_tab(:civil_service_eligibilities) %>">
