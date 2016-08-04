@@ -44,6 +44,10 @@
       <%= link_to 'Scholarships',
             admin_employee_scholarships_path(@employee) %>
     </li>
+    <li role="presentation" class="<%= set_active_tab(:academic_honors) %>">
+      <%= link_to 'Academic Honors',
+            admin_employee_academic_honors_path(@employee) %>
+    </li>
 
 
     <% if false %>

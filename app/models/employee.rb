@@ -58,6 +58,7 @@ class Employee < ActiveRecord::Base
   has_many :technical_articles, dependent: :destroy
   has_many :instructional_manuals, dependent: :destroy
   
+  has_many :academic_honors, dependent: :destroy
   has_many :scholarships, dependent: :destroy
   has_many :awards, dependent: :destroy
   has_many :community_outreaches, dependent: :destroy
