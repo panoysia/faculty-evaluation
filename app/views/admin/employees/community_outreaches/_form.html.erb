@@ -1,0 +1,48 @@
+<%= form_for [:admin, @employee, @outreach] do |f| %>
+  <%= error_messages_for(@outreach) %>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :project_name, 'Project Name' %>
+        <%= f.text_field :project_name, class: 'form-control',
+              autofocus: true, required: true,
+              maxlength: Employee::CommunityOutreach.get_field_limit_of(:project_name) %>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :sponsoring_agency, 'Sponsoring Agency' %>
+        <%= f.text_field :sponsoring_agency, class: 'form-control',
+              required: true,
+              maxlength: Employee::CommunityOutreach.get_field_limit_of(:sponsoring_agency) %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :start_at, 'Start At' %>
+        <%= f.date_field :start_at, class: 'form-control',
+            required: true %>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :end_at, 'End At' %>
+        <%= f.date_field :end_at, class: 'form-control',
+            required: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>    
+      </div>
+    </div>
+  </div>  
+<% end %>

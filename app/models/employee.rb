@@ -58,6 +58,7 @@ class Employee < ActiveRecord::Base
   has_many :technical_articles, dependent: :destroy
   has_many :instructional_manuals, dependent: :destroy
   
+  has_many :community_outreaches, dependent: :destroy
   has_many :professional_examinations, dependent: :destroy
 
   # Employee's own QCEs as (owner)

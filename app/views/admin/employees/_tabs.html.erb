@@ -33,6 +33,10 @@
       <%= link_to 'Prof. Examinations',
             admin_employee_professional_examinations_path(@employee) %>
     </li>
+    <li role="presentation" class="<%= set_active_tab(:community_outreaches) %>">
+      <%= link_to 'Community Outreaches',
+            admin_employee_community_outreaches_path(@employee) %>
+    </li>
 
 
     <% if false %>
