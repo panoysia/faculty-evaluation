@@ -1,0 +1,39 @@
+<% provide(:content_id, 'id=scholarships-content') %>
+<div>
+  <%= link_to new_admin_employee_scholarship_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span> New
+  <% end %>
+</div>
+<table class="table table-striped table-bordered table-master">
+  <thead>
+    <tr>
+      <th>#</th>  
+      <th>Title</th>
+      <th>Sponsoring Agency</th>
+      <th>Date Granted</th>
+      <th>Scholarship</th>
+      <th>Degree</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @scholarships.each_with_index do |scholarship, index| %>
+      <tr>
+        <td><%= index += 1 %></td>
+        <td><%= scholarship.title %></td>
+        <td><%= scholarship.sponsoring_agency %></td>
+        <td><%= scholarship.date_granted %></td>
+        <td><%= scholarship.scholarship_type_to_string %></td>
+        <td><%= scholarship.degree_type_to_string %></td>
+        <td>
+          <%= link_to edit_admin_employee_scholarship_path(@employee, scholarship) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_employee_scholarship_path(@employee, scholarship), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
