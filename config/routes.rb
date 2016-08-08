@@ -51,17 +51,18 @@ Rails.application.routes.draw do
         resources :work_experiences
         
         resources :professional_developments, only: :index
-
-        # profdev-related resources (Prof. Development)
-        resources :inventions, except: [:index, :show]
-        resources :discoveries, except: [:index, :show]
-        resources :creative_works, except: [:index, :show]
-        resources :innovations, except: [:index, :show]
-        resources :publications, except: [:index, :show]
-        resources :technical_articles, except: [:index, :show]
-        resources :instructional_manuals, except: [:index, :show]
+          # Under :professional_developments are: 
+          resources :inventions, except: [:index, :show]
+          resources :discoveries, except: [:index, :show]
+          resources :creative_works, except: [:index, :show]
+          resources :innovations, except: [:index, :show]
+          resources :publications, except: [:index, :show]
+          resources :technical_articles, except: [:index, :show]
+          resources :instructional_manuals, except: [:index, :show]
         
         resources :expert_services, only: :index
+        # Under :expert_services are:
+          resources :professional_services, except: [:index, :show]
 
         resources :professional_memberships, except: :show
         resources :academic_honors, except: :show

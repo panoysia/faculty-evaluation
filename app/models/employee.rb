@@ -44,7 +44,7 @@ class Employee < ActiveRecord::Base
   has_many :rankings, dependent: :destroy
   has_many :educations, dependent: :destroy
   has_many :work_experiences, dependent: :destroy
-  has_many :trainings, dependent: :destroy
+  
   has_many :civil_service_eligibilities, dependent: :destroy
   has_many :voluntary_works, dependent: :destroy
   has_many :other_infos, dependent: :destroy
@@ -57,6 +57,11 @@ class Employee < ActiveRecord::Base
   has_many :publications, dependent: :destroy
   has_many :technical_articles, dependent: :destroy
   has_many :instructional_manuals, dependent: :destroy
+  
+
+  has_many :trainings, dependent: :destroy
+  has_many :professional_services, dependent: :destroy
+  has_many :academic_advisories, dependent: :destroy
   
   has_many :professional_memberships, dependent: :destroy
   has_many :academic_honors, dependent: :destroy
