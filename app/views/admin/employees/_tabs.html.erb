@@ -52,6 +52,10 @@
       <%= link_to 'Prof. Memberships',
             admin_employee_professional_memberships_path(@employee) %>
     </li>
+    <li role="presentation" class="<%= set_active_tab(:expert_services) %>">
+      <%= link_to 'Expert Services',
+            admin_employee_expert_services_path(@employee) %>
+    </li>
 
     <% if false %>
       <li role="presentation" class="<%= set_active_tab(:civil_service_eligibilities) %>">

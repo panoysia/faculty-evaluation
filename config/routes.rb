@@ -50,6 +50,8 @@ Rails.application.routes.draw do
         resources :voluntary_works
         resources :work_experiences
         
+        resources :professional_developments, only: :index
+
         # profdev-related resources (Prof. Development)
         resources :inventions, except: [:index, :show]
         resources :discoveries, except: [:index, :show]
@@ -59,6 +61,8 @@ Rails.application.routes.draw do
         resources :technical_articles, except: [:index, :show]
         resources :instructional_manuals, except: [:index, :show]
         
+        resources :expert_services, only: :index
+
         resources :professional_memberships, except: :show
         resources :academic_honors, except: :show
         resources :scholarships, except: :show
@@ -71,7 +75,7 @@ Rails.application.routes.draw do
         resources :rankings
         resources :leaves
 
-        resources :professional_developments, only: [:index]
+        
 
         resource :career_path, only: [:show]
       end
