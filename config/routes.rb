@@ -63,6 +63,7 @@ Rails.application.routes.draw do
         resources :expert_services, only: :index
         # Under :expert_services are:
           resources :professional_services, except: [:index, :show]
+          resources :academic_advisories, except: [:index, :show]
 
         resources :professional_memberships, except: :show
         resources :academic_honors, except: :show

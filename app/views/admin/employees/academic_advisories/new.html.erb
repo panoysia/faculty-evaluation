@@ -1,0 +1,6 @@
+<% provide(:content_id, 'id=academic-advisories-content') %>
+<h4 class="page-header">New Academic Advisory</h4>
+<%= render 'form' %>
+<%= link_to '< Back to Academic Advisories',
+  admin_employee_expert_services_path(anchor: 'academic-advisories'),
+  class: 'btn btn-link' %>

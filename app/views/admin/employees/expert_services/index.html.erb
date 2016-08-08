@@ -19,13 +19,13 @@
   </div>  <!-- .row -->
 </div>  <!-- #invention.category -->
 
-<div id="discoveries" class="category">
+<div id="academic-advisories" class="category">
   <div class="row">
     <div class="col-md-12">
       <h4 class="page-header">
-        <span>Discoveries</span>
+        <span>Academic Advisories</span>
         <span class="pull-right">
-          <%= link_to new_admin_employee_discovery_path,
+          <%= link_to new_admin_employee_academic_advisory_path,
             class: 'btn btn-primary btn-xs' do %>
             <span class="glyphicon glyphicon-plus"></span> New
           <% end %>
@@ -35,7 +35,7 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%#= render 'discoveries' %>
+      <%= render 'academic_advisories' %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
 </div>  <!-- #discoveries.category -->
