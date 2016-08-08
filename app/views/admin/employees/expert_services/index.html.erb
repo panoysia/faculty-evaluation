@@ -40,13 +40,13 @@
   </div>  <!-- .row -->
 </div>  <!-- #discoveries.category -->
 
-<div id="creative-works" class="category">
+<div id="professional-reviews" class="category">
   <div class="row">
     <div class="col-md-12">
       <h4 class="page-header">
-        <span>Creative Works</span>
+        <span>Professional Reviews</span>
         <span class="pull-right">
-          <%= link_to new_admin_employee_creative_work_path,
+          <%= link_to new_admin_employee_professional_review_path,
             class: 'btn btn-primary btn-xs' do %>
             <span class="glyphicon glyphicon-plus"></span> New
           <% end %>
@@ -56,7 +56,7 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%#= render 'creative_works' %>
+      <%= render 'professional_reviews' %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
 </div>  <!-- #creative-works.category -->
@@ -123,24 +123,3 @@
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->  
 </div>  <!-- #technical-articles.category -->
-
-<div id="instructional-manuals" class="category">
-  <div class="row">
-    <div class="col-md-12">
-      <h4 class="page-header">
-        <span>Instructional Manuals</span>
-        <span class="pull-right">
-          <%= link_to new_admin_employee_instructional_manual_path,
-            class: 'btn btn-primary btn-xs' do %>
-            <span class="glyphicon glyphicon-plus"></span> New
-          <% end %>
-        </span>
-      </h4>
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-  <div class="row">
-    <div class="col-md-12">
-      <%#= render 'instructional_manuals' %>
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->  
-</div>  <!-- #instructional-manuals.category -->

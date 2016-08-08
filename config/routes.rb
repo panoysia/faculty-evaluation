@@ -64,6 +64,7 @@ Rails.application.routes.draw do
         # Under :expert_services are:
           resources :professional_services, except: [:index, :show]
           resources :academic_advisories, except: [:index, :show]
+          resources :professional_reviews, except: [:index, :show]
 
         resources :professional_memberships, except: :show
         resources :academic_honors, except: :show
@@ -76,8 +77,6 @@ Rails.application.routes.draw do
         resources :qces, only: [:index, :show]
         resources :rankings
         resources :leaves
-
-        
 
         resource :career_path, only: [:show]
       end
@@ -113,7 +112,7 @@ Rails.application.routes.draw do
 
     resource :dashboard, only: [:show]
     resource :hr_profile, only: [:show], path: 'my-hr-profile'
-    resource :career_path, only: [:show], path: 'my-career-path'     
+    resource :career_path, only: [:show], path: 'my-career-path'
     resource :account, only: [:edit, :update], path: 'user-account', as: :user_account
 
     resources :leaves, only: [:index, :show]
