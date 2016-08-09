@@ -63,7 +63,8 @@ class Employee < ActiveRecord::Base
   has_many :professional_services, dependent: :destroy
   has_many :academic_advisories, dependent: :destroy
   has_many :professional_reviews, dependent: :destroy
-
+  has_many :accreditation_services, dependent: :destroy
+  
   has_many :professional_memberships, dependent: :destroy
   has_many :academic_honors, dependent: :destroy
   has_many :scholarships, dependent: :destroy
