@@ -66,7 +66,8 @@ Rails.application.routes.draw do
           resources :academic_advisories, except: [:index, :show]
           resources :professional_reviews, except: [:index, :show]
           resources :accreditation_services, except: [:index, :show]
-
+          resources :assessor_services, except: [:index, :show]
+          
         resources :professional_memberships, except: :show
         resources :academic_honors, except: :show
         resources :scholarships, except: :show

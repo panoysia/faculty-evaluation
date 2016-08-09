@@ -82,13 +82,13 @@
   </div>  <!-- .row -->
 </div>  <!-- #innovation.category -->
 
-<div id="publications" class="category">
+<div id="assessor-services" class="category">
   <div class="row">
     <div class="col-md-12">
       <h4 class="page-header">
-        <span>Publications (Book, Journal)</span>
+        <span>Assessor Services</span>
         <span class="pull-right">
-          <%= link_to new_admin_employee_publication_path,
+          <%= link_to new_admin_employee_assessor_service_path,
                 class: 'btn btn-primary btn-xs' do %>
             <span class="glyphicon glyphicon-plus"></span> New
           <% end %>
@@ -98,7 +98,7 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%#= render 'publications' %>
+      <%= render 'assessor_services' %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->  
 </div>  <!-- #publication.category -->
