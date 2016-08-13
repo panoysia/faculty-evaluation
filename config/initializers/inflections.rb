@@ -30,4 +30,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   
   inflect.acronym 'NBC'
   inflect.acronym 'NBCs'
+
+  inflect.acronym 'PRC'
+  inflect.acronym 'PRCs'
 end
