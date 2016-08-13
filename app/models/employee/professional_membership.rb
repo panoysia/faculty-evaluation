@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: employee_professional_memberships
+#
+#  id                 :integer          not null, primary key
+#  employee_id        :integer          not null
+#  organization       :string(150)      not null
+#  date_of_membership :date             not null
+#  organization_type  :integer          not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  membership_type    :integer
+#
+# Indexes
+#
+#  index_employee_professional_memberships_on_employee_id  (employee_id)
+#
+
 class Employee::ProfessionalMembership < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

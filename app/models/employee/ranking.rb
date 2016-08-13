@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: employee_rankings
+#
+#  id               :integer          not null, primary key
+#  employee_id      :integer
+#  nbc_id           :integer
+#  cce_total_points :integer          not null
+#  qce_total_points :integer          not null
+#  current_rank     :string           not null
+#  achieved_rank    :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+# Indexes
+#
+#  index_employee_rankings_on_employee_id  (employee_id)
+#  index_employee_rankings_on_nbc_id       (nbc_id)
+#
+
 class Employee::Ranking < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

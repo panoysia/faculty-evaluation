@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: employee_trainings
+#
+#  id                      :integer          not null, primary key
+#  title                   :string(100)      not null
+#  start_at                :date             not null
+#  end_at                  :date             not null
+#  no_of_days              :integer
+#  conducted_by            :string(50)       not null
+#  employee_id             :integer          not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  level                   :integer          not null
+#  nature_of_participation :string           default(""), not null
+#  category                :integer          not null
+#
+# Indexes
+#
+#  index_employee_trainings_on_employee_id  (employee_id)
+#
+
 class Employee::Training < ActiveRecord::Base  
   self.table_name_prefix = 'employee_'
 

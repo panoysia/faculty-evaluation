@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: cce_scoring_guides
+#
+#  id          :integer          not null, primary key
+#  description :string           not null
+#  criteria    :integer          not null
+#  points      :decimal(5, 2)    not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class CCE::ScoringGuide < ActiveRecord::Base
   self.table_name_prefix = 'cce_'
 

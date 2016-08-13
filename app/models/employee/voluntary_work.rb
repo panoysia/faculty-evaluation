@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: employee_voluntary_works
+#
+#  id           :integer          not null, primary key
+#  organization :string(70)       not null
+#  start_at     :date             not null
+#  end_at       :date             not null
+#  no_of_hours  :integer
+#  position     :string(50)
+#  employee_id  :integer          not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+# Indexes
+#
+#  index_employee_voluntary_works_on_employee_id  (employee_id)
+#
+
 class Employee::VoluntaryWork < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

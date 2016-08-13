@@ -1,3 +1,52 @@
+# == Schema Information
+#
+# Table name: employees
+#
+#  id                   :integer          not null, primary key
+#  first_name           :string(50)       not null
+#  last_name            :string(50)       not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  middle_name          :string(50)
+#  name_extension       :string(7)
+#  designation          :string
+#  gender               :string(1)
+#  civil_status         :string(3)
+#  birth_date           :date
+#  citizenship          :string(15)
+#  height               :string(5)
+#  weight               :string(15)
+#  blood_type           :string(3)
+#  gsis_no              :string(20)
+#  pagibig_no           :string(20)
+#  philhealth_no        :string(20)
+#  sss_no               :string(15)
+#  r_address            :string(70)
+#  r_zip_code           :string(5)
+#  r_telephone_no       :string(15)
+#  p_address            :string(70)
+#  p_zip_code           :string(5)
+#  p_telephone_no       :string(15)
+#  email_address        :string(40)
+#  cellphone_no         :string(15)
+#  agency_employee_no   :string(20)
+#  tin                  :string(15)
+#  academic_ranking_id  :integer
+#  hired_date           :date
+#  picture_file_name    :string
+#  picture_content_type :string
+#  picture_file_size    :integer
+#  picture_updated_at   :datetime
+#  specialization_id    :integer
+#  department_id        :integer
+#
+# Indexes
+#
+#  index_employees_on_academic_ranking_id  (academic_ranking_id)
+#  index_employees_on_department_id        (department_id)
+#  index_employees_on_specialization_id    (specialization_id)
+#
+
 # This code is commented and act only for reference on using namespaced models.
 
 =begin
@@ -64,6 +113,7 @@ class Employee < ActiveRecord::Base
   has_many :professional_reviews, dependent: :destroy
   has_many :accreditation_services, dependent: :destroy
   has_many :assessor_services, dependent: :destroy
+  has_many :trainer_services, dependent: :destroy
 
   has_many :professional_memberships, dependent: :destroy
   has_many :academic_honors, dependent: :destroy

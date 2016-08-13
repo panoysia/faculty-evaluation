@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: employee_professional_examinations
+#
+#  id          :integer          not null, primary key
+#  title       :string(150)      not null
+#  agency_name :string(150)      not null
+#  date_passed :date             not null
+#  category    :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  employee_id :integer          not null
+#
+# Indexes
+#
+#  index_employee_professional_examinations_on_employee_id  (employee_id)
+#
+
 class Employee::ProfessionalExamination < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

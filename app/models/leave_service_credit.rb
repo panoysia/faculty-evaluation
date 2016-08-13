@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: leave_service_credits
+#
+#  id               :integer          not null, primary key
+#  employee_id      :integer          not null
+#  description      :string
+#  valid_at         :date             not null
+#  expire_at        :date             not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  academic_year_id :integer
+#  no_of_days       :integer
+#
+# Indexes
+#
+#  index_leave_service_credits_on_academic_year_id  (academic_year_id)
+#  index_leave_service_credits_on_employee_id       (employee_id)
+#
+
 class LeaveServiceCredit < ActiveRecord::Base
   belongs_to :employee
   belongs_to :academic_year

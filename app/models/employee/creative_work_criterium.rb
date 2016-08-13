@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: creative_work_criteria
+#
+#  id          :integer          not null, primary key
+#  description :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Employee::CreativeWorkCriterium < ActiveRecord::Base
   # self.table_name_prefix = 'employee_'
   self.table_name = 'creative_work_criteria'

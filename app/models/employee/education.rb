@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: employee_educations
+#
+#  id               :integer          not null, primary key
+#  level            :integer          not null
+#  school_name      :string(50)       not null
+#  degree_course    :string(50)       not null
+#  grade_units      :integer
+#  graduated_at     :date
+#  start_at         :date
+#  end_at           :date
+#  honors_received  :text(65535)
+#  employee_id      :integer          not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  attainment_level :integer
+#  criteria         :integer
+#
+# Indexes
+#
+#  index_employee_educations_on_attainment_level  (attainment_level)
+#  index_employee_educations_on_criteria          (criteria)
+#  index_employee_educations_on_employee_id       (employee_id)
+#
+
 class Employee::Education < ActiveRecord::Base
   include EducationConstants
   # prefer: include Employee::EducationConstants

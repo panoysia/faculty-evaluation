@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: employee_community_outreaches
+#
+#  id                :integer          not null, primary key
+#  project_name      :string(150)      not null
+#  sponsoring_agency :string(150)      not null
+#  start_at          :date             not null
+#  end_at            :date             not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  employee_id       :integer          not null
+#
+# Indexes
+#
+#  index_employee_community_outreaches_on_employee_id  (employee_id)
+#
+
 class Employee::CommunityOutreach < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

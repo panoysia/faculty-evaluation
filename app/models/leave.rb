@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: leaves
+#
+#  id               :integer          not null, primary key
+#  filed_at         :date             not null
+#  start_at         :date             not null
+#  end_at           :date             not null
+#  length           :integer          not null
+#  employee_id      :integer          not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  academic_year_id :integer
+#
+# Indexes
+#
+#  index_leaves_on_academic_year_id  (academic_year_id)
+#  index_leaves_on_employee_id       (employee_id)
+#
+
 class Leave < ActiveRecord::Base  
   # Prefer the use of words 'category'/'context' over the word 'type' as column name. 'Type' is more of a reserved word and used internally by Rails for models using Single Table Inheritance.
   CATEGORIES = { 

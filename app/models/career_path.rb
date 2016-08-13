@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: career_paths
+#
+#  id         :integer          not null, primary key
+#  name       :string(50)       not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_career_paths_on_name  (name) UNIQUE
+#
+
 =begin
   CareerPath
     Specialization

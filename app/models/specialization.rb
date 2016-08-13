@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: specializations
+#
+#  id             :integer          not null, primary key
+#  name           :string(100)      not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  career_path_id :integer          not null
+#  is_generalize  :integer          default(0)
+#
+# Indexes
+#
+#  index_specializations_on_career_path_id  (career_path_id)
+#  index_specializations_on_name            (name) UNIQUE
+#
+
 class Specialization < ActiveRecord::Base
   has_many :employees
   has_many :career_path_actions

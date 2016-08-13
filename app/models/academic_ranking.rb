@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: academic_rankings
+#
+#  id             :integer          not null, primary key
+#  name           :string(50)       not null
+#  subrank        :integer
+#  position       :integer          not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  cce_min_points :integer
+#  cce_max_points :integer
+#  qce_min_points :integer
+#  qce_max_points :integer
+#
+
 class AcademicRanking < ActiveRecord::Base
   ASSOCIATE_PROFESSOR_5 = 12
 

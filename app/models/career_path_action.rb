@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: career_path_actions
+#
+#  id                :integer          not null, primary key
+#  name              :string           not null
+#  start_at          :date
+#  end_at            :date
+#  description       :string
+#  category          :integer          not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  company           :string
+#  specialization_id :integer          not null
+#
+# Indexes
+#
+#  index_career_path_actions_on_specialization_id  (specialization_id)
+#
+
 class CareerPathAction < ActiveRecord::Base
  
   CATEGORY_TYPES = %w[ Postgraduate Seminar Training Conference ]  

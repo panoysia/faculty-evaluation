@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: employee_technical_articles
+#
+#  id           :integer          not null, primary key
+#  name         :string(50)       not null
+#  level        :integer          not null
+#  published_at :date             not null
+#  description  :string(150)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  employee_id  :integer          not null
+#
+# Indexes
+#
+#  idx_emp_technical_articles_on_emp_id  (employee_id)
+#
+
 class Employee::TechnicalArticle < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

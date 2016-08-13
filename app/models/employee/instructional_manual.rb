@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: employee_instructional_manuals
+#
+#  id           :integer          not null, primary key
+#  name         :string(50)       not null
+#  published_at :date             not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  category     :integer
+#  employee_id  :integer          not null
+#  description  :string(150)      default(""), not null
+#
+# Indexes
+#
+#  idx_emp_instructioinal_manuals_on_emp_id  (employee_id)
+#
+
 class Employee::InstructionalManual < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

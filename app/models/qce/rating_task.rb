@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: qce_rating_tasks
+#
+#  id             :integer          not null, primary key
+#  employee_id    :integer          not null
+#  evaluator_id   :integer          not null
+#  evaluator_type :string           not null
+#  rating_id      :integer          not null
+#  rating_type    :string           not null
+#  status         :integer          not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+# Indexes
+#
+#  index_qce_rating_tasks_on_employee_id                      (employee_id)
+#  index_qce_rating_tasks_on_evaluator_type_and_evaluator_id  (evaluator_type,evaluator_id)
+#  index_qce_rating_tasks_on_rating_type_and_rating_id        (rating_type,rating_id)
+#
+
 class QCE::RatingTask < ActiveRecord::Base
   self.table_name_prefix = 'qce_'
 

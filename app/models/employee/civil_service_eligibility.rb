@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: employee_civil_service_eligibilities
+#
+#  id                      :integer          not null, primary key
+#  career_service          :string(30)       not null
+#  rating                  :float(24)        not null
+#  date_of_exam            :date             not null
+#  place_of_exam           :string(50)
+#  license_number          :string(15)
+#  date_release_of_license :date
+#  employee_id             :integer          not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#
+# Indexes
+#
+#  index_employee_civil_service_eligibilities_on_employee_id  (employee_id)
+#
+
 class Employee::CivilServiceEligibility < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

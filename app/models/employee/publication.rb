@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: employee_publications
+#
+#  id                  :integer          not null, primary key
+#  title               :string           not null
+#  role                :integer          not null
+#  academic_level      :integer          not null
+#  publisher           :string
+#  date_of_publication :date             not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  employee_id         :integer          not null
+#  description         :string(150)      default(""), not null
+#
+# Indexes
+#
+#  idx_emp_publications_on_emp_id  (employee_id)
+#
+
 class Employee::Publication < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

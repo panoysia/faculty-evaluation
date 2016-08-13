@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: rating_periods
+#
+#  id               :integer          not null, primary key
+#  semester         :integer          not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  nbc_id           :integer
+#  academic_year_id :integer
+#
+# Indexes
+#
+#  index_rating_periods_on_academic_year_id  (academic_year_id)
+#  index_rating_periods_on_nbc_id            (nbc_id)
+#
+
 class RatingPeriod < ActiveRecord::Base 
   
   has_many :qces, dependent: :destroy

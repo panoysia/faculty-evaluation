@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: employee_accreditation_services
+#
+#  id            :integer          not null, primary key
+#  employee_id   :integer          not null
+#  name          :string(150)      not null
+#  participation :string(150)      default(""), not null
+#  start_at      :date             not null
+#  end_at        :date             not null
+#  is_current    :boolean          default(FALSE), not null
+#  no_of_years   :integer          not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  agency        :string(150)      default(""), not null
+#
+# Indexes
+#
+#  index_employee_accreditation_services_on_employee_id  (employee_id)
+#
+
 class Employee::AccreditationService < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
   
@@ -33,6 +54,5 @@ class Employee::AccreditationService < ActiveRecord::Base
     # raise Exception if end_at.nil?
     byebug
   end
-
 
 end

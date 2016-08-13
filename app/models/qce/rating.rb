@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: qce_ratings
+#
+#  id                 :integer          not null, primary key
+#  qce_id             :integer          not null
+#  type               :string           not null
+#  evaluator_id       :integer          not null
+#  evaluator_type     :string           not null
+#  evaluator_name     :string
+#  evaluator_position :string
+#  evaluation_context :string
+#  finished_at        :date
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  instrument         :string
+#
+# Indexes
+#
+#  index_qce_ratings_on_evaluator_type_and_evaluator_id  (evaluator_type,evaluator_id)
+#  index_qce_ratings_on_qce_id                           (qce_id)
+#
+
 class QCE::Rating < ActiveRecord::Base
   self.table_name_prefix = 'qce_'
   self.store_full_sti_class = false

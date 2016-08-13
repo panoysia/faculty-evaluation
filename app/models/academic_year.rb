@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: academic_years
+#
+#  id         :integer          not null, primary key
+#  start_at   :date             not null
+#  end_at     :date             not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  nbc_id     :integer
+#
+# Indexes
+#
+#  index_academic_years_on_nbc_id  (nbc_id)
+#
+
 class AcademicYear < ActiveRecord::Base
   has_many :rating_periods, dependent: :destroy
   has_many :leaves, dependent: :destroy

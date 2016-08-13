@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: qce_rating_evaluations
+#
+#  id          :integer          not null, primary key
+#  question_id :integer          not null
+#  score       :integer          default(0)
+#  rating_id   :integer          not null
+#  rating_type :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  index_qce_rating_evaluations_on_question_id                (question_id)
+#  index_qce_rating_evaluations_on_rating_type_and_rating_id  (rating_type,rating_id)
+#
+
 class QCE::RatingEvaluation < ActiveRecord::Base
   self.table_name_prefix = 'qce_'
 

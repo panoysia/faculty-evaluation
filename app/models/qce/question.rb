@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: qce_questions
+#
+#  id          :integer          not null, primary key
+#  question    :string           not null
+#  sequence    :integer          not null
+#  rating_type :string           not null
+#  instrument  :string           not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class QCE::Question < ActiveRecord::Base
   self.table_name_prefix = 'qce_'
 

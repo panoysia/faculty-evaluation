@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: qces
+#
+#  id                             :integer          not null, primary key
+#  employee_id                    :integer          not null
+#  created_at                     :datetime         not null
+#  updated_at                     :datetime         not null
+#  rating_period_id               :integer          not null
+#  completed                      :integer          default(0), not null
+#  has_assigned_self_rating       :integer
+#  has_assigned_supervisor_rating :integer
+#  has_assigned_peer_rating       :integer
+#  has_assigned_student_rating    :integer
+#  support_area                   :string
+#
+# Indexes
+#
+#  index_qces_on_employee_id       (employee_id)
+#  index_qces_on_rating_period_id  (rating_period_id)
+#
+
 class QCE < ActiveRecord::Base
 
   PERCENTAGE_WEIGHT = 0.25  # 25%

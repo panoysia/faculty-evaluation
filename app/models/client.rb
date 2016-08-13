@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: clients
+#
+#  id          :integer          not null, primary key
+#  first_name  :string(50)       not null
+#  last_name   :string(50)       not null
+#  description :string(30)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Client < ActiveRecord::Base
   has_one :user_account, as: :account, class_name: 'User', dependent: :destroy
 

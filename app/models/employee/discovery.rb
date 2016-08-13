@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: employee_discoveries
+#
+#  id            :integer          not null, primary key
+#  patent_no     :string           not null
+#  year_patented :integer          not null
+#  description   :string(150)
+#  employee_id   :integer          not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  name          :string           not null
+#
+# Indexes
+#
+#  index_employee_discoveries_on_employee_id  (employee_id)
+#
+
 class Employee::Discovery < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

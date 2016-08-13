@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  username        :string(20)       not null
+#  password_digest :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  account_id      :integer
+#  account_type    :string
+#
+# Indexes
+#
+#  index_users_on_account_type_and_account_id  (account_type,account_id)
+#  index_users_on_username                     (username) UNIQUE
+#
+
 class User < ActiveRecord::Base
   USERNAME_MAX_LENGTH = 20
   PASSWORD_MAX_LENGTH = 15

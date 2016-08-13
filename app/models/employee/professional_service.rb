@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: employee_professional_services
+#
+#  id                      :integer          not null, primary key
+#  employee_id             :integer          not null
+#  title                   :string(150)
+#  service_type            :integer          not null
+#  level                   :integer          not null
+#  nature_of_participation :string(150)      default(""), not null
+#  sponsoring_agency       :string(150)      not null
+#  start_at                :date             not null
+#  end_at                  :date             not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#
+# Indexes
+#
+#  index_employee_professional_services_on_employee_id  (employee_id)
+#
+
 class Employee::ProfessionalService < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
 

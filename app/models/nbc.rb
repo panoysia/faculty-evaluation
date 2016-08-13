@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: nbcs
+#
+#  id          :integer          not null, primary key
+#  name        :string           not null
+#  description :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  status      :integer          default(1), not null
+#
+
 class NBC < ActiveRecord::Base
   CLOSE = 0
   OPEN = 1

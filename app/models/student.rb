@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: students
+#
+#  id            :integer          not null, primary key
+#  first_name    :string(50)       not null
+#  last_name     :string(50)       not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  department_id :integer
+#
+# Indexes
+#
+#  index_students_on_department_id  (department_id)
+#
+
 class Student < ActiveRecord::Base
   NUMBER_OF_STUDENT_EVALUATORS = 30
 
