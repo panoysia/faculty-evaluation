@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: employee_assessor_services
+# Table name: employee_trainer_services
 #
 #  id          :integer          not null, primary key
 #  employee_id :integer          not null
@@ -15,10 +15,10 @@
 #
 # Indexes
 #
-#  index_employee_assessor_services_on_employee_id  (employee_id)
+#  index_employee_trainer_services_on_employee_id  (employee_id)
 #
 
-class Employee::AssessorService < ActiveRecord::Base
+class Employee::TrainerService < ActiveRecord::Base
   self.table_name_prefix = 'employee_'
   
   belongs_to :employee

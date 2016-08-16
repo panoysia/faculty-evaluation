@@ -52,7 +52,8 @@ class Employee::AccreditationService < ActiveRecord::Base
     # self[:no_of_years] = YearCalculator.calculate(start_at, end_at)
     # raise Exception if name.nil?
     # raise Exception if end_at.nil?
-    byebug
+
+    # byebug
   end
 
 end

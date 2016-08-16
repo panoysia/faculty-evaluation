@@ -18,6 +18,7 @@
 
 #database.yml
 *.txt
-_my_files/
+.byebug_history
 
+_my_files/
 public/system

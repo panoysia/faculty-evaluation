@@ -50,6 +50,7 @@ Rails.application.routes.draw do
         resources :voluntary_works
         resources :work_experiences
         
+        
         resources :professional_developments, only: :index
           # Under :professional_developments are: 
           resources :inventions, except: [:index, :show]
@@ -61,13 +62,14 @@ Rails.application.routes.draw do
           resources :instructional_manuals, except: [:index, :show]
         
         resources :expert_services, only: :index
-        # Under :expert_services are:
+          # Under :expert_services are:
           resources :professional_services, except: [:index, :show]
           resources :academic_advisories, except: [:index, :show]
           resources :professional_reviews, except: [:index, :show]
           resources :accreditation_services, except: [:index, :show]
           resources :assessor_services, except: [:index, :show]
-          
+          resources :trainer_services, except: [:index, :show]
+
         resources :professional_memberships, except: :show
         resources :academic_honors, except: :show
         resources :scholarships, except: :show

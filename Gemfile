@@ -27,12 +27,12 @@ group :development do
   gem 'spring', '~> 1.6', '>= 1.6.4'
   gem 'better_errors', '~> 2.1', '>= 2.1.1'
   gem 'quiet_assets', '~> 1.1'    
-  gem 'rails-footnotes', '~> 4.1', '>= 4.1.8'
+  # gem 'rails-footnotes', '~> 4.1', '>= 4.1.8'
   gem 'annotate', '~> 2.7'
 end
 
 group :development, :test do
-  gem 'byebug'
+  gem 'byebug', '~> 9.0'
 end
 
 group :production do
