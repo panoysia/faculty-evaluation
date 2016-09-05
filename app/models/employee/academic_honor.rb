@@ -17,9 +17,9 @@
 #  index_employee_academic_honors_on_employee_id  (employee_id)
 #
 
-class Employee::AcademicHonor < ActiveRecord::Base
-  self.table_name_prefix = 'employee_'
+require_dependency "employee/application_record"
 
+class Employee::AcademicHonor < Employee::ApplicationRecord
   DEGREE_TYPES = ["Undergraduate", "Graduate"]
 
   HONOR_TYPES = [
@@ -43,15 +43,7 @@ class Employee::AcademicHonor < ActiveRecord::Base
     in: HONOR_TYPES.each_index.map { |index| index }
   }
   
-  # Use this for resolving namespaced models in polymorphic route generation and when prefer to build routes using arrays instead of named route helpers.
-  def self.use_relative_model_naming?
-    true
-  end
-
-  def self.get_field_limit_of(field_name)
-    column_for_attribute(field_name.to_s.to_sym).limit
-  end
-
+  
   def self.honor_type_options
     HONOR_TYPES.each_with_index.map { |type, index| [type, index] }
   end

@@ -61,11 +61,7 @@ module Employee
 end
 =end
 
-class Employee < ActiveRecord::Base
-  def self.use_relative_model_naming?
-    true
-  end
-
+class Employee < ApplicationRecord
   GENDER_TYPES = { M: 'Male', F: 'Female'}
   CIVIL_STATUS_TYPES = {
     S: 'Single', 
@@ -91,7 +87,12 @@ class Employee < ActiveRecord::Base
   # has_one :supervisor, class_name: 'Employee'
 
   has_many :rankings, dependent: :destroy
-  has_many :educations, dependent: :destroy
+
+  # has_many :educations, dependent: :destroy
+  has_many :academic_degrees, dependent: :destroy
+  has_many :additional_degrees, dependent: :destroy
+  has_many :additional_credits, dependent: :destroy
+
   has_many :work_experiences, dependent: :destroy
   
   has_many :civil_service_eligibilities, dependent: :destroy
@@ -213,9 +214,6 @@ class Employee < ActiveRecord::Base
     # validates_attachment_content_type :picture, :content_type => //    
   end
 
-  def self.get_field_limit_of(field_name)
-    column_for_attribute(field_name.to_s.to_sym).limit
-  end
 
   def full_name
 =begin

@@ -18,9 +18,9 @@
 #  idx_emp_publications_on_emp_id  (employee_id)
 #
 
-class Employee::Publication < ActiveRecord::Base
-  self.table_name_prefix = 'employee_'
+require_dependency "employee/application_record"
 
+class Employee::Publication < Employee::ApplicationRecord
   ROLES = %w(Author Reviewer Translator Editor Compiler)
   ACADEMIC_LEVELS = ['Tertiary', 'High School', 'Elementary']
 
@@ -38,14 +38,6 @@ class Employee::Publication < ActiveRecord::Base
       in: ACADEMIC_LEVELS.each_index.map { |index| index }
   }
   
-  # Use this for resolving namespaced models in polymorphic route generation and when prefer to build routes using arrays instead of named route helpers.
-  def self.use_relative_model_naming?
-    true
-  end
-
-  def self.get_field_limit_of(field_name)
-    column_for_attribute(field_name.to_s.to_sym).limit
-  end
 
   def self.role_options
     ROLES.each_with_index.map { |role, index| [role, index] }  

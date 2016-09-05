@@ -19,9 +19,9 @@
 #  index_employee_accreditation_services_on_employee_id  (employee_id)
 #
 
-class Employee::AccreditationService < ActiveRecord::Base
-  self.table_name_prefix = 'employee_'
-  
+require_dependency "employee/application_record"
+
+class Employee::AccreditationService < Employee::ApplicationRecord
   belongs_to :employee
 
   validates :name, presence: true, length: { maximum: 150 }
@@ -34,15 +34,6 @@ class Employee::AccreditationService < ActiveRecord::Base
   # t.boolean :is_current, null: false, default: false
   
   before_save :set_no_of_years
-
-  # Use this for resolving namespaced models in polymorphic route generation and when prefer to build routes using arrays instead of named route helpers.
-  def self.use_relative_model_naming?
-    true
-  end
-
-  def self.get_field_limit_of(field_name)
-    column_for_attribute(field_name.to_s.to_sym).limit
-  end
 
 
   private

@@ -24,11 +24,11 @@
 #  index_employee_educations_on_employee_id       (employee_id)
 #
 
-class Employee::Education < ActiveRecord::Base
+require_dependency "employee/application_record"
+
+class Employee::Education < Employee::ApplicationRecord
   include EducationConstants
   # prefer: include Employee::EducationConstants
-
-  self.table_name_prefix = 'employee_'
 
   # LEVEL_TYPES = %w[College Masters Doctorate]
   CRITERIA_TYPES = [
@@ -94,18 +94,8 @@ class Employee::Education < ActiveRecord::Base
 # validate :years_of_study, 
 
 
-
   after_save :create_or_update_cce_scoring_record
 
-
-  # Use this for resolving namespaced models in polymorphic route generation and when prefer to build routes using arrays instead of named route helpers.
-  def self.use_relative_model_naming?
-    true
-  end
-
-  def self.get_field_limit_of(field_name)
-    column_for_attribute(field_name.to_s.to_sym).limit
-  end
 
   def years_of_study
     YearCalculator.calculate(start_at, end_at)

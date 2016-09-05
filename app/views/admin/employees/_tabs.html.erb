@@ -1,76 +1,105 @@
 <div id="employee-tabs" class="row">
   <ul class="nav nav-tabs">
-    <li role="presentation" class="<%= set_active_tab(:employees) %>">
+    <li role="presentation" class="<%= get_bs_active_class(:employees) %>">
       <%= link_to 'Profile', admin_employee_path(@employee) %>
     </li>
-    <li role="presentation" class="<%= set_active_tab(:career_paths) %>">
+    <li role="presentation" class="<%= get_bs_active_class(:career_paths) %>">
       <%= link_to 'Career Path',
           admin_employee_career_path_path(@employee) %>
     </li>
-    <li role="presentation" class="<%= set_active_tab(:qces) %>">
+    <li role="presentation" class="<%= get_bs_active_class(:qces) %>">
       <%= link_to 'QCEs', admin_employee_qces_path(@employee) %>
-    </li>    
-    <li role="presentation" class="<%= set_active_tab(:cce_scorings) %>">
-      <%= link_to 'CCE', admin_employee_cce_scorings_path(@employee) %>
     </li>
-    <li role="presentation" class="<%= set_active_tab(:educations) %>">
+    <li role="presentation" class="<%= get_bs_active_class(:leaves) %>">
+      <%= link_to 'Leaves', admin_employee_leaves_path(@employee) %>
+    </li>
+
+    <% tab_names = %i(
+        educations
+        academic_degrees
+        additional_degrees
+        additional_credits
+      ) 
+    %>
+    <li role="presentation" class="<%= get_bs_active_class(*tab_names) %>">
       <%= link_to 'Educations', admin_employee_educations_path(@employee) %>
     </li>
-    <li role="presentation" class="<%= set_active_tab(:work_experiences) %>">
+
+    <% tab_names = "" %>
+    <li role="presentation" class="<%= get_bs_active_class(:work_experiences) %>">
       <%= link_to 'Work Experiences', admin_employee_work_experiences_path(@employee)%>
     </li>
+    <%# achievement_and_honors_1s
+        achievement_and_honors_2s %>
+    <% tab_names = "" %>
     <li role="presentation"
-        class="<%= set_active_tab(:professional_developments) %>">
-      <%= link_to 'Prof. Developments', admin_employee_professional_developments_path(@employee) %>
+        class="<%= get_bs_active_class(tab_names) %>">
+      <%= link_to 'Achievement & Honors 1', admin_employee_professional_developments_path(@employee) %>
     </li>
-    <li role="presentation" class="<%= set_active_tab(:leaves) %>">
-      <%= link_to 'Leaves', admin_employee_leaves_path(@employee) %>
-    </li>    
-    <li role="presentation" class="<%= set_active_tab(:trainings) %>">
-      <%= link_to 'Trainings', admin_employee_trainings_path(@employee)%>
+        
+    <% tab_names = "" %>
+    <li role="presentation"
+        class="<%= get_bs_active_class(tab_names) %>">
+      <%= link_to 'Achievement & Honors 2', admin_employee_professional_developments_path(@employee) %>
     </li>
-    <li role="presentation" class="<%= set_active_tab(:professional_examinations) %>">
-      <%= link_to 'Prof. Examinations (Certificates)',
-            admin_employee_professional_examinations_path(@employee) %>
-    </li>
-    <li role="presentation" class="<%= set_active_tab(:community_outreaches) %>">
-      <%= link_to 'Community Outreaches',
-            admin_employee_community_outreaches_path(@employee) %>
-    </li>
-    <li role="presentation" class="<%= set_active_tab(:awards) %>">
-      <%= link_to 'Awards', admin_employee_awards_path(@employee) %>
-    </li>
-    <li role="presentation" class="<%= set_active_tab(:scholarships) %>">
-      <%= link_to 'Scholarships',
-            admin_employee_scholarships_path(@employee) %>
-    </li>
-    <li role="presentation" class="<%= set_active_tab(:academic_honors) %>">
-      <%= link_to 'Academic Honors',
-            admin_employee_academic_honors_path(@employee) %>
-    </li>
-    <li role="presentation" class="<%= set_active_tab(:professional_memberships) %>">
-      <%= link_to 'Prof. Memberships',
-            admin_employee_professional_memberships_path(@employee) %>
-    </li>
-    <li role="presentation" class="<%= set_active_tab(:expert_services) %>">
+
+    <% tab_names = %i(
+        expert_services
+        professional_services
+        academic_advisories
+        professional_reviews
+        accreditation_services
+        assessor_services
+        trainer_services
+      ) 
+    %>
+    <li role="presentation" class="<%= get_bs_active_class(*tab_names) %>">
       <%= link_to 'Expert Services',
             admin_employee_expert_services_path(@employee) %>
-    </li>
-
-
-    <% if false %>
-      <li role="presentation" class="<%= set_active_tab(:civil_service_eligibilities) %>">
-        <%= link_to 'Civil Service', admin_employee_civil_service_eligibilities_path(@employee)%>  
-      </li>
-      <li role="presentation" class="<%= set_active_tab(:voluntary_works) %>">
-        <%= link_to 'Voluntary Works', admin_employee_voluntary_works_path(@employee)%>
-      </li>
-      <li role="presentation" class="<%= set_active_tab(:other_infos) %>">
-        <%= link_to 'Other Info', admin_employee_other_infos_path(@employee) %>
-      </li>
-      <li role="presentation" class="<%= set_active_tab(:rankings) %>">
-        <%= link_to 'Rankings', admin_employee_rankings_path(@employee) %>
-      </li>
-    <% end %>
+    </li>    
   </ul>
 </div>  <!-- <div#employee-related-data.row> -->
+
+<% if false %>
+  <li role="presentation" class="<%= get_bs_active_class(:civil_service_eligibilities) %>">
+    <%= link_to 'Civil Service', admin_employee_civil_service_eligibilities_path(@employee)%>  
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:voluntary_works) %>">
+    <%= link_to 'Voluntary Works', admin_employee_voluntary_works_path(@employee)%>
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:other_infos) %>">
+    <%= link_to 'Other Info', admin_employee_other_infos_path(@employee) %>
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:rankings) %>">
+    <%= link_to 'Rankings', admin_employee_rankings_path(@employee) %>
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:cce_scorings) %>">
+    <%= link_to 'CCE', admin_employee_cce_scorings_path(@employee) %>
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:trainings) %>">
+    <%= link_to 'Trainings', admin_employee_trainings_path(@employee)%>
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:professional_examinations) %>">
+    <%= link_to 'Prof. Examinations (Certificates)',
+          admin_employee_professional_examinations_path(@employee) %>
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:community_outreaches) %>">
+    <%= link_to 'Community Outreaches',
+          admin_employee_community_outreaches_path(@employee) %>
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:awards) %>">
+    <%= link_to 'Awards', admin_employee_awards_path(@employee) %>
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:scholarships) %>">
+    <%= link_to 'Scholarships',
+          admin_employee_scholarships_path(@employee) %>
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:academic_honors) %>">
+    <%= link_to 'Academic Honors',
+          admin_employee_academic_honors_path(@employee) %>
+  </li>
+  <li role="presentation" class="<%= get_bs_active_class(:professional_memberships) %>">
+    <%= link_to 'Prof. Memberships',
+          admin_employee_professional_memberships_path(@employee) %>
+  </li>  
+<% end %>

@@ -4,8 +4,9 @@ module ApplicationHelper
     render partial: 'shared/error_messages', locals: { object: object }
   end
 
-  def set_active_tab(tab_name)
-    tab_name.to_s == controller_name ? 'active' : ''
+  # "bs" is short for Bootstrap
+  def get_bs_active_class(*tab_names)
+    tab_names.include?(controller_name.to_sym) ? "active" : ""
   end
 
   # For formatting dates for display. 

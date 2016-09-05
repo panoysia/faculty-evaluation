@@ -43,15 +43,33 @@ Rails.application.routes.draw do
 
     resources :employees do
       scope module: :employees do
-        resources :educations
-        resources :trainings
         resources :civil_service_eligibilities
         resources :other_infos
         resources :voluntary_works
+
+        # career path
+        # qces
+        # leaves
+
+        resources :educations, only: [:index]
+          resources :academic_degrees, except: [:index, :show]
+          resources :additional_degrees, except: [:index, :show]
+          resources :additional_credits, except: [:index, :show]
+
         resources :work_experiences
-        
-        
-        resources :professional_developments, only: :index
+        resources :achievement_and_honors_1s, only: [:index]
+        resources :achievement_and_honors_2s, only: [:index]
+
+        resources :expert_services, only: [:index]
+          # Under :expert_services are:
+          resources :professional_services, except: [:index, :show]
+          resources :academic_advisories, except: [:index, :show]
+          resources :professional_reviews, except: [:index, :show]
+          resources :accreditation_services, except: [:index, :show]
+          resources :assessor_services, except: [:index, :show]
+          resources :trainer_services, except: [:index, :show]
+
+        resources :professional_developments, only: [:index]
           # Under :professional_developments are: 
           resources :inventions, except: [:index, :show]
           resources :discoveries, except: [:index, :show]
@@ -61,21 +79,14 @@ Rails.application.routes.draw do
           resources :technical_articles, except: [:index, :show]
           resources :instructional_manuals, except: [:index, :show]
         
-        resources :expert_services, only: :index
-          # Under :expert_services are:
-          resources :professional_services, except: [:index, :show]
-          resources :academic_advisories, except: [:index, :show]
-          resources :professional_reviews, except: [:index, :show]
-          resources :accreditation_services, except: [:index, :show]
-          resources :assessor_services, except: [:index, :show]
-          resources :trainer_services, except: [:index, :show]
+        resources :trainings
 
-        resources :professional_memberships, except: :show
-        resources :academic_honors, except: :show
-        resources :scholarships, except: :show
-        resources :awards, except: :show
-        resources :community_outreaches, except: :show
-        resources :professional_examinations, except: :show
+        resources :professional_memberships, except: [:show]
+        resources :academic_honors, except: [:show]
+        resources :scholarships, except: [:show]
+        resources :awards, except: [:show]
+        resources :community_outreaches, except: [:show]
+        resources :professional_examinations, except: [:show]
         
         resources :cce_scorings, only: [:index]
         resources :qces, only: [:index, :show]
