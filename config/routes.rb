@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
     # resources :faculty_evaluations, path: 'faculty-evaluation'
 
-    resource :dashboard, only: [:show]
+    resource :dashboard, only: :show
 
     resources :nbcs do
       member do
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
     # Just to make use of 'qce' for path, i.e., could have used path scope instead
     # namespace :qce do
-    #   resources :questions, only: [:index]
+    #   resources :questions, only: :index
     # end
 
     resources :employees do
@@ -51,25 +51,15 @@ Rails.application.routes.draw do
         # qces
         # leaves
 
-        resources :educations, only: [:index]
+        resources :educations, only: :index
           resources :academic_degrees, except: [:index, :show]
           resources :additional_degrees, except: [:index, :show]
           resources :additional_credits, except: [:index, :show]
 
         resources :work_experiences
-        resources :achievement_and_honors_1s, only: [:index]
-        resources :achievement_and_honors_2s, only: [:index]
 
-        resources :expert_services, only: [:index]
-          # Under :expert_services are:
-          resources :professional_services, except: [:index, :show]
-          resources :academic_advisories, except: [:index, :show]
-          resources :professional_reviews, except: [:index, :show]
-          resources :accreditation_services, except: [:index, :show]
-          resources :assessor_services, except: [:index, :show]
-          resources :trainer_services, except: [:index, :show]
-
-        resources :professional_developments, only: [:index]
+        resource :achievement_and_honors_1, only: :show
+        resources :professional_developments, only: :index
           # Under :professional_developments are: 
           resources :inventions, except: [:index, :show]
           resources :discoveries, except: [:index, :show]
@@ -79,21 +69,33 @@ Rails.application.routes.draw do
           resources :technical_articles, except: [:index, :show]
           resources :instructional_manuals, except: [:index, :show]
         
+
+        resource :achievement_and_honors_2, only: :show
+          resources :academic_honors, except: :show
+          resources :awards, except: :show
+          resources :community_outreaches, except: :show
+          resources :professional_examinations, except: :show
+          resources :professional_memberships, except: :show
+          resources :scholarships, except: :show
+
+        # "Expert Services" and resources under it 
+        #   (should be namespaced instead)
+        resources :expert_services, only: :index
+          resources :academic_advisories, except: [:index, :show]
+          resources :accreditation_services, except: [:index, :show]
+          resources :assessor_services, except: [:index, :show]          
+          resources :professional_reviews, except: [:index, :show]
+          resources :professional_services, except: [:index, :show]
+          resources :trainer_services, except: [:index, :show]
+
         resources :trainings
 
-        resources :professional_memberships, except: [:show]
-        resources :academic_honors, except: [:show]
-        resources :scholarships, except: [:show]
-        resources :awards, except: [:show]
-        resources :community_outreaches, except: [:show]
-        resources :professional_examinations, except: [:show]
-        
-        resources :cce_scorings, only: [:index]
+        resources :cce_scorings, only: :index
         resources :qces, only: [:index, :show]
         resources :rankings
         resources :leaves
 
-        resource :career_path, only: [:show]
+        resource :career_path, only: :show
       end
     end   # resources :employees
 
@@ -108,7 +110,7 @@ Rails.application.routes.draw do
     
     resources :academic_years, path: 'academic-years'
     # resources :rating_periods, path: 'rating-periods'
-    resources :academic_rankings, only: [:index], path: 'academic-rankings'
+    resources :academic_rankings, only: :index, path: 'academic-rankings'
 
     resources :admins
     resources :users
@@ -125,15 +127,15 @@ Rails.application.routes.draw do
     delete 'logout' => 'sessions#destroy'
     post 'login' => 'sessions#create', as: :authenticate_user
 
-    resource :dashboard, only: [:show]
-    resource :hr_profile, only: [:show], path: 'my-hr-profile'
-    resource :career_path, only: [:show], path: 'my-career-path'
+    resource :dashboard, only: :show
+    resource :hr_profile, only: :show, path: 'my-hr-profile'
+    resource :career_path, only: :show, path: 'my-career-path'
     resource :account, only: [:edit, :update], path: 'user-account', as: :user_account
 
     resources :leaves, only: [:index, :show]
-    resources :rating_tasks, only: [:index]
+    resources :rating_tasks, only: :index
 
-    resources :qces, except: [:new] do
+    resources :qces, except: :new do
       member do
         delete 'support_area' => 'qces#destroy_support_area'
         patch 'finalize' => 'qces#finalize'
@@ -166,15 +168,15 @@ Rails.application.routes.draw do
         end
 
         # QCE Summary Sheet for Teaching Effectiveness by Evaluator Type
-        resource :instruction_summary_sheet, only: [:show],
+        resource :instruction_summary_sheet, only: :show,
           path: 'instruction-summary-sheet-by-evaluator-type'
 
         # QCE Summary Sheet for Research, Extension, Production by Evaluator Type
-        resource :support_area_summary_sheet, only: [:show],
+        resource :support_area_summary_sheet, only: :show,
           path: 'support-area-summary-sheet-by-evaluator-type'
 
         # Computation of Summary of Rating Per Semester
-        resource :computation_summary_rating, only: [:show],
+        resource :computation_summary_rating, only: :show,
           path: 'computation-of-summary-rating-per-semester'
 
         # QCE Computation of the Summary of Rating for the Whole Evaluation Period
