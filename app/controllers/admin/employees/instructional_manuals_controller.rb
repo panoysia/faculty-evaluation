@@ -15,7 +15,7 @@ class Admin::Employees::InstructionalManualsController < Admin::ApplicationContr
     # render html: params.inspect and return true
     @instructional_manual = @employee.instructional_manuals.new(instructional_manual_params)
     if @instructional_manual.save
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Instructional manual record was successfully created.'
     else
       render :new
@@ -27,7 +27,7 @@ class Admin::Employees::InstructionalManualsController < Admin::ApplicationContr
 
   def update
     if @instructional_manual.update(instructional_manual_params)
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Instructional manual record was successfully updated.'
     else
       render :edit
@@ -36,7 +36,7 @@ class Admin::Employees::InstructionalManualsController < Admin::ApplicationContr
 
   def destroy
     @instructional_manual.destroy
-    redirect_to admin_employee_professional_developments_path,
+    redirect_to admin_employee_achievement_and_honors_1_path,
       notice: 'Instructional manual record was successfully deleted.'
   end
 

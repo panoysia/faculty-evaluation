@@ -14,7 +14,7 @@ class Admin::Employees::InventionsController < Admin::ApplicationController
     # render html: params.inspect and return true
     @invention = @employee.inventions.new(invention_params)
     if @invention.save
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Invention record was successfully created.'
     else
       render :new
@@ -26,7 +26,7 @@ class Admin::Employees::InventionsController < Admin::ApplicationController
 
   def update
     if @invention.update(invention_params)
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Invention record was successfully deleted.'      
     else
       render :edit
@@ -35,7 +35,7 @@ class Admin::Employees::InventionsController < Admin::ApplicationController
 
   def destroy
     @invention.destroy
-    redirect_to admin_employee_professional_developments_path(@employee),
+    redirect_to admin_employee_achievement_and_honors_1_path(@employee),
       notice: 'Invention record was successfully deleted.'
   end
 

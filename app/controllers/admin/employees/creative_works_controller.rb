@@ -14,7 +14,7 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
     # render html: params.inspect and return true
     @creative_work = @employee.creative_works.new(creative_work_params)
     if @creative_work.save
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path, 
         notice: 'Creative work record was successfully created.'
     else
       render :new
@@ -26,7 +26,7 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
 
   def update
     if @creative_work.update(creative_work_params)
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Creative work record was successfully updated.'
     else
       render :edit
@@ -35,7 +35,7 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
 
   def destroy
     @creative_work.destroy
-    redirect_to admin_employee_professional_developments_path(@employee),
+    redirect_to admin_employee_achievement_and_honors_1_path(@employee),
       notice: 'Creative work record was successfully deleted.'
   end
 
@@ -52,7 +52,9 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
 
   def creative_work_params
     params.require(:creative_work).permit(:name, :patent_no,
-      :competitiveness, :year_patented, :description, criterium_ids: [])
+                                          :competitiveness,
+                                          :year_patented, :description,
+                                          criterium_ids: [])
   end
 
 end

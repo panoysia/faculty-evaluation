@@ -14,7 +14,7 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
     # render html: params.inspect and return true
     @innovation = @employee.innovations.new(innovation_params)
     if @innovation.save
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Innovation record was successfully created.'
     else
       render :new
@@ -26,7 +26,7 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
 
   def update
     if @innovation.update(innovation_params)
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Innovation record was successfully updated.'
     else
       render :edit
@@ -35,7 +35,7 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
 
   def destroy
     @innovation.destroy
-    redirect_to admin_employee_professional_developments_path,
+    redirect_to admin_employee_achievement_and_honors_1_path,
       notice: 'Innovation record was successfully deleted.'
   end
 

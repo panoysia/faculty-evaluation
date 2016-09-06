@@ -14,7 +14,7 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
     # render html: params.inspect and return true
     @discovery = @employee.discoveries.new(discovery_params)
     if @discovery.save
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Discovery record was successfully created.'
     else
       render :new
@@ -26,7 +26,7 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
 
   def update
     if @discovery.update(discovery_params)
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Discovery record was successfully updated.'
     else
       render :edit
@@ -35,7 +35,7 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
 
   def destroy
     @discovery.destroy
-    redirect_to admin_employee_professional_developments_path(@employee),
+    redirect_to admin_employee_achievement_and_honors_1_path(@employee),
       notice: 'Discovery record was successfully deleted.'     
   end
 

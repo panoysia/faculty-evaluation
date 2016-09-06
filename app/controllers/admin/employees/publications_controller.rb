@@ -14,7 +14,7 @@ class Admin::Employees::PublicationsController < Admin::ApplicationController
     # render html: params.inspect and return true
     @publication = @employee.publications.new(publication_params)
     if @publication.save
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Publication record was successfully created.'
     else
       render :new
@@ -26,7 +26,7 @@ class Admin::Employees::PublicationsController < Admin::ApplicationController
 
   def update
     if @publication.update(publication_params)
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Publication record was successfully updated.'
     else
       render :edit
@@ -35,7 +35,7 @@ class Admin::Employees::PublicationsController < Admin::ApplicationController
 
   def destroy
     @publication.destroy
-    redirect_to admin_employee_professional_developments_path,
+    redirect_to admin_employee_achievement_and_honors_1_path,
       notice: 'Publication record was successfully deleted.'
   end
 

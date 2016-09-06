@@ -14,7 +14,7 @@ class Admin::Employees::TechnicalArticlesController < Admin::ApplicationControll
     # render html: params.inspect and return true
     @technical_article = @employee.technical_articles.new(technical_article_params)
     if @technical_article.save
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Technical article record was successfully created.'
     else
       render :new
@@ -26,7 +26,7 @@ class Admin::Employees::TechnicalArticlesController < Admin::ApplicationControll
 
   def update
     if @technical_article.update(technical_article_params)
-      redirect_to admin_employee_professional_developments_path,
+      redirect_to admin_employee_achievement_and_honors_1_path,
         notice: 'Technical article record was successfully updated.'
     else
       render :edit
@@ -35,7 +35,7 @@ class Admin::Employees::TechnicalArticlesController < Admin::ApplicationControll
 
   def destroy
     @technical_article.destroy
-    redirect_to admin_employee_professional_developments_path,
+    redirect_to admin_employee_achievement_and_honors_1_path,
       notice: 'Technical article record was successfully deleted.'
   end
 
