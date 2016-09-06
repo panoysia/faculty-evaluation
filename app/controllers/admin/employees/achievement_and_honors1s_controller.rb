@@ -1,10 +1,10 @@
-class Admin::Employees::AchievementAndHonor1sController < Admin::ApplicationController
+class Admin::Employees::AchievementAndHonors1sController < Admin::ApplicationController
   
   before_action :set_employee
   
   layout 'employee_profile'
 
-  def index
+  def show
   end
 
 

@@ -43,42 +43,39 @@ Rails.application.routes.draw do
 
     resources :employees do
       scope module: :employees do
-        resources :civil_service_eligibilities
-        resources :other_infos
-        resources :voluntary_works
+        resource :career_path, only: :show
+        resources :qces, only: [:index, :show]
+        resources :leaves
 
-        # career path
-        # qces
-        # leaves
-
+        # "Educations (tab)" and resources under it 
+        #   (should be namespaced instead)
         resources :educations, only: :index
           resources :academic_degrees, except: [:index, :show]
           resources :additional_degrees, except: [:index, :show]
           resources :additional_credits, except: [:index, :show]
 
         resources :work_experiences
-
+        
+        # "Achievement and Honors (tabs 1 & 2)" and resources under it 
+        #   (should be namespaced instead)
         resource :achievement_and_honors_1, only: :show
-        resources :professional_developments, only: :index
-          # Under :professional_developments are: 
-          resources :inventions, except: [:index, :show]
-          resources :discoveries, except: [:index, :show]
           resources :creative_works, except: [:index, :show]
+          resources :discoveries, except: [:index, :show]
           resources :innovations, except: [:index, :show]
+          resources :instructional_manuals, except: [:index, :show]
+          resources :inventions, except: [:index, :show]
           resources :publications, except: [:index, :show]
           resources :technical_articles, except: [:index, :show]
-          resources :instructional_manuals, except: [:index, :show]
-        
-
+                  
         resource :achievement_and_honors_2, only: :show
-          resources :academic_honors, except: :show
-          resources :awards, except: :show
-          resources :community_outreaches, except: :show
-          resources :professional_examinations, except: :show
-          resources :professional_memberships, except: :show
-          resources :scholarships, except: :show
+          resources :academic_honors, except: [:index, :show]
+          resources :awards, except: [:index, :show]
+          resources :community_outreaches, except: [:index, :show]
+          resources :professional_examinations, except: [:index, :show]
+          resources :professional_memberships, except: [:index, :show]
+          resources :scholarships, except: [:index, :show]
 
-        # "Expert Services" and resources under it 
+        # "Expert Services (tab)" and resources under it 
         #   (should be namespaced instead)
         resources :expert_services, only: :index
           resources :academic_advisories, except: [:index, :show]
@@ -91,11 +88,11 @@ Rails.application.routes.draw do
         resources :trainings
 
         resources :cce_scorings, only: :index
-        resources :qces, only: [:index, :show]
         resources :rankings
-        resources :leaves
 
-        resource :career_path, only: :show
+        # resources :civil_service_eligibilities
+        # resources :other_infos
+        # resources :voluntary_works
       end
     end   # resources :employees
 
