@@ -1,0 +1,40 @@
+<table class="table table-striped table-bordered table-master">
+  <thead>
+    <tr>
+      <th>#</th>  
+      <th>Position</th>
+      <th>Institution</th>
+      <th>Start</th>
+      <th>End</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employee.public_private_work_experiences.
+          each_with_index do |work_experience, index| %>
+      <tr>
+        <td><%= index += 1 %></td>
+        <td><%= work_experience.position_to_string %></td>
+        <td><%= work_experience.institution %></td>
+        <td><%= date_format_readable(work_experience.start_at) %></td>
+        <td><%= date_format_readable(work_experience.end_at) %></td>
+        <td>
+          <%= link_to edit_admin_employee_public_private_work_experience_path(
+                @employee, work_experience
+              ),
+              title: 'Edit', data: { toggle: 'tooltip' } do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_employee_public_private_work_experience_path(
+                  @employee, work_experience
+                ),
+                method: :delete, title: 'Delete',
+                data: { toggle: 'tooltip',
+                        confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>                
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -61,7 +61,8 @@ Rails.application.routes.draw do
           resources :admin_work_experiences, except: [:index, :show]
           resources :professional_work_experiences,
             except: [:index, :show]
-          # 7 employee_public_private_work_experiences
+          resources :public_private_work_experiences,
+            except: [:index, :show]
 
         # "Achievement and Honors (tabs 1 & 2)" and resources under it 
         #   (should be namespaced instead)

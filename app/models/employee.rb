@@ -96,6 +96,7 @@ class Employee < ApplicationRecord
   has_many :academic_work_experiences, dependent: :destroy
   has_many :admin_work_experiences, dependent: :destroy
   has_many :professional_work_experiences, dependent: :destroy
+  has_many :public_private_work_experiences, dependent: :destroy
 
   has_many :creative_works, dependent: :destroy
   has_many :discoveries, dependent: :destroy
