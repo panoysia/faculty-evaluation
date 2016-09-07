@@ -58,9 +58,8 @@ Rails.application.routes.draw do
         #   (should be namespaced instead)
         resources :work_experiences, only: :index
           resources :academic_work_experiences, except: [:index, :show]
+          resources :admin_work_experiences, except: [:index, :show]
 
-          # 4 employee_academic_work_experiences
-          # 5 employee_administrative_work_experiences
           # 6 employee_professional_work_experiences (professional/technical)
           # 7 employee_public_private_work_experiences
 

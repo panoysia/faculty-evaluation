@@ -92,9 +92,10 @@ class Employee < ApplicationRecord
   has_many :additional_degrees, dependent: :destroy
   has_many :additional_credits, dependent: :destroy
   has_many :trainings, dependent: :destroy
-  
+
   has_many :academic_work_experiences, dependent: :destroy
-   
+  has_many :admin_work_experiences, dependent: :destroy
+
   has_many :creative_works, dependent: :destroy
   has_many :discoveries, dependent: :destroy
   has_many :innovations, dependent: :destroy
