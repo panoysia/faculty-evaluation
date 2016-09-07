@@ -88,40 +88,35 @@ class Employee < ApplicationRecord
 
   has_many :rankings, dependent: :destroy
 
-  # has_many :educations, dependent: :destroy
   has_many :academic_degrees, dependent: :destroy
   has_many :additional_degrees, dependent: :destroy
   has_many :additional_credits, dependent: :destroy
-
-  has_many :work_experiences, dependent: :destroy
-  
-  has_many :civil_service_eligibilities, dependent: :destroy
-  has_many :voluntary_works, dependent: :destroy
-  has_many :other_infos, dependent: :destroy
-  
-  # prof. dev-related resources
-  has_many :inventions, dependent: :destroy
-  has_many :discoveries, dependent: :destroy
-  has_many :creative_works, dependent: :destroy
-  has_many :innovations, dependent: :destroy
-  has_many :publications, dependent: :destroy
-  has_many :technical_articles, dependent: :destroy
-  has_many :instructional_manuals, dependent: :destroy
-  
   has_many :trainings, dependent: :destroy
-  has_many :professional_services, dependent: :destroy
-  has_many :academic_advisories, dependent: :destroy
-  has_many :professional_reviews, dependent: :destroy
-  has_many :accreditation_services, dependent: :destroy
-  has_many :assessor_services, dependent: :destroy
-  has_many :trainer_services, dependent: :destroy
-
-  has_many :professional_memberships, dependent: :destroy
+  
+  has_many :academic_work_experiences, dependent: :destroy
+   
+  has_many :creative_works, dependent: :destroy
+  has_many :discoveries, dependent: :destroy
+  has_many :innovations, dependent: :destroy
+  has_many :instructional_manuals, dependent: :destroy
+  has_many :inventions, dependent: :destroy
+  has_many :technical_articles, dependent: :destroy
+  has_many :publications, dependent: :destroy
+  
   has_many :academic_honors, dependent: :destroy
-  has_many :scholarships, dependent: :destroy
   has_many :awards, dependent: :destroy
   has_many :community_outreaches, dependent: :destroy
   has_many :professional_examinations, dependent: :destroy
+  has_many :professional_memberships, dependent: :destroy
+  has_many :scholarships, dependent: :destroy
+
+  has_many :academic_advisories, dependent: :destroy
+  has_many :accreditation_services, dependent: :destroy
+  has_many :assessor_services, dependent: :destroy
+  has_many :professional_reviews, dependent: :destroy
+  has_many :professional_services, dependent: :destroy
+  has_many :trainer_services, dependent: :destroy
+   
 
   # Employee's own QCEs as (owner)
   has_many :qces, dependent: :destroy

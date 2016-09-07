@@ -25,8 +25,11 @@
       <%= link_to 'Educations', admin_employee_educations_path(@employee) %>
     </li>
 
-    <% tab_names = "" %>
-    <li role="presentation" class="<%= get_bs_active_class(:work_experiences) %>">
+    <% tab_names = %i(
+          work_experiences
+        )
+    %>
+    <li role="presentation" class="<%= get_bs_active_class(*tab_names) %>">
       <%= link_to 'Work Experiences', admin_employee_work_experiences_path(@employee)%>
     </li>
  
