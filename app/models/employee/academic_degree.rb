@@ -41,9 +41,8 @@ class Employee::AcademicDegree < Employee::ApplicationRecord
     in: DEGREE_TYPES.each_index.map { |index| index }
   }
 
-  validates :end_at, presence: true
   validates :institution, presence: true, length: { maximum: 50 }
-  validates :start_at, presence: true
+  validates :start_at, :end_at, presence: true
 
 
   def self.degree_type_options

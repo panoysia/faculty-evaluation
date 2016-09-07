@@ -19,7 +19,7 @@
         <td><%= publication.role_to_string %></td>
         <td><%= publication.academic_level_to_string %></td>
         <td><%= publication.publisher %></td>
-        <td><%= publication.date_of_publication %></td>
+        <td><%= date_format_readable(publication.date_of_publication) %></td>
         <td><%= publication.description %></td>
         <td>
           <%= link_to edit_admin_employee_publication_path(

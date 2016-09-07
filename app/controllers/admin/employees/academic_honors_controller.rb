@@ -18,7 +18,7 @@ class Admin::Employees::AcademicHonorsController < Admin::ApplicationController
     # render html: params.inspect and return true
     @academic_honor = @employee.academic_honors.new(academic_honor_params)
     if @academic_honor.save
-      redirect_to admin_employee_academic_honors_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Academic honor record was successfully created.'
     else
       render :new
@@ -30,7 +30,7 @@ class Admin::Employees::AcademicHonorsController < Admin::ApplicationController
 
   def update
     if @academic_honor.update(academic_honor_params)
-      redirect_to admin_employee_academic_honors_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Academic honor record was successfully updated.'
     else
       render :edit
@@ -39,7 +39,7 @@ class Admin::Employees::AcademicHonorsController < Admin::ApplicationController
 
   def destroy
     @academic_honor.destroy
-    redirect_to admin_employee_academic_honors_path,
+    redirect_to admin_employee_achievement_and_honors_2_path,
       notice: 'Academic honor record was successfully deleted.'     
   end
 

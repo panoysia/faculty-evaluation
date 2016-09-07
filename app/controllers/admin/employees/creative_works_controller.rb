@@ -35,7 +35,7 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
 
   def destroy
     @creative_work.destroy
-    redirect_to admin_employee_achievement_and_honors_1_path(@employee),
+    redirect_to admin_employee_achievement_and_honors_1_path,
       notice: 'Creative work record was successfully deleted.'
   end
 

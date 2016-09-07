@@ -35,7 +35,7 @@ class Admin::Employees::AcademicDegreesController < Admin::ApplicationController
 
   def destroy
     @degree.destroy
-    redirect_to admin_employee_educations_path(@employee),
+    redirect_to admin_employee_educations_path,
       notice: 'Academic degree record was successfully deleted.'
   end
 

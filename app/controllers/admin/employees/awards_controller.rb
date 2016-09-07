@@ -18,7 +18,7 @@ class Admin::Employees::AwardsController < Admin::ApplicationController
     # render html: params.inspect and return true
     @award = @employee.awards.new(award_params)
     if @award.save
-      redirect_to admin_employee_awards_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Award record was successfully created.'
     else
       render :new
@@ -30,7 +30,7 @@ class Admin::Employees::AwardsController < Admin::ApplicationController
 
   def update
     if @award.update(award_params)
-      redirect_to admin_employee_awards_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Award record was successfully updated.'
     else
       render :edit
@@ -39,7 +39,7 @@ class Admin::Employees::AwardsController < Admin::ApplicationController
 
   def destroy
     @award.destroy
-    redirect_to admin_employee_awards_path,
+    redirect_to admin_employee_achievement_and_honors_2_path,
       notice: 'Award record was successfully deleted.'     
   end
 

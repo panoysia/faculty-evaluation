@@ -35,7 +35,7 @@ class Admin::Employees::ProfessionalReviewsController < Admin::ApplicationContro
 
   def destroy
     @review.destroy
-    redirect_to admin_employee_expert_services_path(@employee),
+    redirect_to admin_employee_expert_services_path,
       notice: 'Prof. review record was successfully deleted.'
   end
 

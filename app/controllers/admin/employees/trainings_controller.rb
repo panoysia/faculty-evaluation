@@ -22,7 +22,7 @@ class Admin::Employees::TrainingsController < Admin::ApplicationController
     respond_to do |format|
       if @training.save
         format.html {
-          redirect_to admin_employee_trainings_path(@employee),
+          redirect_to admin_employee_educations_path(@employee),
           notice: 'Training was successfully created.'
         }
       else
@@ -38,7 +38,7 @@ class Admin::Employees::TrainingsController < Admin::ApplicationController
     respond_to do |format|    
       if @training.update(training_params)
         format.html {
-          redirect_to edit_admin_employee_training_path(@employee, @training),
+          redirect_to admin_employee_educations_path(@employee, @training),
           notice: 'Training was successfully updated.'
         }
       else
@@ -52,7 +52,7 @@ class Admin::Employees::TrainingsController < Admin::ApplicationController
     @training.destroy
     respond_to do |format|
       format.html {
-        redirect_to admin_employee_trainings_path(@employee),
+        redirect_to admin_employee_educations_path(@employee),
         notice: 'Training was successfully deleted.' 
       }
     end

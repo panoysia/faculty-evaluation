@@ -14,7 +14,7 @@
         <td><%= index += 1 %></td>
         <td><%= review.name %></td>
         <td><%= review.review_type_to_string %></td>
-        <td><%= review.occurred_at %></td>
+        <td><%= date_format_readable(review.occurred_at) %></td>
         <td>
           <%= link_to edit_admin_employee_professional_review_path(
                         @employee, review

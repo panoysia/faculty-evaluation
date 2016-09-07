@@ -5,8 +5,8 @@
       <th>Name</th>
       <th>Agency</th>
       <th>Participation</th>
-      <th>Start At</th>
-      <th>End At</th>
+      <th>Start</th>
+      <th>End</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
@@ -17,8 +17,8 @@
         <td><%= service.name %></td>
         <td><%= service.agency %></td>
         <td><%= service.participation %></td>
-        <td><%= service.start_at %></td>
-        <td><%= service.end_at %></td>
+        <td><%= date_format_readable(service.start_at) %></td>
+        <td><%= date_format_readable(service.end_at) if service.end_at.present? %></td>
         <td>
           <%= link_to edit_admin_employee_accreditation_service_path(
                         @employee, service

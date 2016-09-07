@@ -4,8 +4,8 @@
       <th>#</th>
       <th>Title</th>
       <th>Nature</th>
-      <th>Start At</th>
-      <th>End At</th>
+      <th>Start</th>
+      <th>End</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
@@ -15,8 +15,8 @@
         <td><%= index += 1 %></td>
         <td><%= advisory.title %></td>
         <td><%= advisory.nature_to_string %></td>
-        <td><%= advisory.start_at %></td>
-        <td><%= advisory.end_at %></td>
+        <td><%= date_format_readable(advisory.start_at) %></td>
+        <td><%= date_format_readable(advisory.end_at) %></td>
         <td>
           <%= link_to edit_admin_employee_academic_advisory_path(
                         @employee, advisory

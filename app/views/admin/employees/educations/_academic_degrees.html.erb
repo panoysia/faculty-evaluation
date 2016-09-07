@@ -20,7 +20,7 @@
         <td><%= degree.institution %></td>
         <td><%= date_format_readable(degree.start_at) %></td>
         <td><%= date_format_readable(degree.end_at) %></td>
-        <td><%= date_format_readable(degree.graduated_at) unless degree.graduated_at.nil?  %></td>
+        <td><%= date_format_readable(degree.graduated_at) if degree.graduated_at.present?  %></td>
         <td>
           <%= link_to edit_admin_employee_academic_degree_path(
                         @employee, degree

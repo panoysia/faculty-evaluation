@@ -45,6 +45,7 @@ class Employee::AccreditationService < Employee::ApplicationRecord
     # raise Exception if end_at.nil?
 
     # byebug
+    self[:no_of_years] = 0
   end
 
 end

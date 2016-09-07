@@ -36,7 +36,7 @@ class Admin::Employees::AdminWorkExperiencesController < Admin::ApplicationContr
 
   def destroy
     @work_experience.destroy
-    redirect_to admin_employee_work_experiences_path(@employee),
+    redirect_to admin_employee_work_experiences_path,
       notice: 'Administrative work experience record was successfully deleted.'
   end
 

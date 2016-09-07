@@ -19,7 +19,7 @@ class Admin::Employees::ProfessionalMembershipsController < Admin::ApplicationCo
     @membership = @employee.professional_memberships.
                     new(membership_params)
     if @membership.save
-      redirect_to admin_employee_professional_memberships_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Prof. membership record was successfully created.'
     else
       render :new
@@ -31,7 +31,7 @@ class Admin::Employees::ProfessionalMembershipsController < Admin::ApplicationCo
 
   def update
     if @membership.update(membership_params)
-      redirect_to admin_employee_professional_memberships_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Prof. membership record was successfully updated.'
     else
       render :edit
@@ -40,7 +40,7 @@ class Admin::Employees::ProfessionalMembershipsController < Admin::ApplicationCo
 
   def destroy
     @membership.destroy
-    redirect_to admin_employee_professional_memberships_path,
+    redirect_to admin_employee_achievement_and_honors_2_path,
       notice: 'Prof. membership record was successfully deleted.'
   end
 

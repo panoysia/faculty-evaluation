@@ -18,7 +18,7 @@ class Admin::Employees::ScholarshipsController < Admin::ApplicationController
     # render html: params.inspect and return true
     @scholarship = @employee.scholarships.new(scholarship_params)
     if @scholarship.save
-      redirect_to admin_employee_scholarships_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Scholarship record was successfully created.'
     else
       render :new
@@ -30,7 +30,7 @@ class Admin::Employees::ScholarshipsController < Admin::ApplicationController
 
   def update
     if @scholarship.update(scholarship_params)
-      redirect_to admin_employee_scholarships_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Scholarship record was successfully updated.'
     else
       render :edit
@@ -39,7 +39,7 @@ class Admin::Employees::ScholarshipsController < Admin::ApplicationController
 
   def destroy
     @scholarship.destroy
-    redirect_to admin_employee_scholarships_path,
+    redirect_to admin_employee_achievement_and_honors_2_path,
       notice: 'Scholarship record was successfully deleted.'     
   end
 

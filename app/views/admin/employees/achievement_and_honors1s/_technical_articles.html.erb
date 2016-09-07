@@ -15,7 +15,7 @@
         <td><%= index += 1 %></td>
         <td><%= technical_article.name %></td>
         <td><%= technical_article.level_to_string %></td>
-        <td><%= technical_article.published_at %></td>
+        <td><%= date_format_readable(technical_article.published_at) %></td>
         <td><%= technical_article.description %></td>
         <td>
           <%= link_to edit_admin_employee_technical_article_path(

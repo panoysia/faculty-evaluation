@@ -35,7 +35,7 @@ class Admin::Employees::AdditionalCreditsController < Admin::ApplicationControll
 
   def destroy
     @credit.destroy
-    redirect_to admin_employee_educations_path(@employee),
+    redirect_to admin_employee_educations_path,
       notice: 'Additional credit record was successfully deleted.'
   end
 

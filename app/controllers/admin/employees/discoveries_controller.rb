@@ -35,7 +35,7 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
 
   def destroy
     @discovery.destroy
-    redirect_to admin_employee_achievement_and_honors_1_path(@employee),
+    redirect_to admin_employee_achievement_and_honors_1_path,
       notice: 'Discovery record was successfully deleted.'     
   end
 

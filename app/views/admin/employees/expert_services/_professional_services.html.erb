@@ -7,8 +7,8 @@
       <th>Level</th>
       <th>Participation</th>
       <th>Sponsoring Agency</th>
-      <th>Start At</th>
-      <th>End At</th>
+      <th>Start</th>
+      <th>End</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
@@ -21,8 +21,8 @@
         <td><%= service.level_to_string %></td>
         <td><%= service.nature_of_participation %></td>
         <td><%= service.sponsoring_agency %></td>
-        <td><%= service.start_at %></td>
-        <td><%= service.end_at %></td>
+        <td><%= date_format_readable(service.start_at) %></td>
+        <td><%= date_format_readable(service.end_at) %></td>
         <td>
           <%= link_to edit_admin_employee_professional_service_path(
                         @employee, service

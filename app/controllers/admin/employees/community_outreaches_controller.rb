@@ -19,7 +19,7 @@ class Admin::Employees::CommunityOutreachesController < Admin::ApplicationContro
     @outreach = @employee.community_outreaches.
                     new(outreach_params)
     if @outreach.save
-      redirect_to admin_employee_community_outreaches_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Community outreach record was successfully created.'
     else
       render :new
@@ -31,7 +31,7 @@ class Admin::Employees::CommunityOutreachesController < Admin::ApplicationContro
 
   def update
     if @outreach.update(outreach_params)
-      redirect_to admin_employee_community_outreaches_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Community outreach record was successfully updated.'
     else
       render :edit
@@ -40,7 +40,7 @@ class Admin::Employees::CommunityOutreachesController < Admin::ApplicationContro
 
   def destroy
     @outreach.destroy
-    redirect_to admin_employee_community_outreaches_path,
+    redirect_to admin_employee_achievement_and_honors_2_path,
       notice: 'Community outreach record was successfully deleted.'     
   end
 

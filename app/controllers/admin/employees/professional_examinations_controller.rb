@@ -19,7 +19,7 @@ class Admin::Employees::ProfessionalExaminationsController < Admin::ApplicationC
     @examination = @employee.professional_examinations.
                     new(examination_params)
     if @examination.save
-      redirect_to admin_employee_professional_examinations_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Prof. Examination record was successfully created.'
     else
       render :new
@@ -31,7 +31,7 @@ class Admin::Employees::ProfessionalExaminationsController < Admin::ApplicationC
 
   def update
     if @examination.update(examination_params)
-      redirect_to admin_employee_professional_examinations_path,
+      redirect_to admin_employee_achievement_and_honors_2_path,
         notice: 'Prof. Examination record was successfully updated.'
     else
       render :edit
@@ -40,7 +40,7 @@ class Admin::Employees::ProfessionalExaminationsController < Admin::ApplicationC
 
   def destroy
     @examination.destroy
-    redirect_to admin_employee_professional_examinations_path,
+    redirect_to admin_employee_achievement_and_honors_2_path,
       notice: 'Prof. Examination record was successfully deleted.'     
   end
 

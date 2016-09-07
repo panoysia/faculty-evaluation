@@ -35,7 +35,7 @@ class Admin::Employees::TrainerServicesController < Admin::ApplicationController
 
   def destroy
     @service.destroy
-    redirect_to admin_employee_expert_services_path(@employee),
+    redirect_to admin_employee_expert_services_path,
       notice: 'Trainer service record was successfully deleted.'
   end
 

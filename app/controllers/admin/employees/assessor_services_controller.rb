@@ -35,7 +35,7 @@ class Admin::Employees::AssessorServicesController < Admin::ApplicationControlle
 
   def destroy
     @service.destroy
-    redirect_to admin_employee_expert_services_path(@employee),
+    redirect_to admin_employee_expert_services_path,
       notice: 'Assessor service record was successfully deleted.'
   end
 

@@ -15,14 +15,22 @@
       <tr>
         <td><%= index += 1 %></td>
         <td><%= membership.organization %></td>
-        <td><%= membership.date_of_membership %></td>
+        <td><%= date_format_readable(membership.date_of_membership) %></td>
         <td><%= membership.organization_type_to_string %></td>
         <td><%= membership.membership_type_to_string %></td>
         <td>
-          <%= link_to edit_admin_employee_professional_membership_path(@employee, membership) do %>
+          <%= link_to edit_admin_employee_professional_membership_path(
+                        @employee, membership
+                        ), 
+                title: 'Edit', data: { toggle: 'tooltip' } do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %>
-          <%= link_to admin_employee_professional_membership_path(@employee, membership), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+          <%= link_to admin_employee_professional_membership_path(
+                        @employee, membership
+                        ),
+                method: :delete, title: 'Delete',
+                data: { toggle: 'tooltip', 
+                        confirm: 'Do you really want to delete this record?' } do %>
             <span class="glyphicon glyphicon-remove"></span>
           <% end %>
         </td>

@@ -27,7 +27,7 @@ class Admin::Employees::InventionsController < Admin::ApplicationController
   def update
     if @invention.update(invention_params)
       redirect_to admin_employee_achievement_and_honors_1_path,
-        notice: 'Invention record was successfully deleted.'      
+        notice: 'Invention record was successfully updated.'      
     else
       render :edit
     end
@@ -35,7 +35,7 @@ class Admin::Employees::InventionsController < Admin::ApplicationController
 
   def destroy
     @invention.destroy
-    redirect_to admin_employee_achievement_and_honors_1_path(@employee),
+    redirect_to admin_employee_achievement_and_honors_1_path,
       notice: 'Invention record was successfully deleted.'
   end
 

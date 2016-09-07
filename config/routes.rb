@@ -53,6 +53,7 @@ Rails.application.routes.draw do
           resources :academic_degrees, except: [:index, :show]
           resources :additional_degrees, except: [:index, :show]
           resources :additional_credits, except: [:index, :show]
+          resources :trainings, except: [:index, :show]
 
         # "Work Experiences (tab)" and resources under it 
         #   (should be namespaced instead)
@@ -93,8 +94,7 @@ Rails.application.routes.draw do
           resources :professional_services, except: [:index, :show]
           resources :trainer_services, except: [:index, :show]
 
-        resources :trainings
-
+    
         resources :cce_scorings, only: :index
         resources :rankings
 

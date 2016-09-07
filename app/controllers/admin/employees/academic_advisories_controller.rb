@@ -35,7 +35,7 @@ class Admin::Employees::AcademicAdvisoriesController < Admin::ApplicationControl
 
   def destroy
     @advisory.destroy
-    redirect_to admin_employee_expert_services_path(@employee),
+    redirect_to admin_employee_expert_services_path,
       notice: 'Academic advisory record was successfully deleted.'
   end
 
