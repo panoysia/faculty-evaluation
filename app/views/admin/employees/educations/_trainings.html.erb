@@ -13,21 +13,27 @@
     </tr>
   </thead>
   <tbody>
-    <% @trainings.each_with_index do |training, index| %>
+    <% @employee.trainings.each_with_index do |training, index| %>
       <tr>
         <td><%= index += 1 %></td>
         <td><%= training.title %></td>
         <td><%= training.level_to_string %></td>
         <td><%= training.category_to_string %></td>        
-        <td><%= training.start_at %></td>
-        <td><%= training.end_at %></td>
+        <td><%= date_format_readable(training.start_at) %></td>
+        <td><%= date_format_readable(training.end_at) %></td>
         <td><%= training.conducted_by %></td>
         <td><%= training.nature_of_participation %></td>
         <td>
-          <%= link_to edit_admin_employee_training_path(@employee, training) do %>
+          <%= link_to edit_admin_employee_training_path(
+                @employee, training
+              ), 
+                title: 'Edit', data: { toggle: 'tooltip' } do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %>
-          <%= link_to admin_employee_training_path(@employee, training), method: :delete, data: { confirm: 'Do you really want to delete this record?' } do %>
+          <%= link_to admin_employee_training_path(@employee, training),
+                method: :delete, title: 'Delete',
+                data: { toggle: 'tooltip', 
+                        confirm: 'Do you really want to delete this record?' } do %>
             <span class="glyphicon glyphicon-remove"></span>
           <% end %>
         </td>

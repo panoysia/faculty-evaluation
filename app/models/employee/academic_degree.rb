@@ -29,7 +29,7 @@ class Employee::AcademicDegree < Employee::ApplicationRecord
     "MD - Licensed",
     "Diploma Course",
     "Bachelor's",
-    "Bachelor's (> 4 yrs.)",
+    "Bachelor's (over 4 yrs.)",
     "3 yr. post secondary course",
     "Special Course (non-degree)"
   ]

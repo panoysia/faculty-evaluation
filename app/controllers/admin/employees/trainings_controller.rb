@@ -18,16 +18,13 @@ class Admin::Employees::TrainingsController < Admin::ApplicationController
   end
 
   def create
+    # render html: params.inspect and return true
     @training = @employee.trainings.new(training_params)
-    respond_to do |format|
-      if @training.save
-        format.html {
-          redirect_to admin_employee_educations_path(@employee),
-          notice: 'Training was successfully created.'
-        }
-      else
-        format.html { render :new }
-      end
+    if @training.save
+      redirect_to admin_employee_educations_path,
+        notice: 'Training was successfully created.'
+    else
+      render :new
     end    
   end
 
@@ -35,28 +32,18 @@ class Admin::Employees::TrainingsController < Admin::ApplicationController
   end
 
   def update
-    respond_to do |format|    
-      if @training.update(training_params)
-        format.html {
-          redirect_to admin_employee_educations_path(@employee, @training),
-          notice: 'Training was successfully updated.'
-        }
-      else
-        format.html { render :edit }
-      end
-    end
-      
+    if @training.update(training_params)
+      redirect_to admin_employee_educations_path,
+        notice: 'Training was successfully updated.'
+    else
+      render :edit
+    end      
   end
 
   def destroy
     @training.destroy
-    respond_to do |format|
-      format.html {
-        redirect_to admin_employee_educations_path(@employee),
-        notice: 'Training was successfully deleted.' 
-      }
-    end
-
+    redirect_to admin_employee_educations_path,
+      notice: 'Training was successfully deleted.' 
   end
 
 

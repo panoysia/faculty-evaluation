@@ -60,3 +60,24 @@
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
 </div>  <!-- #additional-credits.category -->
+
+<div id="trainings" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Trainings</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_training_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'trainings' %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+</div>  <!-- #trainings.category -->
