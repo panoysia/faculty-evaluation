@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160907070639) do
+ActiveRecord::Schema.define(version: 20160910214652) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -237,16 +237,13 @@ ActiveRecord::Schema.define(version: 20160907070639) do
     t.integer  "cce_scorable_id",                                null: false
     t.string   "cce_scorable_type",                              null: false
     t.integer  "nbc_id"
-    t.integer  "cce_scoring_guide_id",                           null: false
     t.decimal  "points",                 precision: 5, scale: 2, null: false
-    t.integer  "criteria",                                       null: false
     t.string   "supporting_description"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
   end
 
   add_index "employee_cce_scorings", ["cce_scorable_type", "cce_scorable_id"], name: "idx_cce_scorable_on_employee_cce_scorings"
-  add_index "employee_cce_scorings", ["cce_scoring_guide_id"], name: "idx_cce_scoring_guide_id_on_employee_cce_scorings"
   add_index "employee_cce_scorings", ["employee_id"], name: "idx_employee_id_on_employee_cce_scorings"
   add_index "employee_cce_scorings", ["nbc_id"], name: "idx_nbc_id_on_employee_cce_scorings"
 
