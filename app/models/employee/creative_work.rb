@@ -20,13 +20,13 @@
 require_dependency "employee/application_record"
 
 class Employee::CreativeWork < Employee::ApplicationRecord
-  COMPETITIVENESS_TYPES = [
-    'International',
-    'National/Regional',
-    'Institutional/Local'
-  ]
-  
+  include CCEConstants::CreativeWork
+    
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
+
   has_and_belongs_to_many :criteria,
     class_name: Employee::CreativeWorkCriterium,
     join_table: 'employee_creative_works_criteria',
@@ -41,6 +41,8 @@ class Employee::CreativeWork < Employee::ApplicationRecord
     in: COMPETITIVENESS_TYPES.each_index.map { |index| index }
   }
   
+  after_save :create_or_update_cce_scoring_record
+
 
   def self.competitiveness_type_options
     COMPETITIVENESS_TYPES.each_with_index.map { |type, index| [type, index] }
@@ -49,6 +51,19 @@ class Employee::CreativeWork < Employee::ApplicationRecord
 
   def competitiveness_to_string
     COMPETITIVENESS_TYPES[competitiveness]
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::CreativeWork.score(self)
+    scoring.supporting_description = "creative work desc"
+    scoring.save
   end
 
 end

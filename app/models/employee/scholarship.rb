@@ -20,17 +20,12 @@
 require_dependency "employee/application_record"
 
 class Employee::Scholarship < Employee::ApplicationRecord
-  SCHOLARSHIP_TYPES = [
-    "International, competitive",
-    "International, non-competitive",
-    "National/Regional, competitive",
-    "National/Regional, non-competitive",
-    "Local, competitive or non-competitive"
-  ]
-  
-  DEGREE_TYPES = ["Doctorate", "Master's", "Non-degree"]
+  include CCEConstants::Scholarship
 
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 150 }
   validates :sponsoring_agency, presence: true, length: { maximum: 150 }
@@ -44,7 +39,9 @@ class Employee::Scholarship < Employee::ApplicationRecord
     in: DEGREE_TYPES.each_index.map { |index| index }
   }
   
+  after_save :create_or_update_cce_scoring_record
 
+  
   def self.scholarship_type_options
     SCHOLARSHIP_TYPES.each_with_index.map { |type, index| [type, index] }
   end
@@ -60,6 +57,19 @@ class Employee::Scholarship < Employee::ApplicationRecord
 
   def degree_type_to_string
     DEGREE_TYPES[degree_type]
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::Scholarship.score(self)
+    scoring.supporting_description = "scholarship desc"
+    scoring.save
   end
 
 end

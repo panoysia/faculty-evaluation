@@ -22,7 +22,10 @@ class Employee::InstructionalManual < Employee::ApplicationRecord
   CATEGORIES = %w(Manual Audio-visual)
 
   belongs_to :employee
-
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
+                      
   validates :name, presence: true, length: { maximum: 50 }
   validates :published_at, presence: true
   validates :description, length: { maximum: 150 }
@@ -30,6 +33,8 @@ class Employee::InstructionalManual < Employee::ApplicationRecord
   validates :category, inclusion: {
       in: CATEGORIES.each_index.map { |index| index }
   }
+
+  after_save :create_or_update_cce_scoring_record
 
 
   def self.category_options
@@ -39,6 +44,19 @@ class Employee::InstructionalManual < Employee::ApplicationRecord
 
   def category_to_string
     CATEGORIES[category]
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::InstructionalManual.score(self)
+    scoring.supporting_description = "instructional manual desc"
+    scoring.save
   end
 
 end

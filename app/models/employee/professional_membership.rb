@@ -34,6 +34,9 @@ class Employee::ProfessionalMembership < Employee::ApplicationRecord
   ]
 
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :organization, presence: true
   validates :date_of_membership, presence: true
@@ -46,6 +49,8 @@ class Employee::ProfessionalMembership < Employee::ApplicationRecord
     in: MEMBERSHIP_TYPES.each_index.map { |index| index }
   }  
   
+  after_save :create_or_update_cce_scoring_record
+
 
   def self.organization_type_options
     ORGANIZATION_TYPES.each_with_index.map { |type, index| [type, index] }
@@ -62,6 +67,19 @@ class Employee::ProfessionalMembership < Employee::ApplicationRecord
 
   def membership_type_to_string
     MEMBERSHIP_TYPES[membership_type]
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::ProfessionalMembership.score(self)
+    scoring.supporting_description = "professional membership desc"
+    scoring.save
   end
 
 end

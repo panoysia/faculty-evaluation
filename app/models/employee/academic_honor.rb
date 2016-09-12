@@ -30,6 +30,9 @@ class Employee::AcademicHonor < Employee::ApplicationRecord
   ]
   
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :award, presence: true, length: { maximum: 150 }  
   validates :school, presence: true, length: { maximum: 150 }
@@ -43,7 +46,9 @@ class Employee::AcademicHonor < Employee::ApplicationRecord
     in: HONOR_TYPES.each_index.map { |index| index }
   }
   
-  
+  after_save :create_or_update_cce_scoring_record
+
+
   def self.honor_type_options
     HONOR_TYPES.each_with_index.map { |type, index| [type, index] }
   end
@@ -60,5 +65,19 @@ class Employee::AcademicHonor < Employee::ApplicationRecord
   def degree_type_to_string
     DEGREE_TYPES[degree_type]
   end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::AcademicHonor.score(self)
+    scoring.supporting_description = "academic honor desc"
+    scoring.save
+  end
+
 
 end

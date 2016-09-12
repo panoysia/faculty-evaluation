@@ -23,12 +23,12 @@
 require_dependency "employee/application_record"
 
 class Employee::Training < Employee::ApplicationRecord
-  LEVELS = ['National/Regional', 'International', 'Local']
-  CATEGORIES = ['Training', 'Seminars/Conferences']
+  include CCEConstants::Training
 
   belongs_to :employee
   has_one :cce_scoring, as: :cce_scorable,
-                        class_name: 'Employee::CCEScoring'
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :start_at, :end_at, presence: true
@@ -45,6 +45,7 @@ class Employee::Training < Employee::ApplicationRecord
   validate :correct_date_range, if: :date_values_are_present?
 
   before_save :set_no_of_days
+  after_save :create_or_update_cce_scoring_record
 
 
   def self.level_options
@@ -67,6 +68,7 @@ class Employee::Training < Employee::ApplicationRecord
 
   private
 
+
   def date_values_are_present?
     start_at.present? && end_at.present?
   end
@@ -79,6 +81,15 @@ class Employee::Training < Employee::ApplicationRecord
 
   def set_no_of_days
     self[:no_of_days] = ((end_at - start_at).to_i) + 1
+  end
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::Training.score(self)
+    scoring.supporting_description = "training credit desc"
+    scoring.save
   end
 
 end

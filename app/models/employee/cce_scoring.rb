@@ -7,19 +7,19 @@
 #  cce_scorable_id        :integer          not null
 #  cce_scorable_type      :string           not null
 #  nbc_id                 :integer
-#  cce_scoring_guide_id   :integer          not null
 #  points                 :decimal(5, 2)    not null
-#  criteria               :integer          not null
 #  supporting_description :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  criteria               :integer
+#  cce_scoring_guide_id   :integer
 #
 # Indexes
 #
-#  idx_cce_scorable_on_employee_cce_scorings          (cce_scorable_type,cce_scorable_id)
-#  idx_cce_scoring_guide_id_on_employee_cce_scorings  (cce_scoring_guide_id)
-#  idx_employee_id_on_employee_cce_scorings           (employee_id)
-#  idx_nbc_id_on_employee_cce_scorings                (nbc_id)
+#  idx_cce_scorable_on_employee_cce_scorings            (cce_scorable_type,cce_scorable_id)
+#  idx_employee_id_on_employee_cce_scorings             (employee_id)
+#  idx_nbc_id_on_employee_cce_scorings                  (nbc_id)
+#  index_employee_cce_scorings_on_cce_scoring_guide_id  (cce_scoring_guide_id)
 #
 
 class Employee::CCEScoring < ActiveRecord::Base

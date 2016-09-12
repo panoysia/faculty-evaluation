@@ -25,6 +25,9 @@ class Employee::Publication < Employee::ApplicationRecord
   ACADEMIC_LEVELS = ['Tertiary', 'High School', 'Elementary']
 
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :title, :publisher, presence: true
   validates :date_of_publication, presence: true
@@ -38,6 +41,8 @@ class Employee::Publication < Employee::ApplicationRecord
       in: ACADEMIC_LEVELS.each_index.map { |index| index }
   }
   
+  after_save :create_or_update_cce_scoring_record
+
 
   def self.role_options
     ROLES.each_with_index.map { |role, index| [role, index] }  
@@ -54,6 +59,19 @@ class Employee::Publication < Employee::ApplicationRecord
 
   def academic_level_to_string
     ACADEMIC_LEVELS[academic_level]
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::Publication.score(self)
+    scoring.supporting_description = "publication desc"
+    scoring.save
   end
 
 end

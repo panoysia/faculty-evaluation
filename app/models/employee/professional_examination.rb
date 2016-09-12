@@ -19,19 +19,12 @@
 require_dependency "employee/application_record"
 
 class Employee::ProfessionalExamination < Employee::ApplicationRecord
-  CATEGORIES = [
-    "Engineering, Accounting, Medicine, Law, Teacher's Board",
+  include CCEConstants::ProfessionalExamination
 
-    "Career Executive Service Officers Examinaton /\nCareer Service Executive Examination",
-
-    'Seaman Certificate; Master Electrician/Master Plumber Certificate; Plant Mechanic Certificate',
-
-    'IT Proficiency Certification',
-
-    'National Certificates (NC)/ Trade Skill Certificates'
-  ]
-  
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 150 }
   validates :agency_name, presence: true, length: { maximum: 150 }
@@ -39,6 +32,8 @@ class Employee::ProfessionalExamination < Employee::ApplicationRecord
   validates :category, inclusion: { 
     in: CATEGORIES.each_index.map { |index| index }
   }
+
+  after_save :create_or_update_cce_scoring_record
 
 
   def self.category_options
@@ -48,6 +43,19 @@ class Employee::ProfessionalExamination < Employee::ApplicationRecord
 
   def category_to_string
     CATEGORIES[category]
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::ProfessionalExamination.score(self)
+    scoring.supporting_description = "prof. examination desc"
+    scoring.save
   end
 
 end

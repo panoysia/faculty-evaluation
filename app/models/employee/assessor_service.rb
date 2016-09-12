@@ -22,6 +22,9 @@ require_dependency "employee/application_record"
 
 class Employee::AssessorService < Employee::ApplicationRecord
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 150 }
   validates :agency, presence: true, length: { maximum: 150 }
@@ -32,6 +35,7 @@ class Employee::AssessorService < Employee::ApplicationRecord
   # t.boolean :is_current, null: false, default: false
   
   before_save :set_no_of_years
+  after_save :create_or_update_cce_scoring_record
 
 
   private
@@ -43,6 +47,15 @@ class Employee::AssessorService < Employee::ApplicationRecord
     # raise Exception if end_at.nil?
 
     # byebug
+  end
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::AssessorService.score(self)
+    scoring.supporting_description = "assessor service desc"
+    scoring.save
   end
 
 end

@@ -22,22 +22,12 @@
 require_dependency "employee/application_record"
 
 class Employee::ProfessionalService < Employee::ApplicationRecord
-  LEVELS = [
-    'International',
-    'National/Regional',
-    'Local/Institutional'
-  ]
-  
-  SERVICE_TYPES = [
-    'Consultant',
-    'Trainer',
-    'Coordinator',
-    'Lecturer',
-    'Resource Person',
-    'Guest Speaker'
-  ]
+  include CCEConstants::ProfessionalService
 
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :title, :sponsoring_agency,
     presence: true, length: { maximum: 150 }
@@ -53,6 +43,8 @@ class Employee::ProfessionalService < Employee::ApplicationRecord
   validates :level, inclusion: { 
     in: LEVELS.each_index.map { |index| index }
   }
+
+  after_save :create_or_update_cce_scoring_record
 
 
   def self.service_type_options
@@ -70,6 +62,19 @@ class Employee::ProfessionalService < Employee::ApplicationRecord
 
   def level_to_string
     LEVELS[level]
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::ProfessionalService.score(self)
+    scoring.supporting_description = "prof. service desc"
+    scoring.save
   end
 
 end

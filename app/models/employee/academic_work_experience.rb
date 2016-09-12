@@ -20,9 +20,12 @@
 require_dependency "employee/application_record"
 
 class Employee::AcademicWorkExperience < Employee::ApplicationRecord
-  INSTITUTION_TYPES = %w(SUC Non-SUC)
+  include CCEConstants::AcademicWorkExperience
 
   belongs_to :employee, required: true
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :institution, presence: true, length: { maximum: 75 }
   validates :institution_type, inclusion: {
@@ -32,7 +35,9 @@ class Employee::AcademicWorkExperience < Employee::ApplicationRecord
   validates :position, presence: true, length: { maximum: 50 }
   validates :start_at, :end_at, presence: true 
 
-  
+  after_save :create_or_update_cce_scoring_record
+
+
   def self.institution_type_options
     INSTITUTION_TYPES.each_with_index.map { |type, index| [type, index] }
   end
@@ -40,6 +45,23 @@ class Employee::AcademicWorkExperience < Employee::ApplicationRecord
 
   def institution_type_to_string
     INSTITUTION_TYPES[institution_type]
+  end
+
+  def years_of_service
+    YearCalculator.calculate(start_at, end_at)
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::AcademicWorkExperience.score(self)
+    scoring.supporting_description = "academic work experience desc"
+    scoring.save
   end
 
 end

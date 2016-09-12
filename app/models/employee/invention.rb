@@ -26,6 +26,9 @@ class Employee::Invention < Employee::ApplicationRecord
   ]
 
   belongs_to :employee
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :name, :patent_no, presence: true
   validates :year_patented, presence: true, length: { is: 4 }
@@ -35,9 +38,24 @@ class Employee::Invention < Employee::ApplicationRecord
     in: PATENT_TYPES.each_index.map { |index| index } 
   }
   
+  after_save :create_or_update_cce_scoring_record
+
 
   def self.patent_type_options
     PATENT_TYPES.each_with_index.map { |type, index| [type, index] }
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::Invention.score(self)
+    scoring.supporting_description = "invention desc"
+    scoring.save
   end
 
 end

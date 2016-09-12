@@ -19,20 +19,12 @@
 require_dependency "employee/application_record"
 
 class Employee::AdminWorkExperience < Employee::ApplicationRecord
-  POSITIONS = [
-    "President",
-    "Vice Precident",
-    "Dean",
-    "Director",
-    "School Superintendent",
-    "Principal",
-    "Supervisor",
-    "Department Chairperson",
-    "Head of Unit",
-    "Faculty"
-  ]
+  include CCEConstants::AdminWorkExperience
 
   belongs_to :employee, required: true
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :institution, presence: true, length: { maximum: 75 }
   validates :position, inclusion: {
@@ -40,6 +32,8 @@ class Employee::AdminWorkExperience < Employee::ApplicationRecord
   }
 
   validates :start_at, :end_at, presence: true
+
+  after_save :create_or_update_cce_scoring_record
 
 
   def self.position_options
@@ -49,6 +43,23 @@ class Employee::AdminWorkExperience < Employee::ApplicationRecord
 
   def position_to_string
     POSITIONS[position]
+  end
+
+  def years_of_experience
+    YearCalculator.calculate(start_at, end_at)
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::AdminWorkExperience.score(self)
+    scoring.supporting_description = "admin work experience desc"
+    scoring.save
   end
 
 end

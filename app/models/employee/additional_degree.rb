@@ -21,9 +21,12 @@
 require_dependency "employee/application_record"
 
 class Employee::AdditionalDegree < Employee::ApplicationRecord
-  DEGREE_TYPES = ["Master's", "Bachelor's"]
+  include CCEConstants::AdditionalDegree
 
   belongs_to :employee, required: true
+  has_one :cce_scoring, as: :cce_scorable,
+                        class_name: Employee::CCEScoring,
+                        dependent: :destroy
 
   validates :degree, presence: true, length: { maximum: 50 }
   validates :degree_type, inclusion: { 
@@ -33,6 +36,8 @@ class Employee::AdditionalDegree < Employee::ApplicationRecord
   validates :institution, presence: true, length: { maximum: 50 }
   validates :start_at, :end_at, presence: true
 
+  after_save :create_or_update_cce_scoring_record
+
 
   def self.degree_type_options
     DEGREE_TYPES.each_with_index.map { |type, index| [type, index] }
@@ -41,6 +46,19 @@ class Employee::AdditionalDegree < Employee::ApplicationRecord
 
   def degree_type_to_string
     DEGREE_TYPES[degree_type]
+  end
+
+
+  private
+
+
+  def create_or_update_cce_scoring_record
+    scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
+  
+    scoring.employee = self.employee
+    scoring.points = CCEScorer::AdditionalDegree.score(self)
+    scoring.supporting_description = "additional degree desc"
+    scoring.save    
   end
 
 end
