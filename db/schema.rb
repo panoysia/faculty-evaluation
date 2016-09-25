@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910214652) do
+ActiveRecord::Schema.define(version: 20160925022930) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20160910214652) do
     t.string   "description", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "criteria",    null: false
   end
 
   create_table "employee_academic_advisories", force: :cascade do |t|
@@ -155,16 +156,14 @@ ActiveRecord::Schema.define(version: 20160910214652) do
   add_index "employee_academic_work_experiences", ["employee_id"], name: "index_employee_academic_work_experiences_on_employee_id"
 
   create_table "employee_accreditation_services", force: :cascade do |t|
-    t.integer  "employee_id",                               null: false
-    t.string   "name",          limit: 150,                 null: false
-    t.string   "participation", limit: 150, default: "",    null: false
-    t.date     "start_at",                                  null: false
-    t.date     "end_at",                                    null: false
-    t.boolean  "is_current",                default: false, null: false
-    t.integer  "no_of_years",                               null: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.string   "agency",        limit: 150, default: "",    null: false
+    t.integer  "employee_id",                            null: false
+    t.string   "name",          limit: 150,              null: false
+    t.string   "participation", limit: 150, default: "", null: false
+    t.date     "start_at",                               null: false
+    t.date     "end_at",                                 null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "agency",        limit: 150, default: "", null: false
   end
 
   add_index "employee_accreditation_services", ["employee_id"], name: "index_employee_accreditation_services_on_employee_id"
@@ -207,15 +206,13 @@ ActiveRecord::Schema.define(version: 20160910214652) do
   add_index "employee_admin_work_experiences", ["employee_id"], name: "index_employee_admin_work_experiences_on_employee_id"
 
   create_table "employee_assessor_services", force: :cascade do |t|
-    t.integer  "employee_id",                             null: false
-    t.string   "name",        limit: 150,                 null: false
-    t.string   "agency",      limit: 150,                 null: false
-    t.date     "start_at",                                null: false
-    t.date     "end_at"
-    t.boolean  "is_current",              default: false, null: false
-    t.integer  "no_of_years",             default: 0,     null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "employee_id",             null: false
+    t.string   "name",        limit: 150, null: false
+    t.string   "agency",      limit: 150, null: false
+    t.date     "start_at",                null: false
+    t.date     "end_at",                  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "employee_assessor_services", ["employee_id"], name: "index_employee_assessor_services_on_employee_id"
@@ -262,13 +259,14 @@ ActiveRecord::Schema.define(version: 20160910214652) do
   add_index "employee_civil_service_eligibilities", ["employee_id"], name: "index_employee_civil_service_eligibilities_on_employee_id"
 
   create_table "employee_community_outreaches", force: :cascade do |t|
-    t.string   "project_name",      limit: 150, null: false
-    t.string   "sponsoring_agency", limit: 150, null: false
-    t.date     "start_at",                      null: false
-    t.date     "end_at",                        null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "employee_id",                   null: false
+    t.string   "project_name",      limit: 150,              null: false
+    t.string   "sponsoring_agency", limit: 150,              null: false
+    t.date     "start_at",                                   null: false
+    t.date     "end_at",                                     null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "employee_id",                                null: false
+    t.string   "participation",     limit: 100, default: "", null: false
   end
 
   add_index "employee_community_outreaches", ["employee_id"], name: "index_employee_community_outreaches_on_employee_id"
@@ -335,13 +333,14 @@ ActiveRecord::Schema.define(version: 20160910214652) do
   add_index "employee_educations", ["employee_id"], name: "index_employee_educations_on_employee_id"
 
   create_table "employee_innovations", force: :cascade do |t|
-    t.string   "patent_no",                 null: false
-    t.integer  "year_patented",             null: false
-    t.string   "description",   limit: 150
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "employee_id",               null: false
-    t.string   "name",                      null: false
+    t.string   "patent_no",                   null: false
+    t.integer  "year_patented",               null: false
+    t.string   "description",     limit: 150
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "employee_id",                 null: false
+    t.string   "name",                        null: false
+    t.integer  "competitiveness",             null: false
   end
 
   add_index "employee_innovations", ["employee_id"], name: "idx_emp_innovations_on_emp_id"
@@ -517,15 +516,13 @@ ActiveRecord::Schema.define(version: 20160910214652) do
   add_index "employee_technical_articles", ["employee_id"], name: "idx_emp_technical_articles_on_emp_id"
 
   create_table "employee_trainer_services", force: :cascade do |t|
-    t.integer  "employee_id",                             null: false
-    t.string   "name",        limit: 150,                 null: false
-    t.string   "agency",      limit: 150,                 null: false
-    t.date     "start_at",                                null: false
-    t.date     "end_at"
-    t.boolean  "is_current",              default: false, null: false
-    t.integer  "no_of_years",             default: 0,     null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "employee_id",             null: false
+    t.string   "name",        limit: 150, null: false
+    t.string   "agency",      limit: 150, null: false
+    t.date     "start_at",                null: false
+    t.date     "end_at",                  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "employee_trainer_services", ["employee_id"], name: "index_employee_trainer_services_on_employee_id"
@@ -534,7 +531,7 @@ ActiveRecord::Schema.define(version: 20160910214652) do
     t.string   "title",                   limit: 100,              null: false
     t.date     "start_at",                                         null: false
     t.date     "end_at",                                           null: false
-    t.integer  "no_of_days",              limit: 2
+    t.integer  "no_of_days",              limit: 2,   default: 0
     t.string   "conducted_by",            limit: 50,               null: false
     t.integer  "employee_id",                                      null: false
     t.datetime "created_at",                                       null: false

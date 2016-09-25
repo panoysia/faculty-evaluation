@@ -23,18 +23,18 @@ require_dependency "employee/application_record"
 
 class Employee::ProfessionalService < Employee::ApplicationRecord
   include CCEConstants::ProfessionalService
-
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEScorable
 
   validates :title, :sponsoring_agency,
     presence: true, length: { maximum: 150 }
   
   validates :nature_of_participation, length: { maximum: 150 }
-  validates :start_at, :end_at,
-    presence: true
+  
+  validates :start_at, :end_at, presence: true
+  validate do |record|
+    fields = [:start_at, :end_at]
+    CorrectDateRangeValidator.new(record, fields).validate
+  end
 
   validates :service_type, inclusion: { 
     in: SERVICE_TYPES.each_index.map { |index| index }
@@ -73,8 +73,8 @@ class Employee::ProfessionalService < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::ProfessionalService.score(self)
-    scoring.supporting_description = "prof. service desc"
     scoring.save
+    # scoring.supporting_description = "prof. service desc"
   end
 
 end

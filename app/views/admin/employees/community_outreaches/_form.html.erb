@@ -9,6 +9,16 @@
               maxlength: Employee::CommunityOutreach.get_field_limit_of(:project_name) %>
       </div>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :participation, 'Participation' %>
+        <%= f.text_field :participation, class: 'form-control',
+              maxlength: Employee::CommunityOutreach.
+                          get_field_limit_of(:participation) %>
+      </div>
+    </div>
   </div>  
   <div class="row">
     <div class="col-md-5">

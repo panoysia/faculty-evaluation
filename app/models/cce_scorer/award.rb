@@ -1,4 +1,5 @@
 =begin
+  check:  :level
 =end
 
 module CCEScorer
@@ -6,8 +7,12 @@ module CCEScorer
     include CCEConstants::Award
     
     def self.score(record)
-      # check
-      #   :level
+      points =  case record.level
+                when INTERNATIONAL then 5
+                when NATIONAL_OR_REGIONAL then 3
+                when LOCAL then 2
+                else 0
+                end
     end
 
   end

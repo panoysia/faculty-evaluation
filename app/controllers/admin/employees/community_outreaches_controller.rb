@@ -57,6 +57,7 @@ class Admin::Employees::CommunityOutreachesController < Admin::ApplicationContro
 
   def outreach_params
     params.require(:community_outreach).permit(:project_name,
+                                                :participation,
                                                 :sponsoring_agency,
                                                 :start_at, :end_at)
   end

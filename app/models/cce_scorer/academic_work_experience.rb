@@ -1,5 +1,8 @@
 =begin
 
+* Part of the criteria: Experience and Length of Service
+  Max of 25 pts total.
+
 2.1 Academic Experience
   2.1.1
     For every year of full-time academic service     
@@ -21,8 +24,10 @@ module CCEScorer
     def self.score(record)
       if record.institution_type == SUC
         1.0 * record.years_of_service
-      elsif record.institution_type = NON_SUC
+      elsif record.institution_type == NON_SUC
         0.75 * record.years_of_service
+      else
+        0
       end
     end
 

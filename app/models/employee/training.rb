@@ -6,7 +6,7 @@
 #  title                   :string(100)      not null
 #  start_at                :date             not null
 #  end_at                  :date             not null
-#  no_of_days              :integer
+#  no_of_days              :integer          default(0)
 #  conducted_by            :string(50)       not null
 #  employee_id             :integer          not null
 #  created_at              :datetime         not null
@@ -24,25 +24,24 @@ require_dependency "employee/application_record"
 
 class Employee::Training < Employee::ApplicationRecord
   include CCEConstants::Training
-
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEScorable
 
   validates :title, presence: true, length: { maximum: 100 }
-  validates :start_at, :end_at, presence: true
   validates :conducted_by, presence: true, length: { maximum: 50 }
  
-  validates :level, presence: true, inclusion: { 
+  validates :level, inclusion: { 
     in: LEVELS.each_index.map { |index| index } 
   }
 
-  validates :category, presence: true, inclusion: { 
+  validates :category, inclusion: { 
     in: CATEGORIES.each_index.map { |index| index } 
   }
 
-  validate :correct_date_range, if: :date_values_are_present?
+  validates :start_at, :end_at, presence: true
+  validate do |record|
+    fields = [:start_at, :end_at]
+    CorrectDateRangeValidator.new(record, fields).validate
+  end
 
   before_save :set_no_of_days
   after_save :create_or_update_cce_scoring_record
@@ -69,16 +68,6 @@ class Employee::Training < Employee::ApplicationRecord
   private
 
 
-  def date_values_are_present?
-    start_at.present? && end_at.present?
-  end
-
-  def correct_date_range
-    unless end_at > start_at
-      errors[:base] << "Invalid date range.\n'End at' date value must be greater than 'Start at' date value."
-    end
-  end
-
   def set_no_of_days
     self[:no_of_days] = ((end_at - start_at).to_i) + 1
   end
@@ -88,8 +77,8 @@ class Employee::Training < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::Training.score(self)
-    scoring.supporting_description = "training credit desc"
     scoring.save
+    # scoring.supporting_description = "training credit desc"
   end
 
 end

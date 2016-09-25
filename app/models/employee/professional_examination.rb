@@ -20,11 +20,7 @@ require_dependency "employee/application_record"
 
 class Employee::ProfessionalExamination < Employee::ApplicationRecord
   include CCEConstants::ProfessionalExamination
-
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEScorable
 
   validates :title, presence: true, length: { maximum: 150 }
   validates :agency_name, presence: true, length: { maximum: 150 }
@@ -54,8 +50,8 @@ class Employee::ProfessionalExamination < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::ProfessionalExamination.score(self)
-    scoring.supporting_description = "prof. examination desc"
     scoring.save
+    # scoring.supporting_description = "prof. examination desc"
   end
 
 end

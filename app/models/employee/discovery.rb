@@ -19,11 +19,7 @@
 require_dependency "employee/application_record"
 
 class Employee::Discovery < Employee::ApplicationRecord
-
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEScorable
 
   has_and_belongs_to_many :criteria,
     class_name: Employee::DiscoveryCriterium,
@@ -46,8 +42,8 @@ class Employee::Discovery < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::Discovery.score(self)
-    scoring.supporting_description = "discovery desc"
     scoring.save
+    # scoring.supporting_description = "discovery desc"
   end
 
 end

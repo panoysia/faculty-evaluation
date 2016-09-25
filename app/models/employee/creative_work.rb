@@ -21,11 +21,7 @@ require_dependency "employee/application_record"
 
 class Employee::CreativeWork < Employee::ApplicationRecord
   include CCEConstants::CreativeWork
-    
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEScorable    
 
   has_and_belongs_to_many :criteria,
     class_name: Employee::CreativeWorkCriterium,
@@ -62,8 +58,8 @@ class Employee::CreativeWork < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::CreativeWork.score(self)
-    scoring.supporting_description = "creative work desc"
     scoring.save
+    # scoring.supporting_description = "creative work desc"
   end
 
 end

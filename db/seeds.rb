@@ -27,8 +27,8 @@ exit
 description1 = 'Originality, educational impact, documentation'
 description2 = 'Evidence of wide dissemination (exhibits, publication)'
 
-data = [ { description: description1 },
-          { description: description2 } 
+data = [ { description: description1, criteria: 1 },
+          { description: description2, criteria: 2 } 
       ]
 
 Employee::DiscoveryCriterium.create data

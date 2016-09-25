@@ -19,15 +19,12 @@
 require_dependency "employee/application_record"
 
 class Employee::TechnicalArticle < Employee::ApplicationRecord
-  LEVELS = %w(International National Local)
-  
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEConstants::TechnicalArticle
+  include CCEScorable
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :published_at, presence: true
+
   validates :level, inclusion: {
       in: LEVELS.each_index.map { |index| index } 
   }
@@ -54,8 +51,8 @@ class Employee::TechnicalArticle < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::TechnicalArticle.score(self)
-    scoring.supporting_description = "tech article desc"
     scoring.save
+    # scoring.supporting_description = "tech article desc"    
   end
 
 end

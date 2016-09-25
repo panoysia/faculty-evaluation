@@ -21,13 +21,8 @@
 require_dependency "employee/application_record"
 
 class Employee::Publication < Employee::ApplicationRecord
-  ROLES = %w(Author Reviewer Translator Editor Compiler)
-  ACADEMIC_LEVELS = ['Tertiary', 'High School', 'Elementary']
-
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEConstants::Publication
+  include CCEScorable
 
   validates :title, :publisher, presence: true
   validates :date_of_publication, presence: true
@@ -70,8 +65,8 @@ class Employee::Publication < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::Publication.score(self)
-    scoring.supporting_description = "publication desc"
     scoring.save
+    # scoring.supporting_description = "publication desc"
   end
 
 end

@@ -4,6 +4,7 @@
       <th>#</th>
       <th>Name</th>
       <th>Patent No.</th>
+      <th>Patent Type</th>
       <th>Year Patented</th>
       <th>Description</th>
       <th colspan="2">Actions</th>
@@ -15,6 +16,7 @@
         <td><%= index += 1 %></td>
         <td><%= invention.name %></td>
         <td><%= invention.patent_no %></td>
+        <td><%= invention.patent_type_to_string %></td>
         <td><%= invention.year_patented %></td>
         <td><%= invention.description %></td>
         <td>

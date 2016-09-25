@@ -7,6 +7,9 @@
       <%= link_to 'Career Path',
           admin_employee_career_path_path(@employee) %>
     </li>
+    <li role="presentation" class="<%= get_bs_active_class(:cce_records) %>">
+      <%= link_to 'CCE', admin_employee_cce_record_path(@employee) %>
+    </li>    
     <li role="presentation" class="<%= get_bs_active_class(:qces) %>">
       <%= link_to 'QCEs', admin_employee_qces_path(@employee) %>
     </li>

@@ -6,6 +6,7 @@
 #  description :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  criteria    :integer          not null
 #
 
 require_dependency "employee/application_record"

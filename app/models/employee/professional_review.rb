@@ -18,15 +18,12 @@
 require_dependency "employee/application_record"
 
 class Employee::ProfessionalReview < Employee::ApplicationRecord
+  include CCEScorable
+  
   REVIEW_TYPES = [
     'Professional Regulations Commission',
     'Civil Service Commission'
   ]
-
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 150 }
   validates :occurred_at, presence: true
@@ -56,8 +53,8 @@ class Employee::ProfessionalReview < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::ProfessionalReview.score(self)
-    scoring.supporting_description = "prof. review desc"
     scoring.save
+    # scoring.supporting_description = "prof. review desc"
   end
 
 end

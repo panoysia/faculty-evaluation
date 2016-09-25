@@ -4,7 +4,6 @@
       Masters         4
       Bachelors       3
 
-    * check :degree_type field
 =end
 
 module CCEScorer
@@ -16,6 +15,8 @@ module CCEScorer
         4.0
       elsif record.degree_type == BACHELORS
         3.0
+      else
+        0
       end
     end
 

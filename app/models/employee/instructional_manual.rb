@@ -19,12 +19,8 @@
 require_dependency "employee/application_record"
 
 class Employee::InstructionalManual < Employee::ApplicationRecord
-  CATEGORIES = %w(Manual Audio-visual)
-
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEConstants::InstructionalManual
+  include CCEScorable
                       
   validates :name, presence: true, length: { maximum: 50 }
   validates :published_at, presence: true
@@ -55,8 +51,8 @@ class Employee::InstructionalManual < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::InstructionalManual.score(self)
-    scoring.supporting_description = "instructional manual desc"
     scoring.save
+    # scoring.supporting_description = "instructional manual desc"
   end
 
 end

@@ -18,7 +18,10 @@
 
 #database.yml
 *.txt
-.byebug_history
+
 
 _my_files/
 public/system
+app/models/programmer.rb
+
+.byebug_history

@@ -19,25 +19,9 @@
 require_dependency "employee/application_record"
 
 class Employee::ProfessionalMembership < Employee::ApplicationRecord
-  ORGANIZATION_TYPES = [
-    'Learned Society',
-    'Honor Society',
-    'Scientific Society',
-    'Professional'
-  ]
-
-  MEMBERSHIP_TYPES = [
-    'Full member',
-    'Associate member',
-    'Officer',
-    'Member'
-  ]
-
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
-
+  include CCEConstants::ProfessionalMembership
+  include CCEScorable
+  
   validates :organization, presence: true
   validates :date_of_membership, presence: true
 
@@ -48,7 +32,13 @@ class Employee::ProfessionalMembership < Employee::ApplicationRecord
   validates :membership_type, inclusion: { 
     in: MEMBERSHIP_TYPES.each_index.map { |index| index }
   }  
-  
+
+  validate :learned_society_membership,
+    if: Proc.new { |rec | rec.organization_type == LEARNED_SOCIETY }
+
+  validate :professional_society_membership,
+    if: Proc.new { |rec| rec.organization_type == PROFESSIONAL_SOCIETY }
+
   after_save :create_or_update_cce_scoring_record
 
 
@@ -73,13 +63,29 @@ class Employee::ProfessionalMembership < Employee::ApplicationRecord
   private
 
 
+  def learned_society_membership
+    error_message = "For a Learned society organization, valid values for [Membership] type criteria are: Full member or Associate member."
+
+    unless membership_type.in? [FULL_MEMBER, ASSOCIATE_MEMBER]
+      errors[:base] << error_message
+    end
+  end
+
+  def professional_society_membership
+    error_message = "For a Professional society organization, valid values for [Membership] type criteria are: Officer or Member."
+    
+    unless membership_type.in? [OFFICER, MEMBER]
+      errors[:base] << error_message
+    end
+  end
+
   def create_or_update_cce_scoring_record
     scoring = Employee::CCEScoring.find_or_initialize_by(cce_scorable: self)
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::ProfessionalMembership.score(self)
-    scoring.supporting_description = "professional membership desc"
     scoring.save
+    # scoring.supporting_description = "professional membership desc"
   end
 
 end

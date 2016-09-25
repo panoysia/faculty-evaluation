@@ -22,11 +22,7 @@ require_dependency "employee/application_record"
 
 class Employee::AdditionalDegree < Employee::ApplicationRecord
   include CCEConstants::AdditionalDegree
-
-  belongs_to :employee, required: true
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEScorable
 
   validates :degree, presence: true, length: { maximum: 50 }
   validates :degree_type, inclusion: { 
@@ -34,7 +30,12 @@ class Employee::AdditionalDegree < Employee::ApplicationRecord
   }
 
   validates :institution, presence: true, length: { maximum: 50 }
+
   validates :start_at, :end_at, presence: true
+  validate do |record|
+    fields = [:start_at, :end_at]
+    CorrectDateRangeValidator.new(record, fields).validate
+  end
 
   after_save :create_or_update_cce_scoring_record
 
@@ -57,8 +58,8 @@ class Employee::AdditionalDegree < Employee::ApplicationRecord
   
     scoring.employee = self.employee
     scoring.points = CCEScorer::AdditionalDegree.score(self)
-    scoring.supporting_description = "additional degree desc"
-    scoring.save    
+    scoring.save
+    # scoring.supporting_description = "additional degree desc"
   end
 
 end

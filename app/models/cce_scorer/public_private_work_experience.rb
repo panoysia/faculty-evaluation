@@ -16,10 +16,12 @@ module CCEScorer
                   0.75
                 elsif record.position == BASIC_EDUCATION_TEACHER
                   0.50
+                else
+                  0
                 end
 
       points * record.years_of_service
     end
 
   end   # class PublicPrivateWorkExperience
-end   # module CCEScorer  
+end   # module CCEScorer

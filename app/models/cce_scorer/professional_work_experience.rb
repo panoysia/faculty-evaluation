@@ -13,13 +13,12 @@ module CCEScorer
     include CCEConstants::ProfessionalWorkExperience
 
     def self.score(record)
-      points = if record.position == MANAGER_CONSULTANT
-                1.50
-              elsif record.position == SUPERVISOR_OR_HEAD_OF_UNIT
-                1.0
-              elsif record.position == RANK_AND_FILE
-                0.5
-              end
+      points =  case record.position
+                when MANAGER_CONSULTANT           then 1.50
+                when SUPERVISOR_OR_HEAD_OF_UNIT   then 1.0
+                when RANK_AND_FILE                then 0.5
+                else 0
+                end
 
       points * record.years_of_service
     end

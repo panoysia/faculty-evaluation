@@ -20,15 +20,14 @@ require_dependency "employee/application_record"
 
 class Employee::AcademicAdvisory < Employee::ApplicationRecord
   include CCEConstants::AcademicAdvisory
-  
-  belongs_to :employee
-  
-  has_one :cce_scoring, as: :cce_scorable,
-                      class_name: Employee::CCEScoring,
-                      dependent: :destroy
+  include CCEScorable
 
   validates :title, presence: true, length: { maximum: 150 }
   validates :start_at, :end_at, presence: true
+  validate do |record|
+    fields = [:start_at, :end_at]
+    CorrectDateRangeValidator.new(record, fields).validate
+  end
 
   validates :nature, inclusion: { 
     in: NATURES.each_index.map { |index| index }
@@ -55,8 +54,8 @@ class Employee::AcademicAdvisory < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::AcademicAdvisory.score(self)
-    scoring.supporting_description = "academic advisory desc"
     scoring.save
+    # scoring.supporting_description = "academic advisory desc" 
   end
 
 end   # Employee::AcademicAdvisory

@@ -52,7 +52,8 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
 
   def innovation_params
     params.require(:innovation).permit(:name, :patent_no,
-                                        :year_patented, :description, criterium_ids: [])
+                                      :year_patented, :description,
+                                      :competitiveness, criterium_ids: [])
   end
 
 end

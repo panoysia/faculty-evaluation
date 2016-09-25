@@ -1,5 +1,5 @@
 =begin
-  (masters/doctorate) (max 10 pts.)
+  check: :nature; (max 10 pts.)  
 =end
 
 module CCEScorer
@@ -7,8 +7,14 @@ module CCEScorer
     include CCEConstants::AcademicAdvisory
     
     def self.score(record)
-      # check:
-      #   :nature
+
+      case record.nature
+      when DOCTORAL then 1.00
+      when MASTERS then 0.50
+      when UNDERGRADUATE then 0.25
+      else 0
+      end
+
     end
 
   end  

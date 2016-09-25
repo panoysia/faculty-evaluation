@@ -10,6 +10,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  employee_id       :integer          not null
+#  participation     :string(100)      default(""), not null
 #
 # Indexes
 #
@@ -19,16 +20,24 @@
 require_dependency "employee/application_record"
 
 class Employee::CommunityOutreach < Employee::ApplicationRecord
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEScorable
 
   validates :project_name, presence: true, length: { maximum: 150 }
   validates :sponsoring_agency, presence: true, length: { maximum: 150 }
+  validates :participation, length: { maximum: 100 }
+  
   validates :start_at, :end_at, presence: true
+  validate do |record|
+    fields = [:start_at, :end_at]
+    CorrectDateRangeValidator.new(record, fields).validate
+  end
 
   after_save :create_or_update_cce_scoring_record
+
+
+  def years_of_participation
+    YearCalculator.calculate(start_at, end_at)    
+  end
 
 
   private
@@ -39,8 +48,8 @@ class Employee::CommunityOutreach < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::CommunityOutreach.score(self)
-    scoring.supporting_description = "community outreach desc"
     scoring.save
+    # scoring.supporting_description = "community outreach desc"
   end
 
 end

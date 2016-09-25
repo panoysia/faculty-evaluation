@@ -21,11 +21,7 @@ require_dependency "employee/application_record"
 
 class Employee::Scholarship < Employee::ApplicationRecord
   include CCEConstants::Scholarship
-
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEScorable
 
   validates :title, presence: true, length: { maximum: 150 }
   validates :sponsoring_agency, presence: true, length: { maximum: 150 }
@@ -68,8 +64,8 @@ class Employee::Scholarship < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::Scholarship.score(self)
-    scoring.supporting_description = "scholarship desc"
     scoring.save
+    # scoring.supporting_description = "scholarship desc"
   end
 
 end

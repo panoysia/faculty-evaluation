@@ -20,15 +20,8 @@
 require_dependency "employee/application_record"
 
 class Employee::Invention < Employee::ApplicationRecord
-  PATENT_TYPES = [
-    'Philippine Intellectual Property Office Utility Model', 
-    'Philippine Intellectual Property Office'
-  ]
-
-  belongs_to :employee
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEConstants::Invention
+  include CCEScorable
 
   validates :name, :patent_no, presence: true
   validates :year_patented, presence: true, length: { is: 4 }
@@ -46,6 +39,11 @@ class Employee::Invention < Employee::ApplicationRecord
   end
 
 
+  def patent_type_to_string
+    PATENT_TYPES[patent_type]
+  end
+
+
   private
 
 
@@ -54,8 +52,8 @@ class Employee::Invention < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::Invention.score(self)
-    scoring.supporting_description = "invention desc"
     scoring.save
+    # scoring.supporting_description = "invention desc"
   end
 
 end

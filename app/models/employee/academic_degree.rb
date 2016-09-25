@@ -22,11 +22,7 @@ require_dependency "employee/application_record"
 
 class Employee::AcademicDegree < Employee::ApplicationRecord
   include CCEConstants::AcademicDegree
-
-  belongs_to :employee, required: true
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEScorable
 
   validates :degree, presence: true, length: { maximum: 50 }
   validates :degree_type, inclusion: { 
@@ -34,9 +30,13 @@ class Employee::AcademicDegree < Employee::ApplicationRecord
   }
 
   validates :institution, presence: true, length: { maximum: 50 }
-  validates :start_at, :end_at, presence: true
   
-  validate :correct_date_range, if: :date_values_are_present?
+  validates :start_at, :end_at, presence: true
+  validate do |record|
+    fields = [:start_at, :end_at]
+    CorrectDateRangeValidator.new(record, fields).validate
+  end
+
   validate :four_years_minimum, if: :bachelors_plus?
 
   after_save :create_or_update_cce_scoring_record
@@ -59,22 +59,12 @@ class Employee::AcademicDegree < Employee::ApplicationRecord
   private
 
 
-  def date_values_are_present?
-    start_at.present? && end_at.present?
-  end
-
   def bachelors_plus?
     degree_type == BACHELORS_PLUS
   end
-
-  def correct_date_range
-    unless end_at > start_at
-      errors[:base] << "Invalid date range.\n[End At] date value must be greater than [Start At] date value."
-    end
-  end
-
+  
   def four_years_minimum
-    if years_of_study < 4
+    if years_of_study < MINIMUM_YEARS_FOR_BACHELORS
       errors[:base] << "Minimum of four years between [Start at] date and [End at] date is required for Bachelor's (over 4 yrs.)."
     end
   end
@@ -84,8 +74,8 @@ class Employee::AcademicDegree < Employee::ApplicationRecord
   
     scoring.employee = self.employee
     scoring.points = CCEScorer::AcademicDegree.score(self)
-    scoring.supporting_description = "academic degree desc"
     scoring.save
+    #scoring.supporting_description = "academic degree desc"
   end
 
 end   # class Employee::AcademicDegree

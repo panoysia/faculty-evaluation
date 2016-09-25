@@ -26,6 +26,6 @@ module CCEConstants
     THREE_YEARS_POST_SECONDARY = 8
     SPECIAL_COURSE = 9
 
-    MINIMUM_BACHELOR_YEARS = 4  
+    MINIMUM_YEARS_FOR_BACHELORS = 4
   end   # module AcademicDegree
 end   # module CCEConstants

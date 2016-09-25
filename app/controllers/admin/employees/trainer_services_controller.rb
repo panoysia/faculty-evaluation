@@ -52,8 +52,7 @@ class Admin::Employees::TrainerServicesController < Admin::ApplicationController
 
   def service_params
     params.require(:trainer_service).permit(:name, :agency,
-                                            :start_at, :end_at,
-                                            :is_current)
+                                            :start_at, :end_at)
   end
 
 end

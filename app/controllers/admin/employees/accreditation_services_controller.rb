@@ -52,8 +52,8 @@ class Admin::Employees::AccreditationServicesController < Admin::ApplicationCont
 
   def service_params
     params.require(:accreditation_service).permit(:name, :participation,
-                                                :start_at, :end_at,
-                                                :is_current, :agency)
+                                                  :start_at, :end_at,
+                                                  :agency)
   end
 
 end

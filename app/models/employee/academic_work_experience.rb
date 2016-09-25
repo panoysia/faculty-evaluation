@@ -21,11 +21,7 @@ require_dependency "employee/application_record"
 
 class Employee::AcademicWorkExperience < Employee::ApplicationRecord
   include CCEConstants::AcademicWorkExperience
-
-  belongs_to :employee, required: true
-  has_one :cce_scoring, as: :cce_scorable,
-                        class_name: Employee::CCEScoring,
-                        dependent: :destroy
+  include CCEScorable
 
   validates :institution, presence: true, length: { maximum: 75 }
   validates :institution_type, inclusion: {
@@ -34,6 +30,10 @@ class Employee::AcademicWorkExperience < Employee::ApplicationRecord
               
   validates :position, presence: true, length: { maximum: 50 }
   validates :start_at, :end_at, presence: true 
+  validate do |record|
+    fields = [:start_at, :end_at]
+    CorrectDateRangeValidator.new(record, fields).validate
+  end
 
   after_save :create_or_update_cce_scoring_record
 
@@ -60,8 +60,8 @@ class Employee::AcademicWorkExperience < Employee::ApplicationRecord
 
     scoring.employee = self.employee
     scoring.points = CCEScorer::AcademicWorkExperience.score(self)
-    scoring.supporting_description = "academic work experience desc"
     scoring.save
+    # scoring.supporting_description = "academic work experience desc"
   end
 
 end

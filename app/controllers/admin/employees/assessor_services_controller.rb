@@ -52,7 +52,7 @@ class Admin::Employees::AssessorServicesController < Admin::ApplicationControlle
 
   def service_params
     params.require(:assessor_service).permit(:name, :agency, :start_at,
-                                            :end_at, :is_current)
+                                              :end_at,)
   end
 
 end  
