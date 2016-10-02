@@ -43,7 +43,9 @@ Rails.application.routes.draw do
 
     resources :employees do
       scope module: :employees do
+        resource :cce_record, only: :show
         resource :career_path, only: :show
+        
         resources :qces, only: [:index, :show]
         resources :leaves
 

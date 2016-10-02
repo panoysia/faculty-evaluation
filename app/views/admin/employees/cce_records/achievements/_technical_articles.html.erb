@@ -1,0 +1,46 @@
+<table class="table table-striped table-bordered table-master">
+  <thead>
+    <tr>
+      <th colspan="8">Technical Articles</th>
+    </tr>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Level</th>
+      <th>Published At</th>
+      <th>Description</th>
+      <th>Points</th>
+      <th>NBC</th>      
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% achievements.includes(:cce_scoring).each_with_index do |technical_article, index| %>
+      <tr>
+        <td><%= index += 1 %></td>
+        <td><%= technical_article.name %></td>
+        <td><%= technical_article.level_to_string %></td>
+        <td><%= date_format_readable(technical_article.published_at) %></td>
+        <td><%= technical_article.description %></td>
+        <td class="text-right"><%= technical_article.cce_scoring.points %></td>
+        <td><%= technical_article.cce_scoring.nbc_id %></td>         
+        <td>
+          <%= link_to edit_admin_employee_technical_article_path(
+                        employee, technical_article
+                        ), 
+                title: 'Edit', data: { toggle: 'tooltip' } do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_employee_technical_article_path(
+                        employee, technical_article
+                        ),
+                method: :delete, title: 'Delete',
+                data: { toggle: 'tooltip', 
+                        confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>    
+  </tbody>
+</table>

@@ -30,5 +30,7 @@ module CapsuHrSystem
       # g.assets false
     end
     
+    # config.action_view.prefix_partial_path_with_controller_namespace = false
+
   end   # class Application < Rails::Application
 end   # module CapsuHrSystem

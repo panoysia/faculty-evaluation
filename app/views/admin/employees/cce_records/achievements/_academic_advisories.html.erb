@@ -1,36 +1,38 @@
 <table class="table table-striped table-bordered table-master">
   <thead>
     <tr>
-      <th colspan="7">Additional Credits</th>
+      <th colspan="8">Academic Advisories</th>
     </tr>    
     <tr>
       <th>#</th>
-      <th>Degree</th>
-      <th>Institution</th>
-      <th># of units</th>
+      <th>Title</th>
+      <th>Nature</th>
+      <th>Start</th>
+      <th>End</th>
       <th>Points</th>
       <th>NBC</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <% additional_credits.includes(:cce_scoring).each_with_index do |credit, index| %>
+    <% achievements.includes(:cce_scoring).each_with_index do |advisory, index| %>
       <tr>
         <td><%= index += 1 %></td>
-        <td><%= credit.degree %></td>
-        <td><%= credit.institution %></td>
-        <td><%= credit.no_of_units %></td>
-        <td class="text-right"><%= credit.cce_scoring.points %></td>
-        <td><%= credit.cce_scoring.nbc_id %></td>
+        <td><%= advisory.title %></td>
+        <td><%= advisory.nature_to_string %></td>
+        <td><%= date_format_readable(advisory.start_at) %></td>
+        <td><%= date_format_readable(advisory.end_at) %></td>
+        <td class="text-right"><%= advisory.cce_scoring.points %></td>
+        <td><%= advisory.cce_scoring.nbc_id %></td>
         <td>
-          <%= link_to edit_admin_employee_additional_credit_path(
-                        employee, credit
+          <%= link_to edit_admin_employee_academic_advisory_path(
+                        employee, advisory
                         ), 
                 title: 'Edit', data: { toggle: 'tooltip' } do %>
             <span class="glyphicon glyphicon-pencil"></span>
           <% end %>
-          <%= link_to admin_employee_additional_credit_path(
-                        employee, credit
+          <%= link_to admin_employee_academic_advisory_path(
+                        employee, advisory
                         ),
                 method: :delete, title: 'Delete',
                 data: { toggle: 'tooltip', 

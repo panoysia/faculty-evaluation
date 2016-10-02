@@ -119,7 +119,6 @@ class Employee < ApplicationRecord
   has_many :professional_reviews, dependent: :destroy
   has_many :professional_services, dependent: :destroy
   has_many :trainer_services, dependent: :destroy
-   
 
   # Employee's own QCEs as (owner)
   has_many :qces, dependent: :destroy

@@ -1,0 +1,48 @@
+<table class="table table-striped table-bordered table-master">
+  <thead>
+    <tr>
+      <th colspan="9">Creative Works</th>
+    </tr>
+    <tr>
+      <th>#</th>  
+      <th>Name</th>
+      <th>Competitiveness</th>
+      <th>Patent No.</th>
+      <th>Year Patented</th>
+      <th>Description</th>
+      <th>Points</th>
+      <th>NBC</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% achievements.includes(:cce_scoring).each_with_index do |creative_work, index| %>
+      <tr>
+        <td><%= index += 1 %></td>
+        <td><%= creative_work.name %></td>
+        <td><%= creative_work.competitiveness_to_string %></td>
+        <td><%= creative_work.patent_no %></td>
+        <td><%= creative_work.year_patented %></td>
+        <td><%= creative_work.description %></td>
+        <td class="text-right"><%= creative_work.cce_scoring.points %></td>
+        <td><%= creative_work.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to edit_admin_employee_creative_work_path(
+                        employee,creative_work
+                        ), 
+                title: 'Edit', data: { toggle: 'tooltip' } do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_employee_creative_work_path(
+                        employee, creative_work
+                        ),
+                method: :delete, title: 'Delete',
+                data: { toggle: 'tooltip', 
+                        confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>    
+  </tbody>
+</table>

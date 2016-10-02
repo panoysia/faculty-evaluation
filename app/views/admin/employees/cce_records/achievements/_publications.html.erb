@@ -1,0 +1,50 @@
+<table class="table table-striped table-bordered table-master">
+  <thead>
+    <tr>
+      <th colspan="10">Publications</th>
+    </tr>
+    <tr>
+      <th>#</th>  
+      <th>Title</th>
+      <th>Role</th>
+      <th>Academic Level</th>
+      <th>Publisher</th>
+      <th>Date of Publication</th>
+      <th>Description</th>
+      <th>Points</th>
+      <th>NBC</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% achievements.includes(:cce_scoring).each_with_index do |publication, index| %>
+      <tr>
+        <td><%= index += 1 %></td>
+        <td><%= publication.title %></td>
+        <td><%= publication.role_to_string %></td>
+        <td><%= publication.academic_level_to_string %></td>
+        <td><%= publication.publisher %></td>
+        <td><%= date_format_readable(publication.date_of_publication) %></td>
+        <td><%= publication.description %></td>
+        <td class="text-right"><%= publication.cce_scoring.points %></td>
+        <td><%= publication.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to edit_admin_employee_publication_path(
+                        employee, publication
+                        ), 
+                title: 'Edit', data: { toggle: 'tooltip' } do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          <%= link_to admin_employee_publication_path(
+                        employee, publication
+                        ),
+                method: :delete, title: 'Delete',
+                data: { toggle: 'tooltip', 
+                        confirm: 'Do you really want to delete this record?' } do %>
+            <span class="glyphicon glyphicon-remove"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
