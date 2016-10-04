@@ -12,13 +12,16 @@ Rails.application.routes.draw do
     get 'faculty/search' => "employee_searches#index"
     get 'faculty/query' => "employee_queries#index"
     get 'faculty-career-pathing' => "employee_career_pathings#index"
-    get 'faculty-evaluation' => "faculty_evaluation_searches#index", as: :faculty_evaluation_search
+
+    # get "faculty-evaluation/search" =>
+    #   "search_employee_evaluations#index"
+    
+    resources :search_employee_evaluations,
+      path: "faculty-evaluation/search", only: [:index, :show]
 
     #get 'leaves/view' => "leave_viewings#index"
     #get 'leaves/search' => "leave_searches#index"
     #get 'leave_service_credits/search' => "leave_service_credits#index"
-
-    # resources :faculty_evaluations, path: 'faculty-evaluation'
 
     resource :dashboard, only: :show
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925022930) do
+ActiveRecord::Schema.define(version: 20161004070222) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -65,14 +65,6 @@ ActiveRecord::Schema.define(version: 20160925022930) do
   end
 
   add_index "career_paths", ["name"], name: "index_career_paths_on_name", unique: true
-
-  create_table "cce_scoring_guides", force: :cascade do |t|
-    t.string   "description",                         null: false
-    t.integer  "criteria",                            null: false
-    t.decimal  "points",      precision: 5, scale: 2, null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
 
   create_table "clients", force: :cascade do |t|
     t.string   "first_name",  limit: 50, null: false
@@ -331,6 +323,17 @@ ActiveRecord::Schema.define(version: 20160925022930) do
   add_index "employee_educations", ["attainment_level"], name: "index_employee_educations_on_attainment_level"
   add_index "employee_educations", ["criteria"], name: "index_employee_educations_on_criteria"
   add_index "employee_educations", ["employee_id"], name: "index_employee_educations_on_employee_id"
+
+  create_table "employee_evaluations", force: :cascade do |t|
+    t.integer  "employee_id",  null: false
+    t.integer  "nbc_id",       null: false
+    t.string   "current_rank", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "employee_evaluations", ["employee_id"], name: "index_employee_evaluations_on_employee_id"
+  add_index "employee_evaluations", ["nbc_id"], name: "index_employee_evaluations_on_nbc_id"
 
   create_table "employee_innovations", force: :cascade do |t|
     t.string   "patent_no",                   null: false
@@ -614,17 +617,6 @@ ActiveRecord::Schema.define(version: 20160925022930) do
   add_index "employees", ["academic_ranking_id"], name: "index_employees_on_academic_ranking_id"
   add_index "employees", ["department_id"], name: "index_employees_on_department_id"
   add_index "employees", ["specialization_id"], name: "index_employees_on_specialization_id"
-
-  create_table "faculty_evaluations", force: :cascade do |t|
-    t.integer  "employee_id",  null: false
-    t.integer  "nbc_id",       null: false
-    t.string   "current_rank", null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "faculty_evaluations", ["employee_id"], name: "index_faculty_evaluations_on_employee_id"
-  add_index "faculty_evaluations", ["nbc_id"], name: "index_faculty_evaluations_on_nbc_id"
 
   create_table "holidays", force: :cascade do |t|
     t.string   "name",                   null: false

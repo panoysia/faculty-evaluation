@@ -15,7 +15,9 @@
 #  index_faculty_evaluations_on_nbc_id       (nbc_id)
 #
 
-class FacultyEvaluation < ActiveRecord::Base
+require_dependency "employee/application_record"
+
+class Employee::Evaluation < Employee::ApplicationRecord
   belongs_to :employee
   belongs_to :nbc
 
