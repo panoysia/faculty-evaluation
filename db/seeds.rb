@@ -9,7 +9,6 @@ data = [
 
 Employee::InnovationCriterium.create data
 
-exit
 
 # Data for Employee::CreativeWorkCriterium
 data = [ 
@@ -21,7 +20,6 @@ data = [
 
 Employee::CreativeWorkCriterium.create data
 
-exit
 
 # Data for Employee::DiscoveryCriterium
 description1 = 'Originality, educational impact, documentation'
@@ -33,7 +31,6 @@ data = [ { description: description1, criteria: 1 },
 
 Employee::DiscoveryCriterium.create data
 
-exit
 
 # Student.all.each do |s|
 #   name = s.first_name + s.last_name
