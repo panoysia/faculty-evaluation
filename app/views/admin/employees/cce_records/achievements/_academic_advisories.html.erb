@@ -23,7 +23,10 @@
         <td><%= date_format_readable(advisory.start_at) %></td>
         <td><%= date_format_readable(advisory.end_at) %></td>
         <td class="text-right"><%= advisory.cce_scoring.points %></td>
-        <td><%= advisory.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to advisory.cce_scoring.nbc_name,
+                admin_nbc_path(advisory.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_academic_advisory_path(
                         employee, advisory

@@ -27,7 +27,10 @@
         <td><%= date_format_readable(degree.end_at) %></td>
         <td><%= date_format_readable(degree.graduated_at) if degree.graduated_at.present?  %></td>
         <td class="text-right"><%= degree.cce_scoring.points %></td>
-        <td><%= degree.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to degree.cce_scoring.nbc_name,
+                admin_nbc_path(degree.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_additional_degree_path(
                         employee, degree

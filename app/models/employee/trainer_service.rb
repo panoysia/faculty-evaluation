@@ -37,7 +37,7 @@ class Employee::TrainerService < Employee::ApplicationRecord
     YearCalculator.calculate(start_at, end_at)
   end
 
-  
+
   private
 
 

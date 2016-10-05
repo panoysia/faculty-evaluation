@@ -21,7 +21,10 @@
         <td><%= credit.institution %></td>
         <td><%= credit.no_of_units %></td>
         <td class="text-right"><%= credit.cce_scoring.points %></td>
-        <td><%= credit.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to credit.cce_scoring.nbc_name,
+                admin_nbc_path(credit.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_additional_credit_path(
                         employee, credit

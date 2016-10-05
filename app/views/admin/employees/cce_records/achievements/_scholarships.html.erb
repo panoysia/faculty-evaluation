@@ -25,7 +25,10 @@
         <td><%= scholarship.scholarship_type_to_string %></td>
         <td><%= scholarship.degree_type_to_string %></td>
         <td class="text-right"><%= scholarship.cce_scoring.points %></td>
-        <td><%= scholarship.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to scholarship.cce_scoring.nbc_name,
+                admin_nbc_path(scholarship.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_scholarship_path(
                         employee, scholarship

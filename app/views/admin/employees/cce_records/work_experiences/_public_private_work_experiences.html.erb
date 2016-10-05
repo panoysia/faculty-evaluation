@@ -24,7 +24,10 @@
         <td><%= date_format_readable(work_experience.start_at) %></td>
         <td><%= date_format_readable(work_experience.end_at) %></td>
         <td class="text-right"><%= work_experience.cce_scoring.points %></td>
-        <td><%= work_experience.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to work_experience.cce_scoring.nbc_name,
+                admin_nbc_path(work_experience.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_public_private_work_experience_path(
                 employee, work_experience

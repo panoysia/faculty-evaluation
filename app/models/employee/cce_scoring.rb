@@ -27,6 +27,8 @@ class Employee::CCEScoring < Employee::ApplicationRecord
   belongs_to :cce_scorable, polymorphic: true
   belongs_to :employee
   belongs_to :nbc
+  
+  delegate :id, :name, to: :nbc, allow_nil: true, prefix: true
 
   scope :educations, -> { where(cce_scorable_type: EDUCATIONS) }
   scope :work_experiences, -> { 
@@ -35,8 +37,12 @@ class Employee::CCEScoring < Employee::ApplicationRecord
   scope :achievements, -> { where(cce_scorable_type: ACHIEVEMENTS) }
 
 
-  def nbc_recorded?
+  def recorded?
     nbc_id.present?
   end
+
+  # def nbc_recorded?
+  #   nbc_id.present?
+  # end
 
 end

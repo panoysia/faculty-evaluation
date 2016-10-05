@@ -21,7 +21,10 @@
         <td><%= review.review_type_to_string %></td>
         <td><%= date_format_readable(review.occurred_at) %></td>
         <td class="text-right"><%= review.cce_scoring.points %></td>
-        <td><%= review.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to review.cce_scoring.nbc_name,
+                admin_nbc_path(review.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_professional_review_path(
                         employee, review

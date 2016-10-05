@@ -1,5 +1,4 @@
 class Employee::CCERecord
-  # include ActiveModel::Model
 
   EDUCATIONS = %i(
     academic_degrees
@@ -66,28 +65,3 @@ class Employee::CCERecord
   #   employee.trainer_services.joins(:cce_scoring)
   # end
 end
-
-=begin
-
-  # employee_cce_evaluations
-  # employee_qce_evaluations
-  # employee_nbc_evaluation
-
-  employee_cce_evaluation_logs
-
-  id
-  employee_id
-  nbc_id
-  academic_rank_id
-  educations_total
-  work_experiences_total
-  achievements_total
-  overall_total
-  created_at
-  updated_at
-
-  create_table "faculty_evaluations", force: :cascade do |t|
-    "employee_id",  
-    "nbc_id",       
-    "current_rank",
-=end

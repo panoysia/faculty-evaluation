@@ -25,7 +25,10 @@
         <td><%= creative_work.year_patented %></td>
         <td><%= creative_work.description %></td>
         <td class="text-right"><%= creative_work.cce_scoring.points %></td>
-        <td><%= creative_work.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to creative_work.cce_scoring.nbc_name,
+                admin_nbc_path(creative_work.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_creative_work_path(
                         employee,creative_work

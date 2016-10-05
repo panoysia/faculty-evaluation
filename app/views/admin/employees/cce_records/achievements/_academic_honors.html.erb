@@ -25,7 +25,10 @@
         <td><%= academic_honor.school %></td>
         <td><%= date_format_readable(academic_honor.date_awarded) %></td>
         <td class="text-right"><%= academic_honor.cce_scoring.points %></td>
-        <td><%= academic_honor.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to academic_honor.cce_scoring.nbc_name,
+                admin_nbc_path(academic_honor.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_academic_honor_path(
                         employee, academic_honor

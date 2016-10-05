@@ -23,7 +23,10 @@
         <td><%= membership.organization_type_to_string %></td>
         <td><%= membership.membership_type_to_string %></td>
         <td class="text-right"><%= membership.cce_scoring.points %></td>
-        <td><%= membership.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to membership.cce_scoring.nbc_name,
+                admin_nbc_path(membership.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_professional_membership_path(
                         employee, membership

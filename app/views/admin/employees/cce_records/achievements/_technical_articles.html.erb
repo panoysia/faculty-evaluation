@@ -23,7 +23,10 @@
         <td><%= date_format_readable(technical_article.published_at) %></td>
         <td><%= technical_article.description %></td>
         <td class="text-right"><%= technical_article.cce_scoring.points %></td>
-        <td><%= technical_article.cce_scoring.nbc_id %></td>         
+        <td>
+          <%= link_to technical_article.cce_scoring.nbc_name,
+                admin_nbc_path(technical_article.cce_scoring.nbc_id) %>
+        </td>
         <td>
           <%= link_to edit_admin_employee_technical_article_path(
                         employee, technical_article

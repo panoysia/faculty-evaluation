@@ -23,7 +23,10 @@
         <td><%= date_format_readable(award.date_awarded) %></td>
         <td><%= award.description %></td>
         <td class="text-right"><%= award.cce_scoring.points %></td>
-        <td><%= award.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to award.cce_scoring.nbc_name,
+                admin_nbc_path(award.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_award_path(employee, award), 
                 title: 'Edit', data: { toggle: 'tooltip' } do %>

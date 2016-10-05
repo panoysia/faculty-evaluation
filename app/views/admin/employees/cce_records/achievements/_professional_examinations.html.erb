@@ -23,7 +23,10 @@
         <td><%= date_format_readable(examination.date_passed) %></td>
         <td><%= examination.category_to_string %></td>
         <td class="text-right"><%= examination.cce_scoring.points %></td>
-        <td><%= examination.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to examination.cce_scoring.nbc_name,
+                admin_nbc_path(examination.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_professional_examination_path(
                         employee, examination

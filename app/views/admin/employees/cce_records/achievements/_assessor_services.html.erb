@@ -23,7 +23,10 @@
         <td><%= date_format_readable(service.start_at) %></td>
         <td><%= date_format_readable(service.end_at) if service.end_at.present? %></td>
         <td class="text-right"><%= service.cce_scoring.points %></td>
-        <td><%= service.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to service.cce_scoring.nbc_name,
+                admin_nbc_path(service.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_assessor_service_path(
                         employee, service

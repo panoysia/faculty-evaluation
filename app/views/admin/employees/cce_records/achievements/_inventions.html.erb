@@ -25,7 +25,10 @@
         <td><%= invention.year_patented %></td>
         <td><%= invention.description %></td>
         <td class="text-right"><%= invention.cce_scoring.points %></td>
-        <td><%= invention.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to invention.cce_scoring.nbc_name,
+                admin_nbc_path(invention.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_invention_path(
                         employee,invention

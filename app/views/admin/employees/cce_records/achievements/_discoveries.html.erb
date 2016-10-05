@@ -23,7 +23,10 @@
         <td><%= discovery.year_patented %></td>
         <td><%= discovery.description %></td>
         <td class="text-right"><%= discovery.cce_scoring.points %></td>
-        <td><%= discovery.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to discovery.cce_scoring.nbc_name,
+                admin_nbc_path(discovery.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_discovery_path(
                         employee, discovery

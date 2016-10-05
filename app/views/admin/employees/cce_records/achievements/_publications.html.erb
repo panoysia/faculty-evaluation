@@ -27,7 +27,10 @@
         <td><%= date_format_readable(publication.date_of_publication) %></td>
         <td><%= publication.description %></td>
         <td class="text-right"><%= publication.cce_scoring.points %></td>
-        <td><%= publication.cce_scoring.nbc_id %></td>
+        <td>
+          <%= link_to publication.cce_scoring.nbc_name,
+                admin_nbc_path(publication.cce_scoring.nbc_id) %>
+        </td>        
         <td>
           <%= link_to edit_admin_employee_publication_path(
                         employee, publication
