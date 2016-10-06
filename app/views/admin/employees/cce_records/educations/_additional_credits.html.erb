@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <% additional_credits.includes(:cce_scoring).each_with_index do |credit, index| %>
+    <% additional_credits.includes(cce_scoring: :nbc).each_with_index do |credit, index| %>
       <tr>
         <td><%= index += 1 %></td>
         <td><%= credit.degree %></td>

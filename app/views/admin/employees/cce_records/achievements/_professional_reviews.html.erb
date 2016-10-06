@@ -14,7 +14,8 @@
     </tr>
   </thead>
   <tbody>
-    <% achievements.includes(:cce_scoring).each_with_index do |review, index| %>
+    <% achievements.includes(cce_scoring: :nbc).
+          each_with_index do |review, index| %>
       <tr>
         <td><%= index += 1 %></td>
         <td><%= review.name %></td>

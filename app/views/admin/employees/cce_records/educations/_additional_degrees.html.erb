@@ -17,7 +17,8 @@
     </tr>
   </thead>
   <tbody>
-    <% additional_degrees.includes(:cce_scoring).each_with_index do |degree, index| %>
+    <% additional_degrees.includes(cce_scoring: :nbc).
+          each_with_index do |degree, index| %>
       <tr>
         <td><%= index += 1 %></td>
         <td><%= degree.degree %></td>

@@ -15,7 +15,8 @@
     </tr>
   </thead>
   <tbody>
-    <% achievements.includes(:cce_scoring).each_with_index do |technical_article, index| %>
+    <% achievements.includes(cce_scoring: :nbc).
+          each_with_index do |technical_article, index| %>
       <tr>
         <td><%= index += 1 %></td>
         <td><%= technical_article.name %></td>

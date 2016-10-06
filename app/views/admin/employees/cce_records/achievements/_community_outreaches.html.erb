@@ -16,7 +16,8 @@
     </tr>
   </thead>
   <tbody>
-    <% achievements.includes(:cce_scoring).each_with_index do |outreach, index| %>
+    <% achievements.includes(cce_scoring: :nbc).
+          each_with_index do |outreach, index| %>
       <tr>
         <td><%= index += 1 %></td>
         <td><%= outreach.project_name %></td>

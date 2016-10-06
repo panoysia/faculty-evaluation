@@ -18,7 +18,8 @@
     </tr>
   </thead>
   <tbody>
-    <% achievements.includes(:cce_scoring).each_with_index do |service, index| %>
+    <% achievements.includes(cce_scoring: :nbc).
+          each_with_index do |service, index| %>
       <tr>
         <td><%= index += 1 %></td>
         <td><%= service.title %></td>
