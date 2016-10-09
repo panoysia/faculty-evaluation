@@ -11,7 +11,7 @@
       <%= link_to 'CCE', admin_employee_cce_record_path(@employee) %>
     </li>    
     <li role="presentation" class="<%= get_bs_active_class(:qces) %>">
-      <%= link_to 'QCEs', admin_employee_qces_path(@employee) %>
+      <%= link_to 'QCE', admin_employee_qces_path(@employee) %>
     </li>
     <li role="presentation" class="<%= get_bs_active_class(:leaves) %>">
       <%= link_to 'Leaves', admin_employee_leaves_path(@employee) %>
@@ -26,7 +26,7 @@
         ) 
     %>
     <li role="presentation" class="<%= get_bs_active_class(*tab_names) %>">
-      <%= link_to 'Educations', admin_employee_educations_path(@employee) %>
+      <%= link_to 'Education', admin_employee_educations_path(@employee) %>
     </li>
 
     <% tab_names = %i(
@@ -54,7 +54,7 @@
     %>
     <li role="presentation"
         class="<%= get_bs_active_class(*tab_names) %>">
-      <%= link_to 'Achievement & Honors 1',
+      <%= link_to 'Achievements & Honors 1',
             admin_employee_achievement_and_honors_1_path(@employee) %>
     </li>
 
@@ -70,7 +70,7 @@
     %>
     <li role="presentation"
         class="<%= get_bs_active_class(*tab_names) %>">
-      <%= link_to 'Achievement & Honors 2',
+      <%= link_to 'Achievements & Honors 2',
             admin_employee_achievement_and_honors_2_path(@employee) %>
     </li>
 

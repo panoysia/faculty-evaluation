@@ -24,7 +24,4 @@ class Holiday < ActiveRecord::Base
     end
   end
 
-end   
-# t.string   "name",       null: false
-# t.date     "occurs_at",  null: false
-# t.integer  "is_weekend", null: false
+end
