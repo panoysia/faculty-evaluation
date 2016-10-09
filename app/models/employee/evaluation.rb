@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: faculty_evaluations
+# Table name: employee_evaluations
 #
 #  id           :integer          not null, primary key
 #  employee_id  :integer          not null
@@ -8,11 +8,15 @@
 #  current_rank :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  rank_before  :string           default(""), not null
+#  rank_after   :string           default(""), not null
+#  cce_score    :decimal(5, 2)    default(0.0), not null
+#  qce_score    :decimal(5, 2)    default(0.0), not null
 #
 # Indexes
 #
-#  index_faculty_evaluations_on_employee_id  (employee_id)
-#  index_faculty_evaluations_on_nbc_id       (nbc_id)
+#  index_employee_evaluations_on_employee_id  (employee_id)
+#  index_employee_evaluations_on_nbc_id       (nbc_id)
 #
 
 require_dependency "employee/application_record"
@@ -22,10 +26,5 @@ class Employee::Evaluation < Employee::ApplicationRecord
   belongs_to :nbc
 
   validates :current_rank, presence: true
-end
 
-# t.integer  "employee_id",  null: false
-# t.integer  "nbc_id",       null: false
-# t.string   "current_rank", null: false
-# t.datetime "created_at",   null: false
-# t.datetime "updated_at",   null: false
+end

@@ -1,38 +1,33 @@
-<%
-  if params[:employee_id].present?
-    employee_id = params[:employee_id] 
-  end
-
-  if params[:nbc_id].present?
-    nbc_id = params[:nbc_id] 
-  end
-%>
 <div class="row">
   <div class="col-md-12">
-    <%= form_tag admin_faculty_evaluation_search_path, method: :get do %>
+    <%= form_for @search_form,
+          url: admin_search_employee_evaluations_path,
+          method: :get do |f| %>
+      <%= render partial: 'errors', locals: { object: @search_form } %>
+      
       <div class="col-md-3">
         <div class="form-group">
-          <%= label_tag :employee_id, 'Faculty' %>
-          <%= collection_select :employee, :id, Employee.all, :id,
-              :full_name, { include_blank: ' --- Select Faculty --- ',
-                selected: employee_id },
-              class: 'form-control', name: 'employee_id' %>
+          <%= f.label :employee_id, 'Faculty' %>
+          <%= f.collection_select :employee_id, Employee.all, :id,
+                :full_name, { include_blank: ' --- Select Faculty --- '},
+                class: 'form-control',
+                required: true, autofocus: true %>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <%= label_tag :nbc_id, 'NBC' %>
-          <%= collection_select :nbc, :id, NBC.valid, :id, :name,
-              { include_blank: ' --- Select NBC --- ', selected: nbc_id },
-              class: 'form-control', name: 'nbc_id' %>
+          <%= f.label :nbc_id, 'NBC' %>
+          <%= f.collection_select :nbc_id, NBC.valid, :id, :name,
+              { include_blank: ' --- Select NBC --- ' },
+              class: 'form-control', required: true %>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <%= submit_tag 'Search', class: 'btn btn-success',
+          <%= f.submit 'Search', class: 'btn btn-success',
                 id: 'evaluate-button', name: 'commit' %>
         </div>
-      </div>
+      </div>      
     <% end %>
   </div>  <!-- div.col-md-12 -->
 </div>  <!-- div.row -->

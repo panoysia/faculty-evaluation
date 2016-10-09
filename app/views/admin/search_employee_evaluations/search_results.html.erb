@@ -2,16 +2,25 @@
 <%= render 'search_form' %>
 <div class="row">
   <div class="col-md-12">
-    <h3 class="page-header">QCE Summary</h3>
-    <!-- display all QCES per semester based on the academic years included by the selected NBC -->
+    <h3 class="page-header">Search results:</h3>
+    <div class="col-md-6">      
+      <p>Current status: <%= @evaluation.status %></p>
+      <p>Name: <%= @evaluation.employee_full_name %></p>
+      <p>Current rank: <%= @evaluation.current_rank %></p>
+      <p>CCE Score: <%= @evaluation.cce_score %></p>
+      <% if @evaluation.evaluated? %>
+        <p>QCE Score: <%= @evaluation.qce_score %></p>
+        <p>Rank before: <%= @evaluation.rank_before %></p>
+        <p>Rank after: <%= @evaluation.rank_after %></p>
+        <p><%= link_to "Show",
+            admin_employee_evaluation_path(
+              @evaluation.employee_id, @evaluation.id
+            ) %></p>
+      <% else %>
+        <p>QCE Status: <%= @evaluation.qce_status %></p>
+      <% end %>
+    </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-12">
-    <h3 class="page-header">CCE Summary</h3>
-    <!-- check :cce_scoreable table -->
-    <h4 class="page-header">Educational Attainment (display in table:)</h4>
-    <h4 class="page-header">Work Experiences (display in table:)</h4>
-    <h4 class="page-header">Prof. Developments (display in table:)</h4>
-  </div>
-</div>
+<%#= render @search_results if @search_results %>
+<%#= render @search_form.results %>

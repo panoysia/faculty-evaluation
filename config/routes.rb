@@ -15,9 +15,8 @@ Rails.application.routes.draw do
 
     # get "faculty-evaluation/search" =>
     #   "search_employee_evaluations#index"
-    
     resources :search_employee_evaluations,
-      path: "faculty-evaluation/search", only: [:index, :show]
+      path: "faculty-evaluation/search", only: :index
 
     #get 'leaves/view' => "leave_viewings#index"
     #get 'leaves/search' => "leave_searches#index"
@@ -49,6 +48,7 @@ Rails.application.routes.draw do
         resource :cce_record, only: :show
         resource :career_path, only: :show
         
+        resources :evaluations, only: [:index, :show]
         resources :qces, only: [:index, :show]
         resources :leaves
 
