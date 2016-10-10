@@ -1,5 +1,7 @@
 class Admin::Employees::AssessorServicesController < Admin::ApplicationController
 
+  include CCE::ExpertService
+
   before_action :set_employee
   before_action :set_service, only: [:edit, :update, :destroy]
 
@@ -26,7 +28,7 @@ class Admin::Employees::AssessorServicesController < Admin::ApplicationControlle
 
   def update
     if @service.update(service_params)
-      redirect_to admin_employee_expert_services_path,
+      redirect_to referrer,
         notice: 'Assessor service record was successfully updated.'
     else
       render :edit
@@ -35,12 +37,18 @@ class Admin::Employees::AssessorServicesController < Admin::ApplicationControlle
 
   def destroy
     @service.destroy
-    redirect_to admin_employee_expert_services_path,
+    redirect_to referrer,
       notice: 'Assessor service record was successfully deleted.'
   end
 
 
   private
+
+  
+  def service_params
+    params.require(:assessor_service).permit(:name, :agency, :start_at,
+                                              :end_at,)
+  end
 
   def set_employee
     @employee = Employee.find(params[:employee_id])
@@ -48,11 +56,6 @@ class Admin::Employees::AssessorServicesController < Admin::ApplicationControlle
 
   def set_service
     @service = @employee.assessor_services.find(params[:id])
-  end
-
-  def service_params
-    params.require(:assessor_service).permit(:name, :agency, :start_at,
-                                              :end_at,)
   end
 
 end  

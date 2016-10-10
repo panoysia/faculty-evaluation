@@ -1,5 +1,7 @@
 class Admin::Employees::InnovationsController < Admin::ApplicationController
 
+  include CCE::AchievementAndHonor1
+
   before_action :set_employee
   before_action :set_innovation, only: [:edit, :update, :destroy]
 
@@ -26,7 +28,7 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
 
   def update
     if @innovation.update(innovation_params)
-      redirect_to admin_employee_achievement_and_honors_1_path,
+      redirect_to referrer,
         notice: 'Innovation record was successfully updated.'
     else
       render :edit
@@ -35,12 +37,19 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
 
   def destroy
     @innovation.destroy
-    redirect_to admin_employee_achievement_and_honors_1_path,
+    redirect_to referrer,
       notice: 'Innovation record was successfully deleted.'
   end
 
 
   private
+
+
+  def innovation_params
+    params.require(:innovation).permit(:name, :patent_no,
+                                      :year_patented, :description,
+                                      :competitiveness, criterium_ids: [])
+  end
 
   def set_employee
     @employee = Employee.find(params[:employee_id])
@@ -48,12 +57,6 @@ class Admin::Employees::InnovationsController < Admin::ApplicationController
 
   def set_innovation
     @innovation = @employee.innovations.find(params[:id])
-  end
-
-  def innovation_params
-    params.require(:innovation).permit(:name, :patent_no,
-                                      :year_patented, :description,
-                                      :competitiveness, criterium_ids: [])
   end
 
 end

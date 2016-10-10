@@ -36,13 +36,13 @@ class Employee::CCEScoring < Employee::ApplicationRecord
   }
   scope :achievements, -> { where(cce_scorable_type: ACHIEVEMENTS) }
 
+  # scope :with_nbc, -> (id = nil) { 
+  #   where(nbc_id: id) if id.present?
+  # }
+
 
   def recorded?
     nbc_id.present?
   end
-
-  # def nbc_recorded?
-  #   nbc_id.present?
-  # end
 
 end

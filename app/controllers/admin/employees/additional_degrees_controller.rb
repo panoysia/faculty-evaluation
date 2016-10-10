@@ -1,5 +1,7 @@
 class Admin::Employees::AdditionalDegreesController < Admin::ApplicationController
 
+  include CCE::Education
+
   before_action :set_employee
   before_action :set_degree, only: [:edit, :update, :destroy]
 
@@ -26,7 +28,7 @@ class Admin::Employees::AdditionalDegreesController < Admin::ApplicationControll
 
   def update
     if @degree.update(degree_params)
-      redirect_to admin_employee_educations_path,
+      redirect_to referrer,
         notice: 'Additional degree record was successfully updated.'
     else
       render :edit
@@ -35,25 +37,26 @@ class Admin::Employees::AdditionalDegreesController < Admin::ApplicationControll
 
   def destroy
     @degree.destroy
-    redirect_to admin_employee_educations_path,
+    redirect_to referrer,
       notice: 'Additional degree record was successfully deleted.'
   end
 
 
   private
 
-  def set_employee
-    @employee = Employee.find(params[:employee_id])
+
+  def degree_params
+    params.require(:additional_degree).permit(:institution, :degree,
+                                              :degree_type, :start_at,
+                                              :end_at, :graduated_at)
   end
 
   def set_degree
     @degree = @employee.additional_degrees.find(params[:id])
   end
 
-  def degree_params
-    params.require(:additional_degree).permit(:institution, :degree,
-                                              :degree_type, :start_at,
-                                              :end_at, :graduated_at)
+  def set_employee
+    @employee = Employee.find(params[:employee_id])
   end
 
 end

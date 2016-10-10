@@ -1,3 +1,45 @@
+<div id="consultancy-services" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Consultancy Services</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_consultancy_service_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render "consultancy_services" %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+</div>  <!-- #consultancy-services.category -->
+
+<div id="professional-services" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Professional Services</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_professional_service_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render "professional_services" %>    
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+</div>  <!-- #professional-services.category -->
+
 <div id="academic-advisories" class="category">
   <div class="row">
     <div class="col-md-12">
@@ -14,10 +56,31 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'academic_advisories' %>
+      <%= render "academic_advisories" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
 </div>  <!-- #academic-advisories.category -->
+
+<div id="professional-reviews" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Professional Reviews</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_professional_review_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render "professional_reviews" %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+</div>  <!-- #professional-reviews.category -->
 
 <div id="accreditation-services" class="category">
   <div class="row">
@@ -35,7 +98,7 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'accreditation_services' %>
+      <%= render "accreditation_services" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
 </div>  <!-- #accreditation-services.category -->
@@ -56,52 +119,10 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'assessor_services' %>
+      <%= render "assessor_services" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->  
 </div>  <!-- #assessor-services.category -->
-
-<div id="professional-reviews" class="category">
-  <div class="row">
-    <div class="col-md-12">
-      <h4 class="page-header">
-        <span>Professional Reviews</span>
-        <span class="pull-right">
-          <%= link_to new_admin_employee_professional_review_path,
-            class: 'btn btn-primary btn-xs' do %>
-            <span class="glyphicon glyphicon-plus"></span> New
-          <% end %>
-        </span>
-      </h4>      
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-  <div class="row">
-    <div class="col-md-12">
-      <%= render 'professional_reviews' %>
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-</div>  <!-- #professional-reviews.category -->
-
-<div id="professional-services" class="category">
-  <div class="row">
-    <div class="col-md-12">
-      <h4 class="page-header">
-        <span>Professional Services</span>
-        <span class="pull-right">
-          <%= link_to new_admin_employee_professional_service_path,
-            class: 'btn btn-primary btn-xs' do %>
-            <span class="glyphicon glyphicon-plus"></span> New
-          <% end %>
-        </span>
-      </h4>      
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-  <div class="row">
-    <div class="col-md-12">
-      <%= render 'professional_services' %>    
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-</div>  <!-- #professional-services.category -->
 
 <div id="trainer-services" class="category">
   <div class="row">
@@ -119,7 +140,7 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'trainer_services' %>
+      <%= render "trainer_services" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->  
 </div>  <!-- #trainer-services.category -->

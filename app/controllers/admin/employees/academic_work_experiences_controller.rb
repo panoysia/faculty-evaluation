@@ -1,5 +1,7 @@
 class Admin::Employees::AcademicWorkExperiencesController < Admin::ApplicationController
 
+  include CCE::WorkExperience
+
   before_action :set_employee
   before_action :set_work_experience, only: [:edit, :update, :destroy]
 
@@ -27,7 +29,7 @@ class Admin::Employees::AcademicWorkExperiencesController < Admin::ApplicationCo
 
   def update
     if @work_experience.update(experience_params)
-      redirect_to admin_employee_work_experiences_path,
+      redirect_to referrer,
         notice: 'Academic work experience record was successfully updated.'
     else
       render :edit
@@ -36,12 +38,19 @@ class Admin::Employees::AcademicWorkExperiencesController < Admin::ApplicationCo
 
   def destroy
     @work_experience.destroy
-    redirect_to admin_employee_work_experiences_path,
+    redirect_to referrer,
       notice: 'Academic work experience record was successfully deleted.'
   end
 
 
   private
+
+
+  def experience_params
+    params.require(:academic_work_experience).permit(:start_at, :end_at,
+                                                :position, :institution,
+                                                :institution_type)
+  end
 
   def set_employee
     @employee = Employee.find(params[:employee_id])
@@ -50,12 +59,6 @@ class Admin::Employees::AcademicWorkExperiencesController < Admin::ApplicationCo
   def set_work_experience
     @work_experience = @employee.academic_work_experiences.
                           find(params[:id])
-  end
-
-  def experience_params
-    params.require(:academic_work_experience).permit(:start_at, :end_at,
-                                                :position, :institution,
-                                                :institution_type)
   end
 
 end  

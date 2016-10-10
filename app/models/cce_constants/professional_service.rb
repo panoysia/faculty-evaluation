@@ -11,12 +11,12 @@ module CCEConstants
     LOCAL = 2   # or INSTITUTIONAL
 
     SERVICE_TYPES = [
-      'Consultant',
+      #'Consultant',
       'Trainer',
       'Coordinator',
       'Lecturer',
       'Resource Person',
       'Guest Speaker'
-    ]    
+    ]
   end
 end

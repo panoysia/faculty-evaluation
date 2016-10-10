@@ -97,8 +97,8 @@ Rails.application.routes.draw do
           resources :assessor_services, except: [:index, :show]          
           resources :professional_reviews, except: [:index, :show]
           resources :professional_services, except: [:index, :show]
+          resources :consultancy_services, except: [:index, :show]
           resources :trainer_services, except: [:index, :show]
-
     
         resources :cce_scorings, only: :index
         resources :rankings

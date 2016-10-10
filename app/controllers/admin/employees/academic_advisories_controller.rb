@@ -1,5 +1,7 @@
 class Admin::Employees::AcademicAdvisoriesController < Admin::ApplicationController
 
+  include CCE::ExpertService
+
   before_action :set_employee
   before_action :set_advisory, only: [:edit, :update, :destroy]
 
@@ -26,7 +28,7 @@ class Admin::Employees::AcademicAdvisoriesController < Admin::ApplicationControl
 
   def update
     if @advisory.update(advisory_params)
-      redirect_to admin_employee_expert_services_path,
+      redirect_to referrer,
         notice: 'Academic advisory record was successfully updated.'
     else
       render :edit
@@ -35,24 +37,25 @@ class Admin::Employees::AcademicAdvisoriesController < Admin::ApplicationControl
 
   def destroy
     @advisory.destroy
-    redirect_to admin_employee_expert_services_path,
+    redirect_to referrer,
       notice: 'Academic advisory record was successfully deleted.'
   end
 
 
   private
 
-  def set_employee
-    @employee = Employee.find(params[:employee_id])
+
+  def advisory_params
+    params.require(:academic_advisory).permit(:title, :nature,
+                                              :start_at, :end_at)
   end
 
   def set_advisory
     @advisory = @employee.academic_advisories.find(params[:id])
   end
 
-  def advisory_params
-    params.require(:academic_advisory).permit(:title, :nature,
-                                              :start_at, :end_at)
+  def set_employee
+    @employee = Employee.find(params[:employee_id])
   end
 
 end

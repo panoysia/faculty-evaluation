@@ -21,21 +21,9 @@
         <td><%= date_format_readable(outreach.start_at) %></td>
         <td><%= date_format_readable(outreach.end_at) %></td>
         <td>
-          <%= link_to edit_admin_employee_community_outreach_path(
-                        @employee, outreach
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_community_outreach_path(
-                        @employee, outreach
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
-        </td>        
+          <%= render "admin/employees/action_links",
+                        record: outreach, employee: outreach.employee %>
+        </td>
       </tr>
     <% end %>
   </tbody>

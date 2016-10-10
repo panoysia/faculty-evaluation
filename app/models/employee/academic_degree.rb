@@ -30,7 +30,7 @@ class Employee::AcademicDegree < Employee::ApplicationRecord
   }
 
   validates :institution, presence: true, length: { maximum: 50 }
-  
+
   validates :start_at, :end_at, presence: true
   validate do |record|
     fields = [:start_at, :end_at]

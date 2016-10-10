@@ -17,32 +17,16 @@
   <tbody>
     <% achievements.includes(cce_scoring: :nbc).
           each_with_index do |examination, index| %>
-      <tr>
+      <tr <%= "class=info" unless examination.cce_scoring.recorded? %>>
         <td><%= index += 1 %></td>
         <td><%= examination.title %></td>
         <td><%= examination.agency_name %></td>
         <td><%= date_format_readable(examination.date_passed) %></td>
         <td><%= examination.category_to_string %></td>
         <td class="text-right"><%= examination.cce_scoring.points %></td>
+        <td><%= render "nbc_link", record: examination.cce_scoring %></td>
         <td>
-          <%= link_to examination.cce_scoring.nbc_name,
-                admin_nbc_path(examination.cce_scoring.nbc_id) %>
-        </td>        
-        <td>
-          <%= link_to edit_admin_employee_professional_examination_path(
-                        employee, examination
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_professional_examination_path(
-                        employee, examination
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
+          <%= render("action_links", record: examination, employee: employee) unless examination.cce_scoring.recorded? %>
         </td>        
       </tr>
     <% end %>

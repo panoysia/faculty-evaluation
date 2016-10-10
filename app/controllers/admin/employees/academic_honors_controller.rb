@@ -1,5 +1,7 @@
 class Admin::Employees::AcademicHonorsController < Admin::ApplicationController
 
+  include CCE::AchievementAndHonor2
+
   before_action :set_employee
   before_action :set_academic_honor, only: [:edit, :update, :destroy]
 
@@ -30,7 +32,7 @@ class Admin::Employees::AcademicHonorsController < Admin::ApplicationController
 
   def update
     if @academic_honor.update(academic_honor_params)
-      redirect_to admin_employee_achievement_and_honors_2_path,
+      redirect_to referrer,
         notice: 'Academic honor record was successfully updated.'
     else
       render :edit
@@ -39,25 +41,26 @@ class Admin::Employees::AcademicHonorsController < Admin::ApplicationController
 
   def destroy
     @academic_honor.destroy
-    redirect_to admin_employee_achievement_and_honors_2_path,
+    redirect_to referrer,
       notice: 'Academic honor record was successfully deleted.'     
   end
 
 
   private
 
-  def set_employee
-    @employee = Employee.find(params[:employee_id])
-  end
-
-  def set_academic_honor
-    @academic_honor = @employee.academic_honors.find(params[:id])
-  end
 
   def academic_honor_params
     params.require(:academic_honor).permit(:award, :degree_type,
                                           :honor_type, :school,
                                             :date_awarded)
+  end
+  
+  def set_academic_honor
+    @academic_honor = @employee.academic_honors.find(params[:id])
+  end
+
+  def set_employee
+    @employee = Employee.find(params[:employee_id])
   end
 
 end

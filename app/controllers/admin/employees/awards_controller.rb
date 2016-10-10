@@ -1,5 +1,7 @@
 class Admin::Employees::AwardsController < Admin::ApplicationController
 
+  include CCE::AchievementAndHonor2
+
   before_action :set_employee
   before_action :set_award, only: [:edit, :update, :destroy]
 
@@ -30,7 +32,7 @@ class Admin::Employees::AwardsController < Admin::ApplicationController
 
   def update
     if @award.update(award_params)
-      redirect_to admin_employee_achievement_and_honors_2_path,
+      redirect_to referrer,
         notice: 'Award record was successfully updated.'
     else
       render :edit
@@ -39,24 +41,25 @@ class Admin::Employees::AwardsController < Admin::ApplicationController
 
   def destroy
     @award.destroy
-    redirect_to admin_employee_achievement_and_honors_2_path,
+    redirect_to referrer,
       notice: 'Award record was successfully deleted.'     
   end
 
 
   private
 
-  def set_employee
-    @employee = Employee.find(params[:employee_id])
+  
+  def award_params
+    params.require(:award).permit(:name, :level,
+                                  :date_awarded, :description)
   end
 
   def set_award
     @award = @employee.awards.find(params[:id])
   end
 
-  def award_params
-    params.require(:award).permit(:name, :level,
-                                  :date_awarded, :description)
+  def set_employee
+    @employee = Employee.find(params[:employee_id])
   end
 
 end

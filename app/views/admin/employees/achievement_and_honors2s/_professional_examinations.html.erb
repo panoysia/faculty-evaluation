@@ -19,21 +19,9 @@
         <td><%= date_format_readable(examination.date_passed) %></td>
         <td><%= examination.category_to_string %></td>
         <td>
-          <%= link_to edit_admin_employee_professional_examination_path(
-                        @employee, examination
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_professional_examination_path(
-                        @employee, examination
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
-        </td>        
+          <%= render "admin/employees/action_links",
+                        record: examination, employee: examination.employee %>
+        </td>
       </tr>
     <% end %>
   </tbody>

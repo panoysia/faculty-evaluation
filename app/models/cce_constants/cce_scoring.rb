@@ -15,33 +15,34 @@ module CCEConstants
 
     HONORS_1 = [
       Employee::Training,
-      Employee::CreativeWork,
-      Employee::Discovery,
-      Employee::Innovation,
-      Employee::InstructionalManual,
       Employee::Invention,
+      Employee::Discovery,
+      Employee::CreativeWork,
+      Employee::Innovation,
       Employee::Publication,
-      Employee::TechnicalArticle
+      Employee::TechnicalArticle,
+      Employee::InstructionalManual
     ]
 
     HONORS_2 = [
+      Employee::ProfessionalMembership,
       Employee::AcademicHonor,
+      Employee::Scholarship,
       Employee::Award,
       Employee::CommunityOutreach,
-      Employee::ProfessionalExamination,
-      Employee::ProfessionalMembership,
-      Employee::Scholarship
+      Employee::ProfessionalExamination
     ]
 
     EXPERT_SERVICES = [
+      Employee::ConsultancyService,
+      Employee::ProfessionalService,
       Employee::AcademicAdvisory,
+      Employee::ProfessionalReview,
       Employee::AccreditationService,
       Employee::AssessorService,
-      Employee::ProfessionalReview,
-      Employee::ProfessionalService,
-      Employee::TrainerService,
+      Employee::TrainerService
     ]
-    
+
     ACHIEVEMENTS = [*HONORS_1, *HONORS_2, *EXPERT_SERVICES]
   end  
 end

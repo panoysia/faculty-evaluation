@@ -46,8 +46,7 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
-      <!-- <h5 class="page-header">Academic Work Experiences</h5> -->
+    <div id="academic-degrees" class="col-md-12">
       <%= render partial: "educations/academic_degrees",
             locals: { academic_degrees: @cce_record.academic_degrees,
                       employee: @cce_record.employee 
@@ -56,7 +55,7 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="additional-degrees" class="col-md-12">
       <%= render partial: "educations/additional_degrees",
             locals: { additional_degrees: @cce_record.additional_degrees,
                       employee: @cce_record.employee
@@ -65,7 +64,7 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12"> 
+    <div id="additional-credits" class="col-md-12">
       <%= render partial: "educations/additional_credits",
             locals: { additional_credits: @cce_record.additional_credits,
                       employee: @cce_record.employee
@@ -84,7 +83,7 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="academic-work-experiences" class="col-md-12">
       <%= render partial: "work_experiences/academic_work_experiences",
             locals: { 
                       work_experiences: @cce_record.academic_work_experiences,
@@ -94,7 +93,7 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="admin-work-experiences" class="col-md-12">
       <%= render partial: "work_experiences/admin_work_experiences",
             locals: { 
                       work_experiences: @cce_record.admin_work_experiences,
@@ -104,7 +103,7 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="professional-work-experiences" class="col-md-12">
       <%= render \
             partial: "work_experiences/professional_work_experiences",
             locals: { 
@@ -115,7 +114,7 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="public-private-work-experiences" class="col-md-12">
       <%= render \
             partial: "work_experiences/public_private_work_experiences",
             locals: { 
@@ -136,7 +135,7 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="trainings" class="col-md-12">
       <%= render partial: "achievements/trainings",
             locals: { achievements: @cce_record.trainings,
                       employee: @cce_record.employee 
@@ -145,43 +144,7 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/creative_works",
-            locals: { achievements: @cce_record.creative_works,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/discoveries",
-            locals: { achievements: @cce_record.discoveries,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/innovations",
-            locals: { achievements: @cce_record.innovations,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/instructional_manuals",
-            locals: { achievements: @cce_record.instructional_manuals,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="inventions" class="col-md-12">
       <%= render partial: "achievements/inventions",
             locals: { achievements: @cce_record.inventions,
                       employee: @cce_record.employee 
@@ -190,7 +153,34 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="discoveries" class="col-md-12">
+      <%= render partial: "achievements/discoveries",
+            locals: { achievements: @cce_record.discoveries,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="creative-works" class="col-md-12">
+      <%= render partial: "achievements/creative_works",
+            locals: { achievements: @cce_record.creative_works,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="innovations" class="col-md-12">
+      <%= render partial: "achievements/innovations",
+            locals: { achievements: @cce_record.innovations,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="publications" class="col-md-12">
       <%= render partial: "achievements/publications",
             locals: { achievements: @cce_record.publications,
                       employee: @cce_record.employee 
@@ -199,7 +189,7 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="technical-articles" class="col-md-12">
       <%= render partial: "achievements/technical_articles",
             locals: { achievements: @cce_record.technical_articles,
                       employee: @cce_record.employee 
@@ -208,46 +198,16 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/academic_honors",
-            locals: { achievements: @cce_record.academic_honors,
+    <div id="instructional-manuals" class="col-md-12">
+      <%= render partial: "achievements/instructional_manuals",
+            locals: { achievements: @cce_record.instructional_manuals,
                       employee: @cce_record.employee 
                     }
       %>
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/awards",
-            locals: { achievements: @cce_record.awards,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/community_outreaches",
-            locals: { achievements: @cce_record.community_outreaches,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render \
-            partial: "achievements/professional_examinations",
-            locals: {
-                      achievements: @cce_record.
-                        professional_examinations,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="professional-memberships" class="col-md-12">
       <%= render \
             partial: "achievements/professional_memberships",
             locals: {
@@ -259,7 +219,16 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="academic-honors" class="col-md-12">
+      <%= render partial: "achievements/academic_honors",
+            locals: { achievements: @cce_record.academic_honors,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="scholarships" class="col-md-12">
       <%= render partial: "achievements/scholarships",
             locals: { achievements: @cce_record.scholarships,
                       employee: @cce_record.employee 
@@ -268,43 +237,46 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/academic_advisories",
-            locals: { achievements: @cce_record.academic_advisories,
+    <div id="awards" class="col-md-12">
+      <%= render partial: "achievements/awards",
+            locals: { achievements: @cce_record.awards,
                       employee: @cce_record.employee 
                     }
       %>
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/accreditation_services",
-            locals: { achievements: @cce_record.accreditation_services,
+    <div id="community-outreaches" class="col-md-12">
+      <%= render partial: "achievements/community_outreaches",
+            locals: { achievements: @cce_record.community_outreaches,
                       employee: @cce_record.employee 
                     }
       %>
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/assessor_services",
-            locals: { achievements: @cce_record.assessor_services,
+    <div id="professional-examinations" class="col-md-12">
+      <%= render \
+            partial: "achievements/professional_examinations",
+            locals: {
+                      achievements: @cce_record.
+                        professional_examinations,
                       employee: @cce_record.employee 
                     }
       %>
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
-      <%= render partial: "achievements/professional_reviews",
-            locals: { achievements: @cce_record.professional_reviews,
+    <div id="consultancy-services" class="col-md-12">
+      <%= render partial: "achievements/consultancy_services",
+            locals: { achievements: @cce_record.consultancy_services,
                       employee: @cce_record.employee 
                     }
       %>
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="professional-services" class="col-md-12">
       <%= render partial: "achievements/professional_services",
             locals: { achievements: @cce_record.professional_services,
                       employee: @cce_record.employee 
@@ -313,7 +285,43 @@
     </div>
   </div>
   <div class="row subcategory">
-    <div class="col-md-12">
+    <div id="academic-advisories" class="col-md-12">
+      <%= render partial: "achievements/academic_advisories",
+            locals: { achievements: @cce_record.academic_advisories,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="professional-reviews" class="col-md-12">
+      <%= render partial: "achievements/professional_reviews",
+            locals: { achievements: @cce_record.professional_reviews,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="accreditation-services" class="col-md-12">
+      <%= render partial: "achievements/accreditation_services",
+            locals: { achievements: @cce_record.accreditation_services,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="assessor-services" class="col-md-12">
+      <%= render partial: "achievements/assessor_services",
+            locals: { achievements: @cce_record.assessor_services,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="trainer-services" class="col-md-12">
       <%= render partial: "achievements/trainer_services",
             locals: { achievements: @cce_record.trainer_services,
                       employee: @cce_record.employee 

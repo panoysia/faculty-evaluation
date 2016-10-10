@@ -15,28 +15,29 @@ class Employee::CCERecord
 
   ACHIEVEMENTS = %i(
     trainings
-    creative_works
-    discoveries
-    innovations
-    instructional_manuals
     inventions
+    discoveries
+    creative_works
+    innovations
     publications
     technical_articles
+    instructional_manuals
+    professional_memberships
     academic_honors
+    scholarships
     awards
     community_outreaches
     professional_examinations
-    professional_memberships
-    scholarships
+    consultancy_services
+    professional_services
     academic_advisories
+    professional_reviews
     accreditation_services
     assessor_services
-    professional_reviews
-    professional_services
-    trainer_services    
+    trainer_services
   )
 
-  attr_reader :employee
+  attr_reader :employee, :nbc_id
   delegate *EDUCATIONS, *WORK_EXPERIENCES, *ACHIEVEMENTS,
             to: :employee
 
@@ -45,7 +46,13 @@ class Employee::CCERecord
     @employee = employee
   end
 
+  # def initialize(employee, nbc_id = nil)
+  #   @employee = employee
+  #   @nbc_id = nbc_id
+  # end
+
   def total_educations_score
+    # employee.cce_scorings.with_nbc(nbc_id).educations.sum(:points)
     employee.cce_scorings.educations.sum(:points)
   end
 

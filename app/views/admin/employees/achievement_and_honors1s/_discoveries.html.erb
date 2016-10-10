@@ -18,20 +18,8 @@
         <td><%= discovery.year_patented %></td>
         <td><%= discovery.description %></td>
         <td>
-          <%= link_to edit_admin_employee_discovery_path(
-                        @employee, discovery
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_discovery_path(
-                        @employee, discovery
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
+          <%= render "admin/employees/action_links",
+                        record: discovery, employee: discovery.employee %>
         </td>
       </tr>
     <% end %>

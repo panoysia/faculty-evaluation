@@ -1,5 +1,7 @@
 class Admin::Employees::DiscoveriesController < Admin::ApplicationController
 
+  include CCE::AchievementAndHonor1
+
   before_action :set_employee
   before_action :set_discovery, only: [:edit, :update, :destroy]
 
@@ -26,7 +28,7 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
 
   def update
     if @discovery.update(discovery_params)
-      redirect_to admin_employee_achievement_and_honors_1_path,
+      redirect_to referrer,
         notice: 'Discovery record was successfully updated.'
     else
       render :edit
@@ -35,15 +37,17 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
 
   def destroy
     @discovery.destroy
-    redirect_to admin_employee_achievement_and_honors_1_path,
+    redirect_to referrer,
       notice: 'Discovery record was successfully deleted.'     
   end
 
 
   private
 
-  def set_employee
-    @employee = Employee.find(params[:employee_id])
+
+  def discovery_params
+    params.require(:discovery).permit(:name, :patent_no, :year_patented,
+                                      :description, criterium_ids: [])
   end
 
   def set_discovery
@@ -51,9 +55,8 @@ class Admin::Employees::DiscoveriesController < Admin::ApplicationController
     @discovery = @employee.discoveries.find(params[:id])
   end
 
-  def discovery_params
-    params.require(:discovery).permit(:name, :patent_no, :year_patented,
-                                      :description, criterium_ids: [])
+  def set_employee
+    @employee = Employee.find(params[:employee_id])
   end
 
 end

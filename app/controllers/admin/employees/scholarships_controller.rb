@@ -1,5 +1,7 @@
 class Admin::Employees::ScholarshipsController < Admin::ApplicationController
 
+  include CCE::AchievementAndHonor2
+
   before_action :set_employee
   before_action :set_scholarship, only: [:edit, :update, :destroy]
 
@@ -30,7 +32,7 @@ class Admin::Employees::ScholarshipsController < Admin::ApplicationController
 
   def update
     if @scholarship.update(scholarship_params)
-      redirect_to admin_employee_achievement_and_honors_2_path,
+      redirect_to referrer,
         notice: 'Scholarship record was successfully updated.'
     else
       render :edit
@@ -39,12 +41,19 @@ class Admin::Employees::ScholarshipsController < Admin::ApplicationController
 
   def destroy
     @scholarship.destroy
-    redirect_to admin_employee_achievement_and_honors_2_path,
+    redirect_to referrer,
       notice: 'Scholarship record was successfully deleted.'     
   end
 
 
   private
+
+
+  def scholarship_params
+    params.require(:scholarship).permit(:title, :sponsoring_agency,
+                                        :date_granted, :scholarship_type,
+                                        :degree_type)
+  end
 
   def set_employee
     @employee = Employee.find(params[:employee_id])
@@ -52,12 +61,6 @@ class Admin::Employees::ScholarshipsController < Admin::ApplicationController
 
   def set_scholarship
     @scholarship = @employee.scholarships.find(params[:id])
-  end
-
-  def scholarship_params
-    params.require(:scholarship).permit(:title, :sponsoring_agency,
-                                        :date_granted, :scholarship_type,
-                                        :degree_type)
   end
 
 end

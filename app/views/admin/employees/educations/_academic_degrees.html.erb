@@ -22,20 +22,8 @@
         <td><%= date_format_readable(degree.end_at) %></td>
         <td><%= date_format_readable(degree.graduated_at) if degree.graduated_at.present?  %></td>
         <td>
-          <%= link_to edit_admin_employee_academic_degree_path(
-                        @employee, degree
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_academic_degree_path(
-                        @employee, degree
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
+          <%= render "admin/employees/action_links",
+                        record: degree, employee: degree.employee %>
         </td>
       </tr>
     <% end %>

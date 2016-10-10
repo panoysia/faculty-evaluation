@@ -1,5 +1,7 @@
 <%= form_for [:admin, @employee, @discovery] do |f| %>
   <%= error_messages_for(@discovery) %>
+
+  <%= hidden_field_tag :redirect, params[:redirect] %>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
@@ -34,7 +36,7 @@
             maxlength: Employee::Discovery.get_field_limit_of(:patent_no) %>
       </div>
     </div>
-  </div>  
+  </div>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
@@ -58,7 +60,7 @@
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
-        <%= f.submit class: 'btn btn-primary' %>    
+        <%= f.submit class: 'btn btn-primary' %>
       </div>
     </div>
   </div>

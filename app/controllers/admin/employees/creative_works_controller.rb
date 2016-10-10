@@ -1,5 +1,7 @@
 class Admin::Employees::CreativeWorksController < Admin::ApplicationController
 
+  include CCE::AchievementAndHonor1
+
   before_action :set_employee
   before_action :set_creative_work, only: [:edit, :update, :destroy]
 
@@ -26,7 +28,7 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
 
   def update
     if @creative_work.update(creative_work_params)
-      redirect_to admin_employee_achievement_and_honors_1_path,
+      redirect_to referrer,
         notice: 'Creative work record was successfully updated.'
     else
       render :edit
@@ -35,26 +37,27 @@ class Admin::Employees::CreativeWorksController < Admin::ApplicationController
 
   def destroy
     @creative_work.destroy
-    redirect_to admin_employee_achievement_and_honors_1_path,
+    redirect_to referrer,
       notice: 'Creative work record was successfully deleted.'
   end
 
 
   private
 
-  def set_employee
-    @employee = Employee.find(params[:employee_id])
-  end
-
-  def set_creative_work
-    @creative_work = @employee.creative_works.find(params[:id])
-  end
 
   def creative_work_params
     params.require(:creative_work).permit(:name, :patent_no,
                                           :competitiveness,
                                           :year_patented, :description,
                                           criterium_ids: [])
+  end
+
+  def set_creative_work
+    @creative_work = @employee.creative_works.find(params[:id])
+  end
+
+  def set_employee
+    @employee = Employee.find(params[:employee_id])
   end
 
 end

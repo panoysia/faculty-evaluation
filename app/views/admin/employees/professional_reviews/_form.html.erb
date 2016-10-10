@@ -1,5 +1,7 @@
 <%= form_for [:admin, @employee, @review] do |f| %>
   <%= error_messages_for(@review) %>
+
+  <%= hidden_field_tag :redirect, params[:redirect] %>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">

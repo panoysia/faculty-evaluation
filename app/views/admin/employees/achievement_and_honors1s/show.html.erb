@@ -1,10 +1,10 @@
-<div id="creative-works" class="category">
+<div id="inventions" class="category">
   <div class="row">
     <div class="col-md-12">
       <h4 class="page-header">
-        <span>Creative Works</span>
+        <span>Inventions</span>
         <span class="pull-right">
-          <%= link_to new_admin_employee_creative_work_path,
+          <%= link_to new_admin_employee_invention_path,
             class: 'btn btn-primary btn-xs' do %>
             <span class="glyphicon glyphicon-plus"></span> New
           <% end %>
@@ -14,10 +14,10 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'creative_works' %>
+      <%= render "inventions" %>    
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
-</div>  <!-- #creative-works.category -->
+</div>  <!-- #inventions.category -->
 
 <div id="discoveries" class="category">
   <div class="row">
@@ -35,10 +35,31 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'discoveries' %>
+      <%= render "discoveries" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
 </div>  <!-- #discoveries.category -->
+
+<div id="creative-works" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Creative Works</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_creative_work_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render "creative_works" %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+</div>  <!-- #creative-works.category -->
 
 <div id="innovations" class="category">
   <div class="row">
@@ -56,52 +77,10 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'innovations' %>
+      <%= render "innovations" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
 </div>  <!-- #innovations.category -->
-
-<div id="instructional-manuals" class="category">
-  <div class="row">
-    <div class="col-md-12">
-      <h4 class="page-header">
-        <span>Instructional Manuals</span>
-        <span class="pull-right">
-          <%= link_to new_admin_employee_instructional_manual_path,
-            class: 'btn btn-primary btn-xs' do %>
-            <span class="glyphicon glyphicon-plus"></span> New
-          <% end %>
-        </span>
-      </h4>
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-  <div class="row">
-    <div class="col-md-12">
-      <%= render 'instructional_manuals' %>
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->  
-</div>  <!-- #instructional-manuals.category -->
-
-<div id="inventions" class="category">
-  <div class="row">
-    <div class="col-md-12">
-      <h4 class="page-header">
-        <span>Inventions</span>
-        <span class="pull-right">
-          <%= link_to new_admin_employee_invention_path,
-            class: 'btn btn-primary btn-xs' do %>
-            <span class="glyphicon glyphicon-plus"></span> New
-          <% end %>
-        </span>
-      </h4>      
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-  <div class="row">
-    <div class="col-md-12">
-      <%= render 'inventions' %>    
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-</div>  <!-- #inventions.category -->
 
 <div id="publications" class="category">
   <div class="row">
@@ -119,7 +98,7 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'publications' %>
+      <%= render "publications" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->  
 </div>  <!-- #publications.category -->
@@ -140,7 +119,28 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'technical_articles' %>
+      <%= render "technical_articles" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->  
 </div>  <!-- #technical-articles.category -->
+
+<div id="instructional-manuals" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Instructional Manuals</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_instructional_manual_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render "instructional_manuals" %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->  
+</div>  <!-- #instructional-manuals.category -->

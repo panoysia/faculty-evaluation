@@ -1,5 +1,7 @@
 class Admin::Employees::ProfessionalExaminationsController < Admin::ApplicationController
 
+  include CCE::AchievementAndHonor2
+
   before_action :set_employee
   before_action :set_examination, only: [:edit, :update, :destroy]
 
@@ -31,7 +33,7 @@ class Admin::Employees::ProfessionalExaminationsController < Admin::ApplicationC
 
   def update
     if @examination.update(examination_params)
-      redirect_to admin_employee_achievement_and_honors_2_path,
+      redirect_to referrer,
         notice: 'Prof. Examination record was successfully updated.'
     else
       render :edit
@@ -40,24 +42,25 @@ class Admin::Employees::ProfessionalExaminationsController < Admin::ApplicationC
 
   def destroy
     @examination.destroy
-    redirect_to admin_employee_achievement_and_honors_2_path,
+    redirect_to referrer,
       notice: 'Prof. Examination record was successfully deleted.'     
   end
 
 
   private
 
+
+  def examination_params
+    params.require(:professional_examination).permit(:title, :agency_name,
+                                            :date_passed, :category)
+  end
+  
   def set_employee
     @employee = Employee.find(params[:employee_id])
   end
 
   def set_examination
     @examination = @employee.professional_examinations.find(params[:id])
-  end
-
-  def examination_params
-    params.require(:professional_examination).permit(:title, :agency_name,
-                                            :date_passed, :category)
   end
 
 end

@@ -1,5 +1,7 @@
 class Admin::Employees::ProfessionalReviewsController < Admin::ApplicationController
 
+  include CCE::ExpertService
+
   before_action :set_employee
   before_action :set_review, only: [:edit, :update, :destroy]
 
@@ -26,7 +28,7 @@ class Admin::Employees::ProfessionalReviewsController < Admin::ApplicationContro
 
   def update
     if @review.update(review_params)
-      redirect_to admin_employee_expert_services_path,
+      redirect_to referrer,
         notice: 'Prof. review record was successfully updated.'
     else
       render :edit
@@ -35,12 +37,18 @@ class Admin::Employees::ProfessionalReviewsController < Admin::ApplicationContro
 
   def destroy
     @review.destroy
-    redirect_to admin_employee_expert_services_path,
+    redirect_to referrer,
       notice: 'Prof. review record was successfully deleted.'
   end
 
 
   private
+
+
+  def review_params
+    params.require(:professional_review).permit(:name, :review_type,
+                                                :occurred_at)
+  end
 
   def set_employee
     @employee = Employee.find(params[:employee_id])
@@ -48,11 +56,6 @@ class Admin::Employees::ProfessionalReviewsController < Admin::ApplicationContro
 
   def set_review
     @review = @employee.professional_reviews.find(params[:id])
-  end
-
-  def review_params
-    params.require(:professional_review).permit(:name, :review_type,
-                                                :occurred_at)
   end
 
 end

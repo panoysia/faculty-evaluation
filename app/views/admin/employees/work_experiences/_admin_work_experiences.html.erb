@@ -19,21 +19,10 @@
         <td><%= date_format_readable(work_experience.start_at) %></td>
         <td><%= date_format_readable(work_experience.end_at) %></td>
         <td>
-          <%= link_to edit_admin_employee_admin_work_experience_path(
-                @employee, work_experience
-              ),
-              title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_admin_work_experience_path(
-                  @employee, work_experience
-                ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip',
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
-        </td>                
+          <%= render "admin/employees/action_links",
+                        record: work_experience,
+                        employee: work_experience.employee %>
+        </td>
       </tr>
     <% end %>
   </tbody>

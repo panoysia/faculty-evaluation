@@ -1,5 +1,7 @@
 class Admin::Employees::CommunityOutreachesController < Admin::ApplicationController
 
+  include CCE::AchievementAndHonor2
+
   before_action :set_employee
   before_action :set_outreach, only: [:edit, :update, :destroy]
 
@@ -31,7 +33,7 @@ class Admin::Employees::CommunityOutreachesController < Admin::ApplicationContro
 
   def update
     if @outreach.update(outreach_params)
-      redirect_to admin_employee_achievement_and_honors_2_path,
+      redirect_to referrer,
         notice: 'Community outreach record was successfully updated.'
     else
       render :edit
@@ -40,12 +42,20 @@ class Admin::Employees::CommunityOutreachesController < Admin::ApplicationContro
 
   def destroy
     @outreach.destroy
-    redirect_to admin_employee_achievement_and_honors_2_path,
+    redirect_to referrer,
       notice: 'Community outreach record was successfully deleted.'     
   end
 
 
   private
+
+
+  def outreach_params
+    params.require(:community_outreach).permit(:project_name,
+                                                :participation,
+                                                :sponsoring_agency,
+                                                :start_at, :end_at)
+  end
 
   def set_employee
     @employee = Employee.find(params[:employee_id])
@@ -53,13 +63,6 @@ class Admin::Employees::CommunityOutreachesController < Admin::ApplicationContro
 
   def set_outreach
     @outreach = @employee.community_outreaches.find(params[:id])
-  end
-
-  def outreach_params
-    params.require(:community_outreach).permit(:project_name,
-                                                :participation,
-                                                :sponsoring_agency,
-                                                :start_at, :end_at)
   end
 
 end

@@ -1,0 +1,31 @@
+<table class="table table-striped table-bordered table-master">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Level</th>
+      <th>Participation</th>
+      <th>Sponsoring Agency</th>
+      <th>Start</th>
+      <th>End</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employee.consultancy_services.each_with_index do |service, index| %>
+      <tr>
+        <td><%= index += 1 %></td>
+        <td><%= service.title %></td>
+        <td><%= service.level_to_string %></td>
+        <td><%= service.nature_of_participation %></td>
+        <td><%= service.sponsoring_agency %></td>
+        <td><%= date_format_readable(service.start_at) %></td>
+        <td><%= date_format_readable(service.end_at) %></td>
+        <td>
+          <%= render "admin/employees/action_links",
+                        record: service, employee: service.employee %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

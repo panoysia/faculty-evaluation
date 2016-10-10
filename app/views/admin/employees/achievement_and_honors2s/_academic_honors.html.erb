@@ -21,20 +21,9 @@
         <td><%= academic_honor.school %></td>
         <td><%= date_format_readable(academic_honor.date_awarded) %></td>
         <td>
-          <%= link_to edit_admin_employee_academic_honor_path(
-                        @employee, academic_honor
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_academic_honor_path(
-                        @employee, academic_honor
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
+          <%= render "admin/employees/action_links",
+                        record: academic_honor,
+                        employee: academic_honor.employee %>
         </td>
       </tr>
     <% end %>

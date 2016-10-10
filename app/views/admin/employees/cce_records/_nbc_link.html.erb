@@ -1,0 +1,5 @@
+<% if record.nbc_id.present? %>
+  <%= link_to record.nbc_name, admin_nbc_path(record.nbc_id) %>
+<% else %>
+  <span class="label label-info">unrecorded</span>
+<% end %>

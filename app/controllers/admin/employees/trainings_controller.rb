@@ -1,5 +1,7 @@
 class Admin::Employees::TrainingsController < Admin::ApplicationController
 
+  include CCE::Education
+
   before_action :set_employee
   before_action :set_training, only: [:show, :edit, :update, :destroy]
   
@@ -33,7 +35,7 @@ class Admin::Employees::TrainingsController < Admin::ApplicationController
 
   def update
     if @training.update(training_params)
-      redirect_to admin_employee_educations_path,
+      redirect_to referrer,
         notice: 'Training was successfully updated.'
     else
       render :edit
@@ -42,7 +44,7 @@ class Admin::Employees::TrainingsController < Admin::ApplicationController
 
   def destroy
     @training.destroy
-    redirect_to admin_employee_educations_path,
+    redirect_to referrer,
       notice: 'Training was successfully deleted.' 
   end
 

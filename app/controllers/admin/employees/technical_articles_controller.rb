@@ -1,5 +1,7 @@
 class Admin::Employees::TechnicalArticlesController < Admin::ApplicationController
 
+  include CCE::AchievementAndHonor1
+
   before_action :set_employee
   before_action :set_technical_article, only: [:edit, :update, :destroy]
   
@@ -26,7 +28,7 @@ class Admin::Employees::TechnicalArticlesController < Admin::ApplicationControll
 
   def update
     if @technical_article.update(technical_article_params)
-      redirect_to admin_employee_achievement_and_honors_1_path,
+      redirect_to referrer,
         notice: 'Technical article record was successfully updated.'
     else
       render :edit
@@ -35,7 +37,7 @@ class Admin::Employees::TechnicalArticlesController < Admin::ApplicationControll
 
   def destroy
     @technical_article.destroy
-    redirect_to admin_employee_achievement_and_honors_1_path,
+    redirect_to referrer,
       notice: 'Technical article record was successfully deleted.'
   end
 

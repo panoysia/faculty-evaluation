@@ -19,20 +19,8 @@
         <td><%= membership.organization_type_to_string %></td>
         <td><%= membership.membership_type_to_string %></td>
         <td>
-          <%= link_to edit_admin_employee_professional_membership_path(
-                        @employee, membership
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_professional_membership_path(
-                        @employee, membership
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
+          <%= render "admin/employees/action_links",
+                        record: membership, employee: membership.employee %>
         </td>
       </tr>
     <% end %>

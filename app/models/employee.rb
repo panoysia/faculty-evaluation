@@ -118,6 +118,7 @@ class Employee < ApplicationRecord
   has_many :assessor_services, dependent: :destroy
   has_many :professional_reviews, dependent: :destroy
   has_many :professional_services, dependent: :destroy
+  has_many :consultancy_services, dependent: :destroy
   has_many :trainer_services, dependent: :destroy
 
   has_many :evaluations, dependent: :destroy

@@ -20,7 +20,7 @@
   <tbody>
     <% achievements.includes(cce_scoring: :nbc).
           each_with_index do |training, index| %>
-      <tr>
+      <tr <%= "class=info" unless training.cce_scoring.recorded? %>>
         <td><%= index += 1 %></td>
         <td><%= training.title %></td>
         <td><%= training.level_to_string %></td>
@@ -30,23 +30,9 @@
         <td><%= training.conducted_by %></td>
         <td><%= training.nature_of_participation %></td>
         <td class="text-right"><%= training.cce_scoring.points %></td>
+        <td><%= render "nbc_link", record: training.cce_scoring %></td>
         <td>
-          <%= link_to training.cce_scoring.nbc_name,
-                admin_nbc_path(training.cce_scoring.nbc_id) %>
-        </td>        
-        <td>
-          <%= link_to edit_admin_employee_training_path(
-                employee, training
-              ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_training_path(employee, training),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
+          <%= render("action_links", record: training, employee: employee) unless training.cce_scoring.recorded? %>
         </td>
       </tr>
     <% end %>

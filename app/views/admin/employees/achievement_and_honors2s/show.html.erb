@@ -1,3 +1,24 @@
+<div id="professional-memberships" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Professional Memberships</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_professional_membership_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render "professional_memberships" %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+</div>  <!-- #professional-memberships.category -->
+
 <div id="academic-honors" class="category">
   <div class="row">
     <div class="col-md-12">
@@ -14,10 +35,31 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'academic_honors' %>
+      <%= render "academic_honors" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
 </div>  <!-- #academic-honors.category -->
+
+<div id="scholarships" class="category">
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="page-header">
+        <span>Scholarships</span>
+        <span class="pull-right">
+          <%= link_to new_admin_employee_scholarship_path,
+            class: 'btn btn-primary btn-xs' do %>
+            <span class="glyphicon glyphicon-plus"></span> New
+          <% end %>
+        </span>
+      </h4>      
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+  <div class="row">
+    <div class="col-md-12">
+      <%= render "scholarships" %>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->  
+</div>  <!-- #scholarships.category -->
 
 <div id="awards" class="category">
   <div class="row">
@@ -35,7 +77,7 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'awards' %>
+      <%= render "awards" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
 </div>  <!-- #awards.category -->
@@ -56,7 +98,7 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'community_outreaches' %>
+      <%= render "community_outreaches" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->
 </div>  <!-- #community-outreaches.category -->
@@ -77,49 +119,7 @@
   </div>  <!-- .row -->
   <div class="row">
     <div class="col-md-12">
-      <%= render 'professional_examinations' %>
+      <%= render "professional_examinations" %>
     </div>  <!-- .col-md-12 -->
   </div>  <!-- .row -->  
 </div>  <!-- #professional-examinations.category -->
-
-<div id="professional-memberships" class="category">
-  <div class="row">
-    <div class="col-md-12">
-      <h4 class="page-header">
-        <span>Professional Memberships</span>
-        <span class="pull-right">
-          <%= link_to new_admin_employee_professional_membership_path,
-            class: 'btn btn-primary btn-xs' do %>
-            <span class="glyphicon glyphicon-plus"></span> New
-          <% end %>
-        </span>
-      </h4>      
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-  <div class="row">
-    <div class="col-md-12">
-      <%= render 'professional_memberships' %>    
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-</div>  <!-- #professional-memberships.category -->
-
-<div id="scholarships" class="category">
-  <div class="row">
-    <div class="col-md-12">
-      <h4 class="page-header">
-        <span>Scholarships</span>
-        <span class="pull-right">
-          <%= link_to new_admin_employee_scholarship_path,
-            class: 'btn btn-primary btn-xs' do %>
-            <span class="glyphicon glyphicon-plus"></span> New
-          <% end %>
-        </span>
-      </h4>      
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->
-  <div class="row">
-    <div class="col-md-12">
-      <%= render 'scholarships' %>
-    </div>  <!-- .col-md-12 -->
-  </div>  <!-- .row -->  
-</div>  <!-- #scholarships.category -->

@@ -1,5 +1,7 @@
 class Admin::Employees::ProfessionalServicesController < Admin::ApplicationController
 
+  include CCE::ExpertService
+
   before_action :set_employee
   before_action :set_service, only: [:edit, :update, :destroy]
 
@@ -26,7 +28,7 @@ class Admin::Employees::ProfessionalServicesController < Admin::ApplicationContr
 
   def update
     if @service.update(service_params)
-      redirect_to admin_employee_expert_services_path,
+      redirect_to referrer,
         notice: 'Prof. service record was successfully updated.'
     else
       render :edit
@@ -35,20 +37,13 @@ class Admin::Employees::ProfessionalServicesController < Admin::ApplicationContr
 
   def destroy
     @service.destroy
-    redirect_to admin_employee_expert_services_path,
+    redirect_to referrer,
       notice: 'Prof. service record was successfully deleted.'
   end
 
 
   private
 
-  def set_employee
-    @employee = Employee.find(params[:employee_id])
-  end
-
-  def set_service
-    @service = @employee.professional_services.find(params[:id])
-  end
 
   def service_params
     params.require(:professional_service).permit(:title, :service_type,
@@ -56,6 +51,14 @@ class Admin::Employees::ProfessionalServicesController < Admin::ApplicationContr
                                                 :nature_of_participation,
                                                 :sponsoring_agency,
                                                 :start_at, :end_at)
+  end
+
+  def set_employee
+    @employee = Employee.find(params[:employee_id])
+  end
+
+  def set_service
+    @service = @employee.professional_services.find(params[:id])
   end
 
 end

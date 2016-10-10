@@ -20,21 +20,9 @@
         <td><%= scholarship.scholarship_type_to_string %></td>
         <td><%= scholarship.degree_type_to_string %></td>
         <td>
-          <%= link_to edit_admin_employee_scholarship_path(
-                        @employee, scholarship
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_scholarship_path(
-                        @employee, scholarship
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
-        </td>        
+          <%= render "admin/employees/action_links",
+                        record: scholarship, employee: scholarship.employee %>
+        </td>
       </tr>
     <% end %>
   </tbody>

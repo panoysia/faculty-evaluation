@@ -18,22 +18,11 @@
         <td><%= date_format_readable(technical_article.published_at) %></td>
         <td><%= technical_article.description %></td>
         <td>
-          <%= link_to edit_admin_employee_technical_article_path(
-                        @employee, technical_article
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_technical_article_path(
-                        @employee, technical_article
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
+          <%= render "admin/employees/action_links",
+                        record: technical_article,
+                        employee: technical_article.employee %>
         </td>
       </tr>
-    <% end %>    
+    <% end %>
   </tbody>
 </table>

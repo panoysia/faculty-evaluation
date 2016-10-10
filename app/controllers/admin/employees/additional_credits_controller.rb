@@ -1,5 +1,7 @@
 class Admin::Employees::AdditionalCreditsController < Admin::ApplicationController
 
+  include CCE::Education
+
   before_action :set_employee
   before_action :set_credit, only: [:edit, :update, :destroy]
 
@@ -26,7 +28,7 @@ class Admin::Employees::AdditionalCreditsController < Admin::ApplicationControll
 
   def update
     if @credit.update(credit_params)
-      redirect_to admin_employee_educations_path,
+      redirect_to referrer,
         notice: 'Additional credit record was successfully updated.'
     else
       render :edit
@@ -35,24 +37,25 @@ class Admin::Employees::AdditionalCreditsController < Admin::ApplicationControll
 
   def destroy
     @credit.destroy
-    redirect_to admin_employee_educations_path,
+    redirect_to referrer,
       notice: 'Additional credit record was successfully deleted.'
   end
 
 
   private
 
-  def set_employee
-    @employee = Employee.find(params[:employee_id])
+
+  def credit_params
+    params.require(:additional_credit).permit(:institution, :degree,
+                                              :no_of_units)
   end
 
   def set_credit
     @credit = @employee.additional_credits.find(params[:id])
   end
 
-  def credit_params
-    params.require(:additional_credit).permit(:institution, :degree,
-                                              :no_of_units)
+  def set_employee
+    @employee = Employee.find(params[:employee_id])
   end
 
 end

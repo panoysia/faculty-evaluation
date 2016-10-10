@@ -18,20 +18,8 @@
         <td><%= date_format_readable(advisory.start_at) %></td>
         <td><%= date_format_readable(advisory.end_at) %></td>
         <td>
-          <%= link_to edit_admin_employee_academic_advisory_path(
-                        @employee, advisory
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_academic_advisory_path(
-                        @employee, advisory
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
+          <%= render "admin/employees/action_links",
+                        record: advisory, employee: advisory.employee %>
         </td>
       </tr>
     <% end %>

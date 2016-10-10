@@ -7,6 +7,9 @@ module CCEScorable
     has_one :cce_scoring, as: :cce_scorable,
                           class_name: Employee::CCEScoring,
                           dependent: :destroy
+
+    delegate :nbc_name, :recorded?, to: :cce_scoring,
+                                    allow_nil: true
   end
 
 end

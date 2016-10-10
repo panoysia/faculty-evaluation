@@ -1,5 +1,7 @@
 <%= form_for [:admin, @employee, @creative_work] do |f| %>
   <%= error_messages_for(@creative_work) %>
+
+  <%= hidden_field_tag :redirect, params[:redirect] %>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
@@ -15,7 +17,7 @@
     <div class="col-md-5">
       <div class="form-group">
         <%= f.label :criteria, 'Criteria' %>
-        <%= f.collection_check_boxes :criterium_ids, 
+        <%= f.collection_check_boxes :criterium_ids,
             Employee::CreativeWorkCriterium.all,
             :id, :description do |b| %>
           <div class="collection-check-box">

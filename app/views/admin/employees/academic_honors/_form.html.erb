@@ -1,5 +1,7 @@
 <%= form_for [:admin, @employee, @academic_honor] do |f| %>
-  <%= error_messages_for(@academic_honor) %>  
+  <%= error_messages_for(@academic_honor) %>
+
+  <%= hidden_field_tag :redirect, params[:redirect] %>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">

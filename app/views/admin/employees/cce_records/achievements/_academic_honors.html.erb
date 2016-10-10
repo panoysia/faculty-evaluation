@@ -18,7 +18,7 @@
   <tbody>
     <% achievements.includes(cce_scoring: :nbc).
           each_with_index do |academic_honor, index| %>
-      <tr>
+      <tr <%= "class=info" unless academic_honor.cce_scoring.recorded? %>>
         <td><%= index += 1 %></td>
         <td><%= academic_honor.award %></td>
         <td><%= academic_honor.degree_type_to_string %></td>
@@ -26,26 +26,10 @@
         <td><%= academic_honor.school %></td>
         <td><%= date_format_readable(academic_honor.date_awarded) %></td>
         <td class="text-right"><%= academic_honor.cce_scoring.points %></td>
+        <td><%= render "nbc_link", record: academic_honor.cce_scoring %></td>
         <td>
-          <%= link_to academic_honor.cce_scoring.nbc_name,
-                admin_nbc_path(academic_honor.cce_scoring.nbc_id) %>
+          <%= render("action_links", record: academic_honor, employee: employee) unless academic_honor.cce_scoring.recorded? %>
         </td>        
-        <td>
-          <%= link_to edit_admin_employee_academic_honor_path(
-                        employee, academic_honor
-                        ), 
-                title: 'Edit', data: { toggle: 'tooltip' } do %>
-            <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
-          <%= link_to admin_employee_academic_honor_path(
-                        employee, academic_honor
-                        ),
-                method: :delete, title: 'Delete',
-                data: { toggle: 'tooltip', 
-                        confirm: 'Do you really want to delete this record?' } do %>
-            <span class="glyphicon glyphicon-remove"></span>
-          <% end %>
-        </td>
       </tr>
     <% end %>
   </tbody>

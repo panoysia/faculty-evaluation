@@ -1,5 +1,7 @@
 <%= form_for [:admin, @employee, @training] do |f| %>
-  <%= error_messages_for(@training) %>  
+  <%= error_messages_for(@training) %>
+
+  <%= hidden_field_tag :redirect, params[:redirect] %>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
@@ -18,13 +20,13 @@
               {}, class: 'form-control' %>
       </div>
     </div>
-  </div>  
+  </div>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
         <%= f.label :level, 'Level' %>
         <%= f.select :level, Employee::Training.level_options,
-              {}, class: 'form-control' %>        
+              {}, class: 'form-control' %>
       </div>
     </div>
   </div>
@@ -68,8 +70,8 @@
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
-        <%= f.submit class: 'btn btn-primary' %>    
+        <%= f.submit class: 'btn btn-primary' %>
       </div>
     </div>
-  </div>  
+  </div>
 <% end %>
