@@ -42,8 +42,10 @@ class Employee::CCERecord
   MAX_PTS_FOR_WORK_EXPERIENCES = 25.00
   MAX_PTS_FOR_ACHIEVEMENTS = 90.00
 
-  MAX_PTS_FOR_INSTRUCTIONAL_MANUALS = 10.00
-  
+
+  MAX_PTS_FOR_CREATIVE_WORKS_CATEGORY = 30.00
+    MAX_PTS_FOR_INSTRUCTIONAL_MANUALS = 10.00
+
   MAX_PTS_FOR_TRAININGS_SEMINARS = 10.00
   MAX_PTS_FOR_ACADEMIC_ADVISORIES = 10.00
 
@@ -53,7 +55,14 @@ class Employee::CCERecord
   MAX_PTS_FOR_PROF_EXAMINATIONS = 10.00
  
 
-  attr_reader :employee, :nbc_id
+  MAX_PTS_FOR_EXPERT_SERVICES_RENDERED = 20.00
+  
+  MAX_PTS_FOR_EXPERT_SERVICES_CATEGORY = 
+    MAX_PTS_FOR_EXPERT_SERVICES_RENDERED + MAX_PTS_FOR_TRAININGS_SEMINARS
+
+
+  attr_reader :employee, :nbc_id, :ninja
+
   delegate *EDUCATIONS, *WORK_EXPERIENCES, *ACHIEVEMENTS, :cce_scorings,
             to: :employee
   
@@ -61,6 +70,7 @@ class Employee::CCERecord
   def initialize(employee)
     @employee = employee
   end
+
 
   def total_educations_score
     return MAX_PTS_FOR_EDUCATIONS if has_max_points_for_educations?
@@ -96,6 +106,19 @@ class Employee::CCERecord
     sum_of_achievements >= MAX_PTS_FOR_ACHIEVEMENTS
   end
 
+  def has_max_points_for_creative_works_category?
+    sum_of_creative_works_category >= MAX_PTS_FOR_CREATIVE_WORKS_CATEGORY
+  end
+
+  def has_max_points_for_expert_services_rendered?
+    sum_of_expert_services_rendered >= MAX_PTS_FOR_EXPERT_SERVICES_RENDERED
+  end
+
+  def has_max_points_for_expert_services_category?
+    sum_of_expert_services_category >= MAX_PTS_FOR_EXPERT_SERVICES_CATEGORY
+  end
+
+
   # totals in subcriteria
   def has_max_points_for_additional_credits?
     cce_scorings.additional_credits.
@@ -117,7 +140,7 @@ class Employee::CCERecord
   end
 
   def has_max_points_for_prof_memberships?
-    cce_scorings.professional_memberships.
+    cce_scorings.prof_memberships.
       sum(:points) >= MAX_PTS_FOR_PROF_MEMBERSHIPS
   end
 
@@ -137,41 +160,33 @@ class Employee::CCERecord
   end
 
 
-  private
+  # private
 
 
   def sum_of_educations
-    cce_scorings.educations.sum(:points)
+    @educations_sum ||= cce_scorings.educations.sum(:points)
   end
 
   def sum_of_work_experiences
-    cce_scorings.work_experiences.sum(:points)
+    @work_experiences_sum ||= cce_scorings.work_experiences.sum(:points)
   end
 
   def sum_of_achievements
-    cce_scorings.achievements.sum(:points)    
+    @achievements_sum ||= cce_scorings.achievements.sum(:points)    
+  end
+
+  def sum_of_creative_works_category  
+    @sum_creative_works_category ||= cce_scorings.creative_works_category.sum(:points)
   end
   
+  def sum_of_expert_services_rendered
+    @sum_expert_services_rendered ||= cce_scorings.expert_services_rendered.sum(:points)
+  end
 
-  
-  # MAX_PTS_FOR_EXPERT_SERVICES = 30.00
-  # MAX_PTS_FOR_PROFESSIONAL_SERVICES = 20.00
+  def sum_of_expert_services_category
+    @sum_expert_services_category ||= cce_scorings.expert_services_category.sum(:points)
+  end
 
-  # 20 pts for professional services (under expert services)
-  # MAX_PTS_FOR_PROFESSIONAL_SERVICES = MAX_PTS_FOR_ACADEMIC_ADVISORIES + 10.00  
-  
-  #   MAX_PTS_FOR_CREATIVE_WORKS = 30.00    
-
-
-  # def max_pts_for_expert_services
-  #   # 30 pts total for expert services
-  #   MAX_PTS_FOR_TRAININGS_SEMINARS + MAX_PTS_FOR_PROFESSIONAL_SERVICES
-  # end
-
-  # def max_pts_for_academic_advisories
-  #   MAX_PTS_FOR_ACADEMIC_ADVISORIES
-  # end
-  
   # def initialize(employee, nbc_id = nil)
   #   @employee = employee
   #   @nbc_id = nbc_id

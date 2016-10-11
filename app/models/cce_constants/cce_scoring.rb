@@ -1,5 +1,37 @@
 module CCEConstants
   module CCEScoring
+
+    CREATIVE_WORKS = [
+      Employee::Invention,
+      Employee::Discovery,
+      Employee::CreativeWork,
+      Employee::Innovation,
+      Employee::Publication,
+      Employee::TechnicalArticle,
+      Employee::InstructionalManual
+    ]
+
+    HONORS = [
+      Employee::ProfessionalMembership,
+      Employee::AcademicHonor,
+      Employee::Scholarship,
+      Employee::Award,
+      Employee::CommunityOutreach,
+      Employee::ProfessionalExamination
+    ]
+
+    EXPERT_SERVICES_RENDERED = [
+      Employee::ConsultancyService,
+      Employee::ProfessionalService,
+      Employee::AcademicAdvisory,
+      Employee::ProfessionalReview,
+      Employee::AccreditationService,
+      Employee::AssessorService,
+      Employee::TrainerService      
+    ]
+
+    EXPERT_SERVICES = EXPERT_SERVICES_RENDERED + [Employee::Training]
+
     EDUCATIONS = [ 
       Employee::AcademicDegree, 
       Employee::AdditionalCredit,
@@ -12,37 +44,7 @@ module CCEConstants
       Employee::ProfessionalWorkExperience,
       Employee::PublicPrivateWorkExperience
     ]
-
-    HONORS_1 = [
-      Employee::Training,
-      Employee::Invention,
-      Employee::Discovery,
-      Employee::CreativeWork,
-      Employee::Innovation,
-      Employee::Publication,
-      Employee::TechnicalArticle,
-      Employee::InstructionalManual
-    ]
-
-    HONORS_2 = [
-      Employee::ProfessionalMembership,
-      Employee::AcademicHonor,
-      Employee::Scholarship,
-      Employee::Award,
-      Employee::CommunityOutreach,
-      Employee::ProfessionalExamination
-    ]
-
-    EXPERT_SERVICES = [
-      Employee::ConsultancyService,
-      Employee::ProfessionalService,
-      Employee::AcademicAdvisory,
-      Employee::ProfessionalReview,
-      Employee::AccreditationService,
-      Employee::AssessorService,
-      Employee::TrainerService
-    ]
-
-    ACHIEVEMENTS = [*HONORS_1, *HONORS_2, *EXPERT_SERVICES]
+    
+    ACHIEVEMENTS = [*CREATIVE_WORKS, *HONORS, *EXPERT_SERVICES]
   end  
 end

@@ -1,3 +1,4 @@
+<% if false %>
 <% if record.recorded? %>
   <span class="label label-info"><%= record.nbc_name %></span>
 <% else %>
@@ -12,8 +13,9 @@
     <span class="glyphicon glyphicon-remove"></span>
   <% end %>
 <% end %>
+<% end %>
 <!--  -->
-<% if false %>
+<% if true %>
   <%= link_to edit_polymorphic_path([:admin, employee, record]),
         title: 'Edit', data: { toggle: 'tooltip' } do %>
     <span class="glyphicon glyphicon-pencil"></span>

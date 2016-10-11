@@ -36,6 +36,21 @@ class Employee::CCEScoring < Employee::ApplicationRecord
   }
   scope :achievements, -> { where(cce_scorable_type: ACHIEVEMENTS) }
 
+  # includes Employee::Training
+  scope :expert_services_category, -> {
+    where(cce_scorable_type: EXPERT_SERVICES)
+  }
+
+  # excludes Employee::Training
+  scope :expert_services_rendered, -> {
+    where(cce_scorable_type: EXPERT_SERVICES_RENDERED) 
+  }
+
+  scope :creative_works_category, -> {
+    where(cce_scorable_type: CREATIVE_WORKS) 
+  }
+
+
   scope :additional_credits, -> { 
     where(cce_scorable_type: Employee::AdditionalCredit) 
   }
@@ -52,7 +67,7 @@ class Employee::CCEScoring < Employee::ApplicationRecord
     where(cce_scorable_type: Employee::Award) 
   }
 
-  scope :professional_memberships, -> { 
+  scope :prof_memberships, -> { 
     where(cce_scorable_type: Employee::ProfessionalMembership) 
   }
 
@@ -67,6 +82,7 @@ class Employee::CCEScoring < Employee::ApplicationRecord
   scope :instructional_manuals, -> { 
     where(cce_scorable_type: Employee::InstructionalManual) 
   }
+
 
   # scope :with_nbc, -> (id = nil) { 
   #   where(nbc_id: id) if id.present?

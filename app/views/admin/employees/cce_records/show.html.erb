@@ -46,6 +46,15 @@
           <span style="color: red;" class="pull-right">
             <em>max points reached</em>
           </span>
+        <% else %>
+          <span class="pull-right">
+            <em>Total:&nbsp;&nbsp;
+                <%= number_with_precision(
+                  @cce_record.sum_of_educations,
+                  precision: 2)
+                %>
+            </em>
+          </span>        
         <% end %>
       </h4>
     </div>
@@ -88,6 +97,15 @@
           <span style="color: red;" class="pull-right">
             <em>max points reached</em>
           </span>
+        <% else %>
+          <span class="pull-right">
+            <em>Total:&nbsp;&nbsp;
+                <%= number_with_precision(
+                  @cce_record.sum_of_work_experiences,
+                  precision: 2)
+                %>
+            </em>
+          </span>        
         <% end %>        
       </h4>
     </div>
@@ -145,17 +163,101 @@
           <span style="color: red;" class="pull-right">
             <em>max points reached</em>
           </span>
-        <% end %>        
+        <% else %>
+          <span class="pull-right">
+            <em>Total:&nbsp;&nbsp;
+                <%= number_with_precision(
+                  @cce_record.sum_of_achievements,
+                  precision: 2)
+                %>
+            </em>
+          </span>
+        <% end %>
       </h4>
     </div>
   </div>
+
   <div class="row subcategory">
-    <div id="trainings" class="col-md-12">
-      <%= render partial: "achievements/trainings",
-            locals: { achievements: @cce_record.trainings,
+    <div id="professional-memberships" class="col-md-12">
+      <%= render \
+            partial: "achievements/professional_memberships",
+            locals: {
+                      achievements: @cce_record.
+                        professional_memberships,
                       employee: @cce_record.employee 
                     }
       %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="academic-honors" class="col-md-12">
+      <%= render partial: "achievements/academic_honors",
+            locals: { achievements: @cce_record.academic_honors,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="scholarships" class="col-md-12">
+      <%= render partial: "achievements/scholarships",
+            locals: { achievements: @cce_record.scholarships,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="awards" class="col-md-12">
+      <%= render partial: "achievements/awards",
+            locals: { achievements: @cce_record.awards,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="community-outreaches" class="col-md-12">
+      <%= render partial: "achievements/community_outreaches",
+            locals: { achievements: @cce_record.community_outreaches,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+  <div class="row subcategory">
+    <div id="professional-examinations" class="col-md-12">
+      <%= render \
+            partial: "achievements/professional_examinations",
+            locals: {
+                      achievements: @cce_record.
+                        professional_examinations,
+                      employee: @cce_record.employee 
+                    }
+      %>
+    </div>
+  </div>
+
+  <!-- subcategory: Discoveries, patented inventions & other creative works-->
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="page-header alert alert-info">
+        3.1 &nbsp;&nbsp;Discoveries, patented inventions, and other creative works (30 pts.)
+        <% if @cce_record.has_max_points_for_creative_works_category? %>
+          <span style="color: red;" class="pull-right">
+            <em>max points reached</em>
+          </span>
+        <% else %>
+          <span class="pull-right">
+            <em>Total:&nbsp;&nbsp;
+                <%= number_with_precision(
+                  @cce_record.sum_of_creative_works_category,
+                  precision: 2)
+                %>
+            </em>
+          </span>        
+        <% end %>
+      </h5>
     </div>
   </div>
   <div class="row subcategory">
@@ -221,64 +323,59 @@
       %>
     </div>
   </div>
+
+  <!-- subcategory Expert Services and Trainings -->
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="page-header alert alert-info">
+        3.2 &nbsp;&nbsp;Expert Services and Trainings (30 pts.)
+        <% if @cce_record.has_max_points_for_expert_services_category? %>
+          <span style="color: red;" class="pull-right">
+            <em>max points reached</em>
+          </span>
+        <% else %>
+          <span class="pull-right">
+            <em>Total:&nbsp;&nbsp;
+                <%= number_with_precision(
+                    @cce_record.sum_of_expert_services_category,
+                    precision: 2)
+                %>
+            </em>
+          </span>
+        <% end %>
+      </h5>
+    </div>
+  </div>
+  <!-- subcategory in Expert Services and Trainings -->
   <div class="row subcategory">
-    <div id="professional-memberships" class="col-md-12">
-      <%= render \
-            partial: "achievements/professional_memberships",
-            locals: {
-                      achievements: @cce_record.
-                        professional_memberships,
+    <div id="trainings" class="col-md-12">
+      <%= render partial: "achievements/trainings",
+            locals: { achievements: @cce_record.trainings,
                       employee: @cce_record.employee 
                     }
       %>
     </div>
   </div>
-  <div class="row subcategory">
-    <div id="academic-honors" class="col-md-12">
-      <%= render partial: "achievements/academic_honors",
-            locals: { achievements: @cce_record.academic_honors,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div id="scholarships" class="col-md-12">
-      <%= render partial: "achievements/scholarships",
-            locals: { achievements: @cce_record.scholarships,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div id="awards" class="col-md-12">
-      <%= render partial: "achievements/awards",
-            locals: { achievements: @cce_record.awards,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div id="community-outreaches" class="col-md-12">
-      <%= render partial: "achievements/community_outreaches",
-            locals: { achievements: @cce_record.community_outreaches,
-                      employee: @cce_record.employee 
-                    }
-      %>
-    </div>
-  </div>
-  <div class="row subcategory">
-    <div id="professional-examinations" class="col-md-12">
-      <%= render \
-            partial: "achievements/professional_examinations",
-            locals: {
-                      achievements: @cce_record.
-                        professional_examinations,
-                      employee: @cce_record.employee 
-                    }
-      %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="page-header alert alert-info">
+        3.2.2 &nbsp;&nbsp;Expert services rendered (20 pts.)
+        <% if @cce_record.has_max_points_for_expert_services_rendered? %>
+          <span style="color: red;" class="pull-right">
+            <em>max points reached</em>
+          </span>
+        <% else %>
+          <span class="pull-right">
+            <em>Total:&nbsp;&nbsp;
+                <%= number_with_precision(
+                  @cce_record.sum_of_expert_services_rendered,
+                  precision: 2)
+                %>
+            </em>
+          </span>
+        <% end %>
+      </h5>
     </div>
   </div>
   <div class="row subcategory">
