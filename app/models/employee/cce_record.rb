@@ -88,7 +88,7 @@ class Employee::CCERecord
 
   def total_achievements_score
     return MAX_PTS_FOR_ACHIEVEMENTS if has_max_points_for_achievements?
-    sum_of_achievements    
+    sum_of_achievements
   end
 
   def overall_score
@@ -165,19 +165,75 @@ class Employee::CCERecord
   end
 
   def sum_of_achievements
-    @achievements_sum ||= cce_scorings.achievements.sum(:points)    
+    #@sum_achievements ||= cce_scorings.achievements.sum(:points)
+    @sum_achievements =
+      sum_of_creative_works_category +
+      sum_of_expert_services_category +
+      sum_of_prof_memberships +
+      sum_of_awards +
+      sum_of_community_outreaches +
+      sum_of_prof_examinations +
+      sum_of_academic_honors +
+      sum_of_scholarships
+  
+    if @sum_achievements >= MAX_PTS_FOR_ACHIEVEMENTS
+      MAX_PTS_FOR_ACHIEVEMENTS
+    else
+      @sum_achievements
+    end
   end
 
   def sum_of_creative_works_category  
-    @sum_creative_works_category ||= cce_scorings.creative_works_category.sum(:points)
+    # @sum_creative_works_category ||= cce_scorings.creative_works_category.sum(:points)
+
+    @sum_creative_works_category =
+      sum_of_inventions +
+      sum_of_discoveries +
+      sum_of_creative_works +
+      sum_of_innovations +
+      sum_of_publications +
+      sum_of_technical_articles +
+      sum_of_instructional_manuals
+
+    if @sum_creative_works_category >= MAX_PTS_FOR_CREATIVE_WORKS_CATEGORY
+      MAX_PTS_FOR_CREATIVE_WORKS_CATEGORY
+    else
+      @sum_creative_works_category
+    end
+
   end
   
   def sum_of_expert_services_rendered
-    @sum_expert_services_rendered ||= cce_scorings.expert_services_rendered.sum(:points)
+    # @sum_expert_services_rendered ||= cce_scorings.expert_services_rendered.sum(:points)
+
+    @sum_expert_services_rendered = 
+      sum_of_consultancy_services +
+      sum_of_prof_services + 
+      sum_of_academic_advisories +
+      sum_of_prof_reviews + 
+      sum_of_accreditation_services +
+      sum_of_assessor_services +
+      sum_of_trainer_services
+
+    if @sum_expert_services_rendered >= MAX_PTS_FOR_EXPERT_SERVICES_RENDERED
+      MAX_PTS_FOR_EXPERT_SERVICES_RENDERED
+    else
+      @sum_expert_services_rendered
+    end
   end
 
   def sum_of_expert_services_category
-    @sum_expert_services_category ||= cce_scorings.expert_services_category.sum(:points)
+    # @sum_expert_services_category ||= cce_scorings.expert_services_category.sum(:points)
+
+    @sum_expert_services_category = 
+      sum_of_trainings +
+      sum_of_expert_services_rendered
+      
+    if @sum_expert_services_category >= MAX_PTS_FOR_EXPERT_SERVICES_CATEGORY
+      MAX_PTS_FOR_EXPERT_SERVICES_CATEGORY
+    else
+      @sum_expert_services_category
+    end    
   end
 
   def sum_of_academic_degrees
@@ -211,6 +267,11 @@ class Employee::CCERecord
 
   def sum_of_prof_memberships
     @sum_prof_memberships ||= cce_scorings.prof_memberships.sum(:points)
+    if @sum_prof_memberships >= MAX_PTS_FOR_PROF_MEMBERSHIPS
+      MAX_PTS_FOR_PROF_MEMBERSHIPS
+    else
+      @sum_prof_memberships
+    end    
   end
 
   def sum_of_academic_honors
@@ -223,15 +284,32 @@ class Employee::CCERecord
 
   def sum_of_awards
     @sum_awards ||= cce_scorings.awards.sum(:points)
+    if @sum_awards >= MAX_PTS_FOR_AWARDS
+      MAX_PTS_FOR_AWARDS
+    else
+      @sum_awards
+    end
   end
 
   def sum_of_community_outreaches
     @sum_community_outreaches ||= cce_scorings.
                                     community_outreaches.sum(:points)
+    
+    if @sum_community_outreaches >= MAX_PTS_FOR_COMMUNITY_OUTREACHES
+      MAX_PTS_FOR_COMMUNITY_OUTREACHES
+    else
+      @sum_community_outreaches
+    end                                    
   end
 
   def sum_of_prof_examinations
     @sum_prof_examinations ||= cce_scorings.prof_examinations.sum(:points)
+    
+    if @sum_prof_examinations >= MAX_PTS_FOR_PROF_EXAMINATIONS
+      MAX_PTS_FOR_PROF_EXAMINATIONS
+    else
+      @sum_prof_examinations
+    end
   end
 
   def sum_of_inventions
@@ -261,10 +339,20 @@ class Employee::CCERecord
   def sum_of_instructional_manuals
     @sum_instructional_manuals ||= cce_scorings.instructional_manuals.
                                     sum(:points)
+    if @sum_instructional_manuals >= MAX_PTS_FOR_INSTRUCTIONAL_MANUALS
+      MAX_PTS_FOR_INSTRUCTIONAL_MANUALS
+    else
+      @sum_instructional_manuals
+    end                                    
   end
 
   def sum_of_trainings
     @sum_trainings ||= cce_scorings.trainings.sum(:points)
+    if @sum_trainings >= MAX_PTS_FOR_TRAININGS_SEMINARS
+      MAX_PTS_FOR_TRAININGS_SEMINARS
+    else
+      @sum_trainings
+    end    
   end
 
   def sum_of_consultancy_services
@@ -278,6 +366,11 @@ class Employee::CCERecord
 
   def sum_of_academic_advisories
     @sum_academic_advisories ||= cce_scorings.academic_advisories.sum(:points)
+    if @sum_academic_advisories >= MAX_PTS_FOR_ACADEMIC_ADVISORIES
+      MAX_PTS_FOR_ACADEMIC_ADVISORIES
+    else
+      @sum_academic_advisories
+    end    
   end
 
   def sum_of_prof_reviews
