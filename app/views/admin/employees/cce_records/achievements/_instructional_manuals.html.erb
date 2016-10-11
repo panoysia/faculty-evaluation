@@ -1,13 +1,16 @@
 <table class="table table-striped table-bordered table-master">
   <thead>
     <tr>
-      <th colspan="8">Instructional Manuals
+      <th colspan="8">Instructional Manuals (10 pts. max)
         <% if @cce_record.has_max_points_for_instructional_manuals? %>
           <span style="color: red;" class="pull-right">
-            <em>(10 pts max reached)</em>
+            <em>(10 pts. max reached)</em>
           </span>
         <% else %>
-          <span class="pull-right"><em>(10 pts max)</em></span>
+          <span class="pull-right">
+            <em><%= format_in_decimal(@cce_record.
+                      sum_of_instructional_manuals) %></em>
+          </span>
         <% end %>        
       </th>
     </tr>
@@ -31,7 +34,9 @@
         <td><%= manual.category_to_string %></td>
         <td><%= date_format_readable(manual.published_at) %></td>
         <td><%= manual.description %></td>
-        <td class="text-right"><%= manual.cce_scoring.points %></td>
+        <td class="text-right">
+          <%= format_in_decimal(manual.cce_scoring.points) %>
+        </td>
         <td><%= render "nbc_link", record: manual.cce_scoring %></td>
         <td>
           <%= render("action_links", record: manual, employee: employee) unless manual.cce_scoring.recorded? %>

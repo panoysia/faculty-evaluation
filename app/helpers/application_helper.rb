@@ -22,8 +22,8 @@ module ApplicationHelper
     value == 'M' ? 'Male' : 'Female'
   end
 
-  def format_in_decimal
-    
+  def format_in_decimal(number)
+    number_with_precision(number, precision: 2)
   end
 
   # def authenticate_user

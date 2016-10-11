@@ -24,6 +24,9 @@ class Employee::AdditionalDegree < Employee::ApplicationRecord
   include CCEConstants::AdditionalDegree
   include CCEScorable
 
+  scope :masters, -> { where(degree_type: MASTERS) }
+  scope :bachelors, -> { where(degree_type: BACHELORS) }
+
   validates :degree, presence: true, length: { maximum: 50 }
   validates :degree_type, inclusion: { 
     in: DEGREE_TYPES.each_index.map { |index| index }

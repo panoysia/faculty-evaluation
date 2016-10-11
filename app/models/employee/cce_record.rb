@@ -60,6 +60,9 @@ class Employee::CCERecord
   MAX_PTS_FOR_EXPERT_SERVICES_CATEGORY = 
     MAX_PTS_FOR_EXPERT_SERVICES_RENDERED + MAX_PTS_FOR_TRAININGS_SEMINARS
 
+  # POINTS_FOR_DOCTORATE = 85
+  # POINTS_FOR_LICENSED_MD = 85
+  # POINTS_FOR_LLB_OR_MASTERS_OR_MD = 65
 
   attr_reader :employee, :nbc_id, :ninja
 
@@ -126,42 +129,32 @@ class Employee::CCERecord
   end
 
   def has_max_points_for_prof_examinations?
-    cce_scorings.prof_examinations.
-      sum(:points) >= MAX_PTS_FOR_PROF_EXAMINATIONS
+    sum_of_prof_examinations >= MAX_PTS_FOR_PROF_EXAMINATIONS
   end
 
   def has_max_points_for_community_outreaches?
-    cce_scorings.community_outreaches.
-      sum(:points) >= MAX_PTS_FOR_COMMUNITY_OUTREACHES
+    sum_of_community_outreaches >= MAX_PTS_FOR_COMMUNITY_OUTREACHES
   end
 
   def has_max_points_for_awards?
-    cce_scorings.awards.sum(:points) >= MAX_PTS_FOR_AWARDS
+    sum_of_awards >= MAX_PTS_FOR_AWARDS
   end
 
   def has_max_points_for_prof_memberships?
-    cce_scorings.prof_memberships.
-      sum(:points) >= MAX_PTS_FOR_PROF_MEMBERSHIPS
+    sum_of_prof_memberships >= MAX_PTS_FOR_PROF_MEMBERSHIPS
   end
 
   def has_max_points_for_academic_advisories?
-    cce_scorings.academic_advisories.
-      sum(:points) >= MAX_PTS_FOR_ACADEMIC_ADVISORIES
+    sum_of_academic_advisories >= MAX_PTS_FOR_ACADEMIC_ADVISORIES
   end
 
   def has_max_points_for_trainings?
-    cce_scorings.trainings.
-      sum(:points) >= MAX_PTS_FOR_TRAININGS_SEMINARS
+    sum_of_trainings >= MAX_PTS_FOR_TRAININGS_SEMINARS
   end
 
   def has_max_points_for_instructional_manuals?
-    cce_scorings.instructional_manuals.
-      sum(:points) >= MAX_PTS_FOR_INSTRUCTIONAL_MANUALS
+    sum_of_instructional_manuals >= MAX_PTS_FOR_INSTRUCTIONAL_MANUALS
   end
-
-
-  # private
-
 
   def sum_of_educations
     @educations_sum ||= cce_scorings.educations.sum(:points)
@@ -187,11 +180,131 @@ class Employee::CCERecord
     @sum_expert_services_category ||= cce_scorings.expert_services_category.sum(:points)
   end
 
-  # def initialize(employee, nbc_id = nil)
-  #   @employee = employee
-  #   @nbc_id = nbc_id
-  # end
+  def sum_of_academic_degrees
+    cce_scorings.academic_degrees
+  end
 
-  # employee.cce_scorings.with_nbc(nbc_id).educations.sum(:points)
+  def sum_of_additional_degrees
+  end
+
+  def sum_of_additional_credits
+  end
+
+  def sum_of_academic_work_experiences
+    @sum_academic_work_experiences ||= cce_scorings.
+                                        academic_work_experiences.sum(:points)
+  end
+
+  def sum_of_admin_work_experiences
+    @sum_admin_work_experiences ||= cce_scorings.admin_work_experiences.sum(:points)
+  end
+
+  def sum_of_prof_work_experiences
+    @sum_prof_work_experiences ||= cce_scorings.prof_work_experiences.sum(:points)
+  end
+
+  def sum_of_public_private_work_experiences
+    @sum_public_private_work_experiences ||= cce_scorings.
+                                              public_private_work_experiences.
+                                              sum(:points)
+  end
+
+  def sum_of_prof_memberships
+    @sum_prof_memberships ||= cce_scorings.prof_memberships.sum(:points)
+  end
+
+  def sum_of_academic_honors
+    @sum_academic_honors ||= cce_scorings.academic_honors.sum(:points)
+  end
+
+  def sum_of_scholarships
+    @sum_scholarships ||= cce_scorings.scholarships.sum(:points)
+  end
+
+  def sum_of_awards
+    @sum_awards ||= cce_scorings.awards.sum(:points)
+  end
+
+  def sum_of_community_outreaches
+    @sum_community_outreaches ||= cce_scorings.
+                                    community_outreaches.sum(:points)
+  end
+
+  def sum_of_prof_examinations
+    @sum_prof_examinations ||= cce_scorings.prof_examinations.sum(:points)
+  end
+
+  def sum_of_inventions
+    @sum_inventions ||= cce_scorings.inventions.sum(:points)
+  end
+
+  def sum_of_discoveries
+    @sum_discoveries ||= cce_scorings.discoveries.sum(:points)
+  end
+
+  def sum_of_creative_works
+    @creative_works ||= cce_scorings.creative_works.sum(:points)
+  end
+
+  def sum_of_innovations
+    @innovations ||= cce_scorings.innovations.sum(:points)
+  end
+
+  def sum_of_publications
+    @sum_publications ||= cce_scorings.publications.sum(:points)
+  end
+
+  def sum_of_technical_articles
+    @sum_technical_articles ||= cce_scorings.technical_articles.sum(:points)
+  end
+
+  def sum_of_instructional_manuals
+    @sum_instructional_manuals ||= cce_scorings.instructional_manuals.
+                                    sum(:points)
+  end
+
+  def sum_of_trainings
+    @sum_trainings ||= cce_scorings.trainings.sum(:points)
+  end
+
+  def sum_of_consultancy_services
+    @sum_consultancy_services ||= cce_scorings.consultancy_services.
+                                    sum(:points)
+  end
+
+  def sum_of_prof_services
+    @sum_prof_services ||= cce_scorings.prof_services.sum(:points)
+  end
+
+  def sum_of_academic_advisories
+    @sum_academic_advisories ||= cce_scorings.academic_advisories.sum(:points)
+  end
+
+  def sum_of_prof_reviews
+    @sum_prof_reviews ||= cce_scorings.prof_reviews.sum(:points)
+  end
+
+  def sum_of_accreditation_services
+    @sum_accreditation_services ||= cce_scorings.accreditation_services.
+                                      sum(:points)
+  end
+
+  def sum_of_assessor_services
+    @sum_assessor_services ||= cce_scorings.assessor_services.sum(:points)
+  end
+
+  def sum_of_trainer_services
+    @sum_trainer_services ||= cce_scorings.trainer_services.sum(:points)
+  end
 
 end
+
+
+#@educations_sum ||= cce_scorings.educations.sum(:points)
+
+# def initialize(employee, nbc_id = nil)
+#   @employee = employee
+#   @nbc_id = nbc_id
+# end
+
+# employee.cce_scorings.with_nbc(nbc_id).educations.sum(:points)

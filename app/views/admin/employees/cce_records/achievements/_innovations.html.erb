@@ -1,8 +1,12 @@
 <table class="table table-striped table-bordered table-master">
   <thead>
     <tr>
-      <th colspan="9">Innovations</th>
-    </tr>    
+      <th colspan="9">Innovations
+        <span class="pull-right">
+          <em><%= format_in_decimal(@cce_record.sum_of_innovations) %></em>
+        </span>
+      </th>
+    </tr>
     <tr>
       <th>#</th>
       <th>Name</th>
@@ -25,7 +29,9 @@
         <td><%= innovation.patent_no %></td>
         <td><%= innovation.year_patented %></td>
         <td><%= innovation.description %></td>
-        <td class="text-right"><%= innovation.cce_scoring.points %></td>
+        <td class="text-right">
+          <%= format_in_decimal(innovation.cce_scoring.points) %>
+        </td>
         <td><%= render "nbc_link", record: innovation.cce_scoring %></td>
         <td>
           <%= render("action_links", record: innovation, employee: employee) unless innovation.cce_scoring.recorded? %>

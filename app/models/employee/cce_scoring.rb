@@ -51,38 +51,117 @@ class Employee::CCEScoring < Employee::ApplicationRecord
   }
 
 
+  scope :academic_degrees, -> {
+    where(cce_scorable_type: Employee::AcademicDegree) 
+  }
+
+  scope :additional_degrees, -> {
+    where(cce_scorable_type: Employee::AdditionalDegree) 
+  }
+
   scope :additional_credits, -> { 
     where(cce_scorable_type: Employee::AdditionalCredit) 
   }
 
-  scope :prof_examinations, -> { 
-    where(cce_scorable_type: Employee::ProfessionalExamination) 
+  scope :academic_work_experiences, -> { 
+    where(cce_scorable_type: Employee::AcademicWorkExperience) 
   }
 
-  scope :community_outreaches, -> { 
-    where(cce_scorable_type: Employee::CommunityOutreach) 
+  scope :admin_work_experiences, -> { 
+    where(cce_scorable_type: Employee::AdminWorkExperience) 
   }
 
-  scope :awards, -> { 
-    where(cce_scorable_type: Employee::Award) 
+  scope :prof_work_experiences, -> { 
+    where(cce_scorable_type: Employee::ProfessionalWorkExperience) 
+  }
+
+  scope :public_private_work_experiences, -> { 
+    where(cce_scorable_type: Employee::PublicPrivateWorkExperience) 
   }
 
   scope :prof_memberships, -> { 
-    where(cce_scorable_type: Employee::ProfessionalMembership) 
+    where(cce_scorable_type: Employee::ProfessionalMembership)
   }
 
-  scope :academic_advisories, -> { 
-    where(cce_scorable_type: Employee::AcademicAdvisory) 
+  scope :academic_honors, -> { 
+    where(cce_scorable_type: Employee::AcademicHonor)
   }
 
-  scope :trainings, -> { 
-    where(cce_scorable_type: Employee::Training) 
+  scope :scholarships, -> { 
+    where(cce_scorable_type: Employee::Scholarship)
+  }
+
+  scope :awards, -> { 
+    where(cce_scorable_type: Employee::Award)
+  }
+
+  scope :community_outreaches, -> { 
+    where(cce_scorable_type: Employee::CommunityOutreach)
+  }
+
+  scope :prof_examinations, -> { 
+    where(cce_scorable_type: Employee::ProfessionalExamination)
+  }
+
+  scope :inventions, -> { 
+    where(cce_scorable_type: Employee::Invention)
+  }
+
+  scope :discoveries, -> { 
+    where(cce_scorable_type: Employee::Discovery) 
+  }
+
+  scope :creative_works, -> { 
+    where(cce_scorable_type: Employee::CreativeWork)
+  }
+
+  scope :innovations, -> { 
+    where(cce_scorable_type: Employee::Innovation)
+  }
+
+  scope :publications, -> { 
+    where(cce_scorable_type: Employee::Publication)
+  }
+
+  scope :technical_articles, -> { 
+    where(cce_scorable_type: Employee::TechnicalArticle)
   }
 
   scope :instructional_manuals, -> { 
-    where(cce_scorable_type: Employee::InstructionalManual) 
+    where(cce_scorable_type: Employee::InstructionalManual)
   }
 
+  scope :trainings, -> { 
+    where(cce_scorable_type: Employee::Training)
+  }
+
+  scope :consultancy_services, -> { 
+    where(cce_scorable_type: Employee::ConsultancyService) 
+  }
+
+  scope :prof_services, -> { 
+    where(cce_scorable_type: Employee::ProfessionalService)
+  }
+
+  scope :academic_advisories, -> { 
+    where(cce_scorable_type: Employee::AcademicAdvisory)
+  }
+
+  scope :prof_reviews, -> { 
+    where(cce_scorable_type: Employee::ProfessionalReview)
+  }
+
+  scope :accreditation_services, -> { 
+    where(cce_scorable_type: Employee::AccreditationService)
+  }
+
+  scope :assessor_services, -> { 
+    where(cce_scorable_type: Employee::AssessorService)
+  }
+
+  scope :trainer_services, -> { 
+    where(cce_scorable_type: Employee::TrainerService)
+  }
 
   # scope :with_nbc, -> (id = nil) { 
   #   where(nbc_id: id) if id.present?

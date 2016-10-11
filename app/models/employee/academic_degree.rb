@@ -24,6 +24,14 @@ class Employee::AcademicDegree < Employee::ApplicationRecord
   include CCEConstants::AcademicDegree
   include CCEScorable
 
+  scope :doctorate, -> { where(degree_type: DOCTORATE) }
+  scope :masters, -> { where(degree_type: MASTERS) }
+  scope :bachelors, -> { where(degree_type: [BACHELORS, BACHELORS_PLUS]) }
+  scope :licensed_md, -> { where(degree_type: MD_LICENSED) }
+  scope :llb_or_md, -> { 
+    where(degree_type: [LLB, MD])
+  }
+
   validates :degree, presence: true, length: { maximum: 50 }
   validates :degree_type, inclusion: { 
     in: DEGREE_TYPES.each_index.map { |index| index }

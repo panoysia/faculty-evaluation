@@ -1,14 +1,16 @@
 <table class="table table-striped table-bordered table-master">
   <thead>
     <tr>
-      <th colspan="11">Trainings
+      <th colspan="11">Trainings (10 pts. max)
         <% if @cce_record.has_max_points_for_trainings? %>
           <span style="color: red;" class="pull-right">
-            <em>(10 pts max reached)</em>
+            <em>(10 pts. max reached)</em>
           </span>
         <% else %>
-          <span class="pull-right"><em>(10 pts max)</em></span>
-        <% end %>        
+          <span class="pull-right">
+            <em><%= format_in_decimal(@cce_record.sum_of_trainings) %></em>
+          </span>
+        <% end %>
       </th>
     </tr>
     <tr>
@@ -37,7 +39,9 @@
         <td><%= date_format_readable(training.end_at) %></td>
         <td><%= training.conducted_by %></td>
         <td><%= training.nature_of_participation %></td>
-        <td class="text-right"><%= training.cce_scoring.points %></td>
+        <td class="text-right">
+          <%= format_in_decimal(training.cce_scoring.points) %>
+        </td>
         <td><%= render "nbc_link", record: training.cce_scoring %></td>
         <td>
           <%= render("action_links", record: training, employee: employee) unless training.cce_scoring.recorded? %>

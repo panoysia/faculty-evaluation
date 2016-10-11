@@ -1,7 +1,11 @@
 <table class="table table-striped table-bordered table-master">
   <thead>
     <tr>
-      <th colspan="10">Publications</th>
+      <th colspan="10">Publications
+        <span class="pull-right">
+          <em><%= format_in_decimal(@cce_record.sum_of_publications) %></em>
+        </span>        
+      </th>
     </tr>
     <tr>
       <th>#</th>  
@@ -27,7 +31,9 @@
         <td><%= publication.publisher %></td>
         <td><%= date_format_readable(publication.date_of_publication) %></td>
         <td><%= publication.description %></td>
-        <td class="text-right"><%= publication.cce_scoring.points %></td>
+        <td class="text-right">
+          <%= format_in_decimal(publication.cce_scoring.points) %>
+        </td>
         <td><%= render "nbc_link", record: publication.cce_scoring %></td>
         <td>
           <%= render("action_links", record: publication, employee: employee) unless publication.cce_scoring.recorded? %>
