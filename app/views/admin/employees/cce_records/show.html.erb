@@ -15,22 +15,22 @@
         <tr>
           <td>Educational Qualification</td>
           <td class="center">85</td>
-          <td class="text-right"><%= @cce_record.total_educations_score %></td>
+          <td class="text-right"><%= number_with_precision(@cce_record.total_educations_score, precision: 2) %></td>
         </tr>
         <tr>
           <td>Experience and Length of Service</td>
           <td class="center">25</td>
-          <td class="text-right"><%= @cce_record.total_work_experiences_score %></td>
+          <td class="text-right"><%= number_with_precision(@cce_record.total_work_experiences_score, precision: 2) %></td>
         </tr>
         <tr>
           <td>Professional Development, Achievement and Honors</td>
           <td class="center">90</td>
-          <td class="text-right"><%= @cce_record.total_achievements_score %></td>
+          <td class="text-right"><%= number_with_precision(@cce_record.total_achievements_score, precision: 2) %></td>
         </tr>
         <tr>
           <th class="text-right">Total</th>
           <th class="center">200</th>
-          <th class="text-right"><%= @cce_record.overall_score %></th>
+          <th class="text-right"><%= number_with_precision(@cce_record.overall_score, precision: 2) %></th>
         </tr>
       </table>
     </div>
@@ -41,7 +41,12 @@
   <div class="row">
     <div class="col-md-12">
       <h4 class="page-header alert alert-info">
-        Education Qualification (85 pts.)
+        1. &nbsp;&nbsp;Education Qualification (85 pts.)
+        <% if @cce_record.has_max_points_for_educations? %>
+          <span style="color: red;" class="pull-right">
+            <em>max points reached</em>
+          </span>
+        <% end %>
       </h4>
     </div>
   </div>
@@ -78,7 +83,12 @@
   <div class="row">
     <div class="col-md-12">
       <h4 class="page-header alert alert-info">
-        Experiences and Length of Service (25 pts.)
+        2. &nbsp;&nbsp;Experiences and Length of Service (25 pts.)
+        <% if @cce_record.has_max_points_for_work_experiences? %>
+          <span style="color: red;" class="pull-right">
+            <em>max points reached</em>
+          </span>
+        <% end %>        
       </h4>
     </div>
   </div>
@@ -130,7 +140,12 @@
   <div class="row">
     <div class="col-md-12">
       <h4 class="page-header alert alert-info">
-        Professional Development, Achievements and Honors (90 pts.)
+        3. &nbsp;&nbsp;Professional Development, Achievements and Honors (90 pts.)
+        <% if @cce_record.has_max_points_for_achievements? %>
+          <span style="color: red;" class="pull-right">
+            <em>max points reached</em>
+          </span>
+        <% end %>        
       </h4>
     </div>
   </div>

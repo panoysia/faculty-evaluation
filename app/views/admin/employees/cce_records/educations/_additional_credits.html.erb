@@ -1,7 +1,15 @@
 <table class="table table-striped table-bordered table-master">
   <thead>
     <tr>
-      <th colspan="7">Additional Credits</th>
+      <th colspan="7">Additional Credits
+        <% if @cce_record.has_max_points_for_additional_credits? %>
+          <span style="color: red;" class="pull-right">
+            <em>(10 pts max reached)</em>
+          </span>
+        <% else %>
+          <span class="pull-right"><em>(10 pts max reached)</em></span>
+        <% end %>
+      </th>
     </tr>    
     <tr>
       <th>#</th>

@@ -36,6 +36,38 @@ class Employee::CCEScoring < Employee::ApplicationRecord
   }
   scope :achievements, -> { where(cce_scorable_type: ACHIEVEMENTS) }
 
+  scope :additional_credits, -> { 
+    where(cce_scorable_type: Employee::AdditionalCredit) 
+  }
+
+  scope :prof_examinations, -> { 
+    where(cce_scorable_type: Employee::ProfessionalExamination) 
+  }
+
+  scope :community_outreaches, -> { 
+    where(cce_scorable_type: Employee::CommunityOutreach) 
+  }
+
+  scope :awards, -> { 
+    where(cce_scorable_type: Employee::Award) 
+  }
+
+  scope :professional_memberships, -> { 
+    where(cce_scorable_type: Employee::ProfessionalMembership) 
+  }
+
+  scope :academic_advisories, -> { 
+    where(cce_scorable_type: Employee::AcademicAdvisory) 
+  }
+
+  scope :trainings, -> { 
+    where(cce_scorable_type: Employee::Training) 
+  }
+
+  scope :instructional_manuals, -> { 
+    where(cce_scorable_type: Employee::InstructionalManual) 
+  }
+
   # scope :with_nbc, -> (id = nil) { 
   #   where(nbc_id: id) if id.present?
   # }

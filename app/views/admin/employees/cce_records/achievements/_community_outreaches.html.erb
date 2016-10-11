@@ -1,7 +1,15 @@
 <table class="table table-striped table-bordered table-master">
   <thead>
     <tr>
-      <th colspan="9">Community Outreaches</th>
+      <th colspan="9">Community Outreaches
+        <% if @cce_record.has_max_points_for_community_outreaches? %>
+          <span style="color: red;" class="pull-right">
+            <em>(5 pts max reached)</em>
+          </span>
+        <% else %>
+          <span class="pull-right"><em>(5 pts max)</em></span>
+        <% end %>        
+      </th>
     </tr>
     <tr>
       <th>#</th>
