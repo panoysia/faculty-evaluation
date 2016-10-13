@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161012081610) do
+ActiveRecord::Schema.define(version: 20161013095625) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20161012081610) do
     t.integer  "cce_max_points"
     t.integer  "qce_min_points"
     t.integer  "qce_max_points"
+    t.integer  "salary_grade"
   end
 
   create_table "academic_years", force: :cascade do |t|

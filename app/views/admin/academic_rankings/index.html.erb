@@ -15,7 +15,14 @@
     <tr>
       <th>#</th>  
       <th>Rank Name</th>
+      <!-- <th>Name</th> -->
+      <th>Subrank</th>
       <!-- <th>Position</th> -->
+      <th>Salary Grade</th>
+      <th>CCE Min</th>
+      <th>CCE Max</th>
+      <th>QCE Min</th>
+      <th>QCE Max</th>
     </tr>
   </thead>
   <tbody>
@@ -23,7 +30,14 @@
       <tr>
         <td><%= index += 1 %></td>
         <td><%= academic_rank.full_name %></td>
+        <!-- <td><%#= academic_rank.name %></td> -->
+        <td><%= academic_rank.subrank %></td>
         <!-- <td><%#= academic_rank.position %></td> -->
+        <td><%= academic_rank.salary_grade %></td>
+        <td><%= academic_rank.cce_min_points %></td>
+        <td><%= academic_rank.cce_max_points %></td>
+        <td><%= academic_rank.qce_min_points %></td>
+        <td><%= academic_rank.qce_max_points %></td>
       </tr>
     <% end %>
   </tbody>

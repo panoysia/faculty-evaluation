@@ -12,6 +12,7 @@
 #  cce_max_points :integer
 #  qce_min_points :integer
 #  qce_max_points :integer
+#  salary_grade   :integer
 #
 
 class AcademicRanking < ActiveRecord::Base
