@@ -14,10 +14,10 @@
   <thead>
     <tr>
       <th>#</th>  
-      <th>Rank Name</th>
-      <!-- <th>Name</th> -->
-      <th>Subrank</th>
+      <!-- <th>Rank Name</th> -->
       <!-- <th>Position</th> -->
+      <th>Name</th>
+      <th>Subrank</th>
       <th>Salary Grade</th>
       <th>CCE Min</th>
       <th>CCE Max</th>
@@ -29,10 +29,10 @@
     <% @academic_rankings.each_with_index do |academic_rank, index| %>
       <tr>
         <td><%= index += 1 %></td>
-        <td><%= academic_rank.full_name %></td>
-        <!-- <td><%#= academic_rank.name %></td> -->
-        <td><%= academic_rank.subrank %></td>
+        <!-- <td><%= academic_rank.full_name %></td> -->
         <!-- <td><%#= academic_rank.position %></td> -->
+        <td><%= academic_rank.name %></td>
+        <td><%= academic_rank.subrank %></td>
         <td><%= academic_rank.salary_grade %></td>
         <td><%= academic_rank.cce_min_points %></td>
         <td><%= academic_rank.cce_max_points %></td>
