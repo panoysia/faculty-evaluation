@@ -13,8 +13,7 @@ class Admin::EmployeeQueriesController < Admin::ApplicationController
           condition = Employee::AcademicDegree.doctorate.masters
         end
 
-        @employees = Employee::AcademicDegree.joins(:academic_degrees).
-                      merge(condtion)
+        @employees = Employee.joins(:academic_degrees).merge(condition)
 
         #@employees = Employee.includes(:educations).where(criteria).order('employee_educations.level DESC').references(:employee_educations)
         return @employees
