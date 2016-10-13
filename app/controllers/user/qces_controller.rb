@@ -85,7 +85,8 @@ class User::QCEsController < User::ApplicationController
   def finalize
     # render html: params.inspect and return true
     @qce.update completed: 1
-    redirect_to qces_path, notice: 'Your QCE for SY has been finalized.'
+    full_title = @qce.rating_period.coverage_in_years
+    redirect_to qces_path, notice: "Your QCE for #{label} has been finalized."
   end
 
 

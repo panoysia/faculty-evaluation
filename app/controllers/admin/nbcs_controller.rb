@@ -64,10 +64,9 @@ class Admin::NBCsController < Admin::ApplicationController
   end
 
   def update_academic_years
-    # TODO: Make sure to have 3 unique Academic Year records
-     # render html: params.inspect and return true
-    render html: params.inspect and return true
-    
+    # TODO: Make sure to have 3 unique Academic Year records (done?)
+    # render html: params.inspect and return true
+  
     ids = params[:academic_year_ids]
     ids.delete ""
     count = ids.uniq.count
