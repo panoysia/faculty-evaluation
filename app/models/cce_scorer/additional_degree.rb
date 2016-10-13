@@ -12,9 +12,9 @@ module CCEScorer
 
     def self.score(record)
       if record.degree_type == MASTERS
-        4.0
+        PTS_FOR_MASTERS
       elsif record.degree_type == BACHELORS
-        3.0
+        PTS_FOR_BACHELORS
       else
         0
       end

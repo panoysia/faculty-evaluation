@@ -1,7 +1,7 @@
 <table class="table table-striped table-bordered table-master">
   <thead>
     <tr>
-      <th colspan="7">Additional Credits
+      <th colspan="8">Additional Credits
         <% if @cce_record.has_max_points_for_additional_credits? %>
           <span style="color: red;" class="pull-right">
             <em>(10 pts max reached)</em>
@@ -14,6 +14,7 @@
     <tr>
       <th>#</th>
       <th>Degree</th>
+      <th>Type</th>
       <th>Institution</th>
       <th># of units</th>
       <th>Points</th>
@@ -26,6 +27,7 @@
       <tr <%= "class=info" unless credit.cce_scoring.recorded? %>>
         <td><%= index += 1 %></td>
         <td><%= credit.degree %></td>
+        <td><%= credit.degree_type_to_string %></td>
         <td><%= credit.institution %></td>
         <td><%= credit.no_of_units %></td>
         <td class="text-right"><%= credit.cce_scoring.points %></td>

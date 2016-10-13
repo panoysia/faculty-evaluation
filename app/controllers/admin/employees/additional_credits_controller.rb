@@ -47,7 +47,7 @@ class Admin::Employees::AdditionalCreditsController < Admin::ApplicationControll
 
   def credit_params
     params.require(:additional_credit).permit(:institution, :degree,
-                                              :no_of_units)
+                                              :degree_type, :no_of_units)
   end
 
   def set_credit

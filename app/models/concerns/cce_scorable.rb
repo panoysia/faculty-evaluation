@@ -8,8 +8,8 @@ module CCEScorable
                           class_name: Employee::CCEScoring,
                           dependent: :destroy
 
-    delegate :nbc_name, :recorded?, to: :cce_scoring,
-                                    allow_nil: true
+    delegate :nbc_name, :points, :recorded?, to: :cce_scoring,
+                                              allow_nil: true
   end
 
 end

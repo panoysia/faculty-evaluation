@@ -30,6 +30,9 @@ class Employee::CCEScoring < Employee::ApplicationRecord
   
   delegate :id, :name, to: :nbc, allow_nil: true, prefix: true
 
+  scope :recorded, -> { where.not(nbc_id: nil) }
+  scope :unrecorded, -> { where(nbc_id: nil) }
+
   scope :educations, -> { where(cce_scorable_type: EDUCATIONS) }
   scope :work_experiences, -> { 
     where(cce_scorable_type: WORK_EXPERIENCES) 

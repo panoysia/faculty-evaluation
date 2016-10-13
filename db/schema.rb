@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009103527) do
+ActiveRecord::Schema.define(version: 20161012081610) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -161,12 +161,13 @@ ActiveRecord::Schema.define(version: 20161009103527) do
   add_index "employee_accreditation_services", ["employee_id"], name: "index_employee_accreditation_services_on_employee_id"
 
   create_table "employee_additional_credits", force: :cascade do |t|
-    t.integer  "employee_id",            null: false
-    t.string   "institution", limit: 50, null: false
-    t.string   "degree",      limit: 50, null: false
-    t.integer  "no_of_units",            null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "employee_id",                        null: false
+    t.string   "institution", limit: 50,             null: false
+    t.string   "degree",      limit: 50,             null: false
+    t.integer  "no_of_units",                        null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "degree_type",            default: 1, null: false
   end
 
   add_index "employee_additional_credits", ["employee_id"], name: "index_employee_additional_credits_on_employee_id"

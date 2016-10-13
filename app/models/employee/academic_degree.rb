@@ -25,12 +25,12 @@ class Employee::AcademicDegree < Employee::ApplicationRecord
   include CCEScorable
 
   scope :doctorate, -> { where(degree_type: DOCTORATE) }
-  scope :masters, -> { where(degree_type: MASTERS) }
-  scope :bachelors, -> { where(degree_type: [BACHELORS, BACHELORS_PLUS]) }
   scope :licensed_md, -> { where(degree_type: MD_LICENSED) }
-  scope :llb_or_md, -> { 
-    where(degree_type: [LLB, MD])
-  }
+  scope :masters, -> { where(degree_type: MASTERS) }
+  scope :llb, -> { where(degree_type: LLB) }
+  scope :md, -> { where(degree_type: MD) }
+  scope :bachelors_plus, -> { where(degree_type: BACHELORS_PLUS) }
+  scope :bachelors, -> { where(degree_type: BACHELORS) }
 
   validates :degree, presence: true, length: { maximum: 50 }
   validates :degree_type, inclusion: { 
@@ -52,6 +52,12 @@ class Employee::AcademicDegree < Employee::ApplicationRecord
 
   def self.degree_type_options
     DEGREE_TYPES.each_with_index.map { |type, index| [type, index] }
+  end
+
+  def self.highest
+    doctorate.presence || licensed_md.presence ||
+    masters.presence || llb.presence || md.presence ||
+    bachelors_plus.presence || bachelors.presence
   end
 
 

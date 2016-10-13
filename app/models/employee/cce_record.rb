@@ -1,4 +1,7 @@
 class Employee::CCERecord
+  include CCEConstants::AcademicDegree
+  include CCEConstants::AdditionalDegree
+
   EDUCATIONS = %i(
     academic_degrees
     additional_degrees
@@ -36,12 +39,12 @@ class Employee::CCERecord
     trainer_services
   )
 
+  # "PTS" is short for "points"
   MAX_PTS_FOR_EDUCATIONS = 85.00
     MAX_PTS_FOR_ADDITIONAL_CREDITS = 10.00
 
   MAX_PTS_FOR_WORK_EXPERIENCES = 25.00
   MAX_PTS_FOR_ACHIEVEMENTS = 90.00
-
 
   MAX_PTS_FOR_CREATIVE_WORKS_CATEGORY = 30.00
     MAX_PTS_FOR_INSTRUCTIONAL_MANUALS = 10.00
@@ -54,26 +57,27 @@ class Employee::CCERecord
   MAX_PTS_FOR_COMMUNITY_OUTREACHES = 5.00
   MAX_PTS_FOR_PROF_EXAMINATIONS = 10.00
  
-
   MAX_PTS_FOR_EXPERT_SERVICES_RENDERED = 20.00
   
   MAX_PTS_FOR_EXPERT_SERVICES_CATEGORY = 
     MAX_PTS_FOR_EXPERT_SERVICES_RENDERED + MAX_PTS_FOR_TRAININGS_SEMINARS
 
-  # POINTS_FOR_DOCTORATE = 85
-  # POINTS_FOR_LICENSED_MD = 85
-  # POINTS_FOR_LLB_OR_MASTERS_OR_MD = 65
-
-  attr_reader :employee, :nbc_id, :ninja
-
-  delegate *EDUCATIONS, *WORK_EXPERIENCES, *ACHIEVEMENTS, :cce_scorings,
-            to: :employee
+  # PTS_FOR_DOCTORATE = 85.00
+  # PTS_FOR_LICENSED_MD = PTS_FOR_DOCTORATE
+  
+  attr_reader :employee, :nbc_id, :cce_scorings
+  delegate *EDUCATIONS, *WORK_EXPERIENCES, *ACHIEVEMENTS, to: :employee
   
 
   def initialize(employee)
     @employee = employee
+    @cce_scorings = @employee.cce_scorings
+    # if include_unrecorded_cce_scorings
+    #   @cce_scorings = @employee.cce_scorings
+    # else
+    #   @cce_scorings = @employee.cce_scorings.where
+    # end
   end
-
 
   def total_educations_score
     return MAX_PTS_FOR_EDUCATIONS if has_max_points_for_educations?
@@ -156,8 +160,61 @@ class Employee::CCERecord
     sum_of_instructional_manuals >= MAX_PTS_FOR_INSTRUCTIONAL_MANUALS
   end
 
+  def highest_academic_degree
+    @highest_academic_degree ||= academic_degrees.highest.try(:first)
+  end
+
+  def score_for_additional_masters_degree
+    points = ::CCEConstants::AdditionalDegree::PTS_FOR_MASTERS
+    additional_degrees.masters.count * points
+  end
+  
+  def score_for_additional_bachelors_degree
+    points = ::CCEConstants::AdditionalDegree::PTS_FOR_BACHELORS
+    additional_degrees.bachelors.count * points
+  end
+
+  def score_for_additional_doctorate_credits
+    additional_credits.doctorate.joins(:cce_scoring).sum(:points)
+  end
+
+  def score_for_additional_masters_credits
+    additional_credits.masters.joins(:cce_scoring).sum(:points)
+  end
+
+  def compute_score_for_masters_degree
+    score_for_additional_masters_degree + 
+    score_for_additional_doctorate_credits
+  end
+
+  def compute_score_for_bachelors_degree
+    score_for_additional_bachelors_degree +
+    score_for_additional_masters_credits
+  end
+
+  def score_for_additional_credits
+    record = highest_academic_degree.presence
+    return 0 if record.blank?
+
+    if record.degree_type.in? [MASTERS, LLB, MD]
+      additional_credits.doctorate
+    elsif record.degree_type.in? [BACHELORS, BACHELORS_PLUS]
+      additional_credits.masters
+    end
+  end
+
   def sum_of_educations
-    @educations_sum ||= cce_scorings.educations.sum(:points)
+    record = highest_academic_degree.presence
+    return 0 if record.blank?
+    
+    @sum_educations = 
+      case record.degree_type
+      when DOCTORATE, MD_LICENSED then MAX_PTS_FOR_EDUCATIONS
+      when MASTERS, LLB, MD then 
+        compute_score_for_masters_degree
+      when BACHELORS, BACHELORS_PLUS then compute_score_for_bachelors_degree
+      else 0
+      end   # end case record.degree_type
   end
 
   def sum_of_work_experiences
@@ -165,7 +222,6 @@ class Employee::CCERecord
   end
 
   def sum_of_achievements
-    #@sum_achievements ||= cce_scorings.achievements.sum(:points)
     @sum_achievements =
       sum_of_creative_works_category +
       sum_of_expert_services_category +
@@ -183,9 +239,7 @@ class Employee::CCERecord
     end
   end
 
-  def sum_of_creative_works_category  
-    # @sum_creative_works_category ||= cce_scorings.creative_works_category.sum(:points)
-
+  def sum_of_creative_works_category
     @sum_creative_works_category =
       sum_of_inventions +
       sum_of_discoveries +
@@ -200,12 +254,9 @@ class Employee::CCERecord
     else
       @sum_creative_works_category
     end
-
   end
   
   def sum_of_expert_services_rendered
-    # @sum_expert_services_rendered ||= cce_scorings.expert_services_rendered.sum(:points)
-
     @sum_expert_services_rendered = 
       sum_of_consultancy_services +
       sum_of_prof_services + 
@@ -223,8 +274,6 @@ class Employee::CCERecord
   end
 
   def sum_of_expert_services_category
-    # @sum_expert_services_category ||= cce_scorings.expert_services_category.sum(:points)
-
     @sum_expert_services_category = 
       sum_of_trainings +
       sum_of_expert_services_rendered
@@ -233,17 +282,7 @@ class Employee::CCERecord
       MAX_PTS_FOR_EXPERT_SERVICES_CATEGORY
     else
       @sum_expert_services_category
-    end    
-  end
-
-  def sum_of_academic_degrees
-    cce_scorings.academic_degrees
-  end
-
-  def sum_of_additional_degrees
-  end
-
-  def sum_of_additional_credits
+    end
   end
 
   def sum_of_academic_work_experiences
@@ -271,7 +310,7 @@ class Employee::CCERecord
       MAX_PTS_FOR_PROF_MEMBERSHIPS
     else
       @sum_prof_memberships
-    end    
+    end
   end
 
   def sum_of_academic_honors
@@ -299,7 +338,7 @@ class Employee::CCERecord
       MAX_PTS_FOR_COMMUNITY_OUTREACHES
     else
       @sum_community_outreaches
-    end                                    
+    end
   end
 
   def sum_of_prof_examinations
@@ -343,7 +382,7 @@ class Employee::CCERecord
       MAX_PTS_FOR_INSTRUCTIONAL_MANUALS
     else
       @sum_instructional_manuals
-    end                                    
+    end
   end
 
   def sum_of_trainings
@@ -352,7 +391,7 @@ class Employee::CCERecord
       MAX_PTS_FOR_TRAININGS_SEMINARS
     else
       @sum_trainings
-    end    
+    end
   end
 
   def sum_of_consultancy_services
@@ -370,7 +409,7 @@ class Employee::CCERecord
       MAX_PTS_FOR_ACADEMIC_ADVISORIES
     else
       @sum_academic_advisories
-    end    
+    end
   end
 
   def sum_of_prof_reviews
@@ -391,9 +430,6 @@ class Employee::CCERecord
   end
 
 end
-
-
-#@educations_sum ||= cce_scorings.educations.sum(:points)
 
 # def initialize(employee, nbc_id = nil)
 #   @employee = employee
