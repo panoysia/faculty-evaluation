@@ -1,3 +1,17 @@
+=begin
+# ids start from 58..76
+r = -> (id) { AcademicRanking.find(id) }
+ranks = AcademicRanking.order(position: :asc)
+ranks.each_with_index do |rank, index|
+  rank.update(salary_grade: (12 + index))
+end
+
+r.call(58).update cce_min_points: 0, qce_min_points: 0
+r.call(59).update qce_min_points: 80, qce_max_points: 81
+r.call(60).update qce_min_points: 82, qce_max_points: 83
+=end
+
+
 # Data for Employee::InnovationCriterium
 data = [ 
   { description: 'Use of indigenous materials' },

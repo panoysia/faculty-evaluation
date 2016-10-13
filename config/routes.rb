@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     #get 'leave_service_credits/search' => "leave_service_credits#index"
 
     resource :dashboard, only: :show
+    resources :test_rankings, only: [:index, :show]
 
     resources :nbcs do
       member do

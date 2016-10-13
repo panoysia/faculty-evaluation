@@ -1,0 +1,42 @@
+<h2 class="page-header">Test Ranking</h2>
+<div>
+  <%= form_tag admin_test_ranking_path("results"), method: :get do %>
+    <div class="row">
+      <div class="col-md-3">
+        <!-- <div class="form-group"> -->
+          <%#= label_tag :current_rank, "Current Rank" %>
+          <%#= collection_select :nil, :nil, 
+                                @rankings, :id, :full_name,
+                                {}, class: "form-control",
+                                name: :current_rank  %>
+        <!-- </div> -->
+        <div class="form-group">
+          <%= label_tag :cce_score, "CCE Score" %>
+          <%= text_field_tag :cce_score, nil, class: "form-control",
+                                          autofocus: true %>
+        </div>
+        <div class="form-group">
+          <%= label_tag :qce_score, "QCE Score" %>
+          <%= text_field_tag :qce_score, nil, class: "form-control",
+                                        autofocus: true %>  
+        </div>
+        <div class="form-group">
+          <%= submit_tag "Compute", class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% if false %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :degree, 'Degree' %>
+        <%= f.text_field :degree, class: 'form-control',
+            required: true, autofocus: true,
+            maxlength: Employee::AcademicDegree.get_field_limit_of(:degree)
+        %>
+      </div>
+    </div>
+  </div>
+<% end %>

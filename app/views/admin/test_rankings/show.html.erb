@@ -1,0 +1,9 @@
+<h4>CCE score is <%= format_in_decimal(@evaluator.cce_score) %></h4>
+<h4>QCE score is <%= format_in_decimal(@evaluator.qce_score) %></h4>
+<h4>
+  Your evaluated rank is:
+  <strong><%= @evaluator.evaluate(@evaluator.cce_score,
+                                  @evaluator.qce_score).full_name %>
+  </strong>
+</h4>
+<p><%= link_to "< Back to Test Rankings", admin_test_rankings_path, class: "btn btn-links" %></p>

@@ -15,13 +15,28 @@
 #  salary_grade   :integer
 #
 
+
+# Instruction ratings only for: Instructor to Associate Professor 4
+# Associate Professor 5 - Research, Extension, and Production ratings
+
+# "Instructor",
+# "Assistant Professor",
+# "Associate Professor",
+# "Professor",
+# "College/University Professor"
+
 class AcademicRanking < ActiveRecord::Base
   ASSOCIATE_PROFESSOR_5 = 12
 
-  # Instruction only for: Instructor to Associate Professor 4
-  # Associate Professor 5 - Research, Extension, Production
-
   has_many :employees
+
+  scope :professorial, -> {
+    where(name: ["Professor", "College/University Professor"])
+  }
+
+  scope :non_professorial, -> {
+    where.not(name: ["Professor", "College/University Professor"])
+  }
 
   validates :name, presence: true,
                     length: { maximum: 50 }
