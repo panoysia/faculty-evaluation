@@ -49,8 +49,8 @@
           <td><%= index += 1 %></td>
           <td><%= action.name %></td>
           <td><%= category_type_to_string(action.category) %></td>
-          <td><%= action.start_at %></td>
-          <td><%= action.end_at %></td>
+          <td><%= date_format_readable(action.start_at) %></td>
+          <td><%= date_format_readable(action.end_at) %></td>
           <td><%= action.description %></td>
         </tr>
       <% end %>

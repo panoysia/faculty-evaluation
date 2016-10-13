@@ -8,7 +8,7 @@ class Admin::EmployeeCareerPathingsController < Admin::ApplicationController
         
         id = params[:view][:employee_id]
         @employee = Employee.find(id)
-        @actions = @employee.career_path_actions
+        @actions = @employee.actions
       end
     end
   end

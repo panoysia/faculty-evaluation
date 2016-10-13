@@ -62,9 +62,12 @@ class Employee::CCERecord
   MAX_PTS_FOR_EXPERT_SERVICES_CATEGORY = 
     MAX_PTS_FOR_EXPERT_SERVICES_RENDERED + MAX_PTS_FOR_TRAININGS_SEMINARS
 
-  # PTS_FOR_DOCTORATE = 85.00
-  # PTS_FOR_LICENSED_MD = PTS_FOR_DOCTORATE
-  
+  PTS_FOR_DOCTORATE = 85.00
+  PTS_FOR_LICENSED_MD = PTS_FOR_DOCTORATE
+  PTS_FOR_MASTERS = 65
+  PTS_FOR_LLB = PTS_FOR_MASTERS
+  PTS_FOR_MD = PTS_FOR_MASTERS
+
   attr_reader :employee, :nbc_id, :cce_scorings
   delegate *EDUCATIONS, *WORK_EXPERIENCES, *ACHIEVEMENTS, to: :employee
   
@@ -72,11 +75,6 @@ class Employee::CCERecord
   def initialize(employee)
     @employee = employee
     @cce_scorings = @employee.cce_scorings
-    # if include_unrecorded_cce_scorings
-    #   @cce_scorings = @employee.cce_scorings
-    # else
-    #   @cce_scorings = @employee.cce_scorings.where
-    # end
   end
 
   def total_educations_score
@@ -161,59 +159,89 @@ class Employee::CCERecord
   end
 
   def highest_academic_degree
-    @highest_academic_degree ||= academic_degrees.highest.try(:first)
+    # @highest_academic_degree ||= academic_degrees.highest.try(:first)
+    # return @highest_academic_degree if @highest_academic_degree
+    @highest_academic_degree ||= get_highest_academic_degree
+  end
+
+
+  def get_highest_academic_degree
+    record_ids = cce_scorings.academic_degrees.map(&:cce_scorable_id)
+    academic_degrees.where(id: record_ids).highest.try(:first)    
   end
 
   def score_for_additional_masters_degree
-    points = ::CCEConstants::AdditionalDegree::PTS_FOR_MASTERS
-    additional_degrees.masters.count * points
+    puts "ENTER SCORE_FOR_ADDITIONAL_MASTERS_DEGREE"
+    points_for_masters = ::CCEConstants::AdditionalDegree::PTS_FOR_MASTERS
+    cce_scorings.additional_degrees.
+      where(points: points_for_masters).
+      sum(:points)
   end
   
   def score_for_additional_bachelors_degree
-    points = ::CCEConstants::AdditionalDegree::PTS_FOR_BACHELORS
-    additional_degrees.bachelors.count * points
+    puts "ENTER SCORE_FOR_ADDITIONAL_BACHELORS_DEGREE"
+    points_for_bachelors = ::CCEConstants::AdditionalDegree::PTS_FOR_BACHELORS
+    cce_scorings.additional_degrees.
+      where(points: points_for_bachelors).
+      sum(:points)
   end
 
   def score_for_additional_doctorate_credits
-    additional_credits.doctorate.joins(:cce_scoring).sum(:points)
+    puts "ENTER SCORE_FOR_ADDITIONAL_DOCTORATE_CREDITS"
+    record_ids = cce_scorings.additional_credits.map(&:cce_scorable_id)
+
+    additional_credits.where(id: record_ids).doctorate.
+      joins(:cce_scoring).sum(:points)
   end
 
   def score_for_additional_masters_credits
-    additional_credits.masters.joins(:cce_scoring).sum(:points)
+    puts "ENTER SCORE_FOR_ADDITIONAL_MASTERS_CREDITS"
+    record_ids = cce_scorings.additional_credits.map(&:cce_scorable_id)
+
+    additional_credits.where(id: record_ids).masters.
+      joins(:cce_scoring).sum(:points)
   end
 
   def compute_score_for_masters_degree
-    score_for_additional_masters_degree + 
-    score_for_additional_doctorate_credits
+    @score_for_masters ||=
+      score_for_additional_masters_degree + 
+      score_for_additional_doctorate_credits
   end
 
   def compute_score_for_bachelors_degree
-    score_for_additional_bachelors_degree +
-    score_for_additional_masters_credits
-  end
-
-  def score_for_additional_credits
-    record = highest_academic_degree.presence
-    return 0 if record.blank?
-
-    if record.degree_type.in? [MASTERS, LLB, MD]
-      additional_credits.doctorate
-    elsif record.degree_type.in? [BACHELORS, BACHELORS_PLUS]
-      additional_credits.masters
-    end
+    @score_for_bachelors ||= 
+      score_for_additional_bachelors_degree +
+      score_for_additional_masters_credits
   end
 
   def sum_of_educations
     record = highest_academic_degree.presence
     return 0 if record.blank?
-    
-    @sum_educations = 
+
+    @sum_educations ||=
       case record.degree_type
-      when DOCTORATE, MD_LICENSED then MAX_PTS_FOR_EDUCATIONS
-      when MASTERS, LLB, MD then 
-        compute_score_for_masters_degree
-      when BACHELORS, BACHELORS_PLUS then compute_score_for_bachelors_degree
-      else 0
+      when ::CCEConstants::AcademicDegree::DOCTORATE,
+            ::CCEConstants::AcademicDegree::MD_LICENSED
+        
+        puts "EXITING CASE RECORD.DEGREE_TYPE CHECK AND RETURNING 85"
+        MAX_PTS_FOR_EDUCATIONS
+      
+      when ::CCEConstants::AcademicDegree::MASTERS,
+            ::CCEConstants::AcademicDegree::LLB,
+            ::CCEConstants::AcademicDegree::MD
+        puts "ENTERING compute_score_for_masters_degree"
+        compute_score_for_masters_degree + record.points
+
+      when ::CCEConstants::AcademicDegree::BACHELORS_PLUS
+        puts "ENTERING compute_score_for_bachelors_plus_degree"
+        compute_score_for_bachelors_degree + record.points
+
+      when ::CCEConstants::AcademicDegree::BACHELORS
+        puts "ENTERING compute_score_for_bachelors_degree"
+        compute_score_for_bachelors_degree + record.points
+
+      else
+        cce_scorings.academic_degree.sum(:points)
       end   # end case record.degree_type
   end
 
