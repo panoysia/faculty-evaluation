@@ -131,168 +131,166 @@
                 class: 'form-control', disabled: true %>
           </div>
         </div>
-        <% if false %>
-        <div class="col-md-4">
-          <div class="form-group">
-            <%= label :picture, 'Faculty Picture ', class: 'control-label' %>
-            <%= file_field :picture, class: 'form-control' %>
-          </div>
-        </div>
       </div>  <!-- .col-md-12 -->
     </div>  <!-- .row -->
   </div>  <!-- .panel-body -->
 </div>  <!-- #personal-info .panel -->
 
-  <div id="employment-information" class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Employment Information</h3>
-    </div>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :hired_date, class: 'control-label' %>
-              <%= f.date_field :hired_date, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :academic_ranking_id, 'Rank', class: 'control-label' %>
-              <%= f.collection_select :academic_ranking_id, AcademicRanking.all, :id, :full_name, { include_blank: ' -- Select Rank --' }, class: 'form-control' %>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :designation, class: 'control-label' %>
-              <%= f.text_field :designation, class: 'form-control' %>
-            </div>
-          </div>
-        </div>  <!-- .col-md-12 -->
-      </div>  <!-- .row -->
-
-      <!-- Start new row -->
-      <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :specialization_id, 'Specialization (Career Path)', class: 'control-label' %>
-              <%= f.collection_select :specialization_id, Specialization.order(name: :asc), :id, :name, { include_blank: '-- Select Specialization --' }, class: 'form-control' %>
-            </div>            
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :department_id, 'Department', class: 'control-label' %>
-              <%= f.collection_select :department_id, Department.order(name: :asc), :id, :name, { include_blank: '-- Select Department --' }, class: 'form-control' %>
-            </div>            
-          </div>          
-        </div>  <!-- .col-md-12 -->
-      </div>  <!-- .row -->
-            
-    </div> <!-- .panel-body -->
-  </div>  <!--  #employment-information .panel -->
-
-  <div id="government-membership" class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Gov. Membership</h3>
-    </div>  <!-- .panel-heading -->
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :gsis_no, 'GSIS #', class: 'control-label' %>
-              <%= f.text_field :gsis_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:gsis_no) %>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :pagibig_no, 'PAG-IBIG #', class: 'control-label' %>
-              <%= f.text_field :pagibig_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:pagibig_no) %>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :philhealth_no, 'PhilHealth #',class: 'control-label' %>
-              <%= f.text_field :philhealth_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:philhealth_no) %>
-            </div>
-          </div>
-        </div>  <!-- .col-md-12 -->
-      </div>  <!-- .row -->
-      
-      <!-- Start new row -->
-      <div class="row">
-        <div class="col-md-12">
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :sss_no, 'SSS #', class: 'control-label' %>
-              <%= f.text_field :sss_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:sss_no) %>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :agency_employee_no, 'Agency Employee #', class: 'control-label' %>
-              <%= f.text_field :agency_employee_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:agency_employee_no) %>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <%= f.label :tin, 'TIN', class: 'control-label' %>
-              <%= f.text_field :tin, class: 'form-control', maxlength: Employee.get_field_limit_of(:tin) %>
-            </div>
-          </div>
-        </div>  <!-- .col-md-12 -->
-      </div>  <!-- .row -->
-    </div>  <!-- .panel-body -->
-  </div>  <!-- #government-membership .panel -->
-
-  <div id="addresses-panel" class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Addresses</h3>
-    </div>
-    <div class="panel-body">
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= f.label :r_address, 'Residential Address', class: 'control-label' %>
-          <%= f.text_area :r_address, class: 'form-control', maxlength: Employee.get_field_limit_of(:r_address), rows: 3 %>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= f.label :p_address, 'Permanent Address', class: 'control-label' %>
-          <%= f.text_area :p_address, class: 'form-control', maxlength: Employee.get_field_limit_of(:p_address), rows: 3 %>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= f.label :r_zip_code, 'Residential Zip Code', class: 'control-label' %>
-          <%= f.text_field :r_zip_code, class: 'form-control', maxlength: Employee.get_field_limit_of(:r_zip_code) %>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= f.label :p_zip_code, 'Permanent Zip Code', class: 'control-label' %>
-          <%= f.text_field :p_zip_code, class: 'form-control', maxlength: Employee.get_field_limit_of(:p_zip_code) %>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= f.label :r_telephone_no, 'Residential Tel. #', class: 'control-label' %>
-          <%= f.text_field :r_telephone_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:r_telephone_no) %>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= f.label :p_telephone_no, 'Permanent Tel. #', class: 'control-label' %>
-          <%= f.text_field :p_telephone_no, class: 'form-control', maxlength: Employee.get_field_limit_of(:p_telephone_no) %>
-        </div>
-      </div>      
-    </div>  <!-- .panel-body -->
-  </div>  <!-- #addresses-panel .panel -->
-  <div class="col-md-12">
-    <div class="form-group">
-      <%= f.submit 'Save', class: 'btn btn-primary' %>
-    </div>
+<div id="employment-information" class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Employment Information</h3>
   </div>
-  <% end %>
-<%# end # end of form_for %>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :hired_date, "Hired Date", class: 'control-label' %>
+            <%= text_field_tag :hired_date, @profile.hired_date, class: 'form-control', disabled: true %>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :academic_ranking_id, 'Rank', class: 'control-label' %>
+            <%= text_field_tag :academic_rank, @profile.rank.full_name, class: "form-control", disabled: true %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :designation, "Designation", class: 'control-label' %>
+            <%= text_field :designation, @profile.designation, class: 'form-control', disabled: true %>
+          </div>
+        </div>
+      </div>  <!-- .col-md-12 -->
+    </div>  <!-- .row -->
+
+    <!-- Start new row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :specialization, 'Specialization (Career Path)', class: 'control-label' %>
+            <%= text_field_tag :specialization,
+                @profile.specialization.name, class: "form-control",
+                disabled: true %>
+          </div>            
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :department, 'Department', class: 'control-label' %>
+            <%= text_field_tag :department, @profile.department.name, class: "form-control", disabled: true %>
+          </div>            
+        </div>          
+      </div>  <!-- .col-md-12 -->
+    </div>  <!-- .row -->
+  </div> <!-- .panel-body -->
+</div>  <!--  #employment-information .panel -->
+
+<div id="government-membership" class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Gov. Membership</h3>
+  </div>  <!-- .panel-heading -->
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :gsis_no, 'GSIS #', class: 'control-label' %>
+            <%= text_field_tag :gsis_no, @profile.gsis_no,
+                  class: 'form-control', disabled: true %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :pagibig_no, 'PAG-IBIG #', class: 'control-label' %>
+            <%= text_field :pagibig_no, @profile.pagibig_no,
+                class: 'form-control', disabled: true %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :philhealth_no, 'PhilHealth #', class: 'control-label' %>
+            <%= text_field_tag :philhealth_no, @profile.philhealth_no, 
+                  class: 'form-control', disabled: true %>
+          </div>
+        </div>
+      </div>  <!-- .col-md-12 -->
+    </div>  <!-- .row -->
+    
+    <!-- Start new row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :sss_no, 'SSS #', class: 'control-label' %>
+            <%= text_field_tag :sss_no, @profile.sss_no, class: 'form-control', disabled: true %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :agency_employee_no, 'Agency Employee #', class: 'control-label' %>
+            <%= text_field_tag :agency_employee_no,
+                  @profile.agency_employee_no, class: 'form-control',
+                  disabled: true %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= label_tag :tin, 'TIN', class: 'control-label' %>
+            <%= text_field_tag :tin, @profile.tin, class: 'form-control',
+                  disabled: true %>
+          </div>
+        </div>
+      </div>  <!-- .col-md-12 -->
+    </div>  <!-- .row -->
+  </div>  <!-- .panel-body -->
+</div>  <!-- #government-membership .panel -->
+
+<div id="addresses-panel" class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Addresses</h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag :r_address, 'Residential Address', class: 'control-label' %>
+        <%= text_area_tag :r_address, @profile.r_address,
+            class: 'form-control',
+            disabled: true, rows: 3 %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag :p_address, 'Permanent Address', class: 'control-label' %>
+        <%= text_area_tag :p_address, @profile.p_address, class: 'form-control', disabled: true, rows: 3 %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag :r_zip_code, 'Residential Zip Code', class: 'control-label' %>
+        <%= text_field_tag :r_zip_code, @profile.r_zip_code, class: 'form-control', disabled: true %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag :p_zip_code, 'Permanent Zip Code', class: 'control-label' %>
+        <%= text_field_tag :p_zip_code, @profile.p_zip_code, class: 'form-control', disabled: true %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag :r_telephone_no, 'Residential Tel. #', class: 'control-label' %>
+        <%= text_field_tag :r_telephone_no, @profile.r_telephone_no, 
+              class: 'form-control', disabled: true %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag :p_telephone_no, 'Permanent Tel. #', class: 'control-label' %>
+        <%= text_field_tag :p_telephone_no, @profile.p_telephone_no,
+              class: 'form-control', disabled: true %>
+      </div>
+    </div>      
+  </div>  <!-- .panel-body -->
+</div>  <!-- #addresses-panel .panel -->
