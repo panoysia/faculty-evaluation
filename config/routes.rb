@@ -141,7 +141,7 @@ Rails.application.routes.draw do
     post 'login' => 'sessions#create', as: :authenticate_user
 
     resource :dashboard, only: :show
-    resource :hr_profile, only: [:show, :create], path: 'my-hr-profile'
+    resource :hr_profile, only: :show, path: 'my-hr-profile'
     resource :career_path, only: :show, path: 'my-career-path'
     resource :account, only: [:edit, :update], path: 'user-account', as: :user_account
 

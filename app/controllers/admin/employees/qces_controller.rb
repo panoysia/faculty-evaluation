@@ -7,7 +7,7 @@ class Admin::Employees::QCEsController < Admin::ApplicationController
 
 
   def index
-    @qces = (1..5).to_a
+    # @qces = (1..5).to_a
     # @qces = @employee.qces
   end
 

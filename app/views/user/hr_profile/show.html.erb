@@ -159,7 +159,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <%= label_tag :designation, "Designation", class: 'control-label' %>
-            <%= text_field :designation, @profile.designation, class: 'form-control', disabled: true %>
+            <%= text_field_tag :designation, @profile.designation, class: 'form-control', disabled: true %>
           </div>
         </div>
       </div>  <!-- .col-md-12 -->
@@ -294,3 +294,171 @@
     </div>      
   </div>  <!-- .panel-body -->
 </div>  <!-- #addresses-panel .panel -->
+
+ <!--  --> <!--  -->
+
+<% if false %>
+<h2 class="page-header">My HR Profile</h2>
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-3">
+      <%= image_tag @profile.picture.url, size: "210", class: 'img-responsive img-thumbnail center-block' %>
+    </div>
+    <div class="col-md-9">
+      <h2 class="page-header">
+        <span><%= @profile.full_name %></span>
+        <!-- <div class="pull-right">
+          <span class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><%#= link_to 'Print PDS', '#' %></li>
+              </ul>
+            </div>
+          </span>
+        </div> -->
+      </h2>
+      <div class="employee-card-info">
+        <p><%= @profile.rank.full_name if @profile.rank %></p>
+        <p><%= @profile.designation if @profile.designation.present? %></p>
+        <p><%= "#{@profile.age} years old" if @profile.age.present? %></p>
+        <p><%= "Employed since #{@profile.hired_date}" if @profile.hired_date.present? %></p>
+      </div>
+    </div>  <!-- .col-md-9 -->
+  </div>  <!-- .col-md-12 -->
+</div> <!-- .row -->
+<!-- start of related data -->
+
+<!-- education -->
+<div class="row" style="margin-top: 25px;">
+  <div class="col-md-12">
+    <div class="col-md-9 col-md-offset-3">
+      <div id="education-info">
+        <div id="id-of-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Educations</h3>
+          </div>  <!-- .panel-heading -->
+          <div class="panel-body">
+            <% @profile.educations.each do |education| %>
+              <p><%= education.degree_course %></p>
+              <p><%= education.school_name %></p>
+              <p><%= "#{education.start_at.year} - #{education.end_at.year}" if education.start_at.present?  %></p>
+            <% end %>
+          </div>  <!-- .panel-body -->
+        </div>  <!-- #id-of-panel -->        
+      </div>  <!-- #education-info -->
+    </div>  <!-- .col-md-9 -->
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<!-- trainings -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-9 col-md-offset-3">
+      <div id="training-info">
+        <div id="id-of-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Trainings</h3>
+          </div>  <!-- .panel-heading -->
+          <div class="panel-body">
+            <% @profile.trainings.each do |training| %>
+              <p><%= training.title %></p>
+              <p><%= training.conducted_by %></p>
+              <!-- dates are to be right-aligned -->
+              <p><%= "#{training.start_at.year} - #{training.end_at.year}"  %></p>
+            <% end %>
+          </div>  <!-- .panel-body -->
+        </div>  <!-- #id-of-panel -->        
+      </div>  <!-- #training-info -->
+    </div>  <!-- .col-md-9 -->
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<!-- work experiences -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-9 col-md-offset-3">
+      <div id="work-experience-info">
+        <div id="id-of-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Work Experiences</h3>
+          </div>  <!-- .panel-heading -->
+          <div class="panel-body">
+            <% @profile.work_experiences.each do |work_experience| %>
+              <p><%= work_experience.position_title %></p>
+              <p><%= work_experience.company %></p>
+              <!-- dates are to be right-aligned -->
+              <p><%= "#{work_experience.start_at.year} - #{work_experience.end_at.year}"  %></p>
+            <% end %>
+          </div>  <!-- .panel-body -->
+        </div>  <!-- #id-of-panel -->        
+      </div>  <!-- #work-experience-info -->
+    </div>  <!-- .col-md-9 -->
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<!-- civil service -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-9 col-md-offset-3">
+      <div id="civil-service-info">
+        <div id="id-of-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Civil Service</h3>
+          </div>  <!-- .panel-heading -->
+          <div class="panel-body">
+            <% @profile.civil_service_eligibilities.each do |civil_service| %>
+              <p><%= civil_service.career_service %></p>
+              <p><%= civil_service.rating %></p>
+              <p><%= civil_service.place_of_exam %></p>
+              <!-- dates are to be right-aligned -->
+              <p><%= civil_service.date_of_exam %></p>
+            <% end %>
+          </div>  <!-- .panel-body -->
+        </div>  <!-- #id-of-panel -->        
+      </div>  <!-- #civil-service-info -->
+    </div>  <!-- .col-md-9 -->
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<!-- voluntary works -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-9 col-md-offset-3">
+      <div id="voluntary-work-info">
+        <div id="id-of-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Voluntary Works</h3>
+          </div>  <!-- .panel-heading -->
+          <div class="panel-body">
+            <% @profile.voluntary_works.each do |voluntary_work| %>
+              <p><%= voluntary_work.position %></p>
+              <p><%= voluntary_work.organization %></p>
+              <!-- dates are to be right-aligned -->
+              <p><%= "#{voluntary_work.start_at.year} - #{voluntary_work.end_at.year}"  %></p>
+            <% end %>
+          </div>  <!-- .panel-body -->
+        </div>  <!-- #id-of-panel -->        
+      </div>  <!-- #voluntary-work-info -->
+    </div>  <!-- .col-md-9 -->
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<!-- other info -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-9 col-md-offset-3">
+      <div id="other-info-info">
+        <div id="id-of-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Other Info</h3>
+          </div>  <!-- .panel-heading -->
+          <div class="panel-body">
+            <% @profile.other_infos.each do |other_info| %>
+              <p><%= other_info.context %></p>
+              <p><%= other_info.info %></p>
+            <% end %>
+          </div>  <!-- .panel-body -->
+        </div>  <!-- #id-of-panel -->        
+      </div>  <!-- #other-info-info -->
+    </div>  <!-- .col-md-9 -->
+  </div>  <!-- .col-md-12 -->
+</div>  <!-- .row -->
+<% end %> 
