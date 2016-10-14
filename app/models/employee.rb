@@ -262,10 +262,9 @@ class Employee < ApplicationRecord
   # end
 
   def years_in_service
-
-=begin    
-  6/9/2016
-=end
+    if hired_date?
+      YearCalculator.calculate(hired_date, Date.today)
+    end
   end
 
 end

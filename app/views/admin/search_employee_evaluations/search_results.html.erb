@@ -3,21 +3,34 @@
 <div class="row">
   <div class="col-md-12">
     <h3 class="page-header">Search results:</h3>
-    <div class="col-md-6">      
-      <p>Current status: <%= @evaluation.status %></p>
-      <p>Name: <%= @evaluation.employee_full_name %></p>
-      <p>Current rank: <%= @evaluation.current_rank %></p>
-      <p>CCE Score: <%= @evaluation.cce_score %></p>
+    <div class="col-md-2">
+      <%= link_to admin_employee_path(@evaluation.employee) do %>
+        <%= image_tag @evaluation.employee.picture.url(:small), size: "210", class: 'img-responsive img-thumbnail center-block' %>
+      <% end %>      
+    </div>
+    <div class="col-md-6">
+      <h3 class="page-header">
+        <span>
+          <%= link_to @evaluation.employee_full_name,
+                    admin_employee_path(@evaluation.employee) %>
+        </span>
+      </h3>
+      <h4>
+        <span>Evaluation status for NBC <%= @evaluation.nbc_name %>:</span>
+        <span class="label label-<%= 
+                  @evaluation.evaluated? ? "success" : "danger" %>">
+          <%= @evaluation.status %>
+        </span>
+      </h4>
       <% if @evaluation.evaluated? %>
-        <p>QCE Score: <%= @evaluation.qce_score %></p>
-        <p>Rank before: <%= @evaluation.rank_before %></p>
-        <p>Rank after: <%= @evaluation.rank_after %></p>
-        <p><%= link_to "Show",
-            admin_employee_evaluation_path(
-              @evaluation.employee_id, @evaluation.id
-            ) %></p>
+        <p><%= link_to "Show Evaluation",
+                admin_employee_evaluation_path(@evaluation.employee,
+                                                @evaluation),
+                class: "btn btn-success" %></p>
       <% else %>
-        <p>QCE Status: <%= @evaluation.qce_status %></p>
+        <p><%= link_to "Evaluate",
+                new_admin_employee_evaluation_path(@evaluation.employee),
+                class: "btn btn-danger" %></p>
       <% end %>
     </div>
   </div>

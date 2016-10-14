@@ -7,6 +7,10 @@ class Admin::Employees::CareerPathsController < Admin::ApplicationController
 
 
   def show
+    @actions = @employee.actions
+    # @specializations = @career_path.specializations
+    # @actions = @career_path.actions.reorder(category: :asc, start_at: :desc, end_at: :desc)
+
     # @specialization = current_user.account.specialization
     # if @specialization.present? 
     #   @actions = @specialization.career_path_actions.

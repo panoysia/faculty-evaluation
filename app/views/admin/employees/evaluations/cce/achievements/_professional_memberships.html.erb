@@ -1,0 +1,47 @@
+<table class="table table-striped table-bordered table-master">
+  <thead>
+    <tr>
+      <th colspan="8">Professional Memberships (10 pts. max)
+        <% if cce_record.has_max_points_for_prof_memberships? %>
+          <span style="color: red;" class="pull-right">
+            <em>(10 pts. max reached)</em>
+          </span>
+        <% else %>
+          <span class="pull-right">
+            <em><%= format_in_decimal(cce_record.
+                      sum_of_prof_memberships) %></em>
+          </span>
+        <% end %>
+      </th>
+    </tr>
+    <tr>
+      <th>#</th>
+      <th>Organization</th>
+      <th>Date of Membership</th>
+      <th>Type</th>
+      <th>Membership</th>
+      <th>Points</th>
+      <th>NBC</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% achievements.includes(cce_scoring: :nbc).
+          each_with_index do |membership, index| %>
+      <tr <%= "class=info" unless membership.cce_scoring.recorded? %>>
+        <td><%= index += 1 %></td>
+        <td><%= membership.organization %></td>
+        <td><%= date_format_readable(membership.date_of_membership) %></td>
+        <td><%= membership.organization_type_to_string %></td>
+        <td><%= membership.membership_type_to_string %></td>
+        <td class="text-right">
+          <%= format_in_decimal(membership.cce_scoring.points) %>
+        </td>
+        <td><%= render "cce/nbc_link", record: membership.cce_scoring %></td>
+        <td>
+          <%= render("cce/action_links", record: membership, employee: employee) unless membership.cce_scoring.recorded? %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

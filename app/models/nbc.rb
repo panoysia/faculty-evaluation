@@ -21,7 +21,6 @@ class NBC < ActiveRecord::Base
   has_many :rating_periods, through: :academic_years
 
   accepts_nested_attributes_for :academic_years
-  
   enum status: { close: CLOSE, open: OPEN }
 
   validates :name, presence: true
@@ -34,6 +33,7 @@ class NBC < ActiveRecord::Base
   def self.valid
     select(&:has_academic_years?)
   end
+
 
   def has_academic_years?
     academic_years.count > 0

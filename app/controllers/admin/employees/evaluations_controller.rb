@@ -1,14 +1,26 @@
 class Admin::Employees::EvaluationsController < Admin::ApplicationController
 
   before_action :set_employee
-
+  before_action :modify_view_path
 
   def index
 
   end
 
   def new
+    # @evaluation = Employee::EvaluationPresenter.new(evaluation_record)    
+    # render html: params and return true
+    # render html: session[:nbc_id] and return true
+
+    nbc_id = session[:nbc_id]
+    @evaluation = Employee::EvaluationNewPresenter.new(
+                    @employee.evaluations.new(nbc_id: nbc_id)
+                  )
+  end
+
+  def show
     @evaluation = Employee::EvaluationPresenter.new(evaluation_record)
+    @cce_record = @evaluation.cce_record
   end
 
   def create
@@ -29,10 +41,6 @@ class Admin::Employees::EvaluationsController < Admin::ApplicationController
 
   end
 
-  def show
-    @evaluation = Employee::EvaluationPresenter.new(evaluation_record)
-    @cce_record = @evaluation.cce_record
-  end
 
 
   private
@@ -43,6 +51,10 @@ class Admin::Employees::EvaluationsController < Admin::ApplicationController
 
   def evaluation_record
     @employee.evaluations.find(params[:id])
+  end
+
+  def modify_view_path
+    prepend_view_path "app/views/admin/employees/evaluations"
   end
 
 end

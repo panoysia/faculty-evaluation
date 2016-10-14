@@ -1,0 +1,47 @@
+<table class="table table-striped table-bordered table-master">
+  <thead>
+    <tr>
+      <th colspan="8">Professional Examinations (10 pts. max)
+        <% if cce_record.has_max_points_for_prof_examinations? %>
+          <span style="color: red;" class="pull-right">
+            <em>(10 pts. max reached)</em>
+          </span>
+        <% else %>
+          <span class="pull-right">
+            <em><%= format_in_decimal(cce_record.
+                                        sum_of_prof_examinations) %></em>
+          </span>
+        <% end %>
+      </th>
+    </tr>    
+    <tr>
+      <th>#</th>  
+      <th>Title</th>
+      <th>Name of Agency</th>
+      <th>Date Passed</th>
+      <th>Category</th>
+      <th>Points</th>
+      <th>NBC</th>      
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% achievements.includes(cce_scoring: :nbc).
+          each_with_index do |examination, index| %>
+      <tr <%= "class=info" unless examination.cce_scoring.recorded? %>>
+        <td><%= index += 1 %></td>
+        <td><%= examination.title %></td>
+        <td><%= examination.agency_name %></td>
+        <td><%= date_format_readable(examination.date_passed) %></td>
+        <td><%= examination.category_to_string %></td>
+        <td class="text-right">
+          <%= format_in_decimal(examination.cce_scoring.points) %>
+        </td>
+        <td><%= render "cce/nbc_link", record: examination.cce_scoring %></td>
+        <td>
+          <%= render("cce/action_links", record: examination, employee: employee) unless examination.cce_scoring.recorded? %>
+        </td>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>

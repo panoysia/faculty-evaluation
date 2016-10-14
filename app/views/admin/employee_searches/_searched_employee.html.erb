@@ -26,7 +26,10 @@
       <p><%= searched_employee.rank.full_name if searched_employee.rank %></p>
       <p><%= searched_employee.designation if searched_employee.designation.present? %></p>
       <p><%= "#{searched_employee.age} years old" if searched_employee.age.present? %></p>
-      <p><%= "Employed since #{searched_employee.hired_date}" if searched_employee.hired_date.present? %></p>
+      <p>
+        <%= "#{pluralize(searched_employee.years_in_service, 'year') in service} " %>
+      </p>
+      <!-- <p><%#= "Employed since #{searched_employee.hired_date}" if searched_employee.hired_date.present? %></p> -->
     </div>
   </div>
 </div>

@@ -13,7 +13,7 @@
       <th>End At</th>
       <th>Duration<em> (in days)</em></th>
       <!-- <th>Type</th> -->
-      <th>Actions</th>
+      <!-- <th>Actions</th> -->
     </tr>
   </thead>
   <tbody>
@@ -26,11 +26,13 @@
         <td><%= date_format_readable(leave.end_at) %></td>
         <td><%= leave.length %></td>
         <!-- <td><%#= leave.type %></td> -->
-        <td>
-          <%= link_to leave_path(leave), { title: 'View', data: { toggle: 'tooltip' } } do %>
-            <span class="glyphicon glyphicon-zoom-in"></span> View
-          <% end %>
-        </td>        
+        <% if false %>
+          <td>
+            <%= link_to leave_path(leave), { title: 'View', data: { toggle: 'tooltip' } } do %>
+              <span class="glyphicon glyphicon-zoom-in"></span> View
+            <% end %>
+          </td>
+        <% end %>  
       </tr>
     <% end %>
   </tbody>

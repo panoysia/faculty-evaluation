@@ -1,31 +1,38 @@
 require "delegate"
 
 class Employee::EvaluationPresenter < SimpleDelegator
-  delegate :id, :full_name, :cce_scorings, 
+  delegate :id, :full_name,
             to: :employee,
             allow_nil: true, prefix: true
 
   delegate :id, :name,
             to: :nbc,
-            prefix: true
+            allow_nil: true, prefix: true
 
+  attr_reader :cce_record
 
+  
   def initialize(evaluation)
-    @evaluation = evaluation
-    @employee = evaluation.employee
-    @nbc = evaluation.nbc
-    # @cce_record = Employee::CCERecord.new(@employee)
+    # @employee = evaluation.employee
+    # @nbc = evaluation.nbc
     super(evaluation)
+    @evaluation = evaluation
+    @cce_record = Employee::RecordedCCERecord.new(employee, nbc_id)
   end
   
-  def cce_score
-    return self[:cce_score] if evaluated?
-    204
-  end
+  # def cce_score
+  #   return self[:cce_score] if evaluated?
+  #   204
+  # end
 
-  def cce_scorings
-    employee.cce_scorings.where("nbc_id <= ?", nbc_id)
-  end
+  # def cce_scorings
+  #   employee.cce_scorings.where("nbc_id <= ?", nbc_id)
+  # end
+
+  # def nbc_name
+  #   nbc.name
+  # end
+
 
   def current_rank
     # return rank_after if evaluated?
@@ -35,10 +42,6 @@ class Employee::EvaluationPresenter < SimpleDelegator
   def evaluated?
     persisted?
   end
-
-  # def nbc_name
-  #   nbc.name
-  # end
 
   def qce_status
     # 
@@ -59,6 +62,6 @@ class Employee::EvaluationPresenter < SimpleDelegator
 
   private
 
-  attr_reader :evaluation, :employee, :nbc
+  attr_reader :evaluation #, :employee, :nbc
 
 end

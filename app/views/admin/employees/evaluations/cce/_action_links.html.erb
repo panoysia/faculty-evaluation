@@ -1,0 +1,10 @@
+<%= link_to edit_polymorphic_path([:admin, employee, record], redirect: true),
+      title: 'Edit', data: { toggle: 'tooltip' } do %>
+  <span class="glyphicon glyphicon-pencil"></span>
+<% end %>
+<%= link_to polymorphic_path([:admin, employee, record], redirect: true),
+      method: :delete, title: 'Delete',
+      data: { toggle: 'tooltip', 
+              confirm: 'Do you really want to delete this record?' } do %>
+  <span class="glyphicon glyphicon-remove"></span>
+<% end %>

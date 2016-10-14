@@ -1,0 +1,44 @@
+<table class="table table-striped table-bordered table-master">
+  <thead>
+    <tr>
+      <th colspan="10">Publications
+        <span class="pull-right">
+          <em><%= format_in_decimal(cce_record.sum_of_publications) %></em>
+        </span>        
+      </th>
+    </tr>
+    <tr>
+      <th>#</th>  
+      <th>Title</th>
+      <th>Role</th>
+      <th>Academic Level</th>
+      <th>Publisher</th>
+      <th>Date of Publication</th>
+      <th>Description</th>
+      <th>Points</th>
+      <th>NBC</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% achievements.includes(cce_scoring: :nbc).
+          each_with_index do |publication, index| %>
+      <tr <%= "class=info" unless publication.cce_scoring.recorded? %>>
+        <td><%= index += 1 %></td>
+        <td><%= publication.title %></td>
+        <td><%= publication.role_to_string %></td>
+        <td><%= publication.academic_level_to_string %></td>
+        <td><%= publication.publisher %></td>
+        <td><%= date_format_readable(publication.date_of_publication) %></td>
+        <td><%= publication.description %></td>
+        <td class="text-right">
+          <%= format_in_decimal(publication.cce_scoring.points) %>
+        </td>
+        <td><%= render "cce/nbc_link", record: publication.cce_scoring %></td>
+        <td>
+          <%= render("cce/action_links", record: publication, employee: employee) unless publication.cce_scoring.recorded? %>
+        </td>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>

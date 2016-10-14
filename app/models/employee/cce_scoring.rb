@@ -32,6 +32,7 @@ class Employee::CCEScoring < Employee::ApplicationRecord
 
   scope :recorded, -> { where.not(nbc_id: nil) }
   scope :unrecorded, -> { where(nbc_id: nil) }
+  scope :with_nbc, -> (nbc_id) { where("nbc_id <= ?", nbc_id) }
 
   scope :educations, -> { where(cce_scorable_type: EDUCATIONS) }
   scope :work_experiences, -> { 

@@ -6,7 +6,10 @@ class Admin::SearchEmployeeEvaluationsController < Admin::ApplicationController
       # render html: params.inspect and return true
       @search_form = Employee::EvaluationSearchForm.new(search_params)
       if @search_form.valid?
-        @evaluation = @search_form.results 
+        @evaluation = @search_form.results  # returns an EvaluationPresenter
+
+        # Store nbc_id in session, to prevent tampering in browsers address bar
+        session[:nbc_id] = @search_form.nbc_id
         render :search_results
       else
         render :index
