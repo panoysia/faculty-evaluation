@@ -17,7 +17,7 @@ class Employee::EvaluationPresenter < SimpleDelegator
     # @nbc = evaluation.nbc
     super(evaluation)
     @evaluation = evaluation
-    @cce_record = Employee::RecordedCCERecord.new(Employee, nbc_id)
+    @cce_record = Employee::RecordedCCERecord.new(employee, nbc_id)
   end
   
 
