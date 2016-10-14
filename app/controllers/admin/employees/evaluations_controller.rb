@@ -4,7 +4,6 @@ class Admin::Employees::EvaluationsController < Admin::ApplicationController
   before_action :modify_view_path
 
   def index
-
   end
 
   def new

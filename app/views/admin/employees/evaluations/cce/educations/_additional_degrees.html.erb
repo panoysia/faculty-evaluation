@@ -28,9 +28,9 @@
         <td><%= date_format_readable(degree.end_at) %></td>
         <td><%= date_format_readable(degree.graduated_at) if degree.graduated_at.present?  %></td>
         <td class="text-right"><%= degree.cce_scoring.points %></td>
-        <td><%= render "nbc_link", record: degree.cce_scoring %></td>
+        <td><%= render "cce/nbc_link", record: degree.cce_scoring %></td>
         <td>
-          <%= render("action_links", record: degree, employee: employee) unless degree.cce_scoring.recorded? %>
+          <%= render("cce/action_links", record: degree, employee: employee) unless degree.cce_scoring.recorded? %>
         </td>
       </tr>
     <% end %>

@@ -33,9 +33,9 @@
         <td><%= credit.institution %></td>
         <td><%= credit.no_of_units %></td>
         <td class="text-right"><%= credit.cce_scoring.points %></td>
-        <td><%= render "nbc_link", record: credit.cce_scoring %></td>
+        <td><%= render "cce/nbc_link", record: credit.cce_scoring %></td>
         <td>
-          <%= render("action_links", record: credit, employee: employee) unless credit.cce_scoring.recorded? %>
+          <%= render("cce/action_links", record: credit, employee: employee) unless credit.cce_scoring.recorded? %>
         </td>
       </tr>
     <% end %>

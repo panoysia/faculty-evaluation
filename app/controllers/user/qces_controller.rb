@@ -45,6 +45,10 @@ class User::QCEsController < User::ApplicationController
     # attributes = { support_area: support_area }
     # render html: attributes and return true
     support_area = qce_params[:support_area]
+    # if support_area.blank?
+    #   flash.now.alert = "Please select an area in the dropdown-list."
+    #   render :edit
+    # end
 
     respond_to do |format|
       if @qce.update(qce_params)
@@ -86,7 +90,7 @@ class User::QCEsController < User::ApplicationController
     # render html: params.inspect and return true
     @qce.update completed: 1
     full_title = @qce.rating_period.coverage_in_years
-    redirect_to qces_path, notice: "Your QCE for #{label} has been finalized."
+    redirect_to qces_path, notice: "Your QCE for #{full_title} has been finalized."
   end
 
 

@@ -15,7 +15,7 @@ module ApplicationHelper
   
   def date_format_readable(date)
     #date.strftime '%Y-%b-%d'
-    date.strftime '%b %d %Y'
+    date.strftime '%b %d %Y' if date.present?
   end
 
   def convert_gender_value(value)

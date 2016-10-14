@@ -17,9 +17,33 @@ class Employee::EvaluationPresenter < SimpleDelegator
     # @nbc = evaluation.nbc
     super(evaluation)
     @evaluation = evaluation
-    @cce_record = Employee::RecordedCCERecord.new(employee, nbc_id)
+    @cce_record = Employee::RecordedCCERecord.new(Employee, nbc_id)
   end
   
+
+# class Employee::QCEsInNBC
+#   attr_reader :employee
+
+#   def initialize(employee, nbc)
+#     @employee = employee
+#   end
+# end
+
+
+  # def qces
+  #   @qces || Employee::QCEsInNBC(employee, )
+  # end
+
+
+  def ninja_employee
+    employee
+  end
+
+  def ninja_nbc
+    nbc
+  end
+
+
   # def cce_score
   #   return self[:cce_score] if evaluated?
   #   204

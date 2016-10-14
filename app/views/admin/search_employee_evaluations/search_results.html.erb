@@ -8,7 +8,7 @@
         <%= image_tag @evaluation.employee.picture.url(:small), size: "210", class: 'img-responsive img-thumbnail center-block' %>
       <% end %>      
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
       <h3 class="page-header">
         <span>
           <%= link_to @evaluation.employee_full_name,
@@ -25,12 +25,16 @@
       <% if @evaluation.evaluated? %>
         <p><%= link_to "Show Evaluation",
                 admin_employee_evaluation_path(@evaluation.employee,
-                                                @evaluation),
+                                                 @evaluation),
                 class: "btn btn-success" %></p>
       <% else %>
-        <p><%= link_to "Evaluate",
-                new_admin_employee_evaluation_path(@evaluation.employee),
-                class: "btn btn-danger" %></p>
+        <% if @checker.valid? %>
+          <p><%= link_to "Evaluate",
+                  new_admin_employee_evaluation_path(@evaluation.employee),
+                  class: "btn btn-danger" %></p>
+        <% else %>
+          <p class="alert alert-danger">QCE for this NBC period is incomplete. Faculty can't be evaluated until QCE is complete.</p>
+        <% end %>
       <% end %>
     </div>
   </div>

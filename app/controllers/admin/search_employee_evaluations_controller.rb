@@ -7,6 +7,10 @@ class Admin::SearchEmployeeEvaluationsController < Admin::ApplicationController
       @search_form = Employee::EvaluationSearchForm.new(search_params)
       if @search_form.valid?
         @evaluation = @search_form.results  # returns an EvaluationPresenter
+        
+        @checker = Employee::QCEsInNBCCompletionChecker.new(
+            @evaluation.employee, @evaluation.nbc
+          )
 
         # Store nbc_id in session, to prevent tampering in browsers address bar
         session[:nbc_id] = @search_form.nbc_id
