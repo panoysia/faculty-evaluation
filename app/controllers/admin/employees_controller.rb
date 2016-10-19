@@ -63,6 +63,6 @@ class Admin::EmployeesController < Admin::ApplicationController
   end
   
   def employee_params_for_update
-    params.require(:employee).permit(:first_name, :last_name, :middle_name, :name_extension, :designation, :gender, :civil_status, :birth_date, :citizenship, :height, :weight, :blood_type, :gsis_no, :pagibig_no, :philhealth_no, :sss_no, :r_address, :r_zip_code, :r_telephone_no, :p_address, :p_zip_code, :p_telephone_no, :email_address, :cellphone_no, :agency_employee_no, :tin, :academic_ranking_id, :hired_date, :picture, :specialization_id, :department_id)
+    params.require(:employee).permit(:first_name, :last_name, :middle_name, :name_extension, :designation, :gender, :civil_status, :birth_date, :citizenship, :height, :weight, :blood_type, :gsis_no, :pagibig_no, :philhealth_no, :sss_no, :r_address, :r_zip_code, :r_telephone_no, :p_address, :p_zip_code, :p_telephone_no, :email_address, :cellphone_no, :agency_employee_no, :tin, :academic_ranking_id, :hired_date, :picture, :specialization_id, :department_id, :faculty_no)
   end
 end

@@ -39,6 +39,7 @@
 #  picture_updated_at   :datetime
 #  specialization_id    :integer
 #  department_id        :integer
+#  faculty_no           :string           default(""), not null
 #
 # Indexes
 #

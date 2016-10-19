@@ -23,13 +23,11 @@
       </div>
     </h2>
     <div class="employee-card-info">
+      <p><%= model.faculty_no %></p>
       <p><%= model.rank.full_name if model.rank %></p>
       <p><%= model.designation if model.designation.present? %></p>
       <p><%= "#{model.age} years old" if model.age.present? %></p>
-      <p>
-        <%= "#{pluralize(model.years_in_service, 'year')} in service" %>
-      </p>      
-      <!-- <p><%#= "Employed since #{model.hired_date}" if model.hired_date.present? %></p> -->
+      <p><%= "#{pluralize(model.years_in_service, 'year')} in service" %></p>
     </div>
   </div>
 </div><!-- #employee-card.row-->

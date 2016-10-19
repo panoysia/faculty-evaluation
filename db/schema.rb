@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013095625) do
+ActiveRecord::Schema.define(version: 20161019190942) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -596,10 +596,10 @@ ActiveRecord::Schema.define(version: 20161013095625) do
   add_index "employee_work_experiences", ["employee_id"], name: "index_employee_work_experiences_on_employee_id"
 
   create_table "employees", force: :cascade do |t|
-    t.string   "first_name",           limit: 50, null: false
-    t.string   "last_name",            limit: 50, null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.string   "first_name",           limit: 50,              null: false
+    t.string   "last_name",            limit: 50,              null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "middle_name",          limit: 50
     t.string   "name_extension",       limit: 7
     t.string   "designation"
@@ -632,6 +632,7 @@ ActiveRecord::Schema.define(version: 20161013095625) do
     t.datetime "picture_updated_at"
     t.integer  "specialization_id"
     t.integer  "department_id"
+    t.string   "faculty_no",                      default: "", null: false
   end
 
   add_index "employees", ["academic_ranking_id"], name: "index_employees_on_academic_ranking_id"
