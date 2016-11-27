@@ -36,14 +36,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :qces
-    resources :cces
-
-    # Just to make use of 'qce' for path, i.e., could have used path scope instead
-    # namespace :qce do
-    #   resources :questions, only: :index
-    # end
-
     resources :employees do
       scope module: :employees do
         resource :cce_record, only: :show
@@ -103,12 +95,11 @@ Rails.application.routes.draw do
           resources :consultancy_services, except: [:index, :show]
           resources :trainer_services, except: [:index, :show]
     
-        resources :cce_scorings, only: :index
-        resources :rankings
-
-        # resources :civil_service_eligibilities
-        # resources :other_infos
-        # resources :voluntary_works
+        # TODO: Delete all files related to these resources:
+          # resources :rankings
+          # resources :civil_service_eligibilities
+          # resources :other_infos
+          # resources :voluntary_works
       end
     end   # resources :employees
 

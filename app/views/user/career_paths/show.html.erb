@@ -17,7 +17,7 @@
           <th>Category</th>
           <th>Start</th>
           <th>End</th>
-          <th>Company</th>
+          <th>Sponsoring Agency</th>
           <th>Description</th>
         </tr>
       </thead>
@@ -29,7 +29,7 @@
             <td><%= category_type_to_string(action.category) %></td>
             <td><%= date_format_readable(action.start_at) if action.start_at.present? %></td>
             <td><%= date_format_readable(action.end_at) if action.end_at.present? %></td>
-            <td><%= action.company %></td>
+            <td><%= action.sponsoring_agency %></td>
             <td><%= action.description %></td>
           </tr>
         <% end %>
@@ -61,7 +61,7 @@
               <th>Category</th>
               <th>Start</th>
               <th>End</th>
-              <th>Company</th>
+              <th>Sponsoring Agency</th>
               <th>Description</th>
             </tr>
           </thead>

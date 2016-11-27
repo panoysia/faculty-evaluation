@@ -10,7 +10,7 @@
 #  category          :integer          not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  company           :string
+#  sponsoring_agency :string
 #  specialization_id :integer          not null
 #
 # Indexes

@@ -63,7 +63,7 @@ class Admin::CareerPathActionsController < Admin::ApplicationController
   end
 
   def action_params
-    params.require(:career_path_action).permit(:name, :start_at, :end_at, :description, :category, :specialization_id, :company)
+    params.require(:career_path_action).permit(:name, :start_at, :end_at, :description, :category, :specialization_id, :sponsoring_agency)
   end
 
 end

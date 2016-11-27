@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019190942) do
+ActiveRecord::Schema.define(version: 20161127183914) do
 
   create_table "academic_rankings", force: :cascade do |t|
     t.string   "name",           limit: 50, null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20161019190942) do
     t.integer  "category",          null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.string   "company"
+    t.string   "sponsoring_agency"
     t.integer  "specialization_id", null: false
   end
 

@@ -19,7 +19,7 @@
       <th>Category</th>
       <th>Start</th>
       <th>End</th>
-      <th>Company</th>
+      <th>Sponsoring Agency</th>
       <th>Description</th>
       <th colspan="2">Actions</th>
     </tr>
@@ -34,7 +34,7 @@
         <td><%= category_type_to_string(action.category) %></td>        
         <td><%= date_format_readable(action.start_at) if action.start_at.present? %></td>
         <td><%= date_format_readable(action.end_at) if action.end_at.present? %></td>
-        <td><%= action.company %></td>
+        <td><%= action.sponsoring_agency %></td>
         <td><%= action.description %></td>
         <td>
           <%= link_to edit_admin_career_path_action_path(action), { title: 'Edit', data: { toggle: 'tooltip' } } do %>

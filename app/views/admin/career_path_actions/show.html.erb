@@ -1,5 +1,5 @@
 <div class="link">
-  <%= link_to '< Back to Career Path Actions', admin_career_path_actions_path, class: 'btn btn-link' %>  
+  <%= link_to '< Back to Career Path Actions', admin_career_path_actions_path, class: 'btn btn-link' %>
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -10,7 +10,9 @@
     <p><strong>Specialization: </strong><%= @action.specialization.name %></p>
     <p><strong>Start at: </strong><%= @action.start_at %></p>
     <p><strong>End at: </strong><%= @action.end_at %></p>
-    <p><strong>Company: </strong><%= @action.company %></p>
+    <p>
+      <strong>Sponsoring Agency: </strong><%= @action.sponsoring_agency %>
+    </p>
     <p><strong>Description: </strong><%= @action.description %></p>
   </div>
 </div>
