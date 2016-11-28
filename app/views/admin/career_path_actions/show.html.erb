@@ -22,10 +22,11 @@
     <table class="table table-bordered table-striped table-master content">
       <thead>
         <tr>
-          <td>#</td>
-          <td>Faculty</td>
-          <td>Hired Date</td>
-          <td>Years of Service</td>
+          <th>#</th>
+          <th>Faculty</th>
+          <th>Rank</th>
+          <th>Hired Date</th>
+          <th>Years In Service</th>
         </tr>
       </thead>
       <tbody>
@@ -33,8 +34,9 @@
           <tr>
             <td><%= index += 1 %></td>
             <td><%= link_to employee.full_name, admin_employee_path(employee) %></td>
+            <td><%= employee.rank.full_name if employee.rank %></td>
             <td><%= date_format_readable(employee.hired_date) %></td>
-            <td></td>
+            <td><%= employee.years_in_service %></td>
           </tr>
         <% end %>
       </tbody>

@@ -28,9 +28,11 @@
 <%= render 'search_box' %>
 
 <% unless @actions.nil? %>
-  <% if @employee.career_path.present? %>
-    <h3>Career path for <%= @employee.career_path.name %></h3>
-  <% end %>
+  <h3>
+    Career path for <%= @employee.specialization.name %>
+    <%= "(#{@employee.career_path.name})" unless 
+        @employee.specialization.is_generalize? %>
+  </h3>
   <table class="table table-bordered table-striped table-master content">
     <thead>
       <tr>

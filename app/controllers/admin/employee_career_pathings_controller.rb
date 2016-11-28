@@ -7,8 +7,9 @@ class Admin::EmployeeCareerPathingsController < Admin::ApplicationController
         params[:view][:button].present?
         
         id = params[:view][:employee_id]
+        sort_criteria = { category: :asc, start_at: :desc, end_at: :desc }
         @employee = Employee.find(id)
-        @actions = @employee.actions
+        @actions = @employee.actions.order(sort_criteria)
       end
     end
   end

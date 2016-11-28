@@ -7,9 +7,15 @@ class Admin::SpecializationsController < Admin::ApplicationController
   end
 
   def show
-    @employees = @specialization.employees.order(hired_date: :asc, last_name: :asc, first_name: :asc)
+    employees_sort_criteria = { hired_date: :asc,
+                                last_name: :asc, first_name: :asc }
+    actions_sort_criteria = { category: :asc,
+                              start_at: :desc, end_at: :desc }
+                              
+    @employees = @specialization.employees.includes(:rank).
+                                order(employees_sort_criteria)
     @actions = @specialization.career_path_actions.
-                order(category: :asc, start_at: :desc, end_at: :desc)
+                                order(actions_sort_criteria)
   end
 
   def new

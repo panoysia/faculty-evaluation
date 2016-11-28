@@ -12,6 +12,7 @@
         <th>Category</th>
         <th>Start</th>
         <th>End</th>
+        <th>Sponsoring Agency</th>
         <th>Description</th>
       </tr>
     </thead>
@@ -23,6 +24,7 @@
           <td><%= category_type_to_string(action.category) %></td>
           <td><%= date_format_readable(action.start_at) %></td>
           <td><%= date_format_readable(action.end_at) %></td>
+          <td><%= action.sponsoring_agency %></td>
           <td><%= action.description %></td>
         </tr>
       <% end %>

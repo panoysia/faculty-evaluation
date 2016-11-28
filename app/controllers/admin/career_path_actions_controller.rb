@@ -3,13 +3,15 @@ class Admin::CareerPathActionsController < Admin::ApplicationController
 
 
   def index
+    sort_criteria = { category: :asc, start_at: :desc, end_at: :desc }
     @actions = CareerPathAction.includes(:specialization).
-                order(category: :asc, start_at: :desc, end_at: :desc)
+                                order(sort_criteria)
   end
 
   def show
-    @employees = @action.employees.
-                order(hired_date: :asc, last_name: :asc, first_name: :asc)
+    sort_criteria = { hired_date: :asc,
+                      last_name: :asc, first_name: :asc }
+    @employees = @action.employees.includes(:rank).order(sort_criteria)
   end
 
   def new
