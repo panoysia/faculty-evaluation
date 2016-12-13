@@ -1,21 +1,12 @@
-<style>
-  .dashboard-container {
-    /*border: 1px solid red;*/
-    /*margin-top: 10px;*/
-  }
-</style>
 <div class="row">
   <div class="col-md-12">
     <h2 class="page-header">Dashboard</h2>
   </div>
 </div>
 <div class="row">
-  <%#= render 'latest_rating_tasks' %>
+  <%= render 'latest_rating_tasks' %>
 </div>
 <% if @current_user.account.is_a? Employee %>
-  <!-- <div class="row"> -->
-    <%#= render 'cce_status' %>
-  <!-- </div> -->
   <div class="row">
     <%= render 'latest_qces' %>
   </div>

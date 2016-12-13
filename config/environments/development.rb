@@ -16,6 +16,21 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+=begin (THIS ACTS AS A GUIDE FOR ActionMailer configuration)
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :letter_opener
+  
+  config.action_mailer.smtp_settings = {
+    address: ENV["SMTP_SERVER"],
+    user_name: ENV["SMTP_USER"],
+    password: ENV["SMTP_PASSWORD"],
+    authentication: :login,
+    enable_starttls_auto: false
+  }
+=end
+
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

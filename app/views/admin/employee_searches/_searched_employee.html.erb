@@ -14,8 +14,8 @@
               Actions <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><%= link_to 'Perform Ranking', new_admin_employee_ranking_path(searched_employee) %></li>
-              <li role="separator" class="divider"></li>
+              <!-- <li><%#= link_to 'Perform Ranking', "#" %></li> -->
+              <!-- <li role="separator" class="divider"></li> -->
               <li><%= link_to 'Delete Record', admin_employee_path(searched_employee), method: :delete, data: { confirm: 'Delete Employee record? This is undoable!' }%></li>
             </ul>
           </div>

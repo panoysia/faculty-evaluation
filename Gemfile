@@ -33,6 +33,7 @@ end
 
 group :development, :test do
   gem 'byebug', '~> 9.0'
+  gem "hirb", "0.7.3"
 end
 
 group :production do

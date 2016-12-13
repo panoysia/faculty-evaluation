@@ -12,6 +12,7 @@
       </tr>
     </thead>
     <tbody>
+      <% if false %>
       <% @tasks.each_with_index do |task, index| %>
         <tr>
           <td><%= index += 1 %></td>
@@ -38,6 +39,7 @@
             <% end %>
           </td>
         </tr>
+      <% end %>
       <% end %>
     </tbody>
   </table>
