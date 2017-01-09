@@ -43,7 +43,7 @@ GEM
     autoprefixer-rails (6.2.3)
       execjs
       json
-    awesome_print (1.6.1)
+    awesome_print (1.7.0)
     aws-sdk-v1 (1.66.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
@@ -182,7 +182,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (~> 2.7)
-  awesome_print (~> 1.6, >= 1.6.1)
+  awesome_print (~> 1.7)
   aws-sdk-v1
   bcrypt (~> 3.1.7)
   better_errors (~> 2.1, >= 2.1.1)

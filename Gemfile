@@ -13,7 +13,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'awesome_print', '~> 1.6', '>= 1.6.1'
+# gem 'awesome_print', '~> 1.6', '>= 1.6.1'
+gem "awesome_print", "~> 1.7"
+
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'paperclip', '~> 4.3', '>= 4.3.4'
 #gem 'aws-sdk', '~> 2.2', '>= 2.2.26'
