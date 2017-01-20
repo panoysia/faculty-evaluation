@@ -152,7 +152,8 @@ class Employee < ApplicationRecord
   #   belongs_to :evaluator, polymorphic: true
 
   has_many :leaves, dependent: :destroy 
- 
+  has_many :leave_service_credits, dependent: :destroy
+
   has_many :actions, through: :specialization,
                       source: :career_path_actions
   has_one :career_path, through: :specialization,

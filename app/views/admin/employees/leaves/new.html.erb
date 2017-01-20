@@ -1,1 +1,5 @@
-<p>employees/leaves#new</p>
+<h4 class="page-header">New Leave</h4>
+<%= render "form" %>
+<%= link_to "< Back to Leaves",
+      admin_employee_leaves_path(anchor: "leaves"),
+      class: "btn btn-link" %>

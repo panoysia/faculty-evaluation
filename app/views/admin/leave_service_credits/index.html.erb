@@ -48,7 +48,10 @@
     <% @leave_service_credits.each_with_index do |credit, index| %>
       <tr>
         <td><%= index += 1 %></td>
-        <td><%= credit.employee.full_name %></td>
+        <td><%= link_to credit.employee.full_name,
+                  admin_employee_leaves_path(credit.employee),
+                  title: "View Employee Leave data",
+                  data: { toggle: "tooltip" } %></td>
         <td><%= credit.academic_year.coverage_with_details %></td>
         <td><%= credit.no_of_days %></td>
         <td><%= date_format_readable(credit.valid_at) %></td>

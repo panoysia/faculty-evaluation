@@ -93,7 +93,7 @@ class Admin::LeavesController < Admin::ApplicationController
   
     respond_to do |format|
       if @leave.save
-        format.html { redirect_to [:admin, @leave],
+        format.html { redirect_to admin_leaves_path,
           notice: 'Leave was successfully created.' }
       else
         format.html { render :new }

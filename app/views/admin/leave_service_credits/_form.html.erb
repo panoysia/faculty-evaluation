@@ -4,15 +4,20 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :employee_id, 'Faculty' %>
-        <%= f.collection_select :employee_id, Employee.all, :id, :full_name, { include_blank: '-- Select Faculty --' }, class: 'form-control', autofocus: true %>
+        <%= f.collection_select :employee_id, Employee.all,
+              :id, :full_name, { include_blank: '-- Select Faculty --' },
+              class: 'form-control', autofocus: true, required: true %>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :academic_year_id, 'Academic Year', class: 'control-label' %>
-        <%= f.collection_select :academic_year_id, AcademicYear.display_all, :id, :coverage_with_details, { include_blank: ' -- Select Academic Year --' }, class: 'form-control' %>
+        <%= f.label :academic_year_id, "Academic Year" %>
+        <%= f.collection_select :academic_year_id,
+              AcademicYear.display_all, :id, :coverage_with_details,
+              { include_blank: ' -- Select Academic Year --' },
+              class: 'form-control', required: true %>
       </div>
     </div>
   </div>
@@ -20,7 +25,8 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :no_of_days, '# of days' %>
-        <%= f.number_field :no_of_days, class: 'form-control' %>
+        <%= f.number_field :no_of_days, class: 'form-control',
+              required: true %>
       </div>
     </div>
   </div>  
@@ -28,7 +34,8 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :valid_at %>
-        <%= f.date_field :valid_at, class: 'form-control' %>
+        <%= f.date_field :valid_at, class: 'form-control',
+              required: true %>
         <span><em>Service credit expires after 1 year its validity</em></span>
       </div>
     </div>

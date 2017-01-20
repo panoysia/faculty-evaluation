@@ -3,21 +3,24 @@ class User::LeavesController < User::ApplicationController
   before_action :set_employee
 
   def index
-    @leaves = @employee.leaves.order(filed_at: :desc)
-  end
+    @leaves = @employee.leaves.
+                        includes(:academic_year).
+                        order(filed_at: :desc)
 
-  def show
+    @credits = @employee.leave_service_credits.
+                          includes(:academic_year).
+                          order(expire_at: :desc)
+
+    query = Employee::LeaveSummaryPerAcademicYearQuery.new(@employee)
+    @leave_summary = query.result || []
   end
 
 
   private
 
+
   def set_employee
     @employee = @current_user.account
   end
-
-  # def set_leave
-  #   @leave = @employee.leaves.find(params[:id]) 
-  # end
   
 end

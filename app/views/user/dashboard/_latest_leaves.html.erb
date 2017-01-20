@@ -9,7 +9,7 @@
         <th>Date Filed</th>
         <th>Start At</th>
         <th>End At</th>
-        <th class="center">Action</th>
+        <th>Duration <em>(in days)</em></th>
       </tr>
     </thead>
     <tbody>
@@ -19,11 +19,7 @@
           <td><%= date_format_readable(leave.filed_at) %></td>
           <td><%= date_format_readable(leave.start_at) %></td>
           <td><%= date_format_readable(leave.end_at) %></td>
-          <td class="center">
-            <%= link_to leave_path(leave), { title: 'View', data: { toggle: 'tooltip' } } do %>
-              <span class="glyphicon glyphicon-zoom-in"></span> View
-            <% end %>
-          </td>
+          <td class="center"><%= leave.length %></td>
         </tr>
       <% end %>
     </tbody>

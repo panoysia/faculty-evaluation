@@ -15,8 +15,10 @@
 #
 
 class AcademicYear < ActiveRecord::Base
-  has_many :rating_periods, dependent: :destroy
   has_many :leaves, dependent: :destroy
+  has_many :leave_service_credits, dependent: :destroy
+  has_many :rating_periods, dependent: :destroy
+
   belongs_to :nbc
 
   validates :start_at, :end_at, presence: true   
@@ -33,6 +35,7 @@ class AcademicYear < ActiveRecord::Base
 
 
   def coverage
+    # Displays "Sep 17 2016 - Mar 30 2017"; "mm dd yyyy" format
     "#{start_at.strftime('%b %d %Y')} - #{end_at.strftime('%b %d %Y')}"
   end
   

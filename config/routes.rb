@@ -45,7 +45,8 @@ Rails.application.routes.draw do
           only: [:index, :show, :new, :create, :destroy]
           
         resources :qces, only: [:index, :show]
-        resources :leaves
+        resources :leaves, except: :show
+        resources :leave_service_credits, except: [:index, :show]
 
         # "Educations (tab)" and resources under it 
         #   (should be namespaced instead)
@@ -136,7 +137,7 @@ Rails.application.routes.draw do
     resource :career_path, only: :show, path: 'my-career-path'
     resource :account, only: [:edit, :update], path: 'user-account', as: :user_account
 
-    resources :leaves, only: [:index, :show]
+    resources :leaves, only: :index
     resources :rating_tasks, only: :index
 
     resources :qces, except: :new do

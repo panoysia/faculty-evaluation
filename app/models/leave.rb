@@ -26,17 +26,20 @@ class Leave < ActiveRecord::Base
       Maternity: 'M'
     }
 
-  MAXIMUM = 15
+  MAX_DAYS_ALLOWED = 15
 
   belongs_to :employee
   belongs_to :academic_year
 
   scope :latest, -> (size = 8) { order(filed_at: :desc).limit(size) }
 
+  validates :filed_at, presence: true
+  validates :start_at, presence: true
+  validates :end_at, presence: true
+  validates :employee, presence: true
+  validates :academic_year, presence: true
 
-  validates :filed_at, :start_at, :end_at, :employee, :academic_year, presence: true
-  
-  # 1- ensure employee has remaining credits to file for leave
+  # 1 - ensure employee has remaining credits to file for leave
   # 2 - ensure date of leave is between the academic_year period
 
   validate :correct_date_range, unless: :date_values_are_nil?
@@ -63,16 +66,10 @@ class Leave < ActiveRecord::Base
   end
 
   def correct_date_range
-    unless end_at > start_at
+    unless end_at >= start_at
       errors[:base] << "Invalid date range.\n'End at' date value must be greater than 'Start at' date value."
     end
   end
-
-  # def compute_length_of_leave_xxx
-  #   length = ((end_at - start_at).to_i) + 1
-  #   self[:length] = length
-  #   self[:length] = (end_at - start_at).to_i
-  # end
 
   def compute_length_of_leave
     length = ((end_at - start_at).to_i) + 1
@@ -81,16 +78,15 @@ class Leave < ActiveRecord::Base
     # Saturday and Sunday are non-working days
     (start_at..end_at).each do |date|
       if date.saturday? || date.sunday?
-        puts "#{date} is a #{date.strftime '%A, %b %d'}"
+        # puts "#{date} is a #{date.strftime '%A, %b %d'}"
         weekend_count += 1
       end
     end
 
-    # Consider only holidays that doesn't fall on a weekend (Saturday and Sunday) or non-working day
+    # Our query will consider only holidays that doesn't fall
+    # on a weekend (Saturday and Sunday) or non-working day
     criteria = "((occurs_at >= :start_at) AND (occurs_at <= :end_at)) AND (is_weekend <> 1)"
     holiday_count = Holiday.where(criteria, start_at: start_at, end_at: end_at).count
-
-    puts Holiday.where('(occurs_at >= :start_at) AND (occurs_at <= :end_at)', start_at: start_at, end_at: end_at).to_sql
 
     length -= (weekend_count + holiday_count)
     self[:length] = length

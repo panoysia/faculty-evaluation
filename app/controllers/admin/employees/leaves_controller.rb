@@ -1,17 +1,22 @@
 class Admin::Employees::LeavesController < Admin::ApplicationController
 
   before_action :set_employee
-  before_action :set_leave, only: [:show, :edit, :update, :destroy]
+  before_action :set_leave, only: [:edit, :update, :destroy]
 
-  layout 'employee_profile'
+  layout "employee_profile"
 
 
   def index
-    @leaves = @employee.leaves.order(filed_at: :desc)
-    # @leaves = Leave.includes(:employee).order(filed_at: :desc)
-  end
+    @leaves = @employee.leaves.
+                includes(:academic_year).
+                order(filed_at: :desc)
 
-  def show
+    @credits = @employee.leave_service_credits.
+                  includes(:academic_year).
+                  order(expire_at: :desc)
+
+    query = Employee::LeaveSummaryPerAcademicYearQuery.new(@employee)
+    @leave_summary = query.result || []
   end
 
   def new
@@ -24,10 +29,10 @@ class Admin::Employees::LeavesController < Admin::ApplicationController
       if @leave.save
         format.html {
           redirect_to admin_employee_leaves_path(@employee),
-          notice: 'Leave was successfully created.'
+          notice: "Leave was successfully created."
         }
       else
-        format.html { render :edit }
+        format.html { render :new }
       end
     end
   end
@@ -39,8 +44,8 @@ class Admin::Employees::LeavesController < Admin::ApplicationController
     respond_to do |format|    
       if @leave.update(leave_params)
         format.html {
-          redirect_to edit_admin_employee_leave_path(@employee, @leave),
-          notice: 'Leave was successfully updated.'
+          redirect_to admin_employee_leaves_path(@employee),
+          notice: "Leave record was successfully updated."
         }
       else
         format.html { render :edit }
@@ -53,13 +58,14 @@ class Admin::Employees::LeavesController < Admin::ApplicationController
     respond_to do |format|
       format.html {
         redirect_to admin_employee_leaves_path(@employee),
-        notice: 'Leave was successfully deleted.' 
+        notice: "Leave record was successfully deleted." 
       }      
     end
   end
 
 
   private
+
 
   def set_employee
     @employee = Employee.find(params[:employee_id])
@@ -70,8 +76,8 @@ class Admin::Employees::LeavesController < Admin::ApplicationController
   end
 
   def leave_params
-    params.require(:leave).permit(:filed_at, :start_at,
-      :end_at)
+    params.require(:leave).permit(:academic_year_id, :filed_at,
+                                  :start_at, :end_at)
   end
-  
+
 end
