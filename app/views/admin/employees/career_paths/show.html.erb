@@ -1,9 +1,9 @@
 <% unless @actions.nil? %>
-  <h3>
+  <h4 class="page-header">
     <%= @employee.specialization.name %>
     <%= "(#{@employee.career_path.name})" unless 
         @employee.specialization.is_generalize? %>
-  </h3>
+  </h4>
   <table class="table table-bordered table-striped table-master content">
     <thead>
       <tr>

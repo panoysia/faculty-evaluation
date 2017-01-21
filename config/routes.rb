@@ -133,9 +133,15 @@ Rails.application.routes.draw do
     post 'login' => 'sessions#create', as: :authenticate_user
 
     resource :dashboard, only: :show
-    resource :hr_profile, only: :show, path: 'my-hr-profile'
+    resource :hr_profile, only: :show, path: 'my-hr-profile' do
+      patch "personal_info", action: "update_personal_info"
+      patch "gov_membership_info", action: "update_gov_membership_info"
+      patch "addresses_info", action: "update_addresses_info"
+    end
+
     resource :career_path, only: :show, path: 'my-career-path'
-    resource :account, only: [:edit, :update], path: 'user-account', as: :user_account
+    resource :account, only: [:edit, :update], path: 'user-account',
+              as: :user_account
 
     resources :leaves, only: :index
     resources :rating_tasks, only: :index
