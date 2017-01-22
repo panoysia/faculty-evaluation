@@ -1,0 +1,53 @@
+<%= form_for [:admin, @employee, @credit] do |f| %>
+  <%= error_messages_for(@credit) %>
+
+  <%= hidden_field_tag :redirect, params[:redirect] %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :degree, "Degree" %>
+        <%= f.text_field :degree, class: "form-control",
+            required: true, autofocus: true,
+            maxlength: Employee::AdditionalCredit.get_field_limit_of(:degree)
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :degree_type, "Degree Type" %>
+        <%= f.select :degree_type,
+                      Employee::AdditionalCredit.degree_type_options, {},
+                      class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :no_of_units, "No. of units" %>
+        <%= f.number_field :no_of_units, class: "form-control",
+              required: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :institution, "Institution" %>
+        <%= f.text_field :institution, class: "form-control",
+            required: true,
+            maxlength: Employee::AdditionalCredit.get_field_limit_of(:institution)
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.submit class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+<% end %>

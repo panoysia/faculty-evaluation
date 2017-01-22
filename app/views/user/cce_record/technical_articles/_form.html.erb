@@ -1,0 +1,51 @@
+<%= form_for [:admin, @employee, @technical_article] do |f| %>
+  <%= error_messages_for(@technical_article) %>
+
+  <%= hidden_field_tag :redirect, params[:redirect] %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :name, 'Name' %>
+        <%= f.text_field :name, class: 'form-control',
+            autofocus: true, required: true,
+            maxlength: Employee::TechnicalArticle.get_field_limit_of(:name) %>
+      </div>      
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :level, 'Level' %>
+        <%= f.select :level, Employee::TechnicalArticle.level_options,
+              {}, class: 'form-control' %>
+      </div>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :published_at, "Published At" %>
+        <%= f.date_field :published_at, class: 'form-control',
+              required: true %>
+      </div>      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: 'form-control',
+            rows: 3,
+            maxlength: Employee::TechnicalArticle.
+                        get_field_limit_of(:description) %>
+      </div>      
+    </div>
+  </div>      
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>    
+      </div>
+    </div>
+  </div>
+<% end %>

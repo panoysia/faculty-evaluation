@@ -40,7 +40,7 @@ Rails.application.routes.draw do
       scope module: :employees do
         resource :cce_record, only: :show
         resource :career_path, only: :show
-        
+
         resources :evaluations,
           only: [:index, :show, :new, :create, :destroy]
           
@@ -90,7 +90,7 @@ Rails.application.routes.draw do
         resources :expert_services, only: :index
           resources :academic_advisories, except: [:index, :show]
           resources :accreditation_services, except: [:index, :show]
-          resources :assessor_services, except: [:index, :show]          
+          resources :assessor_services, except: [:index, :show]
           resources :professional_reviews, except: [:index, :show]
           resources :professional_services, except: [:index, :show]
           resources :consultancy_services, except: [:index, :show]
@@ -133,6 +133,7 @@ Rails.application.routes.draw do
     post 'login' => 'sessions#create', as: :authenticate_user
 
     resource :dashboard, only: :show
+
     resource :hr_profile, only: :show, path: 'my-hr-profile' do
       patch "personal_info", action: "update_personal_info"
       patch "gov_membership_info", action: "update_gov_membership_info"
@@ -140,6 +141,43 @@ Rails.application.routes.draw do
     end
 
     resource :career_path, only: :show, path: 'my-career-path'
+
+    resource :cce_record, only: :show
+    scope path: "cce_record", module: :cce_record do
+      resources :academic_degrees, except: [:index, :show]
+      resources :additional_degrees, except: [:index, :show]
+      resources :additional_credits, except: [:index, :show]
+      resources :trainings, except: [:index, :show]
+
+      resources :academic_work_experiences, except: [:index, :show]
+      resources :admin_work_experiences, except: [:index, :show]
+      resources :professional_work_experiences, except: [:index, :show]
+      resources :public_private_work_experiences, except: [:index, :show]
+
+      resources :creative_works, except: [:index, :show]
+      resources :discoveries, except: [:index, :show]
+      resources :innovations, except: [:index, :show]
+      resources :instructional_manuals, except: [:index, :show]
+      resources :inventions, except: [:index, :show]
+      resources :publications, except: [:index, :show]
+      resources :technical_articles, except: [:index, :show]
+
+      resources :academic_honors, except: [:index, :show]
+      resources :awards, except: [:index, :show]
+      resources :community_outreaches, except: [:index, :show]
+      resources :professional_examinations, except: [:index, :show]
+      resources :professional_memberships, except: [:index, :show]
+      resources :scholarships, except: [:index, :show]
+
+      resources :academic_advisories, except: [:index, :show]
+      resources :accreditation_services, except: [:index, :show]
+      resources :assessor_services, except: [:index, :show]
+      resources :professional_reviews, except: [:index, :show]
+      resources :professional_services, except: [:index, :show]
+      resources :consultancy_services, except: [:index, :show]
+      resources :trainer_services, except: [:index, :show]
+    end
+
     resource :account, only: [:edit, :update], path: 'user-account',
               as: :user_account
 

@@ -1,0 +1,51 @@
+<%= form_for [:admin, @employee, @membership] do |f| %>
+  <%= error_messages_for(@membership) %>
+
+  <%= hidden_field_tag :redirect, params[:redirect] %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :organization, 'Organization' %>
+        <%= f.text_field :organization, class: 'form-control',
+              autofocus: true, required: true,
+              maxlength: Employee::ProfessionalMembership.get_field_limit_of(:organization) %>
+      </div>
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :date_of_membership, 'Date of Membership' %>
+        <%= f.date_field :date_of_membership, class: 'form-control',
+            required: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :organization_type, 'Organization Type' %>
+        <%= f.select :organization_type,
+              Employee::ProfessionalMembership.organization_type_options,
+              {}, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :membership_type, 'Membership Type' %>
+        <%= f.select :membership_type,
+              Employee::ProfessionalMembership.membership_type_options,
+              {}, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -12,6 +12,15 @@
       </th>
     </tr>
     <tr>
+      <td colspan="10">
+        <%= link_to new_additional_credit_path,
+                    class: "btn btn-primary btn-xs" do %>
+          <span class="glyphicon glyphicon-plus"></span>
+          <em>New record</em>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
       <th>#</th>
       <th>Degree</th>
       <th>Type</th>
@@ -19,7 +28,6 @@
       <th># of units</th>
       <th>Points</th>
       <th>NBC</th>
-      <th colspan="2">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -32,9 +40,6 @@
         <td><%= credit.no_of_units %></td>
         <td class="text-right"><%= credit.cce_scoring.points %></td>
         <td><%= render "nbc_link", record: credit.cce_scoring %></td>
-        <td>
-          <%= render("action_links", record: credit, employee: employee) unless credit.cce_scoring.recorded? %>
-        </td>
       </tr>
     <% end %>
   </tbody>

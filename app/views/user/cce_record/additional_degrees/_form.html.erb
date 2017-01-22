@@ -1,0 +1,70 @@
+<%= form_for [:admin, @employee, @degree] do |f| %>
+  <%= error_messages_for(@degree) %>
+
+  <%= hidden_field_tag :redirect, params[:redirect] %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :degree, 'Degree' %>
+        <%= f.text_field :degree, class: 'form-control',
+            required: true, autofocus: true,
+            maxlength: Employee::AdditionalDegree.get_field_limit_of(:degree)
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :institution, 'Institution' %>
+        <%= f.text_field :institution, class: 'form-control',
+            required: true,
+            maxlength: Employee::AdditionalDegree.get_field_limit_of(:institution)
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :degree_type, 'Type' %>
+        <%= f.select :degree_type,
+                    Employee::AdditionalDegree.degree_type_options, {},
+                    class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :start_at, 'Start At' %>
+        <%= f.date_field :start_at, class: 'form-control',
+              required: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :end_at, 'End At' %>
+        <%= f.date_field :end_at, class: 'form-control',
+              required: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :graduated_at, 'Graduated At' %>
+        <%= f.date_field :graduated_at, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>

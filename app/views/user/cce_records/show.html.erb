@@ -1,4 +1,4 @@
-<% if true %>
+<% if false %>
 <div id="summary">
   <div class="row">
     <div class="col-md-12">
@@ -36,9 +36,8 @@
       </table>
     </div>
   </div>
-</div>  <!-- div#summary -->
+</div>
 <% end %>
-
 <div id="educations" class="category">
   <div class="row">
     <div class="col-md-12">
@@ -59,8 +58,9 @@
           </span>        
         <% end %>
       </h4>
-    </div>
-  </div>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+
   <div class="row subcategory">
     <div id="academic-degrees" class="col-md-12">
       <%= render partial: "educations/academic_degrees",
@@ -88,8 +88,9 @@
       %>
     </div>
   </div>
-</div>  <!-- div#educations.category -->
+</div>  <!-- #educations -->
 
+<% if false %>
 <div id="work-experiences" class="category">
   <div class="row">
     <div class="col-md-12">
@@ -107,11 +108,12 @@
                   precision: 2)
                 %>
             </em>
-          </span>        
-        <% end %>        
+          </span>
+        <% end %>
       </h4>
-    </div>
-  </div>
+    </div>  <!-- .col-md-12 -->
+  </div>  <!-- .row -->
+
   <div class="row subcategory">
     <div id="academic-work-experiences" class="col-md-12">
       <%= render partial: "work_experiences/academic_work_experiences",
@@ -154,9 +156,8 @@
       %>
     </div>
   </div>
-</div>  <!-- div#work-experiences.category -->
+</div>  <!-- #work-experiences -->
 
-<% if true %>
 <div id="achievements" class="category">
   <div class="row">
     <div class="col-md-12">
@@ -177,8 +178,8 @@
           </span>
         <% end %>
       </h4>
-    </div>
-  </div>
+    </div>  <!-- .col-md-12 -->  
+  </div>  <!-- .row -->
 
   <div class="row subcategory">
     <div id="professional-memberships" class="col-md-12">
@@ -258,7 +259,7 @@
                   precision: 2)
                 %>
             </em>
-          </span>        
+          </span>
         <% end %>
       </h5>
     </div>
@@ -444,5 +445,5 @@
       %>
     </div>
   </div>
-</div>  <!-- div#achievements.category -->
+</div>  <!-- .achievements -->
 <% end %>
