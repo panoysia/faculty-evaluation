@@ -17,7 +17,7 @@
           <td><%= index += 1 %></td>
           <td><%= qce.rating_period.coverage_in_years %></td>
           <td>
-            <% if qce.for_finalization? %>      
+            <% if qce.for_finalization? %>
               <span class="label label-primary">For finalization</span>
             <% else %>
               <span class="label <%= qce.completed? ? 'label-success' : 'label-danger' %>">
@@ -36,9 +36,9 @@
             toggle: 'tooltip' } do %>
               <!-- <span class="glyphicon glyphicon-remove"></span> -->
             <%# end %>
-          </td>              
+          </td>
         </tr>
       <% end %>
     </tbody>
-  </table>  
+  </table>
 </div>

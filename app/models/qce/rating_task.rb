@@ -42,23 +42,22 @@ class QCE::RatingTask < ActiveRecord::Base
 
   def description
     owner_name = employee.full_name
-    context = rating.evaluation_context
-    context << " (yourself)" if context == 'Self'
 
-    # "Rate #{owner_name} as #{context} for #{rating.type}"
+    context = rating.evaluation_context
+    context << " (yourself)" if context == "Self"
+
+    rating_type = rating.type
+    unless rating_type == "Instruction"
+      rating_type << " (#{rating.instrument})"
+    end
     
-    "Rate #{owner_name} as #{context} for #{rating.type} — #{rating.qce.rating_period.coverage_in_years}"
+    "Rate #{owner_name} as #{context} for #{rating_type}
+    (#{rating.qce.rating_period.coverage_in_years})"
   end
 
 end
 
 =begin
-
-    # if rating_type == INSTRUCTION
-    #   type_of_rating = 'Instruction'
-    # elsif rating_type == RESEARCH
-    #   type_of_rating = 'Research'
-    # end
     
 Steve Kerr:
   Rate Steve Kerr as Self for Instruction
@@ -67,5 +66,5 @@ Grace Poe:
   Rate Steve Kerr as Supervisor for Instruction
   Rate Grace Poe (yourself) as Self for Instruction
   Rate Kevin Durant as Peer for Instruction
-  Rate Kevin Garnett as Peer for Instruction
+  Rate Rodrigo Duterte as Faculty Member
 =end
