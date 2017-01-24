@@ -9,8 +9,6 @@
   management_evaluations = instruments[types[:management]]
 
   message = "This will finalize your evaluation. After this you can no longer update or edit it.\n\nDo you want to continue?"
-  
-  button_state = @rating.completed?
 %>
 <div id="rating-info" class="center">
   <% if @rating.completed? %>
@@ -178,16 +176,20 @@
       <tr id="row-action">
         <td colspan="7">          
           <p class="text-right">
-            <%= link_to 'Back to Rating Tasks', rating_tasks_path, class: 'btn btn-link' %>
-            <%= submit_tag 'Save', class: 'btn btn-primary',
-                                    disabled: button_state  %>
-            <span>&nbsp;</span><span>&nbsp;</span>
-            <%= link_to 'Finalize using random answers (4 to 5)', randomize_save_qce_instruction_path(@rating.qce, @rating),
-              method: :patch,
-              class: 'btn btn-primary', disabled: button_state %>
-            <%= submit_tag 'Finalize', class: 'btn btn-success',
-                                        disabled: button_state,
-                                        data: { confirm: message } %>
+            <%= link_to '<< Back to Rating Tasks', rating_tasks_path,
+                  class: 'btn btn-link' %>
+            <% unless @rating.completed? %>
+              <%= submit_tag 'Save', class: 'btn btn-primary' %>
+              <span>&nbsp;</span><span>&nbsp;</span>
+              <%= link_to 'Finalize using random answers (4 to 5)',
+                    randomize_save_qce_instruction_path(@rating.qce,
+                                                          @rating),
+                    method: :patch,
+                    class: 'btn btn-primary' %>
+
+              <%= submit_tag 'Finalize', class: 'btn btn-success',
+                                          data: { confirm: message } %>
+            <% end %>
           </p>
         </td>
       </tr>
