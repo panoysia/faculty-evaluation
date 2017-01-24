@@ -41,6 +41,7 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'pg'
+  gem "puma"
 end
 
 # gem 'devise', '~> 3.5', '>= 3.5.3'
