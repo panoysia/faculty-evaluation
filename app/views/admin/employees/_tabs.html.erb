@@ -9,11 +9,25 @@
     </li>
     <li role="presentation" class="<%= get_bs_active_class(:cce_records) %>">
       <%= link_to 'CCE', admin_employee_cce_record_path(@employee) %>
-    </li>    
-    <li role="presentation" class="<%= get_bs_active_class(:qces) %>">
+    </li>
+
+    <% tab_names = %i(
+          qces
+          instructions
+          researches
+          extensions
+          productions
+          instruction_summary_sheets
+          support_area_summary_sheets
+          computation_summary_ratings
+        )
+    %>
+    <li role="presentation" class="<%= get_bs_active_class(*tab_names) %>">
       <%= link_to 'QCE', admin_employee_qces_path(@employee) %>
     </li>
-    <li role="presentation" class="<%= get_bs_active_class(:leaves) %>">
+
+    <% tab_names = %i(leaves leave_service_credits) %>
+    <li role="presentation" class="<%= get_bs_active_class(*tab_names) %>">
       <%= link_to 'Leaves', admin_employee_leaves_path(@employee) %>
     </li>
 
@@ -91,15 +105,3 @@
     </li>    
   </ul>
 </div>  <!-- <div#employee-related-data.row> -->
-
-<% if false %>  
-  <li role="presentation" class="<%= get_bs_active_class(:rankings) %>">
-    <%= link_to 'Rankings', admin_employee_rankings_path(@employee) %>
-  </li>
-  <li role="presentation" class="<%= get_bs_active_class(:cce_scorings) %>">
-    <%= link_to 'CCE', admin_employee_cce_scorings_path(@employee) %>
-  </li>
-  <li role="presentation" class="<%= get_bs_active_class(:trainings) %>">
-    <%= link_to 'Trainings', admin_employee_trainings_path(@employee)%>
-  </li>
-<% end %>

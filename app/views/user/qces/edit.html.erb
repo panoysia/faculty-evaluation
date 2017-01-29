@@ -92,7 +92,7 @@
 </div> <!-- .qce-options -->
 <!-- QCE Support Ratings: Researh/Extension/Production -->
 <% if current_user.account.rank.allows_qce_support? %>
-  <div class="qce-options">  
+  <div class="qce-options">
     <h3 id="support-ratings" class="page-header">Specify a support area to rate: <%= link_to '(View/Check)', qce_path(@qce, anchor: 'support-ratings') if @qce.support_area.present? %></h3>
     <!-- id="assign-support-area" -->
     <div>
@@ -102,7 +102,7 @@
             <div class="form-group">
               <label for="support_area-select"><h4>Area:</h4></label>
             </div>
-          </div>  <!-- .col-md-1 -->          
+          </div>  <!-- .col-md-1 -->
           <% if @qce.support_area.present? %>
             <div class="col-md-5">
               <div class="form-group">

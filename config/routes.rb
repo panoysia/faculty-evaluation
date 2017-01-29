@@ -44,7 +44,31 @@ Rails.application.routes.draw do
         resources :evaluations,
           only: [:index, :show, :new, :create, :destroy]
           
-        resources :qces, only: [:index, :show]
+        resources :qces, only: [:index, :show] do
+          scope module: :qces do
+            rating_types = [:instructions, :extensions,
+                                :productions, :researches]
+
+            resources *rating_types, only: :show
+
+            # QCE Summary Sheet for Teaching Effectiveness by Evaluator Type
+            resource :instruction_summary_sheet, only: :show,
+              path: 'instruction-summary-sheet-by-evaluator-type'
+
+            # QCE Summary Sheet for Research, Extension, Production by Evaluator Type
+            resource :support_area_summary_sheet, only: :show,
+              path: 'support-area-summary-sheet-by-evaluator-type'
+
+            # Computation of Summary of Rating Per Semester
+            resource :computation_summary_rating, only: :show,
+              path: 'computation-of-summary-rating-per-semester'
+
+            # QCE Computation of the Summary of Rating for the Whole Evaluation Period
+            # (Summary Sheet for Whole Evaluation Period)
+            # resource :whole_evaluation_period_summary_sheet
+          end   # scope module: :qces
+        end   # resources :qces
+
         resources :leaves, except: :show
         resources :leave_service_credits, except: [:index, :show]
 

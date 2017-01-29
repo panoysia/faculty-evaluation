@@ -13,11 +13,10 @@
   }
 
   subtotals = { instruction: 0, support: 0 }
-  
+
   if @qce.has_assigned_self_rating?
     average_rating = @qce.self_instruction_rating.total_score / 1
     weighted_score = average_rating * QCE::SELF_RATING_PCT
-
     subtotals[:instruction] += weighted_score
     evaluators[:_self] = {
       average_rating: number_with_precision(average_rating, precision: 2),
@@ -28,7 +27,6 @@
   if @qce.has_assigned_supervisor_rating?
     average_rating = @qce.supervisor_instruction_rating.total_score / 1
     weighted_score = average_rating * QCE::SUPERVISOR_RATING_PCT
-
     subtotals[:instruction] += weighted_score
     evaluators[:supervisor] = {
       average_rating: number_with_precision(average_rating, precision: 2),
@@ -49,7 +47,6 @@
   if @qce.has_assigned_student_rating?
     average_rating = @qce.student_instruction_ratings_average
     weighted_score = average_rating * QCE::STUDENTS_RATING_PCT
-
     subtotals[:instruction] += weighted_score
     evaluators[:students] = {
       average_rating: number_with_precision(average_rating, precision: 2),
@@ -135,14 +132,15 @@
     community_ratings = support_ratings.select do |r|
       r.instrument == 'Community Responsibility'
     end
-  end   # if @qce.support_area.present?
+  end   # if @qce.support_area.present?  
 %>
 <div class="links">
-  <%= link_to '< Back to QCEs', qces_path, class: 'btn btn-link' %>
+  <%= link_to '< Back to QCEs', admin_employee_qces_path,
+        class: 'btn btn-link' %>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <h2 class="page-header">
+    <h3 class="page-header">
       <!-- <span><%#= "My QCE for #{@qce.rating_period.coverage}" %></span> -->
       <span><%= "My QCE for #{@qce.rating_period.coverage_in_years}" %></span>
       <% if @qce.for_finalization? %>
@@ -152,39 +150,44 @@
           <%= @qce.completed? ? 'Completed' : 'Incomplete' %>
         </span>
       <% end %>
-    </h2>
+    </h3>
   </div>  <!-- .col-md-12 -->
 </div>  <!-- .row -->
 <div>
-  <h4>Your current rank in this QCE: <%= @current_user.account.rank.full_name %></h4>
+  <h5>Your current rank in this QCE: <%= @employee.rank.full_name %></h5>
 </div>
+
 <% if @qce.completed? || @qce.for_finalization? %>
   <div id="summary-sheet-panel" class="qce-options">
-    <h3 class="page-header">Summary Sheets</h3>
+    <h4 class="page-header">Summary Sheets</h4>
     <ul>
       <li>
         <!-- View Summary Sheet for Instruction by Evaluator Type -->
         <%= link_to 'View Summary Sheet by Evaluator Type',
-              qce_instruction_summary_sheet_path(@qce) %>
+              admin_employee_qce_instruction_summary_sheet_path(
+                @employee, @qce) %>
       </li>
 
       <% if @qce.support_area.present? %>
         <li>
           <%= link_to 'View Summary Sheet for Research/Extension/Production by Evaluator Type',
-              qce_support_area_summary_sheet_path(@qce) %>
+              admin_employee_qce_support_area_summary_sheet_path(
+                @employee, @qce) %>
         </li>
       <% end %>
 
       <li>
         <!-- . Computation of Summary of Rating Per Semester -->
         <%= link_to 'View Computation of Summary of Rating Per Semester',
-              qce_computation_summary_rating_path(@qce) %>
+              admin_employee_qce_computation_summary_rating_path(
+                @employee, @qce) %>
       </li>
     </ul>
   </div>
 <% end %>
+
 <div class="qce-options">  
-  <h3 id="instruction-ratings" class="page-header">Ratings for Instruction/Teaching Effectiveness <%= link_to '(Edit)', edit_qce_path(@qce, anchor: 'instruction-ratings') %></h3>
+  <h4 id="instruction-ratings" class="page-header">Ratings for Instruction/Teaching Effectiveness</h4>
   <div class="row">
     <div class="col-md-12">
       <!-- 1st column -->
@@ -214,16 +217,13 @@
                     <span class="label label-success">Completed</span>
                   </td>
                   <td class="center">
-                    <%= link_to 'View', [@qce, self_rating] %>&nbsp;
+                    <%= link_to 'View',
+                        [:admin, @employee, @qce, self_rating] %>
+                        &nbsp;
                   </td>
                 <% else %>
                   <td class="center">
                     <span class="label label-warning">Pending</span>
-                  </td>
-                  <td class="center">
-                    <% if self_rating.evaluator == current_user.account %>
-                      <%= link_to 'Evaluate', [:edit, @qce, self_rating] %>
-                    <% end %>
                   </td>
                 <% end # if self_rating.completed? %>
               <% else %>
@@ -248,7 +248,9 @@
                     <span class="label label-success">Completed</span>
                   </td>
                   <td class="center">
-                    <%= link_to 'View', [@qce, supervisor_rating] %>&nbsp;
+                    <%= link_to 'View',
+                        [:admin, @employee, @qce, supervisor_rating] %>
+                        &nbsp;
                   </td>
                 <% else %>
                   <td class="center">
@@ -292,7 +294,8 @@
                       <span class="label label-success">Completed</span>
                     </td>
                     <td class="center">
-                      <%= link_to 'View', [@qce, rating] %>&nbsp;
+                      <%= link_to 'View',
+                          [:admin, @employee, @qce, rating] %>&nbsp;
                     </td>
                   <% else %>
                     <td class="center">
@@ -330,7 +333,8 @@
                       <span class="label label-success">Completed</span>
                     </td>
                     <td class="center">
-                      <%= link_to 'View', [@qce, rating] %>&nbsp;
+                      <%= link_to 'View',
+                          [:admin, @employee, @qce, rating] %>&nbsp;
                     </td>
                   <% else %>
                     <td class="center">
@@ -413,10 +417,9 @@
   
 </div>  <!-- .qce-options -->
 
-
 <% if @qce.support_area.present? %>
   <div class="qce-options">  
-    <h3 id="support-ratings" class="page-header">Ratings for <%= @qce.support_area %> <%= link_to '(Edit)', edit_qce_path(@qce, anchor: 'support-ratings') %></h3>
+    <h4 id="support-ratings" class="page-header">Ratings for <%= @qce.support_area %></h4>
     <div class="row">
       <div class="col-md-12">
         <!-- 1st column -->
@@ -459,7 +462,8 @@
                         <span class="label label-success">Completed</span>
                       </td>
                       <td class="center">
-                        <%= link_to 'View', [@qce, rating] %>&nbsp;
+                        <%= link_to 'View',
+                            [:admin, @employee, @qce, rating] %>&nbsp;
                       </td>  
                     <% else %>
                       <td class="center">
@@ -483,7 +487,9 @@
                       <span class="label label-success">Completed</span>
                     </td>
                     <td class="center">
-                      <%= link_to 'View', [@qce, leadership_rating] %>&nbsp;
+                      <%= link_to 'View',
+                          [:admin, @employee, @qce, leadership_rating] %>
+                          &nbsp;
                     </td>
                   <% else %>
                     <td class="center">
@@ -526,7 +532,8 @@
                         <span class="label label-success">Completed</span>
                       </td>
                       <td class="center">
-                        <%= link_to 'View', [@qce, rating] %>&nbsp;
+                        <%= link_to 'View',
+                            [:admin, @employee, @qce, rating] %>&nbsp;
                       </td>  
                     <% else %>
                       <td class="center">
@@ -564,7 +571,8 @@
                         <span class="label label-success">Completed</span>
                       </td>
                       <td class="center">
-                        <%= link_to 'View', [@qce, rating] %>&nbsp;
+                        <%= link_to 'View',
+                            [:admin, @employee, @qce, rating] %>&nbsp;
                       </td>  
                     <% else %>
                       <td class="center">
@@ -648,6 +656,6 @@
   </div>  <!-- .qce-options  -->
 <% end # if @qce.support_area.present? %>
 <div class="links">
-  <%= link_to '< Back to QCEs', qces_path, class: 'btn btn-link' %> |&nbsp;
-  <%= link_to 'Edit', edit_qce_path(@qce), class: 'btn btn-link' %>
+  <%= link_to '< Back to QCEs', admin_employee_qces_path,
+        class: 'btn btn-link' %>
 </div>

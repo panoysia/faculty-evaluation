@@ -23,6 +23,13 @@
 class QCE < ActiveRecord::Base
 
   PERCENTAGE_WEIGHT = 0.25  # 25%
+  WHOLE_PCT = 1.0
+  HALF_PCT = 0.50
+
+  STUDENTS_RATING_PCT = 0.30
+  PEER_RATING_PCT = 0.20
+  SELF_RATING_PCT = 0.20
+  SUPERVISOR_RATING_PCT = 0.30
 
   SELF_RATING_COUNT = 1
   SUPERVISOR_RATING_COUNT = 1
@@ -108,24 +115,33 @@ class QCE < ActiveRecord::Base
   scope :latest, -> (size = 8) { order(updated_at: :desc).limit(size) }
   
 
-  def self.order_by_academic_year
-    order('academic_years.start_at DESC, academic_years.end_at DESC,
-            rating_periods.semester DESC').
-            references(:academic_year)
+  def self.sort_by_academic_year_and_semester
+    joins(rating_period: [:academic_year]).
+      order("academic_years.start_at DESC, "\
+              "academic_years.end_at DESC, "\
+              "rating_periods.semester DESC").
+      includes(rating_period: :academic_year)
   end
 
 
   def for_finalization?
     completed_ratings = nil
 
-    if support_area.present?
+    if employee.rank.allows_qce_support?
       completed_ratings = (ratings.completed.count == 
-        (INSTRUCTION_RATINGS_COUNT + SUPPORT_AREA_RATINGS_COUNT))
+            (INSTRUCTION_RATINGS_COUNT + SUPPORT_AREA_RATINGS_COUNT))
     else
       completed_ratings = (instruction_ratings.completed.count == INSTRUCTION_RATINGS_COUNT)
     end
 
     (completed == 0) && completed_ratings
+
+    # if support_area.present?
+    #   completed_ratings = (ratings.completed.count == 
+    #     (INSTRUCTION_RATINGS_COUNT + SUPPORT_AREA_RATINGS_COUNT))
+    # else
+    #   completed_ratings = (instruction_ratings.completed.count == INSTRUCTION_RATINGS_COUNT)
+    # end
   end
 
 
@@ -185,8 +201,4 @@ end   # class QCE
 
 # def status
 #   completed? and for_finalization
-# end
-
-# def completed?
-#   finished_at.present?
 # end

@@ -6,6 +6,7 @@ module ApplicationHelper
 
   # "bs" is short for Bootstrap
   def get_bs_active_class(*tab_names)
+    #puts ">>>>>>>>>>>>>>> CONTROLLER NAME: #{controller_name.to_sym}"
     tab_names.include?(controller_name.to_sym) ? "active" : ""
   end
 

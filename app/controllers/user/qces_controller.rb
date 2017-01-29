@@ -1,5 +1,7 @@
 class User::QCEsController < User::ApplicationController
-  before_action :set_qce, only: [:show, :edit, :update, :destroy, :destroy_support_area, :finalize]
+
+  before_action :set_qce, only: [:show, :edit, :update, :destroy,
+                                  :destroy_support_area, :finalize]
 
 
   def index
