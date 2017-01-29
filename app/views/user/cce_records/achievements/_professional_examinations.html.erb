@@ -31,6 +31,7 @@
       <th>Category</th>
       <th>Points</th>
       <th>NBC</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -46,6 +47,9 @@
           <%= format_in_decimal(examination.cce_scoring.points) %>
         </td>
         <td><%= render "nbc_link", record: examination.cce_scoring %></td>
+        <td>
+          <%= render("action_links", record: examination) unless examination.cce_scoring.recorded? %>
+        </td>
       </tr>
     <% end %>
   </tbody>

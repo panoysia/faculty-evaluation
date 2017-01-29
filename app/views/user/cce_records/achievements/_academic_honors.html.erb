@@ -25,6 +25,7 @@
       <th>Date Awarded</th>
       <th>Points</th>
       <th>NBC</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -41,6 +42,9 @@
           <%= format_in_decimal(academic_honor.cce_scoring.points) %>
         </td>
         <td><%= render "nbc_link", record: academic_honor.cce_scoring %></td>
+        <td>
+          <%= render("action_links", record: academic_honor) unless academic_honor.cce_scoring.recorded? %>
+        </td>
       </tr>
     <% end %>
   </tbody>
