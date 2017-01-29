@@ -9,6 +9,13 @@ class User::CCERecord::AcademicDegreesController < User::ApplicationController
   end
 
   def create
+    @degree = employee.academic_degrees.new(academic_degree_params)
+    if @degree.save
+      redirect_to cce_record_path,
+        notice: "Academic degree record was successfully created."
+    else
+      render :new
+    end
   end
 
   def edit
@@ -16,17 +23,17 @@ class User::CCERecord::AcademicDegreesController < User::ApplicationController
 
   def update
     if @degree.update(academic_degree_params)
-      redirect_to referrer,
-        notice: 'Academic degree record was successfully updated.'
+      redirect_to cce_record_path,
+        notice: "Academic degree record was successfully updated."
     else
       render :edit
-    end    
+    end
   end
 
   def destroy
     @degree.destroy
-    redirect_to referrer,
-      notice: 'Academic degree record was successfully deleted.'    
+    redirect_to cce_record_path,
+      notice: "Academic degree record was successfully deleted."
   end
 
 

@@ -13,6 +13,7 @@
       <th>Graduated</th>
       <th>Points</th>
       <th>NBC</th>
+      <th>Actions</th>
     </tr>
     <tr>
       <td colspan="10">
@@ -37,6 +38,9 @@
         <td><%= date_format_readable(degree.graduated_at) if degree.graduated_at.present?  %></td>
         <td class="text-right"><%= degree.cce_scoring.points %></td>
         <td><%= render "nbc_link", record: degree.cce_scoring %></td>
+        <td>
+          <%= render("action_links", record: degree) unless degree.cce_scoring.recorded? %>
+        </td>
       </tr>
     <% end %>
   </tbody>
