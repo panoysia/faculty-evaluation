@@ -26,6 +26,7 @@
       <th>End</th>
       <th>Points</th>
       <th>NBC</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -42,6 +43,9 @@
           <%= format_in_decimal(work_experience.cce_scoring.points) %>
         </td>
         <td><%= render "nbc_link", record: work_experience.cce_scoring %></td>
+        <td>
+          <%= render("action_links", record: work_experience) unless work_experience.cce_scoring.recorded? %>
+        </td>
       </tr>
     <% end %>
   </tbody>
