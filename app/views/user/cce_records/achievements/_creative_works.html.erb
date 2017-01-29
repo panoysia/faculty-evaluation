@@ -25,12 +25,13 @@
       <th>Description</th>
       <th>Points</th>
       <th>NBC</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <% achievements.includes(cce_scoring: :nbc).
           each_with_index do |creative_work, index| %>
-      <tr <%= "class=info" unless creative_work.cce_scoring.recorded? %>>  
+      <tr <%= "class=info" unless creative_work.cce_scoring.recorded? %>>
         <td><%= index += 1 %></td>
         <td><%= creative_work.name %></td>
         <td><%= creative_work.competitiveness_to_string %></td>
@@ -41,6 +42,9 @@
           <%= format_in_decimal(creative_work.cce_scoring.points) %>
         </td>
         <td><%= render "nbc_link", record: creative_work.cce_scoring %></td>
+        <td>
+          <%= render("action_links", record: creative_work) unless creative_work.cce_scoring.recorded? %>
+        </td>
       </tr>
     <% end %>
   </tbody>

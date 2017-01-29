@@ -25,6 +25,7 @@
       <th>Description</th>
       <th>Points</th>
       <th>NBC</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -40,6 +41,9 @@
           <%= format_in_decimal(technical_article.cce_scoring.points) %>
         </td>
         <td><%= render "nbc_link", record: technical_article.cce_scoring %></td>
+        <td>
+          <%= render("action_links", record: technical_article) unless technical_article.cce_scoring.recorded? %>
+        </td>
       </tr>
     <% end %>
   </tbody>

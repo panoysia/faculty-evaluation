@@ -1,7 +1,6 @@
-<%= form_for [:admin, @employee, @instructional_manual] do |f| %>
+<%= form_for(@instructional_manual) do |f| %>
   <%= error_messages_for(@instructional_manual) %>
 
-  <%= hidden_field_tag :redirect, params[:redirect] %>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
@@ -11,7 +10,7 @@
             maxlength: Employee::InstructionalManual.get_field_limit_of(:name) %>
       </div>
     </div>
-  </div>  
+  </div>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
@@ -28,7 +27,7 @@
         <%= f.label :published_at, "Published At" %>
         <%= f.date_field :published_at, class: 'form-control',
               required: true %>
-      </div>      
+      </div>
     </div>
   </div>
   <div class="row">
@@ -39,13 +38,13 @@
             rows: 3,
             maxlength: Employee::InstructionalManual.
                         get_field_limit_of(:description) %>
-      </div>      
+      </div>
     </div>
-  </div>    
+  </div>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
-        <%= f.submit class: 'btn btn-primary' %>    
+        <%= f.submit class: 'btn btn-primary' %>
       </div>
     </div>
   </div>
