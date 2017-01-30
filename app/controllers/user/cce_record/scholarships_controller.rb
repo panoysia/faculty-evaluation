@@ -48,7 +48,7 @@ class User::CCERecord::ScholarshipsController < User::ApplicationController
 
 
   def set_scholarship
-    @scholarship = @employee.scholarships.find(params[:id])
+    @scholarship = employee.scholarships.find(params[:id])
   end
 
   def scholarship_params

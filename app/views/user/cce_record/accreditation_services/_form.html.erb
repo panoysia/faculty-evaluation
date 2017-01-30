@@ -1,7 +1,6 @@
-<%= form_for [:admin, @employee, @service] do |f| %>
+<%= form_for(@service) do |f| %>
   <%= error_messages_for(@service) %>
 
-  <%= hidden_field_tag :redirect, params[:redirect] %>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
@@ -21,7 +20,7 @@
               maxlength: Employee::AccreditationService.get_field_limit_of(:agency) %>
       </div>
     </div>
-  </div>  
+  </div>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">
@@ -48,7 +47,7 @@
               required: true %>
       </div>
     </div>
-  </div>  
+  </div>
   <div class="row">
     <div class="col-md-5">
       <div class="form-group">

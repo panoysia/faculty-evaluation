@@ -33,6 +33,7 @@
       <th>Participation</th>
       <th>Points</th>
       <th>NBC</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -51,6 +52,9 @@
           <%= format_in_decimal(training.cce_scoring.points) %>
         </td>
         <td><%= render "nbc_link", record: training.cce_scoring %></td>
+        <td>
+          <%= render("action_links", record: training) unless training.cce_scoring.recorded? %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -31,6 +31,7 @@
       <th>End</th>
       <th>Points</th>
       <th>NBC</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -46,6 +47,9 @@
           <%= format_in_decimal(advisory.cce_scoring.points) %>
         </td>
         <td><%= render "nbc_link", record: advisory.cce_scoring %></td>
+        <td>
+          <%= render("action_links", record: advisory) unless advisory.cce_scoring.recorded? %>
+        </td>
       </tr>
     <% end %>
   </tbody>
