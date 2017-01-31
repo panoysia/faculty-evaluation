@@ -93,7 +93,6 @@ Rails.application.routes.draw do
         # "Achievement and Honors (tabs 1 & 2)" and resources under it 
         #   (should be namespaced instead)
         resource :achievement_and_honors_1, only: :show,
-          as: "discoveries_and_creative_works",
           path: "discoveries-and-creative-works"
 
           resources :creative_works, except: [:index, :show]
@@ -105,7 +104,6 @@ Rails.application.routes.draw do
           resources :technical_articles, except: [:index, :show]
                   
         resource :achievement_and_honors_2, only: :show,
-          as: "achievement_and_honors",
           path: "achievement-and-honors"
 
           resources :academic_honors, except: [:index, :show]
