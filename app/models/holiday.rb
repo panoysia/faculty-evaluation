@@ -21,6 +21,8 @@ class Holiday < ActiveRecord::Base
   def set_weekend_column_value
     if occurs_at.saturday? || occurs_at.sunday?
       self[:is_weekend] = 1
+    else
+      self[:is_weekend] = 0
     end
   end
 

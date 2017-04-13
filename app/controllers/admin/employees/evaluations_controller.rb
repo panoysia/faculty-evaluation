@@ -3,7 +3,11 @@ class Admin::Employees::EvaluationsController < Admin::ApplicationController
   before_action :set_employee
   before_action :modify_view_path
 
+  layout "employee_profile"
+
+
   def index
+    @evaluations = @employee.evaluations
   end
 
   def new
@@ -23,7 +27,6 @@ class Admin::Employees::EvaluationsController < Admin::ApplicationController
   end
 
   def create
-    # 
     # @evaluation = Employee::Evaluation.create(some_params)
     # redirect_to @evaluation, notice: "Evaluation successfully created."
 
@@ -36,13 +39,11 @@ class Admin::Employees::EvaluationsController < Admin::ApplicationController
     #   flash[:alert] = "Login failed."
     #   render "new"
     # end
-    
-
   end
 
 
-
   private
+
 
   def set_employee
     @employee = Employee.find(params[:employee_id])

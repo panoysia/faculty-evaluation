@@ -9,10 +9,11 @@
         <span><%= @profile.full_name %></span>
       </h2>
       <div class="employee-card-info">
+        <p><%= @profile.faculty_no %></p>
         <p><%= @profile.rank.full_name if @profile.rank %></p>
         <p><%= @profile.designation if @profile.designation.present? %></p>
         <p><%= "#{@profile.age} years old" if @profile.age.present? %></p>
-        <p><%= "Employed since #{@profile.hired_date}" if @profile.hired_date.present? %></p>
+        <p><%= "#{pluralize(@profile.years_in_service, 'year')} in service" %></p>
       </div>
     </div>  <!-- .col-md-9 -->
   </div>  <!-- .col-md-12 -->

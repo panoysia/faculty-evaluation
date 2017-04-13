@@ -1,12 +1,12 @@
-<%= render 'header' %>
-<%= render 'search_form' %>
+<%= render "header" %>
+<%= render "search_form" %>
 <div class="row">
   <div class="col-md-12">
     <h3 class="page-header">Search results:</h3>
     <div class="col-md-2">
       <%= link_to admin_employee_path(@evaluation.employee) do %>
-        <%= image_tag @evaluation.employee.picture.url(:small), size: "210", class: 'img-responsive img-thumbnail center-block' %>
-      <% end %>      
+        <%= image_tag @evaluation.employee.picture.url, size: "210", class: "img-responsive img-thumbnail center-block" %>
+      <% end %>
     </div>
     <div class="col-md-7">
       <h3 class="page-header">
@@ -33,7 +33,10 @@
                   new_admin_employee_evaluation_path(@evaluation.employee),
                   class: "btn btn-danger" %></p>
         <% else %>
-          <p class="alert alert-danger">QCE for this NBC period is incomplete. Faculty can't be evaluated until QCE is complete.</p>
+          <p class="alert alert-danger">
+            Some QCEs for this NBC period are still incomplete.<br>
+            Evaluation is not possible until all of these QCEs are completed.
+          </p>
         <% end %>
       <% end %>
     </div>

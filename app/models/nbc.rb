@@ -39,6 +39,14 @@ class NBC < ActiveRecord::Base
     academic_years.count > 0
   end
 
+  def name_with_academic_years
+    years = academic_years.
+              map { |record| record.start_at.year }.
+              sort.join(", ")
+
+    "#{name} (years #{years})"
+  end
+
 end
 
 # reject_if: lambda { |attributes| attributes['username'].blank? && attributes['password'].blank? }

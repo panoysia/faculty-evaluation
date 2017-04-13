@@ -16,6 +16,8 @@
 !/log/.keep
 /tmp
 
+.byebug_history
+
 #database.yml
 *.txt
 
@@ -23,5 +25,3 @@
 _my_files/
 public/system
 app/models/programmer.rb
-
-.byebug_history

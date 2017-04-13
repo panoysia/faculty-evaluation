@@ -42,7 +42,7 @@ Rails.application.routes.draw do
         resource :career_path, only: :show
 
         resources :evaluations,
-          only: [:index, :show, :new, :create, :destroy]
+          only: [:index, :show, :new, :create]
           
         resources :qces, only: [:index, :show] do
           scope module: :qces do

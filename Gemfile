@@ -28,9 +28,10 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring', '~> 1.6', '>= 1.6.4'
   gem 'better_errors', '~> 2.1', '>= 2.1.1'
-  gem 'quiet_assets', '~> 1.1'    
-  # gem 'rails-footnotes', '~> 4.1', '>= 4.1.8'
+  gem 'quiet_assets', '~> 1.1'
   gem 'annotate', '~> 2.7'
+  # gem 'rails-footnotes', '~> 4.1', '>= 4.1.8'
+  # gem "pp_sql" (https://github.com/kvokka/pp_sql)
 end
 
 group :development, :test do

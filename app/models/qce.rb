@@ -26,6 +26,9 @@ class QCE < ActiveRecord::Base
   WHOLE_PCT = 1.0
   HALF_PCT = 0.50
 
+  ONE_HUNDRED = 100
+  MAX_SCORE_FOR_SUPPORT_AREA_EVALUATION = 25.0
+
   STUDENTS_RATING_PCT = 0.30
   PEER_RATING_PCT = 0.20
   SELF_RATING_PCT = 0.20
@@ -113,7 +116,7 @@ class QCE < ActiveRecord::Base
   scope :completed, -> { where(completed: 1) }
   scope :incomplete, -> { where(completed: 0) }
   scope :latest, -> (size = 8) { order(updated_at: :desc).limit(size) }
-  
+
 
   def self.sort_by_academic_year_and_semester
     joins(rating_period: [:academic_year]).
@@ -146,7 +149,8 @@ class QCE < ActiveRecord::Base
 
 
   def clientele_instruments_total_score
-    clientele_instruments.joins(:evaluations).sum('qce_rating_evaluations.score')
+    clientele_instruments.joins(:evaluations).
+      sum("qce_rating_evaluations.score")
   end
 
   def clientele_instruments_average
@@ -154,7 +158,8 @@ class QCE < ActiveRecord::Base
   end
 
   def partnership_instruments_total_score
-    partnership_instruments.joins(:evaluations).sum('qce_rating_evaluations.score')
+    partnership_instruments.joins(:evaluations).
+      sum("qce_rating_evaluations.score")
   end
 
   def partnership_instruments_average
@@ -162,7 +167,8 @@ class QCE < ActiveRecord::Base
   end
 
   def community_instruments_total_score
-    community_instruments.joins(:evaluations).sum('qce_rating_evaluations.score')
+    community_instruments.joins(:evaluations).
+      sum("qce_rating_evaluations.score")
   end  
 
   def community_instruments_average
@@ -170,7 +176,8 @@ class QCE < ActiveRecord::Base
   end
 
   def peer_instruction_ratings_total_score
-    peer_instruction_ratings.joins(:evaluations).sum('qce_rating_evaluations.score')
+    peer_instruction_ratings.joins(:evaluations).
+      sum("qce_rating_evaluations.score")
   end
 
   def peer_instruction_ratings_average
@@ -178,7 +185,8 @@ class QCE < ActiveRecord::Base
   end
 
   def student_instruction_ratings_total_score
-    student_instruction_ratings.joins(:evaluations).sum('qce_rating_evaluations.score')
+    student_instruction_ratings.joins(:evaluations).
+      sum("qce_rating_evaluations.score")
   end
 
   def student_instruction_ratings_average
@@ -189,16 +197,10 @@ class QCE < ActiveRecord::Base
 
   def clear_ratings
     ratings.destroy_all
-    update has_assigned_self_rating: 0, 
-          has_assigned_supervisor_rating: 0, 
+    update has_assigned_self_rating: 0,
+          has_assigned_supervisor_rating: 0,
           has_assigned_peer_rating: 0,
           has_assigned_student_rating: 0
   end
 
 end   # class QCE
-
-# completed, for_finalization, incomplete
-
-# def status
-#   completed? and for_finalization
-# end
