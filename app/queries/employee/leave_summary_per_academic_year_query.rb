@@ -4,7 +4,7 @@ class Employee::LeaveSummaryPerAcademicYearQuery
     @employee = employee
   end
   
-  def result    
+  def result
     Leave.connection.select_all(<<-SQL)
       SELECT
         ay.id,
@@ -34,7 +34,7 @@ class Employee::LeaveSummaryPerAcademicYearQuery
         GROUP BY academic_year_id
       ) leaves
         ON leaves.academic_year_id = ay.id
-      ORDER BY ay.start_at DESC, ay.end_at DESC;    
+      ORDER BY ay.start_at DESC, ay.end_at DESC;
     SQL
   end
 
@@ -50,7 +50,8 @@ end
   * Interchange the term "relation" and "result" in the method that
     returns data.
 
-    # def relation
+    # relation  => ActiveRecord::Relation
+    # result    => ActiveRecord::Result
 
   * Use can also use Model#find_by_sql for custom SQL queries.
     It returns an array of objects from the model where you called

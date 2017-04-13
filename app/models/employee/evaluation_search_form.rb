@@ -13,7 +13,8 @@ class Employee::EvaluationSearchForm
   end
 
   def results
-    evaluation = Employee::Evaluation.find_or_initialize_by(employee_id_and_nbc_id)
+    evaluation = Employee::Evaluation.
+                  find_or_initialize_by(employee_id_and_nbc_id)
 
     Employee::EvaluationPresenter.new(evaluation)
   end

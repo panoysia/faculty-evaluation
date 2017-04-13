@@ -1,6 +1,6 @@
 class Admin::Employees::EvaluationsController < Admin::ApplicationController
 
-  before_action :set_employee
+  before_action :set_employee, only: [:index, :new, :show]
   before_action :modify_view_path
 
   layout "employee_profile"
@@ -11,34 +11,27 @@ class Admin::Employees::EvaluationsController < Admin::ApplicationController
   end
 
   def new
-    # @evaluation = Employee::EvaluationPresenter.new(evaluation_record)    
-    # render html: params and return true
-    # render html: session[:nbc_id] and return true
-
-    nbc_id = session[:nbc_id]
-    @evaluation = Employee::EvaluationNewPresenter.new(
-                    @employee.evaluations.new(nbc_id: nbc_id)
-                  )
+    new_evaluation
+    # @evaluation = Employee::EvaluationNewPresenter.
+    #                 new(build_employee_evaluation)
   end
 
   def show
-    @evaluation = Employee::EvaluationPresenter.new(evaluation_record)
+    @evaluation = Employee::EvaluationPresenter.new(evaluation)
     @cce_record = @evaluation.cce_record
   end
 
   def create
-    # @evaluation = Employee::Evaluation.create(some_params)
-    # redirect_to @evaluation, notice: "Evaluation successfully created."
+    service = Employee::EvaluationApprovalService.
+                new(new_evaluation)
 
-    # user = User.where(email: params[:email]).first
+    if service.perform
+      redirect_to admin_employee_evaluations_path,
+                  notice: "Evaluation was successfully recorded"
+    else
+      render :new
+    end
 
-    # if UserAuthenticator.new(user).authenticate(params[:password])
-    #   self.current_user = user
-    #   redirect_to dashboard_path
-    # else
-    #   flash[:alert] = "Login failed."
-    #   render "new"
-    # end
   end
 
 
@@ -49,7 +42,7 @@ class Admin::Employees::EvaluationsController < Admin::ApplicationController
     @employee = Employee.find(params[:employee_id])
   end
 
-  def evaluation_record
+  def evaluation
     @employee.evaluations.find(params[:id])
   end
 
@@ -57,6 +50,17 @@ class Admin::Employees::EvaluationsController < Admin::ApplicationController
     prepend_view_path "app/views/admin/employees/evaluations"
   end
 
-end
+  def nbc_id
+    session[:nbc_id]
+  end
 
-# evaluation = Employee::Evaluation.find_or_initialize_by(employee_id_and_nbc_id)
+  def build_employee_evaluation
+    @employee.evaluations.new(nbc_id: nbc_id)
+  end
+
+  def new_evaluation
+    @evaluation = Employee::EvaluationNewPresenter.
+                    new(build_employee_evaluation)    
+  end
+  
+end
