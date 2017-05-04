@@ -13,11 +13,10 @@ class Employee::LeaveSummaryPerAcademicYearQuery
   end
 
 
-  # private
+  private
 
 
   attr_reader :employee, :sql_for_postgres, :sql_for_sqlite
-
 
   def sql_for_postgres
   <<-SQL
