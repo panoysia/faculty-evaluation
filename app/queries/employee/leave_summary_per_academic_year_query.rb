@@ -16,7 +16,7 @@ class Employee::LeaveSummaryPerAcademicYearQuery
   private
 
 
-  attr_reader :employee, :sql_for_postgres, :sql_for_sqlite
+  attr_reader :employee
 
   def sql_for_postgres
   <<-SQL
