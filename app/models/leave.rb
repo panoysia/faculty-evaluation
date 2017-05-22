@@ -54,7 +54,7 @@ class Leave < ActiveRecord::Base
   def self.remaining(employee_id, academic_year_id)
     service_credits = LeaveServiceCredit.where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:no_of_days)
 
-    total_leave_credits = MAXIMUM + service_credits
+    total_leave_credits = MAX_DAYS_ALLOWED + service_credits
     total_leave_credits - where(employee_id: employee_id, academic_year_id: academic_year_id).sum(:length)
   end
 

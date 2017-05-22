@@ -150,7 +150,7 @@ Rails.application.routes.draw do
     resources :admins
     resources :users
     resources :students
-    resources :clients
+    # resources :clients
 
     resource :account, only: [:edit, :update]
   end   # namespace :admin
