@@ -1,7 +1,13 @@
 # Description
 This app is an online implementation of the manual faculty profiling and evaluation process done by most local state universities in the Philippines.
 
-Basically, think of this as a semi-HR application catered to faculty members. This app has CRUD capabilities for basic HR features like leaves management and employee/faculty profiling.
+Basically, think of it as a semi-HR application catered to faculty members. The features are:
+
+1. Profiling and CRUD capabilities of faculty members, plus managing their leaves and career paths.
+
+2. Performance evaluation through a web-based form questionnaire that can be answered by the colleagues and students of the faculty member.
+
+3. Determining the next rank of the faculty member based on his or her evaluation score — either he or she is promoted to the next rank or remain in current.
 
 Originally, this app started as a project proposal of my friend who works in a local state university near my hometown [Iloilo City](https://en.wikipedia.org/wiki/Iloilo_City). **I volunteered in kind to develop it so that I can practice and apply my Ruby and Ruby on Rails skills in real world scenarios.**
 
