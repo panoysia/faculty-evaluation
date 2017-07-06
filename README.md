@@ -15,7 +15,7 @@ Originally, this app started as a project proposal of my friend who works in a l
 I shared it publicly here in GitHub for a number of reasons:
 
   1. To let prospective employers see it as my code portfolio<br>
-***(I'm currently looking for work opportunities as a web developer, preferably using Ruby/Rails)***
+***([I'm currently looking for work opportunities](https://www.linkedin.com/in/panoysia/) as a web developer, preferably using Ruby/Rails)***
 
   2. To let other programmers see it and maybe gain feedback in return
   3. To look back someday on how far I've improved my skills
