@@ -29,7 +29,7 @@ Using and browsing this app requires authentication. Since this is being used cu
 Visit the app here [here](https://capsu1.herokuapp.com/).
 
 ## Future Plans
-I'll continue to update and refactor this application as I continue to get better at my craft. Maybe I can create another repository of a better version of this. There's a lot of work to be revised here.
+I'll continue to update and refactor this application as I continue to get better at my craft. Maybe I can create another repository of a better version of this. There's a lot of work to revise here.
 
 ## Changelog
 1. Jul 7 2017 — Updated README
